@@ -53,6 +53,7 @@ export default function Login() {
       dispatch(setUserType(userType));
       const { access } = response.data;
       setAccess(true);
+      localStorage.setItem("authToken", token);
       access && navigate("/home");
     } catch (error) {
       Swal.fire({
@@ -115,6 +116,7 @@ export default function Login() {
         dispatch(setUserType(userType));
         const { access } = response.data;
         setAccess(true);
+        localStorage.setItem("authToken", JSON.stringify(response.data));
         access && navigate("/home");
       } catch (error) {
         Swal.fire({
@@ -145,6 +147,15 @@ export default function Login() {
   useEffect(() => {
     !access && navigate("/login");
   }, [access]);
+  useEffect(() => {
+    const loggedUserJson = localStorage.getItem("authToken");
+    if (loggedUserJson) {
+      console.log(loggedUserJson)
+      const user = JSON.parse(loggedUserJson);
+      dispatch(setUserId(user.id));
+      dispatch(setUserType(user.type));
+    }
+  }, []);
   return (
     <div className={styles.login}>
       <Link to={"/home"}><ButtonBack /></Link>

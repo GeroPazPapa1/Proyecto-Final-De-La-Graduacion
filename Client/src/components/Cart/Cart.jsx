@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import styles from './Cart.module.css'
 import { Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux';
-import { deleteProduct, emptyCart, purchaseProducts, setCart } from '../../redux/actions';
+import { deleteProduct, emptyCart, purchaseProducts, setCart } from '../../Redux/actions';
 
 export default function Cart() {
     const cartList = useSelector(state => state.cartList);
