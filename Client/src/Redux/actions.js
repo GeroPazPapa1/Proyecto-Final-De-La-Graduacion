@@ -21,7 +21,6 @@ export const removeFromFav = (product) => {
   };
 };
 
-
 export const deleteProduct = (product) => {
   return {
     type: "DELETE_PRODUCT",
@@ -57,7 +56,6 @@ export const getAllCars = () => {
   };
 };
 
-
 export const register = (payload) => {
   const userCreate = "http://localhost:3001/user/create";
   return async function (dispatch) {
@@ -87,30 +85,29 @@ export const setCart = (cartItems) => {
 };
 
 export const getDetail = (id) => {
-  const carId = `http://localhost:3001/car/detail/${id}`
+  const carId = `http://localhost:3001/car/detail/${id}`;
   if (id) {
     return async function (dispatch) {
       try {
         const detail = await axios.get(carId);
         dispatch({
-          type: 'GET_DETAIL',
-          payload: detail.data
-        })
+          type: "GET_DETAIL",
+          payload: detail.data,
+        });
       } catch (error) {
-        console.error('Error fetching car details:', error);
+        console.error("Error fetching car details:", error);
       }
-    }
+    };
   }
   return {
-    type: 'RESET_DETAIL',
-  }
+    type: "RESET_DETAIL",
+  };
 };
 export const resetDetail = () => {
   return {
-    type: 'RESET_DETAIL',
+    type: "RESET_DETAIL",
   };
-}
-
+};
 
 //----------------------------------------------------------------
 

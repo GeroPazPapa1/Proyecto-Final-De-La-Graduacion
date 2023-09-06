@@ -3,11 +3,16 @@ const { getIpUserController } = require("../controllers/getIpUserController");
 const admin = require("firebase-admin");
 
 const googleLoginHandler = async (req, res) => {
+  let ipinfoResponse = {};
   try {
     const token = req.body.token;
     const decodedToken = await admin.auth().verifyIdToken(token);
     const clientIp = req.clientIp;
-    const ipinfoResponse = await getIpUserController(clientIp);
+    try {
+      ipinfoResponse = await getIpUserController(clientIp);
+    } catch (error) {
+      ipinfoResponse = { data: "undefined" };
+    }
     let { country } = ipinfoResponse.data;
     const uid = decodedToken.uid;
     const email = decodedToken.email;
@@ -41,6 +46,7 @@ const googleLoginHandler = async (req, res) => {
     console.log(user);
     return res.status(200).json({ access: true, type: "user", id: userId });
   } catch (error) {
+    console.log(error);
     res.status(500).json({ error: "Error al verificar el token" });
   }
 };

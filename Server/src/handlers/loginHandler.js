@@ -1,9 +1,9 @@
 const { getEmailController } = require("../controllers/getEmailController");
 const bcrypt = require("bcrypt");
+const mailOptions = require("../utils/mailOptions");
+const transporter = require("../utils/transporter");
 
 const loginHandler = async (req, res) => {
-  const saltRounds = 10;
-
   try {
     const { email, password } = req.body;
     if (!email || !password) return res.status(400).send("Faltan datos");
@@ -14,6 +14,18 @@ const loginHandler = async (req, res) => {
     if (!passwordMatch) {
       return res.status(403).send("Contraseña incorrecta");
     }
+    const subject = "Inicio de seión en Vehibuy.com";
+    let text = `Le confirmamos un inicio de seión recientemente en Vehibuy.com con el email: ${email}`;
+    transporter.sendMail(mailOptions(email, subject, text), (error, info) => {
+      if (error) {
+        console.error("Error al enviar la notificación por correo:", error);
+      } else {
+        console.log(
+          "Notificación por correo electrónico enviada:",
+          info.response
+        );
+      }
+    });
     if (user.status == "admin")
       return res.status(200).json({ access: true, type: "admin", id: userId });
     if (user.status == "user")
