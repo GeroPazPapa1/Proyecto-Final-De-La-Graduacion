@@ -8,7 +8,6 @@ const initialState = {
   userId: "",
   userType: "",
   pageFiltered: [],
-
   queryParams: {
     name: "",
     state: "",
@@ -25,7 +24,6 @@ const initialState = {
     colorQuery: [],
     locationQuery: [],
   },
-
   carsLoaded: false,
   brandLoaded: false,
   colorsLoaded: false,
@@ -152,6 +150,7 @@ function rootReducer(state = initialState, action) {
       };
 
     case "CARDS_LOADED":
+      console.log(action.payload)
       return {
         ...state,
         carsLoaded: action.payload,

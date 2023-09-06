@@ -12,7 +12,7 @@ export default function Footer() {
                         <img className={styles.logo} src={LOGO_NV} alt="Logo..." />
                     </div>
                     <div>
-                        <span><p>Elegance Motors</p>Elevating Driving Luxury. Discover a curated selection of exquisite luxury cars that redefine elegance and performance. Explore the epitome of automotive refinement with Elegance Motors.</span>
+                        <span><p>VehiBuy</p>Elevating Driving Luxury. Discover a curated selection of exquisite luxury cars that redefine elegance and performance. Explore the epitome of automotive refinement with Elegance Motors.</span>
                     </div>
                 </div>
                 <div className={styles.containerList}>
@@ -52,7 +52,7 @@ export default function Footer() {
             </div>
             <div className={styles.containerSecond}>
                 <div>
-                    <p>Copyrigth ® 2023 | Elegance Motors</p>
+                    <p>Copyrigth ® 2023 | vehiBuy</p>
                 </div>
             </div>
         </div>

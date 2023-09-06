@@ -37,9 +37,6 @@ const deleteCarHandler = async (req, res) =>{
 const getAllCarHandler = async (req,res) => {
     try{
         const allCars = await allCar();
-        if (allCars == "Car not found"){
-            res.status(404).json("Car not found");
-        }
         res.status(200).send(allCars)
     }
     catch(error){
@@ -54,10 +51,6 @@ const getAllMatchesHandler = async (req, res) => {
         // console.log(name);
         // name.toLowerCase();
         const carMatches = await carNameController(name);
-        if (carMatches == "Car not found"){
-            return res.status(404).json("Car not found");
-            
-        }
         res.status(200).send(carMatches);
     } catch(error){
         res.status(500).json({error: error.message});
@@ -71,9 +64,6 @@ const getDetailCarHandler = async (req, res) => {
     try{
         const { id } = req.params;
         const findCarId = await getCarById(id);
-        if (findCarId == "Car not found"){
-            return res.status(404).json("Car not found");
-        }
         res.status(200).send(findCarId);
     } catch(error){
         res.status(500).send(error.message);

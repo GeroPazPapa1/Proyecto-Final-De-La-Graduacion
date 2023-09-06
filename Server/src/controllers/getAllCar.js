@@ -1,12 +1,12 @@
-const { Car } = require('../db');
+const { Car } = require("../db");
 
 const allCar = async () => {
-    try {
-      const allCars = await Car.findAll();
-      return allCars;
-    } catch (error) {
-      return "Car not found";
-    }
-  };
+  try {
+    const allCars = await Car.findAll();
+    return allCars;
+  } catch (error) {
+    console.error(error);
+  }
+};
 
-  module.exports = {allCar,};
+module.exports = { allCar };
