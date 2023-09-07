@@ -116,7 +116,7 @@ export default function Login() {
         dispatch(setUserType(userType));
         const { access } = response.data;
         setAccess(true);
-        localStorage.setItem("authToken", JSON.stringify(response.data));
+        localStorage.setItem("authToken", JSON.stringify({response: response.data, email: input.email}));
         access && navigate("/home");
       } catch (error) {
         Swal.fire({
@@ -149,11 +149,13 @@ export default function Login() {
   }, [access]);
   useEffect(() => {
     const loggedUserJson = localStorage.getItem("authToken");
-    if (loggedUserJson) {
-      console.log(loggedUserJson)
-      const user = JSON.parse(loggedUserJson);
-      dispatch(setUserId(user.id));
-      dispatch(setUserType(user.type));
+    const user = JSON.parse(loggedUserJson);
+    if (user) {
+      dispatch(setUserId(user.response.id));
+      dispatch(setUserType(user.response.type));
+      const { access } = user.response;
+      setAccess(true);
+      access && navigate("/home");
     }
   }, []);
   return (
