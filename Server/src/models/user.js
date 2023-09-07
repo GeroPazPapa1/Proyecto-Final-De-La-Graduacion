@@ -30,7 +30,7 @@ module.exports = (sequelize) => {
       },
     },
     userStatus: {type: DataTypes.ENUM("enabled", "banned"), defaultValue: "enabled"},
-    userType: {
+    status: {
       type: DataTypes.ENUM("admin", "user"),
       allowNull: false,
     },

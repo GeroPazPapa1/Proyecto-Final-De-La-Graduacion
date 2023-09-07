@@ -19,7 +19,6 @@ router.post("/", loginHandler);
 router.put("/:id", putUserHandler);
 
 //Configuracion de rutas de admi
-router.get("/dashboard", checkUserRole("admin"));
-router.get("/dashboard/users", getUsersInDashboard)
+router.get("/dashboard/users", checkUserRole("admin"), getUsersInDashboard)
 
 module.exports = router;
