@@ -35,5 +35,6 @@ module.exports = (sequelize) => {
     },
     image: { type: DataTypes.STRING, allowNull: true },
     tel: { type: DataTypes.INTEGER, allowNull: true },
+    verify: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: false },
   });
 };
