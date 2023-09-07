@@ -51,9 +51,12 @@ export default function Login() {
       const userType = response.data.type;
       dispatch(setUserId(userId));
       dispatch(setUserType(userType));
+  
+      // Almacena toda la información del usuario en el LocalStorage
+      localStorage.setItem("authToken", JSON.stringify(response.data));
+  
       const { access } = response.data;
       setAccess(true);
-      localStorage.setItem("authToken", token);
       access && navigate("/home");
     } catch (error) {
       Swal.fire({
@@ -64,6 +67,7 @@ export default function Login() {
       });
     }
   };
+  
 
   function handleChange(e) {
     const { name, value } = e.target;
@@ -149,12 +153,22 @@ export default function Login() {
   }, [access]);
   useEffect(() => {
     const loggedUserJson = localStorage.getItem("authToken");
-    if (loggedUserJson) {
-      console.log(loggedUserJson)
-      const user = JSON.parse(loggedUserJson);
+    let user = null;
+
+    try {
+      user = JSON.parse(loggedUserJson);
+      console.log(user)
+    } catch (error) {
+      console.error("Error al analizar el JSON:", error);
+      // Puedes manejar el error de alguna manera, por ejemplo, mostrar un mensaje al usuario o establecer user en un valor predeterminado.
+    }
+    
+    if (user) {
+      // Realiza acciones con el usuario si se pudo analizar correctamente
       dispatch(setUserId(user.id));
       dispatch(setUserType(user.type));
     }
+    
   }, []);
   return (
     <div className={styles.login}>
