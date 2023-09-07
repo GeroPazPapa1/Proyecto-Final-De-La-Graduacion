@@ -9,7 +9,7 @@ import Register from './components/LoginRegister/Register'
 import ForgotPassword from './components/LoginRegister/ForgotPassword';
 import NavBar from './components/NavBar/NavBar'
 import Detail from './components/Home/Detail/Detail';
-import Favorites from './components/Favorites/favorites';
+import Favorites from './components/Favorites/Favorites.jsx';
 
 function App() {
   return (
