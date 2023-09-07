@@ -7,7 +7,7 @@
 .container {
     display: flex;
     flex-wrap: wrap;
-    background-color:#EBE8E5;
+    background-color:#bdac9b;
     justify-content: center;
     align-items: flex-start;
     padding-bottom: 25px;
@@ -68,11 +68,11 @@
     cursor: pointer;
     font-family: 'Nunito Sans', sans-serif;
     font-size: 18px;
-    color: #bbb3ab;
+    color: #000000;
     margin: 0px 17px;
 }
 
 button[disabled] {
-    color: #e7e3df;
+    color: #00000060;
     cursor: default;
 }

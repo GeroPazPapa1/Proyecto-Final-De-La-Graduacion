@@ -1,4 +1,3 @@
-// Importa useState y useEffect
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
@@ -12,42 +11,41 @@ export default function Card(props) {
     const formatPrice = (price) => {
         return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
     };
-//----
+
     const [isFav, setIsFav] = useState(false);
     const [firstImage, setFirstImage] = useState(null);
 
     useEffect(() => {
-        // Verifica si el array de imágenes tiene al menos una imagen antes de establecer la primera imagen
         if (image && image.length > 0) {
-            setFirstImage(image[0]); // Establece la primera imagen en el estado
+            setFirstImage(image[0]);
         }
-    }, [image]); // Ejecuta el efecto cuando cambia la prop 'image'
+    }, [image]);
 
     useEffect(() => {
         myFavorites.forEach((fav) => {
-          if (fav.id === props.id) {
-            setIsFav(true);
-          }
+            if (fav.id === props.id) {
+                setIsFav(true);
+            }
         });
-      }, [myFavorites]);
+    }, [myFavorites]);
 
     const handleFavorite = () => {
         if (isFav) {
-          setIsFav(false);
-          dispatch(removeFromFav(props.id))
+            setIsFav(false);
+            dispatch(removeFromFav(props.id));
         } else {
-          setIsFav(true);
-          dispatch(addToFav(props));
-          console.log(myFavorites);
+            setIsFav(true);
+            dispatch(addToFav(props));
+            console.log(myFavorites);
         }
-      };
+    };
 
     const toggleFav = () => {
         setIsFav(!isFav);
     };
 
     return (
-        <div className={styles.container}>
+        <div className={`${styles.container} ${isFav ? styles.selectedCard : ""}`}>
             <div>
                 <Link to={`/detail/${id}`}>
                     <img className={styles.containerImg} src={firstImage} alt="Image..." />
@@ -61,7 +59,7 @@ export default function Card(props) {
                     {location}
                 </div>
                 <div className={styles.heart} onClick={toggleFav}>
-                    <button onClick={handleFavorite}>{isFav ? "❤" : "♡"}</button>
+                <button onClick={handleFavorite}>{isFav ? "⭐" : "☆"}</button>
                 </div>
             </div>
         </div>

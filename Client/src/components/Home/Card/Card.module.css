@@ -43,7 +43,7 @@
     margin-left: 19px;
     margin-top: 7px;
     font-family: 'Nunito Sans', sans-serif;
-    color: #95887c;
+    color: #000000;
     font-size: 14px;
 }
 
@@ -57,7 +57,7 @@
 .location {
     font-family: 'Nunito Sans', sans-serif;
     margin-left: 19px;
-    color: #bbb3ab;
+    color: #000000;
 }
 
 .heart {
@@ -70,4 +70,8 @@
     background-color: transparent;
     border: transparent;
     cursor: pointer;
+}
+
+.container.selectedCard {
+    background-color: rgb(188, 154, 87); /* Cambia el color de fondo a rojo */
 }
