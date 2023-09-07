@@ -112,3 +112,13 @@ export const MercadoPagoFail = () => {
         }
     })
 }
+
+export const NeedToLogin = () => {
+    enqueueSnackbar('You need to Log In to buy a car', {
+        variant: 'error',
+        anchorOrigin: {
+            vertical: 'top',
+            horizontal: 'right',
+        }
+    })
+}

@@ -8,8 +8,7 @@ const verifyTokenHandler = async (req, res) => {
   const { token } = req.params;
   try {
     // Verifica el token
-    const decoded = jwt.verify(token, "123456");
-
+    const decoded = jwt.verify(token);
     // Actualiza el estado del usuario en la base de datos
     const user = await getEmailController(decoded.email);
     if (user) {

@@ -4,7 +4,6 @@ const initialState = {
   purchasedProducts: [],
   allCarsID: [],
   detail: {},
-  pageFiltered: [],
   userId: "",
   userType: "",
   pageFiltered: [],

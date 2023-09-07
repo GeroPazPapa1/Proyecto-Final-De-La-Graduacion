@@ -10,7 +10,6 @@ import { OpenEye, ClosedEye, Google } from "./svgs.jsx";
 import { ButtonBack } from "../../assets/svgs";
 import { AlreadyAccountWithEmail, PutEmailPassword, SignedSuccesfully, WrongEmailPassword } from "../NotiStack";
 
-
 export default function Login() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -52,9 +51,9 @@ export default function Login() {
       dispatch(setUserId(userId));
       dispatch(setUserType(userType));
       const { access } = response.data;
+      SignedSuccesfully()
       setAccess(true);
       localStorage.setItem("authToken", token);
-      SignedSuccesfully()
       access && navigate("/home");
     } catch (error) {
       AlreadyAccountWithEmail()
@@ -100,13 +99,16 @@ export default function Login() {
           email: input.email,
           password: input.password,
         });
-        // Guardar información del usuario en el localStorage
-        localStorage.setItem("userId", response.data.id);
-        localStorage.setItem("userType", response.data.type);
+        SignedSuccesfully()
+        const userId = response.data.id;
+        const userType = response.data.type;
+        dispatch(setUserId(userId));
+        dispatch(setUserType(userType));
         const { access } = response.data;
         setAccess(true);
-        SignedSuccesfully()
-        // localStorage.setItem("authToken", JSON.stringify({ response: response.data, email: input.email }));
+        localStorage.setItem("userId", response.data.id)
+        localStorage.setItem("userType", response.data.type)
+        localStorage.setItem("authToken", JSON.stringify({ response: response.data, email: input.email }));
         access && navigate("/home");
       } catch (error) {
         WrongEmailPassword()
@@ -135,7 +137,7 @@ export default function Login() {
       dispatch(setUserType(user.response.type));
       const { access } = user.response;
       setAccess(true);
-      access && navigate("/home");
+      // access && navigate("/home");
     }
   }, []);
   return (
@@ -199,9 +201,6 @@ export default function Login() {
               Register
             </Link>
           </label>
-          {/* <label>
-            <button onClick={handleLogout}>Logout</button>
-          </label> */}
         </div>
       </div>
     </div>

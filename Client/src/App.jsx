@@ -10,6 +10,7 @@ import ForgotPassword from './components/LoginRegister/ForgotPassword';
 import NavBar from './components/NavBar/NavBar'
 import Detail from './components/Home/Detail/Detail';
 import Favorites from './components/Favorites/Favorites.jsx';
+import ProfileDashboard from './components/Profile/ProfileDashboard'
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/login/forgotpassword" element={<ForgotPassword />} />
         <Route path="/favorites" element={<Favorites />} />
+        <Route path="/profile" element={<ProfileDashboard />} />
       </Routes>
       <Footer />
     </>

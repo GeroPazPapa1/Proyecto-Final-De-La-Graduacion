@@ -7,15 +7,16 @@ import { Link, useLocation } from "react-router-dom";
 export default function NavBar() {
     const location = useLocation();
 
-    // const loggedUserJson = localStorage.getItem("authToken");
-    // const loggedUser = loggedUserJson ? JSON.parse(loggedUserJson) : null;
+    const loggedUserJson = localStorage.getItem("authToken");
+    const loggedUser = loggedUserJson ? JSON.parse(loggedUserJson) : null;
 
-    // const handleLogout = () => {
-    //     localStorage.clear();
-    // // };
+    const handleLogout = () => {
+        localStorage.clear();
+        // };
 
-    // console.log("loggedUser:", loggedUser);
-    // console.log("loggedUser.email:", loggedUser?.email);
+        console.log("loggedUser:", loggedUser);
+        console.log("loggedUser.email:", loggedUser?.email);
+    }
     return (
         <div className={styles.container}>
             <div>
@@ -47,25 +48,25 @@ export default function NavBar() {
                             <Link to={"/favorites"}>
                                 <button className={styles.button}>Favorites</button>
                             </Link>
-                            {/* { 
+                            {
                                 loggedUser && (
                                     <Link to={"/home"}>
-                                    <span>{loggedUser.email}</span>
-                                    <button onClick={handleLogout} className={styles.button}>Log out</button>
+                                        <span>{loggedUser.email}</span>
+                                        <button onClick={handleLogout} className={styles.button}>Log out</button>
                                     </Link>
                                 )
                             }
-                            { !loggedUser && (*/}
-                            <>
-                                <Link to={"/login"}>
-                                    <button className={styles.button}>Log in</button>
-                                </Link>
-                                <Link to={"/register"}>
-                                    <button className={styles.button}>Register</button>
-                                </Link>
-                            </>
-                            {/* ) */}
-                            {/* } */}
+                            {!loggedUser && (
+                                <>
+                                    <Link to={"/login"}>
+                                        <button className={styles.button}>Log in</button>
+                                    </Link>
+                                    <Link to={"/register"}>
+                                        <button className={styles.button}>Register</button>
+                                    </Link>
+                                </>
+                            )
+                            }
                             <Link to='/cart'>
                                 <img className={styles.icons} src={CART} alt="Cart..." />
                             </Link>

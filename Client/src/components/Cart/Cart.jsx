@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux';
 import { deleteProduct, purchaseProducts, setCart } from '../../redux/actions';
 import { NoCarsSVG } from '../../assets/svgs'
-import { CarRemovedFromCart, MercadoPagoSuccess, MercadoPagoFail, SignedSuccesfully } from '../NotiStack'
+import { CarRemovedFromCart, MercadoPagoFail, NeedToLogin  } from '../NotiStack'
 import { initMercadoPago, Wallet } from '@mercadopago/sdk-react'
 import axios from 'axios'
 
@@ -22,7 +22,6 @@ export default function Cart() {
   // initMercadoPago('TEST-620ddc2a-2dd8-487a-a99e-61892333c8d0');
   initMercadoPago('TEST-ff5e06a0-15c1-4054-b8bf-9ad68b31499b');
 
-
   const createPreference = async () => {
     try {
       const items = await cartList.map(product => ({
@@ -35,9 +34,11 @@ export default function Cart() {
       const { id } = response.data;
       console.log(id)
       console.log(response)
+      localStorage.setItem('transactionStatus', 'success');
       return id
     } catch (error) {
       console.error(error)
+      localStorage.setItem('transactionStatus', 'fail');
     }
   };
 
@@ -47,28 +48,30 @@ export default function Cart() {
       return total + productPrice;
     }, 0);
   };
-  const handleBuy = async (event) => {
-    event.preventDefault();
-    try {
-      dispatch(purchaseProducts(cartList));
-      const id = await createPreference();
-      if (id) {
-        setPreferenceId(id);
-        setShowMercadoPago(true);
-        localStorage.setItem('transactionStatus', 'success');
-      }
-    } catch (error) {
-      console.error("Error al procesar la compra:", error);
-      localStorage.setItem('transactionStatus', 'fail');
-    }
-  };
 
   const isLogged = () => {
     const userId = localStorage.getItem("userId");
     const userType = localStorage.getItem("userType");
-
     return userId && userType;
   }
+
+  const handleBuy = async (event) => {
+    event.preventDefault();
+    if (!isLogged()) {
+      NeedToLogin()
+    } else {
+      try {
+        dispatch(purchaseProducts(cartList));
+        const id = await createPreference();
+        if (id) {
+          setPreferenceId(id);
+          setShowMercadoPago(true);
+        }
+      } catch (error) {
+        console.error("Error al procesar la compra:", error);
+      }
+    }
+  };
 
 
   useEffect(() => {
@@ -143,7 +146,7 @@ export default function Cart() {
                   {preferenceId && <Wallet initialization={{ preferenceId }} />}
                 </div>
               ) : (
-                <button className={styles.btn_buy} disabled={!isLogged()} onClick={handleBuy}>Finish Order</button>
+                <button className={styles.btn_buy} onClick={handleBuy}>Finish Order</button>
               )}
             </div>
           </div>
