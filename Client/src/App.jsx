@@ -1,6 +1,6 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import Cart from "./components/Cart/Cart.jsx";
+import Cart from "./components/Cart/Cart";
 import Home from "./components/Home/Home";
 import LandingPage from "./components/LandingPage/LandingPage";
 import Footer from "./components/Home/Footer/Footer";
@@ -9,7 +9,8 @@ import Register from "./components/LoginRegister/Register";
 import ForgotPassword from "./components/LoginRegister/ForgotPassword";
 import NavBar from "./components/NavBar/NavBar";
 import Detail from "./components/Home/Detail/Detail";
-import Favorites from "./components/Favorites/Favorites";
+import Favorites from "./components/Favorites/favorites";
+import Modification from "./components/Modification/Modification";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/login/forgotpassword" element={<ForgotPassword />} />
         <Route path="/favorites" element={<Favorites />} />
+        <Route path="/modification" element={<Modification />} />
       </Routes>
       <Footer />
     </>

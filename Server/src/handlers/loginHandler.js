@@ -1,8 +1,18 @@
 const { getEmailController } = require("../controllers/getEmailController");
 const bcrypt = require("bcrypt");
+<<<<<<< HEAD
 const mailOptions = require("../utils/mailOptions");
 const transporter = require("../utils/transporter");
-
+=======
+const jsonwebtoken = require("jsonwebtoken");
+require('dotenv').config();
+const { SECRET_KEY } = process.env;
+>>>>>>> 093a68cdffff36a90efc3be9c36224a35b2fac1e
+const mailOptions = require("../utils/mailOptions");
+const transporter = require("../utils/transporter");
+const jsonwebtoken = require("jsonwebtoken");
+require('dotenv').config();
+const { SECRET_KEY } = process.env;
 const loginHandler = async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -14,10 +24,11 @@ const loginHandler = async (req, res) => {
     if (!passwordMatch) {
       return res.status(403).send("Contraseña incorrecta");
     }
+    const token = jsonwebtoken.sign({ userId: user.id, userType: user.status }, SECRET_KEY, { expiresIn: "1h" });
     if (user.status == "admin")
-      return res.status(200).json({ access: true, type: "admin", id: userId });
+      return res.status(200).json({ access: true, type: "admin", id: userId, token: token });
     if (user.status == "user")
-      return res.status(200).json({ access: true, type: "user", id: userId });
+      return res.status(200).json({ access: true, type: "user", id: userId, token: token });
   } catch (error) {
     return res.status(500).send(error.message);
   }
