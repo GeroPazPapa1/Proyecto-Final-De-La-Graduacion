@@ -1,9 +1,9 @@
-let mailOptions = (to, subject, text) => {
+let mailOptions = (to, subject, html) => {
   return (mailOptions = {
     from: "vehibuy97@gmail.com",
     to: to,
     subject: subject,
-    text: text,
+    html: html,
   });
 };
 module.exports = mailOptions;

@@ -2,7 +2,7 @@ const { User } = require("../db");
 const bcrypt = require("bcrypt");
 const jsonwebtoken = require("jsonwebtoken");
 const transporter = require("../utils/transporter");
-const getEmailController = require("./getEmailController");
+const verifyHTML = require("../utils/verifyHTML");
 const mailOptions = require("../utils/mailOptions");
 
 const postUserController = async (dataUserBody) => {
@@ -22,17 +22,17 @@ const postUserController = async (dataUserBody) => {
     email,
     password: hashedPassword,
   };
-  /*  const verifyUser = getEmailController(newUser.email);
-  const userId = verifyUser.id; */
+
   const token = jsonwebtoken.sign({ email }, "123456", {
     expiresIn: "24h",
   });
 
   const subject = "Account Verification on Vehibuy.com";
-  let text = `Click on the following link to verify your email and start shopping on Vehibuy.com: http://localhost:3001/user/verify/${token}`;
-  transporter.sendMail(mailOptions(email, subject, text), (error, info) => {
+  let link = `http://localhost:3001/user/verify/${token}`;
+  const html = verifyHTML(link);
+  transporter.sendMail(mailOptions(email, subject, html), (error, info) => {
     if (error) {
-      console.error("Error al enviar la notificación por correo:", error);
+      console.error("Error to send notification:", error);
     } else {
       console.log(
         "Notificación por correo electrónico enviada:",
