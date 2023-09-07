@@ -49,10 +49,14 @@ export default function NavBar() {
                             </Link>
                             {
                                 loggedUser && (
-                                    <Link to={"/home"}>
+                                    <>
                                     <span>{loggedUser.email}</span>
+                                    <Link to={"/modification"}>
+                                        <button className={styles.button} id={loggedUser.id}>Modification</button></Link>
+                                    <Link to={"/home"}>
                                     <button onClick={handleLogout} className={styles.button}>Log out</button>
                                     </Link>
+                                    </>
                                 )
                             }
                             { !loggedUser && (

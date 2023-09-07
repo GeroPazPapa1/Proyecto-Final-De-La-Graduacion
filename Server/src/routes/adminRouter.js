@@ -9,7 +9,7 @@ const adminRouter = Router();
 
 //configuracion de rutas
 adminRouter.get("/users", getUsersHandler);
-adminRouter.get("/user", getUserbyEmailHandler)
+adminRouter.get("/:email", getUserbyEmailHandler);
 adminRouter.post("/user", postUserHandler);
 adminRouter.put("/user", putBanUserHandler);
 adminRouter.delete("/delete", deleteUserHandler);
