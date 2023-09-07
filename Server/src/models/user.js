@@ -29,13 +29,13 @@ module.exports = (sequelize) => {
         },
       },
     },
-    status: {
+    type: {
       type: DataTypes.ENUM("admin", "user"),
       allowNull: false,
     },
     image: { type: DataTypes.STRING, allowNull: true },
     tel: { type: DataTypes.INTEGER, allowNull: true },
-    ban: {
+    status: {
       type: DataTypes.BOOLEAN,
       defaultValue: false
     }
