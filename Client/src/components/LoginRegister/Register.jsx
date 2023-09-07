@@ -5,9 +5,11 @@ import { useDispatch } from "react-redux";
 import Swal from "sweetalert2";
 import { Link, useNavigate } from "react-router-dom";
 import { OpenEye, ClosedEye, Google } from "./svgs.jsx";
-import handleGoogleSignin from "./googleSignIn";
+import { setUserId, setUserType } from "../../Redux/actions";
 import axios from "axios";
 import { ButtonBack } from "../../assets/svgs";
+import { auth } from "./firebase.js";
+import { GoogleAuthProvider, signInWithPopup, getAuth } from "firebase/auth";
 
 export default function Register() {
   const navigate = useNavigate();
@@ -31,7 +33,7 @@ export default function Register() {
     email: false,
     password: false,
   });
-
+  const [access, setAccess] = useState(false);
   function handleChange(e) {
     const { name, value } = e.target;
     setInput((prevInput) => ({
@@ -52,7 +54,58 @@ export default function Register() {
     }));
   }
 
-  const handleGoogleSignin = async () => {};
+  const handleGoogleSignin = async () => {
+    const provider = new GoogleAuthProvider();
+    try {
+      const result = await signInWithPopup(auth, provider);
+      const user = auth.currentUser;
+      const token = await user.getIdToken(true);
+      const response = await axios.post(
+        "http://localhost:3001/user/google",
+        { token },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      console.log("Respuesta del backend:", response.data);
+      const userId = response.data.id;
+      const userType = response.data.type;
+      dispatch(setUserId(userId));
+      dispatch(setUserType(userType));
+      const { access } = response.data;
+      setAccess(true);
+      access && navigate("/home");
+    } catch (error) {
+      Swal.fire({
+        title: "Error!",
+        text: "Already have a user account with this email",
+        icon: "error",
+        confirmButtonText: "OK",
+      });
+    }
+  };
+
+  function handleChange(e) {
+    const { name, value } = e.target;
+    setInput((prevInput) => ({
+      ...prevInput,
+      [name]: value,
+    }));
+    // Setea para renderizar errores
+    setErrors(
+      validate({
+        ...input,
+        [name]: value,
+      })
+    );
+    // Setea para que solo actue el error en el campo seleccionado
+    setTouchedFields((prevTouchedFields) => ({
+      ...prevTouchedFields,
+      [name]: true,
+    }));
+  }
 
   const handleSubmitRegister = async (e) => {
     e.preventDefault();
