@@ -37,7 +37,8 @@ module.exports = (sequelize) => {
     tel: { type: DataTypes.INTEGER, allowNull: true },
     ban: {
       type: DataTypes.BOOLEAN,
-      defaultValue: false
-    }
+      defaultValue: false,
+    },
+    verify: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: false },
   });
 };

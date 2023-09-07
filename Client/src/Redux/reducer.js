@@ -198,11 +198,6 @@ function rootReducer(state = initialState, action) {
         ...state,
         pageFiltered: filteredData,
       };
-
-    case "CREATE_USER":
-      return {
-        ...state,
-      };
     case "SET_USER_ID":
       return {
         ...state,

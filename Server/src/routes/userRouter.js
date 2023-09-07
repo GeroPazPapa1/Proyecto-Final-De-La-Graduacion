@@ -6,9 +6,11 @@ const { loginHandler } = require("../handlers/loginHandler");
 const { getUsersHandler } = require("../handlers/getUsersHandler");
 const { putUserHandler } = require("../handlers/putUserHandler");
 const { googleLoginHandler } = require("../handlers/googleLoginHandler");
+const { verifyTokenHandler } = require("../handlers/verifyTokenHandler");
 const router = Router();
 
 //configuracion de rutas
+router.get("/verify/:token", verifyTokenHandler);
 router.post("/google", googleLoginHandler);
 router.post("/create", postUserHandler);
 router.delete("/delete/:id", deleteUserHandler);

@@ -9,6 +9,7 @@ import axios from "axios";
 import { OpenEye, ClosedEye, Google } from "./svgs.jsx";
 import { ButtonBack } from "../../assets/svgs";
 import { AlreadyAccountWithEmail, PutEmailPassword, SignedSuccesfully, WrongEmailPassword } from "../NotiStack";
+import { auth } from "./firebase.js";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -31,7 +32,6 @@ export default function Login() {
 
   const handleGoogleSignin = async () => {
     const provider = new GoogleAuthProvider();
-    const auth = getAuth();
     try {
       const result = await signInWithPopup(auth, provider);
       const user = auth.currentUser;
@@ -62,15 +62,17 @@ export default function Login() {
 
   function handleChange(e) {
     const { name, value } = e.target;
-    setInput(prevInput => ({
+    setInput((prevInput) => ({
       ...prevInput,
       [name]: value,
     }));
     // Setea para renderizar errores
-    setErrors(validate({
-      ...input,
-      [name]: value,
-    }));
+    setErrors(
+      validate({
+        ...input,
+        [name]: value,
+      })
+    );
     // Setea para que solo actue el error en el campo seleccionado
     setTouchedFields((prevTouchedFields) => ({
       ...prevTouchedFields,
@@ -147,7 +149,9 @@ export default function Login() {
 
   return (
     <div className={styles.login}>
-      <Link to={"/home"}><ButtonBack /></Link>
+      <Link to={"/home"}>
+        <ButtonBack />
+      </Link>
       <div className={styles.login_form}>
         <form className={styles.form_in} onSubmit={(e) => handleSubmitLogin(e)}>
           <h1 className={styles.title_login}>Log In</h1>
@@ -163,7 +167,9 @@ export default function Login() {
             name="email"
             onChange={(e) => handleChange(e)}
           />
-          {touchedFields.email && errors.email && <p className={styles.errors}>{errors.email}</p>}
+          {touchedFields.email && errors.email && (
+            <p className={styles.errors}>{errors.email}</p>
+          )}
           <label className={styles.label}>Password</label>
           <input
             className={styles.input}
@@ -176,12 +182,12 @@ export default function Login() {
             onChange={(e) => handleChange(e)}
           />
           <div className={styles.btn_hideandshow}>
-            <button type='button' className={styles.show_hide_password} onClick={() => setShowPassword(!showPassword)}>
-              {showPassword ?
-                <ClosedEye />
-                :
-                <OpenEye />
-              }
+            <button
+              type="button"
+              className={styles.show_hide_password}
+              onClick={() => setShowPassword(!showPassword)}
+            >
+              {showPassword ? <ClosedEye /> : <OpenEye />}
             </button>
           </div>
           {touchedFields.password && errors.password && (

@@ -20,13 +20,13 @@ function App() {
         <Route path="/cart" element={<Cart />} />
         <Route path="/home" element={<Home />} />
         <Route path="/login" element={<Login />} />
-        <Route path='/detail/:id' element={<Detail />} />
+        <Route path="/detail/:id" element={<Detail />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login/forgotpassword" element={<ForgotPassword />} />
         <Route path="/favorites" element={<Favorites />} />
       </Routes>
       <Footer />
     </>
-  )
+  );
 }
-export default App
+export default App;
