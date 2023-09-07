@@ -57,7 +57,6 @@ export default function Cards() {
         );
     }
 
-
     const totalPages = Math.ceil(pageFiltereds.length / carsForPage); // Total de páginas
     const indexOfLastCar = currentPage * carsForPage;
     const indexOfFirstCar = indexOfLastCar - carsForPage;
@@ -70,7 +69,7 @@ export default function Cards() {
     return (
         <div className={styles.containerDiv}>
             <div className={styles.container}>
-                {currentCar?.map((car) => (
+                {currentCar.map((car) => (
                     <Card
                         key={car.id}
                         id={car.id}
