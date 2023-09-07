@@ -1,15 +1,45 @@
-import React, { useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import styles from './Cart.module.css'
 import { Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux';
-import { deleteProduct, emptyCart, purchaseProducts, setCart } from '../../redux/actions';
+import { deleteProduct, purchaseProducts, setCart } from '../../redux/actions';
+import { NoCarsSVG } from '../../assets/svgs'
+import { CarRemovedFromCart, MercadoPagoSuccess, MercadoPagoFail, SignedSuccesfully } from '../NotiStack'
+import { initMercadoPago, Wallet } from '@mercadopago/sdk-react'
+import axios from 'axios'
 
 export default function Cart() {
     const cartList = useSelector(state => state.cartList);
     const dispatch = useDispatch();
+    const [preferenceId, setPreferenceId] = useState(null)
+    const [showMercadoPago, setShowMercadoPago] = useState(false);
+    const purchasedProducts = useSelector(state => state.purchasedProducts)
     const removeFromCart = (productId) => {
         dispatch(deleteProduct(productId));
+        CarRemovedFromCart()
     }
+    console.log(cartList)
+    // initMercadoPago('TEST-620ddc2a-2dd8-487a-a99e-61892333c8d0');
+    initMercadoPago('TEST-ff5e06a0-15c1-4054-b8bf-9ad68b31499b');
+    
+
+    const createPreference = async () => {
+        try {
+            const items = await cartList.map(product => ({
+                title: `${product.name}, ${product.brand}`,
+                unit_price: product.price,
+                quantity: 1,
+            }))
+            console.log(items)
+            const response = await axios.post('http://localhost:3001/create_preference/', { items })
+            const { id } = response.data;
+            console.log(id)
+            console.log(response)
+            return id
+        } catch (error) {
+            console.error(error)
+        }
+    };
 
     const totalPrice = () => {
         return cartList.reduce((total, product) => {
@@ -17,12 +47,30 @@ export default function Cart() {
             return total + productPrice;
         }, 0);
     }
-    const handleEmptyCart = () => {
-        dispatch(emptyCart())
+    const handleBuy = async (event) => {
+        event.preventDefault();
+        try {
+            dispatch(purchaseProducts(cartList));
+            const id = await createPreference();
+            if (id) {
+                setPreferenceId(id);
+                setShowMercadoPago(true);
+                localStorage.setItem('transactionStatus', 'success');
+            }
+        } catch (error) {
+            console.error("Error al procesar la compra:", error);
+            localStorage.setItem('transactionStatus', 'fail');
+        }
+    };
+
+    const isLogged = () => {
+        const userId = localStorage.getItem("userId");
+        const userType = localStorage.getItem("userType");
+    
+        return userId && userType;
     }
-    const handleBuy = () => {
-        dispatch(purchaseProducts(cartList))
-    }
+    
+
     useEffect(() => {
         // Carga el carrito desde localStorage
         const storedCart = localStorage.getItem('cart');
@@ -32,28 +80,28 @@ export default function Cart() {
         }
         // Luego se guarda en el carrito en localStorage cada vez que el carrito cambie
         localStorage.setItem('cart', JSON.stringify(cartList));
+        const transactionStatus = localStorage.getItem('transactionStatus');
+        // Comprueba el estado de la compra y muestra la notificación adecuada
+        if (transactionStatus === "success") {
+        } else if (transactionStatus === "fail") {
+            MercadoPagoFail();
+        }
+        localStorage.removeItem('transactionStatus');
     }, [cartList, dispatch]);
     return (
         <>
             {cartList.length === 0 ? (
                 <div className={styles.nocars}>
-                    <h2 className={styles.nocars_title}>
+                    <h2 className={styles.cart_title}>
                         No cars added at the cart
                     </h2>
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-car-off" width="72" height="72" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                        <path d="M7 17m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
-                        <path d="M15.584 15.588a2 2 0 0 0 2.828 2.83" />
-                        <path d="M5 17h-2v-6l2 -5h1m4 0h4l4 5h1a2 2 0 0 1 2 2v4m-6 0h-6m-6 -6h8m4 0h3m-6 -3v-2" />
-                        <path d="M3 3l18 18" />
-                    </svg>
+                    <NoCarsSVG />
                     <Link to="/home" className={styles.keeplooking}>Keep looking</Link>
                 </div>
             ) : (
                 <div className={styles.cart}>
                     <div>
-                        <h1>Your Cart</h1>
-                        <Link to="/home" className={styles.keeplooking}> Keep looking </Link>
+                        <h1 className={styles.cart_title}>Your Cart</h1>
                     </div>
                     <div className={styles.products_detail}>
                         <div className={styles.products}>
@@ -63,13 +111,6 @@ export default function Cart() {
                             </div>
                             {cartList.map((product) => (
                                 <div className={styles.car_i} key={product.name}>
-                                    {product.image && product.image[0] && <img className={styles.car_img} src={product.image[0]} alt='imagen' />}
-                                    <div className={styles.name_and_brand}>
-                                        <p>{product.name} {product.model}<br />{product.brand} </p>
-                                    </div>
-                                    <div className={styles.price_and_btnx}>
-                                        <h4 className={styles.car_price}>${Number(product.price)}</h4>
-                                    </div>
                                     <div className={styles.delete}>
                                         <div className={styles.delete_btn} onClick={() => removeFromCart(product.id)}>
                                             <svg xmlns="http://www.w3.org/2000/svg" className={styles.btnX} width="40" height="40" viewBox="0 0 24 24" strokeWidth="1.5" fill="none" strokeLinecap="round" strokeLinejoin="round">
@@ -79,6 +120,15 @@ export default function Cart() {
                                             </svg>
                                         </div>
                                     </div>
+                                    <Link className={styles.link_imgcar} to={`/detail/${product.id}`}>
+                                        {product.image && product.image[0] && <img className={styles.car_img} src={product.image[0]} alt='imagen' />}
+                                    </Link>
+                                    <div className={styles.name_and_brand}>
+                                        <p>{product.name} {product.model}<br />{product.brand} </p>
+                                    </div>
+                                    <div className={styles.price}>
+                                        <h4 className={styles.car_price}>${Number(product.price)}</h4>
+                                    </div>
                                 </div>
                             ))}
                         </div>
@@ -86,10 +136,15 @@ export default function Cart() {
                     <div className={styles.detail}>
                         <div className={styles.detail_info}>
                             <p className={styles.subtotal}>
-                                Subtotal: ${totalPrice()} usd
+                                Subtotal: ${totalPrice()} USD
                             </p>
-                            <button className={styles.btn_buy} onClick={handleBuy}>Finish Order</button>
-                            <button onClick={handleEmptyCart}>Empty Cart</button>
+                            {showMercadoPago ? (
+                                <div>
+                                    {preferenceId && <Wallet initialization={{ preferenceId }} />}
+                                </div>
+                            ) : (
+                                <button className={styles.btn_buy} disabled={!isLogged()} onClick={handleBuy}>Finish Order</button>
+                            )}
                         </div>
                     </div>
                 </div>

@@ -4,12 +4,11 @@ import { useParams } from 'react-router-dom';
 import { getDetail, resetDetail, addToCart, deleteProduct } from '../../../Redux/actions';
 import styles from './Detail.module.css';
 import { useSelector, useDispatch } from 'react-redux';
-import { LocationSvg, ButtonBack } from '../../../assets/svgs'
+import { LocationSvg } from '../../../assets/svgs'
 import { CarRemovedFromCart, CarAddedToCart } from '../../NotiStack';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-
 
 export default function Detail() {
     const { id } = useParams();
@@ -17,7 +16,6 @@ export default function Detail() {
     const detail = useSelector((state) => state.detail);
     const cartList = useSelector((state) => state.cartList);
     const [selectedImage, setSelectedImage] = useState(null);
-    const [firstImageBordered, setFirstImageBordered] = useState(false)
     const mainSliderRef = useRef(null);
     const secondSliderRef = useRef(null);
 
@@ -73,7 +71,6 @@ export default function Detail() {
 
     return (
         <div className={styles.detail}>
-            <Link to={"/home"}><ButtonBack/></Link>
             <div className={styles.detail_card}>
                 <div className={`${styles.carrousel_img} ${styles.custom_carrousel}`}>
                     <div ref={secondSliderRef} className={styles.selected_imgs}>
@@ -118,18 +115,9 @@ export default function Detail() {
                         </div>
                     </h1>
                     <h1 className={`${styles.h1_detail} ${styles.detail_price}`}>$ {formatPrice(detail.price)} USD</h1>
-                    {isInCart() ? (
-                        <div className={styles.div_removegocart}>
-                            <Link to="/cart"><button className={styles.btn_gocart}>Go to cart</button></Link>
-                            <button className={styles.btn_removecart} onClick={handleRemoveFromCart}>
-                                Remove from cart
-                            </button>
-                        </div>
-                    ) : (
-                        <button className={styles.btn_addcart} onClick={handleAddToCart}>
-                            Add to cart
-                        </button>
-                    )}
+                    <button className={styles.btn_addcart} onClick={handleAddToCart}>
+                        Add to cart
+                    </button>
                 </div>
                 <div className={styles.description_car}>
                     <h1 className={`${styles.h1_detail} ${styles.detail_description}`}>Description:<p> {detail.description && detail.description}</p></h1>

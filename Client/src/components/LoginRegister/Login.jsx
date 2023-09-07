@@ -2,13 +2,13 @@ import React, { useState, useEffect } from "react";
 import styles from "./Login.module.css";
 import validate from "./validate";
 import { useDispatch } from "react-redux";
-import Swal from "sweetalert2";
 import { Link, useNavigate } from "react-router-dom";
 import { GoogleAuthProvider, signInWithPopup, getAuth } from "firebase/auth";
 import { setUserId, setUserType } from "../../Redux/actions";
 import axios from "axios";
 import { OpenEye, ClosedEye, Google } from "./svgs.jsx";
 import { ButtonBack } from "../../assets/svgs";
+import { SignedSuccesfully } from "../NotiStack";
 
 
 export default function Login() {
@@ -53,6 +53,7 @@ export default function Login() {
       dispatch(setUserType(userType));
       const { access } = response.data;
       setAccess(true);
+
       access && navigate("/home");
     } catch (error) {
       Swal.fire({
@@ -103,16 +104,10 @@ export default function Login() {
           email: input.email,
           password: input.password,
         });
-        Swal.fire({
-          title: "Succcess",
-          text: "Signed In successfully",
-          icon: "success",
-          confirmButtonText: "Cool",
-        });
-        const userId = response.data.id;
-        const userType = response.data.type;
-        dispatch(setUserId(userId));
-        dispatch(setUserType(userType));
+        // Guardar información del usuario en el localStorage
+        localStorage.setItem("userId", response.data.id);
+        localStorage.setItem("userType", response.data.type);
+        SignedSuccesfully()
         const { access } = response.data;
         setAccess(true);
         access && navigate("/home");
@@ -145,6 +140,13 @@ export default function Login() {
   useEffect(() => {
     !access && navigate("/login");
   }, [access]);
+
+  const handleLogout = () => {
+    // Eliminar los valores del localStorage
+    localStorage.removeItem("userId");
+    localStorage.removeItem("userType")
+  }
+
   return (
     <div className={styles.login}>
       <Link to={"/home"}><ButtonBack /></Link>
@@ -205,6 +207,9 @@ export default function Login() {
             <Link to="/register" className={styles.toregister}>
               Register
             </Link>
+          </label>
+          <label>
+            <button onClick={handleLogout}>Logout</button>
           </label>
         </div>
       </div>

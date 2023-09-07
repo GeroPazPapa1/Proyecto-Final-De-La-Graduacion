@@ -66,10 +66,12 @@ function rootReducer(state = initialState, action) {
       };
     case "PURCHASE_PRODUCTS":
       // Agregar los productos comprados al estado purchasedProducts
+      const newPurchasedProducts = action.payload.filter(product => {
+        return !state.purchasedProducts.some(purchasedProduct => purchasedProduct.id === product.id);
+      });
       return {
         ...state,
-        purchasedProducts: [...state.purchasedProducts, ...action.payload],
-        cartList: [], // Vaciar el carrito después de la compra
+        purchasedProducts: [...state.purchasedProducts, ...newPurchasedProducts],
       };
     case "DELETE_PRODUCT":
       return {

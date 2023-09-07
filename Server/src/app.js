@@ -9,7 +9,11 @@ const corsOptions = {
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   credentials: true,
 };
+const mercadoPago = require('mercadopago');
 const requestIp = require("request-ip");
+
+const { configureMercaPago } = require('./utils/configureMercaPago.js')
+
 
 //Initializing Firebase________________________________________________
 const admin = require("firebase-admin");
@@ -41,6 +45,9 @@ server.use((req, res, next) => {
   res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
   next();
 });
+
+configureMercaPago(mercadoPago);
+
 
 // Error catching endware.
 server.use((err, req, res, next) => {
