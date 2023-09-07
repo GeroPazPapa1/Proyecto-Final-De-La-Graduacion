@@ -31,6 +31,7 @@ export const SignedSuccesfully = () => {
         }
     });
 }
+
 export const AlreadyAccountWithEmail = () => {
     enqueueSnackbar('Already have a user account with this email', {
         variant: 'error',

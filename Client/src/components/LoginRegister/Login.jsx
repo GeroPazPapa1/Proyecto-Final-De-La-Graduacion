@@ -9,7 +9,7 @@ import axios from "axios";
 import { OpenEye, ClosedEye, Google } from "./svgs.jsx";
 import { ButtonBack } from "../../assets/svgs";
 import { AlreadyAccountWithEmail, PutEmailPassword, SignedSuccesfully, WrongEmailPassword } from "../NotiStack";
-import { auth } from "./firebase.js";
+
 
 export default function Login() {
   const navigate = useNavigate();
@@ -32,6 +32,7 @@ export default function Login() {
 
   const handleGoogleSignin = async () => {
     const provider = new GoogleAuthProvider();
+    const auth = getAuth();
     try {
       const result = await signInWithPopup(auth, provider);
       const user = auth.currentUser;
@@ -62,17 +63,15 @@ export default function Login() {
 
   function handleChange(e) {
     const { name, value } = e.target;
-    setInput((prevInput) => ({
+    setInput(prevInput => ({
       ...prevInput,
       [name]: value,
     }));
     // Setea para renderizar errores
-    setErrors(
-      validate({
-        ...input,
-        [name]: value,
-      })
-    );
+    setErrors(validate({
+      ...input,
+      [name]: value,
+    }));
     // Setea para que solo actue el error en el campo seleccionado
     setTouchedFields((prevTouchedFields) => ({
       ...prevTouchedFields,
@@ -104,10 +103,10 @@ export default function Login() {
         // Guardar información del usuario en el localStorage
         localStorage.setItem("userId", response.data.id);
         localStorage.setItem("userType", response.data.type);
-        SignedSuccesfully()
         const { access } = response.data;
         setAccess(true);
-        localStorage.setItem("authToken", JSON.stringify({ response: response.data, email: input.email }));
+        SignedSuccesfully()
+        // localStorage.setItem("authToken", JSON.stringify({ response: response.data, email: input.email }));
         access && navigate("/home");
       } catch (error) {
         WrongEmailPassword()
@@ -128,8 +127,6 @@ export default function Login() {
   useEffect(() => {
     !access && navigate("/login");
   }, [access]);
-
-
   useEffect(() => {
     const loggedUserJson = localStorage.getItem("authToken");
     const user = JSON.parse(loggedUserJson);
@@ -141,17 +138,9 @@ export default function Login() {
       access && navigate("/home");
     }
   }, []);
-  const handleLogout = () => {
-    // Eliminar los valores del localStorage
-    localStorage.removeItem("userId");
-    localStorage.removeItem("userType")
-  }
-
   return (
     <div className={styles.login}>
-      <Link to={"/home"}>
-        <ButtonBack />
-      </Link>
+      <Link to={"/home"}><ButtonBack /></Link>
       <div className={styles.login_form}>
         <form className={styles.form_in} onSubmit={(e) => handleSubmitLogin(e)}>
           <h1 className={styles.title_login}>Log In</h1>
@@ -167,9 +156,7 @@ export default function Login() {
             name="email"
             onChange={(e) => handleChange(e)}
           />
-          {touchedFields.email && errors.email && (
-            <p className={styles.errors}>{errors.email}</p>
-          )}
+          {touchedFields.email && errors.email && <p className={styles.errors}>{errors.email}</p>}
           <label className={styles.label}>Password</label>
           <input
             className={styles.input}
@@ -182,12 +169,12 @@ export default function Login() {
             onChange={(e) => handleChange(e)}
           />
           <div className={styles.btn_hideandshow}>
-            <button
-              type="button"
-              className={styles.show_hide_password}
-              onClick={() => setShowPassword(!showPassword)}
-            >
-              {showPassword ? <ClosedEye /> : <OpenEye />}
+            <button type='button' className={styles.show_hide_password} onClick={() => setShowPassword(!showPassword)}>
+              {showPassword ?
+                <ClosedEye />
+                :
+                <OpenEye />
+              }
             </button>
           </div>
           {touchedFields.password && errors.password && (
@@ -212,9 +199,9 @@ export default function Login() {
               Register
             </Link>
           </label>
-          <label>
+          {/* <label>
             <button onClick={handleLogout}>Logout</button>
-          </label>
+          </label> */}
         </div>
       </div>
     </div>
