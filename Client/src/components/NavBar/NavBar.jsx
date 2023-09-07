@@ -10,7 +10,6 @@ export default function NavBar() {
     const location = useLocation();
 
     const userInfo = JSON.parse(localStorage.getItem("authToken"));
-    console.log(userInfo)
 
     const Logout = async () => {
         localStorage.removeItem("authToken"); //Elimina el Token de autenticación de localStorage

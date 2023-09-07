@@ -12,7 +12,7 @@ export default function Dashboard() {
 
     useEffect(() => {
         const handleChargedUsers = async () => {
-            if (location.pathname === "/user/dashboard" && userInfo?.type === "admin") {
+            if (location.pathname === "/user/dashboard") {
                 // Verifica si los usuarios ya están cargados o no
                 if (!usersLoaded) {
                     try {
