@@ -1,40 +1,41 @@
 {
-  "name": "server",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "name": "pf-vehibuy",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
   "scripts": {
-    "start": "nodemon -L",
-    "test": "mocha -w ./tests/**/*.spec.js"
-  },
-  "author": "VehiBuy",
-  "license": "ISC",
-  "engines": {
-    "node": ">=12.18.3",
-    "npm": ">=6.14.6"
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
+    "preview": "vite preview"
   },
   "dependencies": {
-    "axios": "^0.25.0",
+    "axios": "^1.5.0",
     "bcrypt": "^5.1.1",
-    "body-parser": "^1.19.0",
-    "cookie-parser": "^1.4.5",
-    "cors": "^2.8.5",
-    "dotenv": "^8.2.0",
-    "express": "^4.17.1",
     "firebase": "^10.3.1",
-    "firebase-admin": "^11.10.1",
-    "ioredis": "^4.19.2",
-    "jsonwebtoken": "^9.0.1",
-    "morgan": "^1.10.0",
-    "pg": "^8.5.1",
-    "request-ip": "^3.3.0",
-    "sequelize": "^6.3.5"
+    "notistack": "^3.0.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-redux": "^8.1.2",
+    "react-responsive-carousel": "^3.2.23",
+    "react-router-dom": "^6.15.0",
+    "react-slick": "^0.29.0",
+    "react-transition-group": "^4.4.5",
+    "redux": "^4.2.1",
+    "redux-devtools-extension": "^2.13.9",
+    "redux-thunk": "^2.4.2",
+    "slick-carousel": "^1.8.1",
+    "sweetalert2": "^11.7.27",
+    "uuid": "^9.0.0"
   },
   "devDependencies": {
-    "chai": "^4.2.0",
-    "mocha": "^10.2.0",
-    "nodemon": "^2.0.6",
-    "supertest": "^6.0.1",
-    "supertest-session": "^4.1.0"
+    "@types/react": "^18.2.15",
+    "@types/react-dom": "^18.2.7",
+    "@vitejs/plugin-react": "^4.0.3",
+    "eslint": "^8.45.0",
+    "eslint-plugin-react": "^7.32.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.3",
+    "vite": "^4.4.5"
   }
 }
