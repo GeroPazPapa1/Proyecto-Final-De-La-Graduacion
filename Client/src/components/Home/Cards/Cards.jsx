@@ -46,10 +46,10 @@ export default function Cards() {
             <div className={styles.container2}>
                 <div className={styles.containerNF}>
                     <div>
-                      <img src={NOTFOUND} alt="NotFound..." />
+                        <img src={NOTFOUND} alt="NotFound..." />
                     </div>
                     <div>
-                        <p>Not Found</p> 
+                        <p>Not Found</p>
                         <span>Check the spelling of the word</span>
                     </div>
                 </div>

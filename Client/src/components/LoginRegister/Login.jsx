@@ -8,8 +8,7 @@ import { setUserId, setUserType } from "../../Redux/actions";
 import axios from "axios";
 import { OpenEye, ClosedEye, Google } from "./svgs.jsx";
 import { ButtonBack } from "../../assets/svgs";
-import { SignedSuccesfully } from "../NotiStack";
-
+import { AlreadyAccountWithEmail, PutEmailPassword, SignedSuccesfully, WrongEmailPassword } from "../NotiStack";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -54,14 +53,10 @@ export default function Login() {
       const { access } = response.data;
       setAccess(true);
       localStorage.setItem("authToken", token);
+      SignedSuccesfully()
       access && navigate("/home");
     } catch (error) {
-      Swal.fire({
-        title: "Error!",
-        text: "Already have a user account with this email",
-        icon: "error",
-        confirmButtonText: "OK",
-      });
+      AlreadyAccountWithEmail()
     }
   };
 
@@ -110,27 +105,17 @@ export default function Login() {
         SignedSuccesfully()
         const { access } = response.data;
         setAccess(true);
-        localStorage.setItem("authToken", JSON.stringify({response: response.data, email: input.email}));
+        localStorage.setItem("authToken", JSON.stringify({ response: response.data, email: input.email }));
         access && navigate("/home");
       } catch (error) {
-        Swal.fire({
-          title: "Error!",
-          text: "Wrong email or password",
-          icon: "error",
-          confirmButtonText: "OK",
-        });
+        WrongEmailPassword()
       }
       setInput({
         email: "",
         password: "",
       });
     } else {
-      Swal.fire({
-        title: "Error!",
-        text: "Put your email and password",
-        icon: "error",
-        confirmButtonText: "OK",
-      });
+      PutEmailPassword()
       return;
     }
   }
@@ -142,11 +127,6 @@ export default function Login() {
     !access && navigate("/login");
   }, [access]);
 
-  const handleLogout = () => {
-    // Eliminar los valores del localStorage
-    localStorage.removeItem("userId");
-    localStorage.removeItem("userType")
-  }
 
   useEffect(() => {
     const loggedUserJson = localStorage.getItem("authToken");
@@ -159,6 +139,12 @@ export default function Login() {
       access && navigate("/home");
     }
   }, []);
+  const handleLogout = () => {
+    // Eliminar los valores del localStorage
+    localStorage.removeItem("userId");
+    localStorage.removeItem("userType")
+  }
+
   return (
     <div className={styles.login}>
       <Link to={"/home"}><ButtonBack /></Link>
