@@ -23,11 +23,11 @@ admin.initializeApp({
 require("./db.js");
 
 const server = express();
+server.set("view engine", "ejs");
+server.name = "API";
 
-server.name = 'API';
-
-server.use(bodyParser.urlencoded({ extended: true, limit: '100mb' }));
-server.use(bodyParser.json({ limit: '100mb' }));
+server.use(bodyParser.urlencoded({ extended: true, limit: "100mb" }));
+server.use(bodyParser.json({ limit: "100mb" }));
 server.use(cookieParser());
 server.use(morgan("dev"));
 server.use(cors(corsOptions));
