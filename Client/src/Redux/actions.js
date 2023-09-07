@@ -56,14 +56,6 @@ export const getAllCars = () => {
   };
 };
 
-export const register = (payload) => {
-  const userCreate = "http://localhost:3001/user/create";
-  return async function (dispatch) {
-    const response = await axios.post(userCreate, payload);
-    return response;
-  };
-};
-
 export const setUserId = (userId) => {
   return {
     type: "SET_USER_ID",

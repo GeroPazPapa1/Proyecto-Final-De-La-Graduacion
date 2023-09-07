@@ -3,14 +3,14 @@ import styles from "./Register.module.css";
 import validate from "./validate";
 import { useDispatch } from "react-redux";
 import Swal from "sweetalert2";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { OpenEye, ClosedEye, Google } from "./svgs.jsx";
 import handleGoogleSignin from "./googleSignIn";
-import { register } from "../../Redux/actions";
 import axios from "axios";
 import { ButtonBack } from "../../assets/svgs";
 
 export default function Register() {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const [errors, setErrors] = useState({});
   const [countries, setCountries] = useState([]);
@@ -52,6 +52,8 @@ export default function Register() {
     }));
   }
 
+  const handleGoogleSignin = async () => {};
+
   const handleSubmitRegister = async (e) => {
     e.preventDefault();
     setErrors(
@@ -60,56 +62,57 @@ export default function Register() {
         [e.target.name]: e.target.value,
       })
     );
-    // Verifica si hay errores de validación y si todos los campos están llenos
-    const isFormValid =
+    console.log(errors);
+    console.log(input);
+    if (
+      errors.email.length === 0 &&
+      errors.password.length === 0 &&
+      input.email &&
+      input.password &&
       input.name &&
       input.lastName &&
-      input.age &&
       input.country &&
-      input.email &&
-      input.password;
-    if (errors === 0 && isFormValid) {
+      input.age
+    ) {
       try {
-        console.log(input);
-        const createUserResponse = dispatch(register(input));
-        if (createUserResponse.status === 200) {
-          // Muestra un Swal success si la creación es exitosa
-          Swal.fire({
-            icon: "success",
-            title: "Registration Successful",
-            text: "Your account has been created successfully!",
-          });
-          setInput({
-            name: "",
-            lastName: "",
-            age: "",
-            country: "",
-            email: "",
-            password: "",
-          });
-        } else {
-          // Muestra un Swal error si la creación falla
-          Swal.fire({
-            icon: "error",
-            title: "Registration Error",
-            text: "An error occurred while creating your account. Please try again later.",
-          });
-        }
-      } catch (error) {
-        console.error("Error al registrar el usuario:", error);
-        // Muestra un Swal error si hay un error en la solicitud
+        const response = await axios.post("http://localhost:3001/user/create", {
+          email: input.email,
+          password: input.password,
+          name: input.name,
+          lastName: input.lastName,
+          country: input.country,
+          age: input.age,
+          status: "user",
+        });
         Swal.fire({
+          title: "Succcess",
+          text: "Account created successfully, please check your email and follow the verification instructions",
+          icon: "success",
+          confirmButtonText: "Cool",
+        });
+      } catch (error) {
+        Swal.fire({
+          title: "Error!",
+          text: "There is already an account registered with this email",
           icon: "error",
-          title: "Registration Error",
-          text: "An error occurred while creating your account. Please try again later.",
+          confirmButtonText: "OK",
         });
       }
+      setInput({
+        name: "",
+        lastName: "",
+        age: "",
+        country: "",
+        email: "",
+        password: "",
+      });
+      navigate("/login");
     } else {
-      // Muestra un Swal algunos campos no están llenos o hay errores de validación
       Swal.fire({
+        title: "Error!",
+        text: "Please fill all required fields and fix any validation errors",
         icon: "error",
-        title: "Validation Error",
-        text: "Please fill all required fields and fix any validation errors.",
+        confirmButtonText: "OK",
       });
     }
   };
