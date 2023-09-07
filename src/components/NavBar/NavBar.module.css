@@ -1,0 +1,54 @@
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    align-content: center;
+    margin: 2.5vw 9vw;
+}
+
+.nombrelogo {
+    font-size: 20px;
+}
+
+.containerLP {
+    display: flex;
+    align-items: center;
+    align-content: center;
+}
+
+.containerL {
+    display: flex;
+    align-items: center;
+    align-content: center;
+}
+
+.logo {
+    display: flex;
+    width: 120px;
+    height: auto;
+    padding-right: 60px;
+    cursor: pointer;
+    align-content: center;
+}
+
+.icons {
+    margin-left: 15px;
+    width: 30px;
+    height: auto;
+    cursor: pointer;
+}
+
+.button {
+    border: none;
+    background-color: transparent;
+    font-family: 'Inter', sans-serif;
+    font-size: 17px;
+    margin: 0 13px;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    transition: border-bottom-color 0.3 ease;
+}
+
+.button:hover {
+    border-bottom-color: black;
+}

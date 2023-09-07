@@ -1,0 +1,16 @@
+:root {
+  --colorBlanco: #ffffff;
+  --colorGris: #919191;
+  --colorGrisClaro: #e6e6e6;
+  --colorNegro: #000000;
+  --colorNegroClaro: #222222;
+  --colorCrema: #ebe8e5;
+  --fontInter: 'Inter', sans-serif;
+  --fontNunito: 'Nunito Sans', sans-serif;
+  --colorAzulCielo: #5555ff;
+  --colorRojo: #e00000;
+}
+
+body {
+  margin: 0;
+}

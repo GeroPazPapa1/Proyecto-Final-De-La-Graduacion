@@ -1,0 +1,103 @@
+.nocars {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-self: center;
+}
+
+
+.cart {
+    margin: 0 9vw;
+}
+
+.keeplooking {
+    color: var(--colorNegro);
+}
+
+.topics,
+.car_i {
+    display: grid;
+    grid-template-columns: 1fr 3fr 1fr 42px;
+    border-bottom: 1px solid;
+    padding: 1.2rem;
+}
+
+.topics {
+    padding-bottom: 0;
+    border-bottom: 1px solid;
+}
+
+.topic_product {
+    grid-column: 1;
+    text-align: left;
+}
+
+.topic_price {
+    grid-column: 3;
+}
+
+.topic_product,
+.car_price,
+.topic_price {
+    width: 200px;
+
+}
+
+.car_img {
+    width: 200px;
+    aspect-ratio: 16/9;
+}
+
+.delete {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btnX {
+    stroke: red;
+    border: 1px solid red;
+    cursor: pointer;
+}
+
+.name_and_brand {
+    display: flex;
+    flex-direction: column;
+    margin-left: 2rem;
+    align-items: flex-start;
+    align-self: center;
+}
+
+.price_and_btnx {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.detail {
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.subtotal {
+    text-transform: uppercase;
+    font-size: 1.1rem;
+    text-align: right;
+}
+
+.btn_buy {
+    font-size: 1.3rem;
+    text-transform: uppercase;
+    padding: 0.7rem 3rem;
+    background-color: var(--colorBlanco);
+    border: 2px solid var(--colorNegro);
+    transition: ease-in-out 0.1s;
+    cursor: pointer;
+}
+
+.btn_buy:hover {
+    border-color: var(--colorNegroClaro);
+    background-color: var(--colorGrisClaro);
+}
