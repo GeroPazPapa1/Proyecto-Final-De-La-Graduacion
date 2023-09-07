@@ -1,6 +1,6 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import Cart from "./components/Cart/Cart";
+import Cart from "./components/Cart/Cart.jsx";
 import Home from "./components/Home/Home";
 import LandingPage from "./components/LandingPage/LandingPage";
 import Footer from "./components/Home/Footer/Footer";
@@ -9,8 +9,8 @@ import Register from "./components/LoginRegister/Register";
 import ForgotPassword from "./components/LoginRegister/ForgotPassword";
 import NavBar from "./components/NavBar/NavBar";
 import Detail from "./components/Home/Detail/Detail";
-import Favorites from "./components/Favorites/favorites";
-import Modification from "./components/Modification/Modification";
+import Favorites from "./components/Favorites/Favorites";
+import Modification from "./components/Modification/Modification.jsx";
 
 function App() {
   return (
