@@ -11,6 +11,7 @@ import NavBar from './components/NavBar/NavBar'
 import Detail from './components/Home/Detail/Detail';
 import Favorites from './components/Favorites/favorites';
 import Dashboard from './components/Dashboard/Dashboard';
+import Modification from './components/Modification/Modification';
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
         <Route path="/login/forgotpassword" element={<ForgotPassword />} />
         <Route path="/favorites" element={<Favorites />} />
         <Route path='/user/dashboard' element={<Dashboard />}/>
+        <Route path="/modification" element={<Modification />}/>
       </Routes>
       <Footer />
     </>

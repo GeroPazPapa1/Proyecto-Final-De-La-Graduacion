@@ -121,7 +121,7 @@ export default function Login() {
         dispatch(setUserType(userType));
         const { access } = response.data;
         setAccess(true);
-        localStorage.setItem("authToken", JSON.stringify(response.data));
+        localStorage.setItem("authToken", JSON.stringify({response: response.data, email: input.email}));
         access && navigate("/home");
       } catch (error) {
         Swal.fire({
@@ -154,20 +154,13 @@ export default function Login() {
   }, [access]);
   useEffect(() => {
     const loggedUserJson = localStorage.getItem("authToken");
-    let user = null;
-
-    try {
-      user = JSON.parse(loggedUserJson);
-      console.log(user)
-    } catch (error) {
-      console.error("Error al analizar el JSON:", error);
-      // Puedes manejar el error de alguna manera, por ejemplo, mostrar un mensaje al usuario o establecer user en un valor predeterminado.
-    }
-    
+    const user = JSON.parse(loggedUserJson);
     if (user) {
-      // Realiza acciones con el usuario si se pudo analizar correctamente
-      dispatch(setUserId(user.id));
-      dispatch(setUserType(user.type));
+      dispatch(setUserId(user.response.id));
+      dispatch(setUserType(user.response.type));
+      const { access } = user.response;
+      setAccess(true);
+      access && navigate("/home");
     }
     
   }, []);
