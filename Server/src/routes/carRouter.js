@@ -7,9 +7,6 @@ const {
   getFiltersHandler,
   deleteCarHandler,
 } = require("../handlers/handlerCar");
-const { getAllBrand } = require("../controllers/getAllBrand");
-const { getAllColor } = require("../controllers/getAllColors");
-const { getAllLocation } = require("../controllers/getAllLocation");
 
 const carRouter = Router();
 const { getAllBrand } = require("../controllers/getAllBrand");

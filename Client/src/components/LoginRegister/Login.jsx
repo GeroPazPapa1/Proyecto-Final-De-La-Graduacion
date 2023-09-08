@@ -8,7 +8,12 @@ import { setUserId, setUserType } from "../../Redux/actions";
 import axios from "axios";
 import { OpenEye, ClosedEye, Google } from "./svgs.jsx";
 import { ButtonBack } from "../../assets/svgs";
-import { AlreadyAccountWithEmail, PutEmailPassword, SignedSuccesfully, WrongEmailPassword } from "../NotiStack";
+import {
+  AlreadyAccountWithEmail,
+  PutEmailPassword,
+  SignedSuccesfully,
+  WrongEmailPassword,
+} from "../NotiStack";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -32,7 +37,6 @@ export default function Login() {
   const handleGoogleSignin = async () => {
     const provider = new GoogleAuthProvider();
     const auth = getAuth();
-    const auth = getAuth();
     try {
       const result = await signInWithPopup(auth, provider);
       const user = auth.currentUser;
@@ -52,31 +56,35 @@ export default function Login() {
       dispatch(setUserId(userId));
       dispatch(setUserType(userType));
       const { access } = response.data;
-      SignedSuccesfully()
+      SignedSuccesfully();
       setAccess(true);
       localStorage.setItem("authToken", token);
       access && navigate("/home");
     } catch (error) {
-      AlreadyAccountWithEmail()
+      AlreadyAccountWithEmail();
     }
   };
 
   function handleChange(e) {
     const { name, value } = e.target;
-    setInput(prevInput => ({
-    setInput(prevInput => ({
+
+    setInput((prevInput) => ({
       ...prevInput,
       [name]: value,
     }));
     // Setea para renderizar errores
-    setErrors(validate({
-      ...input,
-      [name]: value,
-    }));
-    setErrors(validate({
-      ...input,
-      [name]: value,
-    }));
+    setErrors(
+      validate({
+        ...input,
+        [name]: value,
+      })
+    );
+    setErrors(
+      validate({
+        ...input,
+        [name]: value,
+      })
+    );
     // Setea para que solo actue el error en el campo seleccionado
     setTouchedFields((prevTouchedFields) => ({
       ...prevTouchedFields,
@@ -105,26 +113,29 @@ export default function Login() {
           email: input.email,
           password: input.password,
         });
-        SignedSuccesfully()
+        SignedSuccesfully();
         const userId = response.data.id;
         const userType = response.data.type;
         dispatch(setUserId(userId));
         dispatch(setUserType(userType));
         const { access } = response.data;
         setAccess(true);
-        localStorage.setItem("userId", response.data.id)
-        localStorage.setItem("userType", response.data.type)
-        localStorage.setItem("authToken", JSON.stringify({ response: response.data, email: input.email }));
+        localStorage.setItem("userId", response.data.id);
+        localStorage.setItem("userType", response.data.type);
+        localStorage.setItem(
+          "authToken",
+          JSON.stringify({ response: response.data, email: input.email })
+        );
         access && navigate("/home");
       } catch (error) {
-        WrongEmailPassword()
+        WrongEmailPassword();
       }
       setInput({
         email: "",
         password: "",
       });
     } else {
-      PutEmailPassword()
+      PutEmailPassword();
       return;
     }
   }
@@ -148,8 +159,9 @@ export default function Login() {
   }, []);
   return (
     <div className={styles.login}>
-      <Link to={"/home"}><ButtonBack /></Link>
-      <Link to={"/home"}><ButtonBack /></Link>
+      <Link to={"/home"}>
+        <ButtonBack />
+      </Link>
       <div className={styles.login_form}>
         <form className={styles.form_in} onSubmit={(e) => handleSubmitLogin(e)}>
           <h1 className={styles.title_login}>Log In</h1>
@@ -165,8 +177,12 @@ export default function Login() {
             name="email"
             onChange={(e) => handleChange(e)}
           />
-          {touchedFields.email && errors.email && <p className={styles.errors}>{errors.email}</p>}
-          {touchedFields.email && errors.email && <p className={styles.errors}>{errors.email}</p>}
+          {touchedFields.email && errors.email && (
+            <p className={styles.errors}>{errors.email}</p>
+          )}
+          {touchedFields.email && errors.email && (
+            <p className={styles.errors}>{errors.email}</p>
+          )}
           <label className={styles.label}>Password</label>
           <input
             className={styles.input}
@@ -179,18 +195,12 @@ export default function Login() {
             onChange={(e) => handleChange(e)}
           />
           <div className={styles.btn_hideandshow}>
-            <button type='button' className={styles.show_hide_password} onClick={() => setShowPassword(!showPassword)}>
-              {showPassword ?
-                <ClosedEye />
-                :
-                <OpenEye />
-              }
-            <button type='button' className={styles.show_hide_password} onClick={() => setShowPassword(!showPassword)}>
-              {showPassword ?
-                <ClosedEye />
-                :
-                <OpenEye />
-              }
+            <button
+              type="button"
+              className={styles.show_hide_password}
+              onClick={() => setShowPassword(!showPassword)}
+            >
+              {showPassword ? <ClosedEye /> : <OpenEye />}
             </button>
           </div>
           {touchedFields.password && errors.password && (
