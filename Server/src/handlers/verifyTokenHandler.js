@@ -16,7 +16,7 @@ const verifyTokenHandler = async (req, res) => {
     const user = await getEmailController(decoded.email);
     if (user) {
       await updateUserStatusController(decoded.email, "verificado");
-      res.send("¡Tu correo ha sido verificado con éxito!");
+      res.redirect("http://localhost:5173/login");
     } else {
       res.status(404).send("Usuario no encontrado");
     }
