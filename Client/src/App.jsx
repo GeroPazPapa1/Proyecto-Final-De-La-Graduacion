@@ -10,7 +10,7 @@ import ForgotPassword from './components/LoginRegister/ForgotPassword';
 import NavBar from './components/NavBar/NavBar'
 import Detail from './components/Home/Detail/Detail';
 import Favorites from './components/Favorites/Favorites.jsx';
-import ProfileDashboard from './components/Profile/ProfileDashboard'
+import ProfileDashboard from './components/ProfileDashboard/ProfileDashboard'
 
 function App() {
   return (

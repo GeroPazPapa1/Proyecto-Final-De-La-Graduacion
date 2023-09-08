@@ -7,6 +7,7 @@ const initialState = {
   userId: "",
   userType: "",
   pageFiltered: [],
+  cartHistory: [],
 
   queryParams: {
     name: "",
@@ -44,7 +45,11 @@ function rootReducer(state = initialState, action) {
         ...state,
         cartList: [...state.cartList, action.payload],
       };
-
+    case 'ADD_BUY_TO_HISTORY':
+      return {
+        ...state,
+        cartHistory: [...state.cartHistory, action.payload],
+      };
     case "ADD_TO_FAV":
       const isProductInFav = state.favorites.some(
         (product) => product.name === action.payload.name
