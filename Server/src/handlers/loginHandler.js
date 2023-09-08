@@ -30,6 +30,7 @@ const loginHandler = async (req, res) => {
         .status(200)
         .json({ access: true, type: "user", id: userId, token: token });
   } catch (error) {
+    console.log(error);
     return res.status(500).send(error.message);
   }
 };
