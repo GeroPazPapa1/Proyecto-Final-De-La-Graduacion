@@ -173,13 +173,9 @@ export const locationByQuery = () => {
   };
 };
 
-export const getDashboard = (userInfo) => {
+export const getDashboard = (loggedUser) => {
   const endpoint = "http://localhost:3001/user/dashboard/users";
-  const config = {
-    headers: {
-      Authorization: `Bearer ${userInfo.token}`,
-    },
-  };
+  const config = loggedUser;
   return async (dispatch) => {
     try {
       const { data } = await axios(endpoint, config);

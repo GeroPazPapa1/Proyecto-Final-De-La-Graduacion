@@ -1,9 +1,16 @@
 import React from 'react'
 import LOGO_NV from "./Icons/LOGO_NV.png"
 import styles from "./Footer.module.css"
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 export default function Footer() {
+
+    const location = useLocation();
+
+    if (location.pathname.startsWith("/admin")) {
+        return null;
+    }
+
     return (
         <div className={styles.container}>
             <div className={styles.container2}>

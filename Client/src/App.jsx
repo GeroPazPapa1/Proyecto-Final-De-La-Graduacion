@@ -26,7 +26,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/login/forgotpassword" element={<ForgotPassword />} />
         <Route path="/favorites" element={<Favorites />} />
-        <Route path='/user/dashboard' element={<Dashboard />}/>
+        <Route path='/admin/dashboard' element={<Dashboard />}/>
         <Route path="/modification" element={<Modification />}/>
       </Routes>
       <Footer />
