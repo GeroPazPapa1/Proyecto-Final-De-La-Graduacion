@@ -19,11 +19,11 @@ export default function Cards() {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        if (!carsLoadeds) {
+        if (carsLoadeds === false) {
             const fetchCars = async () => {
+                await dispatch(cardsLoadedTrue());
                 await dispatch(getAllCars());
                 await dispatch(applyFilters("originCars"));
-                dispatch(cardsLoadedTrue());
             };
             fetchCars();
         }

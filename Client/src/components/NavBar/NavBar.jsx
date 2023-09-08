@@ -14,9 +14,10 @@ export default function NavBar() {
         localStorage.clear();
         // };
 
-        console.log("loggedUser:", loggedUser);
-        console.log("loggedUser.email:", loggedUser?.email);
+    if (location.pathname.startsWith("/admin")) {
+        return null;
     }
+
     return (
         <div className={styles.container}>
             <div>
@@ -26,12 +27,26 @@ export default function NavBar() {
             </div>
             {location.pathname === "/" /*&& !loggedUser*/ && (
                 <div className={styles.containerL}>
-                    <Link to={"/login"}>
-                        <button className={styles.button}>Log in</button>
-                    </Link>
-                    <Link to={"/register"}>
-                        <button className={styles.button}>Register</button>
-                    </Link>
+                    {!loggedUser ? (
+                        <>
+                            <Link to={"/login"}>
+                                <button className={styles.button}>Log in</button>
+                            </Link>
+                            <Link to={"/register"}>
+                                <button className={styles.button}>Register</button>
+                            </Link>
+                        </>
+                    ) : (
+                        <>
+                            <p>Welcome {loggedUser.name}</p>
+                            {loggedUser.response?.type === "admin" && (
+                                <Link to={"/admin/dashboard"}>
+                                    <button>Dashboard</button>
+                                </Link>
+                            )}
+                            <button onClick={handleLogout}>Logout</button>
+                        </>
+                    )}
                 </div>
             )}
             {location.pathname === "/home" && (
@@ -50,10 +65,18 @@ export default function NavBar() {
                             </Link>
                             {
                                 loggedUser && (
-                                    <Link to={"/home"}>
+                                    <>
                                         <span>{loggedUser.email}</span>
-                                        <button onClick={handleLogout} className={styles.button}>Log out</button>
-                                    </Link>
+                                        {loggedUser.response?.type === "admin" && (
+                                            <Link to={"/admin/dashboard"}>
+                                                <button>Dashboard</button>
+                                            </Link>)}
+                                        <Link to={"/modification"}>
+                                            <button className={styles.button} id={loggedUser.id}>Modification</button></Link>
+                                        <Link to={"/home"}>
+                                            <button onClick={handleLogout} className={styles.button}>Log out</button>
+                                        </Link>
+                                    </>
                                 )
                             }
                             {!loggedUser && (

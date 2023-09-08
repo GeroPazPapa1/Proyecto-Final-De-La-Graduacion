@@ -56,6 +56,14 @@ export const getAllCars = () => {
   };
 };
 
+export const register = (payload) => {
+  const userCreate = "http://localhost:3001/user/create";
+  return async function (dispatch) {
+    const response = await axios.post(userCreate, payload);
+    return response;
+  };
+};
+
 export const setUserId = (userId) => {
   return {
     type: "SET_USER_ID",
@@ -165,9 +173,33 @@ export const locationByQuery = () => {
   };
 };
 
+export const getDashboard = (loggedUser) => {
+  const endpoint = "http://localhost:3001/user/dashboard/users";
+  const config = loggedUser;
+  return async (dispatch) => {
+    try {
+      const { data } = await axios(endpoint, config);
+      console.log(data)
+      return dispatch({
+        type: "GET_ALL_USERS",
+        payload: data,
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+};
+
 export const locationLoadedTrue = () => {
   return {
     type: "LOCATION_LOADED",
+    payload: true,
+  };
+};
+
+export const usersLoadedTrue = () => {
+  return {
+    type: "USERS_LOADED",
     payload: true,
   };
 };
@@ -206,3 +238,4 @@ export const orderFilters = (order) => {
     payload: order,
   };
 };
+

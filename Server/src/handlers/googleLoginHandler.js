@@ -44,7 +44,7 @@ const googleLoginHandler = async (req, res) => {
       });
     }
     console.log(user);
-    return res.status(200).json({ access: true, type: "user", id: userId });
+    return res.status(200).json({ access: true, type: "user", id: userId, name: name, email: email });
   } catch (error) {
     console.log(error);
     res.status(500).json({ error: "Error al verificar el token" });
