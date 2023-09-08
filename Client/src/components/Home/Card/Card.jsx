@@ -45,7 +45,7 @@ export default function Card(props) {
     };
 
     return (
-        <div className={`${styles.container} ${isFav ? styles.selectedCard : ""}`}>
+        <div className={styles.container}>
             <div>
                 <Link to={`/detail/${id}`}>
                     <img className={styles.containerImg} src={firstImage} alt="Image..." />
