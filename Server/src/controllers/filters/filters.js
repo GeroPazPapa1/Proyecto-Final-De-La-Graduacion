@@ -58,9 +58,9 @@ const filteredCars = async (brand, color, state, location, maxPrice, minPrice, m
     const filtersCar = await Car.findAll({
       where: conditions,
     })
-    if (filtersCar.length === 0) {
-        return "Car not found";
-    }
+    // if (filtersCar.length === 0) {
+    //     return "Car not found";
+    // }
     return filtersCar;
     } catch (error) {
         return error.message;

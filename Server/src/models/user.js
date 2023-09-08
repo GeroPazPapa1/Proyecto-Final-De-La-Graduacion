@@ -29,11 +29,17 @@ module.exports = (sequelize) => {
         },
       },
     },
-    status: {
+    userStatus: {type: DataTypes.ENUM("enabled", "banned"), defaultValue: "enabled"},
+    userType: {
       type: DataTypes.ENUM("admin", "user"),
       allowNull: false,
     },
     image: { type: DataTypes.STRING, allowNull: true },
     tel: { type: DataTypes.INTEGER, allowNull: true },
-  });
+    verify : { type: DataTypes.STRING},
+  },
+  {
+    timestamps: false,
+  }
+);
 };
