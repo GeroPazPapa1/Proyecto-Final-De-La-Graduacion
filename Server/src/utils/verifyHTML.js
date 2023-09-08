@@ -59,7 +59,7 @@ const verifyHTML = (link) => {
                   </p>
   
                   
-                  <p style="margin-bottom: 50px;"><i>
+                  <p style="margin-bottom: 50px; color: #000000"><i>
                       Sincerely:</i><br>VehiBuy Team</p>
   
                   <a class="claseBoton" href="${link}">Verify e-mail</a>
