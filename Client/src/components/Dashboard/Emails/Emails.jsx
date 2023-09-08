@@ -2,6 +2,7 @@ import React from "react"
 import { useSelector } from "react-redux"
 import LOADING from "./Icons/LOADING.svg"
 import Email from "../Email/Email";
+import styles from "./Emails.module.css";
 
 export default function DashBoardEmail() {
 
@@ -18,7 +19,16 @@ export default function DashBoardEmail() {
 
     return (
         <div>
+            <div className={styles.emailContainer}>
+                <div className={styles.emailItem}>Email</div>
+                <div className={styles.emailItem}>Name</div>
+                <div className={styles.emailItem}>Country</div>
+                <div className={styles.emailItem}>Status</div>
+                <div className={styles.emailItem}>Verify</div>
+                <div className={styles.emailItem}>Actions</div>
+            </div>
             <div>
+                
                 {emails.map((email) => (
                     <Email
                         key={email.id}

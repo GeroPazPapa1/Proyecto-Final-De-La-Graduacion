@@ -14,6 +14,10 @@ export default function NavBar() {
         localStorage.clear();
     };
 
+    if (location.pathname.startsWith("/admin")) {
+        return null;
+    }
+
     return (
         <div className={styles.container}>
             <div>
@@ -36,7 +40,9 @@ export default function NavBar() {
                         <>
                             <p>Welcome {loggedUser.name}</p>
                             {loggedUser.response?.type === "admin" && (
-                                <button>Dashboard</button>
+                                <Link to={"/admin/dashboard"}>
+                                    <button>Dashboard</button>
+                                </Link>
                             )}
                             <button onClick={handleLogout}>Logout</button>
                         </>
@@ -62,8 +68,9 @@ export default function NavBar() {
                                     <>
                                         <span>{loggedUser.email}</span>
                                         {loggedUser.response?.type === "admin" && (
-                                            <button>Dashboard</button>
-                                        )}
+                                            <Link to={"/admin/dashboard"}>
+                                                <button>Dashboard</button>
+                                            </Link>)}
                                         <Link to={"/modification"}>
                                             <button className={styles.button} id={loggedUser.id}>Modification</button></Link>
                                         <Link to={"/home"}>

@@ -7,7 +7,7 @@ import SETTING from "./Icons/SETTING.svg";
 import DashBoardEmail from "./Emails/Emails";
 
 export default function Dashboard() {
-    const [selectedTab, setSelectedTab] = useState("user");
+    const [selectedTab, setSelectedTab] = useState("USER");
 
     const location = useLocation();
     const dispatch = useDispatch();
@@ -20,6 +20,10 @@ export default function Dashboard() {
     const handleTabChange = (tab) => {
         setSelectedTab(tab);
     }
+
+    const handleLogout = () => {
+        localStorage.clear();
+    };
 
     useEffect(() => {
         const handleChargedUsers = async () => {
@@ -62,21 +66,30 @@ export default function Dashboard() {
                         <div className={styles.containerP}>
                             <div className={styles.containerLeft}>
                                 <div className={styles.adminTools}>
-                                    <h2>Admin Tools</h2>
+                                    <h2>Admin <br />Tools</h2>
                                     <img className={styles.img} src={SETTING} alt="Setting..." />
                                 </div>
                                 <div>
                                     <>
-                                        <button onClick={() => handleTabChange("user")}>USERS</button>
-                                        <button onClick={() => handleTabChange("history")}>HISTORY</button>
+                                        <button onClick={() => handleTabChange("USER")}>USERS</button>
+                                        <button onClick={() => handleTabChange("HISTORY")}>HISTORY</button>
+                                        <Link to={"/home"}>
+                                            <button>HOME</button>
+                                        </Link>
+                                        <Link to={"/login"}>
+                                            <button onClick={handleLogout}>LOGOUT</button>
+                                        </Link>
                                     </>
                                 </div>
                             </div>
                             <div className={styles.containerRight}>
+                                <div className={styles.stateUp}>
+                                    <h2>{selectedTab}</h2>
+                                </div>
                                 <div className={styles.hello}>
                                     <h2>DashBoard</h2>
                                 </div>
-                                <div>{selectedTab === "user" && (
+                                <div>{selectedTab === "USER" && (
                                     <div className={styles.DashboardUser}>
                                         <DashBoardEmail/>
                                     </div>

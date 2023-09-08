@@ -1,18 +1,21 @@
 .containerP {
-    display: flex;
-    height: 30vw;
+  display: flex;
+  height: 48.1vw;
+  flex-grow: 1; /* Hace que .containerP tome el espacio restante */
   }
   
   .containerLeft {
     display: flex;
-    padding: 0 2vw;
+    padding: 0 1vw;
     flex-direction: column;
     background-color: #bdac9b;
   }
 
   .containerLeft .adminTools {
     display: flex; /* Establece un diseño en línea para los elementos */
+    justify-content: center;
     margin-bottom: 20px;
+    margin-top: 30px;
   }
   
   .img {
@@ -24,6 +27,7 @@
     font-size: 25px;
     color: white;
     line-height: 25px;
+    margin-right: 20px;
   }
   
   .containerLeft button {
@@ -54,7 +58,7 @@
   .hello {
     display: flex; /* Establece un contenedor flexible */
     font-family: 'Nunito Sans', sans-serif;
-    font-size: 13px;
+    font-size: 15px;
     color: #bdac9b;
     align-items: center; /* Centra verticalmente el contenido */
     justify-content: center;
@@ -62,5 +66,21 @@
 
   .DashboardUser {
     margin: 0 2vw;
+  }
+  
+  .stateUp {
+    display: flex; /* Cambiamos a inline-block para que el fondo se ajuste al contenido */
+    justify-content: center;
+    justify-content: flex-end; /* Alinea el contenido hacia la derecha */
+    background-color: white;
+    padding: 0; /* Eliminamos el padding en el contenedor */
+  }
+  
+  .stateUp h2 {
+    font-family: 'Nunito Sans', sans-serif;
+    color: #EBE8E5;
+    line-height: 49px;
+    font-size: 70px;
+    margin: 0; /* Eliminamos el margin para quitar el espacio alrededor del texto */
   }
   
