@@ -4,6 +4,8 @@ const jsonwebtoken = require("jsonwebtoken");
 const transporter = require("../utils/transporter");
 const verifyHTML = require("../utils/verifyHTML");
 const mailOptions = require("../utils/mailOptions");
+require("dotenv").config();
+const { SECRET_KEY } = process.env;
 
 const postUserController = async (dataUserBody) => {
   const { name, lastName, country, age, tel, email, password, status } =
@@ -23,7 +25,7 @@ const postUserController = async (dataUserBody) => {
     password: hashedPassword,
   };
 
-  const token = jsonwebtoken.sign({ email }, "123456", {
+  const token = jsonwebtoken.sign({ email }, "SECRET_KEY", {
     expiresIn: "24h",
   });
 

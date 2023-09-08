@@ -3,12 +3,14 @@ const {
 } = require("../controllers/updateUserStatusController");
 const jwt = require("jsonwebtoken");
 const { getEmailController } = require("../controllers/getEmailController");
+require("dotenv").config();
+const { SECRET_KEY } = process.env;
 
 const verifyTokenHandler = async (req, res) => {
   const { token } = req.params;
   try {
     // Verifica el token
-    const decoded = jwt.verify(token, "123456");
+    const decoded = jwt.verify(token, "SECRET_KEY");
 
     // Actualiza el estado del usuario en la base de datos
     const user = await getEmailController(decoded.email);
