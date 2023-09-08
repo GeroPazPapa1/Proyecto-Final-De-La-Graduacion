@@ -1,44 +1,47 @@
-import React, { useState, useEffect } from 'react'
-import styles from './Cart.module.css'
-import { Link } from 'react-router-dom'
-import { useSelector, useDispatch } from 'react-redux';
-import { deleteProduct, purchaseProducts, setCart } from '../../redux/actions';
-import { NoCarsSVG } from '../../assets/svgs'
-import { CarRemovedFromCart, MercadoPagoFail, NeedToLogin  } from '../NotiStack'
-import { initMercadoPago, Wallet } from '@mercadopago/sdk-react'
-import axios from 'axios'
+import React, { useState, useEffect } from "react";
+import styles from "./Cart.module.css";
+import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { deleteProduct, purchaseProducts, setCart } from "../../Redux/actions";
+import { NoCarsSVG } from "../../assets/svgs";
+import { CarRemovedFromCart, MercadoPagoFail, NeedToLogin } from "../NotiStack";
+import { initMercadoPago, Wallet } from "@mercadopago/sdk-react";
+import axios from "axios";
 
 export default function Cart() {
-  const cartList = useSelector(state => state.cartList);
+  const cartList = useSelector((state) => state.cartList);
   const dispatch = useDispatch();
-  const [preferenceId, setPreferenceId] = useState(null)
+  const [preferenceId, setPreferenceId] = useState(null);
   const [showMercadoPago, setShowMercadoPago] = useState(false);
-  const purchasedProducts = useSelector(state => state.purchasedProducts)
+  const purchasedProducts = useSelector((state) => state.purchasedProducts);
   const removeFromCart = (productId) => {
     dispatch(deleteProduct(productId));
-    CarRemovedFromCart()
-  }
-  console.log(cartList)
+    CarRemovedFromCart();
+  };
+  console.log(cartList);
   // initMercadoPago('TEST-620ddc2a-2dd8-487a-a99e-61892333c8d0');
-  initMercadoPago('TEST-ff5e06a0-15c1-4054-b8bf-9ad68b31499b');
+  initMercadoPago("TEST-ff5e06a0-15c1-4054-b8bf-9ad68b31499b");
 
   const createPreference = async () => {
     try {
-      const items = await cartList.map(product => ({
+      const items = await cartList.map((product) => ({
         title: `${product.name}, ${product.brand}`,
         unit_price: product.price,
         quantity: 1,
-      }))
-      console.log(items)
-      const response = await axios.post('http://localhost:3001/create_preference/', { items })
+      }));
+      console.log(items);
+      const response = await axios.post(
+        "http://localhost:3001/create_preference/",
+        { items }
+      );
       const { id } = response.data;
-      console.log(id)
-      console.log(response)
-      localStorage.setItem('transactionStatus', 'success');
-      return id
+      console.log(id);
+      console.log(response);
+      localStorage.setItem("transactionStatus", "success");
+      return id;
     } catch (error) {
-      console.error(error)
-      localStorage.setItem('transactionStatus', 'fail');
+      console.error(error);
+      localStorage.setItem("transactionStatus", "fail");
     }
   };
 
@@ -53,12 +56,12 @@ export default function Cart() {
     const userId = localStorage.getItem("userId");
     const userType = localStorage.getItem("userType");
     return userId && userType;
-  }
+  };
 
   const handleBuy = async (event) => {
     event.preventDefault();
     if (!isLogged()) {
-      NeedToLogin()
+      NeedToLogin();
     } else {
       try {
         dispatch(purchaseProducts(cartList));
@@ -73,33 +76,32 @@ export default function Cart() {
     }
   };
 
-
   useEffect(() => {
     // Carga el carrito desde localStorage
-    const storedCart = localStorage.getItem('cart');
+    const storedCart = localStorage.getItem("cart");
     if (storedCart) {
       const parsedCart = JSON.parse(storedCart);
       dispatch(setCart(parsedCart));
     }
     // Luego se guarda en el carrito en localStorage cada vez que el carrito cambie
-    localStorage.setItem('cart', JSON.stringify(cartList));
-    const transactionStatus = localStorage.getItem('transactionStatus');
+    localStorage.setItem("cart", JSON.stringify(cartList));
+    const transactionStatus = localStorage.getItem("transactionStatus");
     // Comprueba el estado de la compra y muestra la notificación adecuada
     if (transactionStatus === "success") {
     } else if (transactionStatus === "fail") {
       MercadoPagoFail();
     }
-    localStorage.removeItem('transactionStatus');
+    localStorage.removeItem("transactionStatus");
   }, [cartList, dispatch]);
   return (
     <>
       {cartList.length === 0 ? (
         <div className={styles.nocars}>
-          <h2 className={styles.cart_title}>
-            No cars added at the cart
-          </h2>
+          <h2 className={styles.cart_title}>No cars added at the cart</h2>
           <NoCarsSVG />
-          <Link to="/home" className={styles.keeplooking}>Keep looking</Link>
+          <Link to="/home" className={styles.keeplooking}>
+            Keep looking
+          </Link>
         </div>
       ) : (
         <div className={styles.cart}>
@@ -115,22 +117,50 @@ export default function Cart() {
               {cartList.map((product) => (
                 <div className={styles.car_i} key={product.name}>
                   <div className={styles.delete}>
-                    <div className={styles.delete_btn} onClick={() => removeFromCart(product.id)}>
-                      <svg xmlns="http://www.w3.org/2000/svg" className={styles.btnX} width="40" height="40" viewBox="0 0 24 24" strokeWidth="1.5" fill="none" strokeLinecap="round" strokeLinejoin="round">
+                    <div
+                      className={styles.delete_btn}
+                      onClick={() => removeFromCart(product.id)}
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className={styles.btnX}
+                        width="40"
+                        height="40"
+                        viewBox="0 0 24 24"
+                        strokeWidth="1.5"
+                        fill="none"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      >
                         <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                         <path d="M18 6l-12 12" />
                         <path d="M6 6l12 12" />
                       </svg>
                     </div>
                   </div>
-                  <Link className={styles.link_imgcar} to={`/detail/${product.id}`}>
-                    {product.image && product.image[0] && <img className={styles.car_img} src={product.image[0]} alt='imagen' />}
+                  <Link
+                    className={styles.link_imgcar}
+                    to={`/detail/${product.id}`}
+                  >
+                    {product.image && product.image[0] && (
+                      <img
+                        className={styles.car_img}
+                        src={product.image[0]}
+                        alt="imagen"
+                      />
+                    )}
                   </Link>
                   <div className={styles.name_and_brand}>
-                    <p>{product.name} {product.model}<br />{product.brand} </p>
+                    <p>
+                      {product.name} {product.model}
+                      <br />
+                      {product.brand}{" "}
+                    </p>
                   </div>
                   <div className={styles.price}>
-                    <h4 className={styles.car_price}>${Number(product.price)}</h4>
+                    <h4 className={styles.car_price}>
+                      ${Number(product.price)}
+                    </h4>
                   </div>
                 </div>
               ))}
@@ -138,21 +168,20 @@ export default function Cart() {
           </div>
           <div className={styles.detail}>
             <div className={styles.detail_info}>
-              <p className={styles.subtotal}>
-                Subtotal: ${totalPrice()} USD
-              </p>
+              <p className={styles.subtotal}>Subtotal: ${totalPrice()} USD</p>
               {showMercadoPago ? (
                 <div>
                   {preferenceId && <Wallet initialization={{ preferenceId }} />}
                 </div>
               ) : (
-                <button className={styles.btn_buy} onClick={handleBuy}>Finish Order</button>
+                <button className={styles.btn_buy} onClick={handleBuy}>
+                  Finish Order
+                </button>
               )}
             </div>
           </div>
         </div>
-      )
-      }
+      )}
     </>
-  )
+  );
 }
