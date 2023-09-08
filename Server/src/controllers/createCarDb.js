@@ -1,41 +1,35 @@
 // const { Car, Brand } = require('../db');
-// const data = require('../../api/db.json'); 
-
+// const data = require('../../api/db.json');
 
 // const createCarDb = async () => {
 //  //  console.log(data.Cars.map((element) => element.models.map((element)=> element)))
 //  const allCarsDb = data.Cars.map((element) => element.models.map((element)=> element));
 //  // console.log(allCarsDb);
 //  const allCarDb2 = [].concat.apply([],allCarsDb)
- 
+
 //  const newAllCar = await Car.bulkCreate(allCarDb2);
 
 // }
 
 // module.exports = {createCarDb,};
 
-
-const { Car, Brand } = require('../db');
-const data = require('../../api/db.json'); 
+const { Car, Brand } = require("../db");
+const data = require("../../api/db.json");
 
 const createCarDb = async () => {
- //  console.log(data.Cars.map((element) => element.models.map((element)=> element)))
- const allCarsDb = data.Cars.map((element) => element.models.map((element)=> element));
- // console.log(allCarsDb);
- const allCarDb2 = [].concat.apply([],allCarsDb)
+  //  console.log(data.Cars.map((element) => element.models.map((element)=> element)))
+  const allCarsDb = data.Cars.map((element) =>
+    element.models.map((element) => element)
+  );
+  // console.log(allCarsDb);
+  const allCarDb2 = [].concat.apply([], allCarsDb);
 
- console.log(allCarDb2);
+  console.log(allCarDb2);
 
- const newAllCar = await Car.bulkCreate(allCarDb2);
+  const newAllCar = await Car.bulkCreate(allCarDb2);
+};
 
-}
-
-module.exports = {createCarDb,};
-
-
-
-
-
+module.exports = { createCarDb };
 
 /*
  {
