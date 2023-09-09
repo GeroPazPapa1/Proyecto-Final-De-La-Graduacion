@@ -25,11 +25,15 @@ const initialState = {
     colorQuery: [],
     locationQuery: [],
   },
-
+  filteredsDashboard: {
+    emailsOrigins: [],
+    emailsFiltereds: [],
+  },
   carsLoaded: false,
   brandLoaded: false,
   colorsLoaded: false,
   locationLoaded: false,
+  usersLoaded: false,
 };
 
 function rootReducer(state = initialState, action) {
@@ -101,6 +105,17 @@ function rootReducer(state = initialState, action) {
         },
       };
 
+    case "GET_ALL_USERS":
+      console.log(action.payload);
+      return {
+        ...state,
+        filteredsDashboard: {
+          ...state.filteredsDashboard,
+          emailsOrigins: action.payload,
+          emailsFiltereds: action.payload,
+        }
+      }
+
     case "GET_ALL_BRAND":
       return {
         ...state,
@@ -145,6 +160,12 @@ function rootReducer(state = initialState, action) {
         },
       };
 
+    case "USERS_LOADED":
+      return {
+        ...state,
+        usersLoaded: action.payload,
+      }
+
     case "LOCATION_LOADED":
       return {
         ...state,
@@ -158,6 +179,7 @@ function rootReducer(state = initialState, action) {
       };
 
     case "CARDS_LOADED":
+      console.log(action.payload)
       return {
         ...state,
         carsLoaded: action.payload,

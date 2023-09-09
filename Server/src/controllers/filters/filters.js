@@ -1,8 +1,16 @@
 const { Car } = require("../../db");
-const { Op } = require('sequelize');
+const { Op } = require("sequelize");
 
-
-const filteredCars = async (brand, color, state, location, maxPrice, minPrice, model, name) => {
+const filteredCars = async (
+  brand,
+  color,
+  state,
+  location,
+  maxPrice,
+  minPrice,
+  model,
+  name
+) => {
   try {
     const conditions = {};
 
@@ -23,12 +31,21 @@ const filteredCars = async (brand, color, state, location, maxPrice, minPrice, m
     }
 
     if (name) {
-      conditions.name = {
-        [Op.iLike]: `%${name}%`, // Búsqueda de nombre insensible a mayúsculas y minúsculas
-      };
+      conditions[Op.or] = [
+        {
+          name: {
+            [Op.iLike]: `%${name}%`, // Búsqueda de nombre insensible a mayúsculas y minúsculas
+          },
+        },
+        {
+          brand: {
+            [Op.iLike]: `%${name}%`, // Búsqueda de marca insensible a mayúsculas y minúsculas
+          },
+        },
+      ];
     }
 
-    if (state === 'New' || state === 'Used') {
+    if (state === "New" || state === "Used") {
       conditions.state = state;
     }
 
@@ -54,17 +71,16 @@ const filteredCars = async (brand, color, state, location, maxPrice, minPrice, m
       };
     }
 
-    console.log(conditions);
-
     const filtersCar = await Car.findAll({
       where: conditions,
-    })
+    });
+
     return filtersCar;
   } catch (error) {
     return error.message;
   }
-}
+};
 
 module.exports = {
   filteredCars,
-}
+};
