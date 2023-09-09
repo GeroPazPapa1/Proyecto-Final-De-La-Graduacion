@@ -9,7 +9,12 @@ import axios from "axios";
 import { ButtonBack } from "../../assets/svgs";
 import { auth } from "./firebase.js";
 import { GoogleAuthProvider, signInWithPopup, getAuth } from "firebase/auth";
-import { AlreadyAccountWithEmail, FillInputsFixErrors, RegisteredSucessfully, SignedSuccesfully } from "../NotiStack";
+import {
+  AlreadyAccountWithEmail,
+  FillInputsFixErrors,
+  RegisteredSucessfully,
+  SignedSuccesfully,
+} from "../NotiStack";
 
 export default function Register() {
   const navigate = useNavigate();
@@ -56,30 +61,38 @@ export default function Register() {
 
   const handleGoogleSignin = async () => {
     const provider = new GoogleAuthProvider();
+    const auth = getAuth();
     try {
       const result = await signInWithPopup(auth, provider);
       const user = auth.currentUser;
-      const token = await user.getIdToken(true);
+      const tokenFirebase = await user.getIdToken(true);
       const response = await axios.post(
         "http://localhost:3001/user/google",
-        { token },
+        { tokenFirebase },
         {
           headers: {
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${tokenFirebase}`,
           },
         }
       );
       console.log("Respuesta del backend:", response.data);
+
       const userId = response.data.id;
       const userType = response.data.type;
       dispatch(setUserId(userId));
       dispatch(setUserType(userType));
       const { access } = response.data;
+      SignedSuccesfully();
       setAccess(true);
-      SignedSuccesfully()
+      localStorage.setItem("userId", response.data.id);
+      localStorage.setItem("userType", response.data.type);
+      localStorage.setItem(
+        "authToken",
+        JSON.stringify({ response: response.data, email: response.data.email })
+      );
       access && navigate("/home");
     } catch (error) {
-      AlreadyAccountWithEmail()
+      AlreadyAccountWithEmail();
     }
   };
 
@@ -133,9 +146,9 @@ export default function Register() {
           age: input.age,
           status: "user",
         });
-        RegisteredSucessfully()
+        RegisteredSucessfully();
       } catch (error) {
-        AlreadyAccountWithEmail()
+        AlreadyAccountWithEmail();
       }
       setInput({
         name: "",
@@ -147,7 +160,7 @@ export default function Register() {
       });
       navigate("/login");
     } else {
-      FillInputsFixErrors()
+      FillInputsFixErrors();
     }
   };
 
@@ -171,6 +184,17 @@ export default function Register() {
       }
     };
     fetchCountries();
+  }, []);
+  useEffect(() => {
+    const loggedUserJson = localStorage.getItem("authToken");
+    const user = JSON.parse(loggedUserJson);
+    if (user) {
+      dispatch(setUserId(user.response.id));
+      dispatch(setUserType(user.response.type));
+      const { access } = user.response;
+      setAccess(true);
+      // access && navigate("/home");
+    }
   }, []);
 
   return (
