@@ -6,6 +6,7 @@ const { loginHandler } = require("../handlers/loginHandler");
 const { getUsersHandler } = require("../handlers/getUsersHandler");
 const { putUserHandler } = require("../handlers/putUserHandler");
 const { googleLoginHandler } = require("../handlers/googleLoginHandler");
+const { getFiltersHandler } = require("../handlers/handlerUserFilter");
 const router = Router();
 
 //configuracion de rutas
@@ -15,5 +16,6 @@ router.delete("/delete/:id", deleteUserHandler);
 router.get("/", getUsersHandler);
 router.post("/", loginHandler);
 router.put("/:id", putUserHandler);
+router.get("/dashboard/filter", getFiltersHandler)
 
 module.exports = router;

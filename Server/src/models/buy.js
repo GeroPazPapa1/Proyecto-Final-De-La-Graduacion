@@ -9,13 +9,21 @@ module.exports = (sequelize) => {
       defaultValue: DataTypes.UUIDV4,
       primaryKey: true,
     },
-    date: {
+  date: {
         type: DataTypes.DATE,
         allowNull: false,
     },  
-    description: {
+  description: {
       type: DataTypes.TEXT,
     },
+  amount: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+  },
+  price: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+  }
   },
     {
       timestamps: false,
