@@ -32,18 +32,17 @@ module.exports = (sequelize) => {
     status: {
       type: DataTypes.ENUM("admin", "user"),
       allowNull: false,
-    },
-    image: {
-      type: DataTypes.STRING,
-      allowNull: true,
-      defaultValue:
-        "https://res.cloudinary.com/vehibuy/image/upload/q_auto/v1694066777/user_imgProfileStandar/istockphoto-903053114-612x612_qslxrv.webp",
-    },
+  },
+    image: { type: DataTypes.STRING, allowNull: true },
     tel: { type: DataTypes.INTEGER, allowNull: true },
     ban: {
       type: DataTypes.BOOLEAN,
       defaultValue: false,
     },
-    verify: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: false },
-  });
+    verify : { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: false }, //
+  },
+  {
+    timestamps: false,
+  }
+);
 };
