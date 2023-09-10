@@ -1,7 +1,7 @@
 import React from "react"
 import { useSelector } from "react-redux"
 import LOADING from "./Icons/LOADING.svg"
-import Email from "../Email/Email";
+import Email from "../Email/Email.1";
 import styles from "./Emails.module.css";
 
 export default function DashBoardEmail() {
@@ -21,10 +21,11 @@ export default function DashBoardEmail() {
         <div>
             <div className={styles.emailContainer}>
                 <div className={styles.emailItem}>Email</div>
-                <div className={styles.emailItem}>Name</div>
+                <div className={styles.emailItem}>Full Name</div>
                 <div className={styles.emailItem}>Country</div>
-                <div className={styles.emailItem}>Status</div>
+                <div className={styles.emailItem}>Type</div>
                 <div className={styles.emailItem}>Verify</div>
+                <div className={styles.emailItem}>Banned</div>
                 <div className={styles.emailItem}>Actions</div>
             </div>
             <div>
@@ -37,7 +38,8 @@ export default function DashBoardEmail() {
                         email={email.email}
                         country={email.country}
                         status={email.status}
-                        verify={email.verify} />
+                        verify={email.verify}
+                        ban={email.ban} />
                 ))
                 }
             </div>

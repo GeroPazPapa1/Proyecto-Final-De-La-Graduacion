@@ -24,6 +24,9 @@ const initialState = {
     locationQuery: [],
   },
   filteredsDashboard: {
+    queryParamsF: {
+      name: "",
+    },
     emailsOrigins: [],
     emailsFiltereds: [],
   },
@@ -100,7 +103,6 @@ function rootReducer(state = initialState, action) {
       };
 
     case "GET_ALL_USERS":
-      console.log(action.payload);
       return {
         ...state,
         filteredsDashboard: {
@@ -109,6 +111,26 @@ function rootReducer(state = initialState, action) {
           emailsFiltereds: action.payload,
         }
       }
+
+    case "DELETED_USER":
+      return {
+        ...state,
+        filteredsDashboard: {
+          ...state.filteredsDashboard,
+          emailsOrigins: action.payload,
+          emailsFiltereds: action.payload,
+        }
+      }
+
+    case "EDITED_USER": 
+    return {
+      ...state,
+      filteredsDashboard: {
+        ...state.filteredsDashboard,
+        emailsOrigins: action.payload,
+        emailsFiltereds: action.payload,
+      }
+    }
 
     case "GET_ALL_BRAND":
       return {

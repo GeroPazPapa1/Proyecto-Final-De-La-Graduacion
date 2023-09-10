@@ -122,3 +122,13 @@ export const NeedToLogin = () => {
         }
     })
 }
+
+export const Banned = () => {
+    enqueueSnackbar('You have been banned by an Admin', {
+        variant: "error",
+        anchorOrigin: {
+            vertical: 'top',
+            horizontal: 'right',
+        }
+    });
+}

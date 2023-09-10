@@ -6,17 +6,17 @@ import { Link, useLocation } from "react-router-dom";
 
 export default function NavBar() {
   const location = useLocation();
-
+  
   const loggedUserJson = localStorage.getItem("authToken");
   const loggedUser = loggedUserJson ? JSON.parse(loggedUserJson) : null;
-
-  const handleLogout = () => {
-    localStorage.clear();
-  };
-
+  
   if (location.pathname.startsWith("/admin")) {
     return null;
   }
+  
+  const handleLogout = () => {
+    localStorage.clear();
+  };
 
   return (
     <div className={styles.container}>
