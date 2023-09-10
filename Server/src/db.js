@@ -43,12 +43,14 @@ Car.belongsToMany(Review, { through: "carReviews" });
 Review.belongsTo(Car, { through: "carReviews" });
 User.belongsToMany(Review, { through: "userReviews" });
 Review.belongsTo(User, { through: "userReviews" });
-Car.belongsTo(Brand, { through: "carBrands" });
-Brand.belongsToMany(Car, { through: "carBrands" });
+Brand.hasMany(Car, { foreignKey: 'brandId' });
+Car.belongsTo(Brand, { foreignKey: 'brandId' });
 Car.belongsToMany(Sell, { through: "carSells" });
 Sell.belongsToMany(Car, { through: "carSells" });
 Car.belongsToMany(Buy, { through: "carBuys" });
 Buy.belongsToMany(Car, { through: "carBuys" });
+Sell.belongsTo(Buy, { foreignKey: "buySellId" });
+Buy.belongsTo(Sell, { foreignKey: "buySellId" });
 
 module.exports = {
   ...sequelize.models,

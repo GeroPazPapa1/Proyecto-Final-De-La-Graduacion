@@ -4,7 +4,6 @@ const { Op } = require('sequelize');
 
 const filteredUsers = async (age, country, email, status, ban, verify, lastName, name) => {
     try {const conditions = {};
-
     if (age) {
         conditions.age = age
     }
@@ -38,11 +37,11 @@ const filteredUsers = async (age, country, email, status, ban, verify, lastName,
         };
       }
 
-    if (typeof ban === 'boolean') {
+    if (ban) {
         conditions.ban = ban;
     }
 
-    if (typeof verify === 'boolean') {
+    if (verify) {
         conditions.verify = verify;
     }
 
