@@ -17,10 +17,6 @@ module.exports = (sequelize) => {
       type: DataTypes.ARRAY(DataTypes.STRING),
       allowNull: false,
     },
-    brand: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
     model: {
         type: DataTypes.INTEGER,
         allowNull: false,
