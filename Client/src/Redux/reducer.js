@@ -7,6 +7,7 @@ const initialState = {
   userId: "",
   userType: "",
   pageFiltered: [],
+  pageFilteredDb: [],
   queryParams: {
     name: "",
     state: "",
@@ -26,11 +27,16 @@ const initialState = {
   filteredsDashboard: {
     queryParamsF: {
       name: "",
+      status: "",
+      ban: "",
+      verify: "",
+      country: "",
     },
     emailsOrigins: [],
     emailsFiltereds: [],
   },
   carsLoaded: false,
+  EmailsLoaded: false,
   brandLoaded: false,
   colorsLoaded: false,
   locationLoaded: false,
@@ -71,12 +77,17 @@ function rootReducer(state = initialState, action) {
       };
     case "PURCHASE_PRODUCTS":
       // Agregar los productos comprados al estado purchasedProducts
-      const newPurchasedProducts = action.payload.filter(product => {
-        return !state.purchasedProducts.some(purchasedProduct => purchasedProduct.id === product.id);
+      const newPurchasedProducts = action.payload.filter((product) => {
+        return !state.purchasedProducts.some(
+          (purchasedProduct) => purchasedProduct.id === product.id
+        );
       });
       return {
         ...state,
-        purchasedProducts: [...state.purchasedProducts, ...newPurchasedProducts],
+        purchasedProducts: [
+          ...state.purchasedProducts,
+          ...newPurchasedProducts,
+        ],
       };
     case "DELETE_PRODUCT":
       return {
@@ -109,8 +120,8 @@ function rootReducer(state = initialState, action) {
           ...state.filteredsDashboard,
           emailsOrigins: action.payload,
           emailsFiltereds: action.payload,
-        }
-      }
+        },
+      };
 
     case "DELETED_USER":
       return {
@@ -119,18 +130,18 @@ function rootReducer(state = initialState, action) {
           ...state.filteredsDashboard,
           emailsOrigins: action.payload,
           emailsFiltereds: action.payload,
-        }
-      }
+        },
+      };
 
-    case "EDITED_USER": 
-    return {
-      ...state,
-      filteredsDashboard: {
-        ...state.filteredsDashboard,
-        emailsOrigins: action.payload,
-        emailsFiltereds: action.payload,
-      }
-    }
+    case "EDITED_USER":
+      return {
+        ...state,
+        filteredsDashboard: {
+          ...state.filteredsDashboard,
+          emailsOrigins: action.payload,
+          emailsFiltereds: action.payload,
+        },
+      };
 
     case "GET_ALL_BRAND":
       return {
@@ -167,6 +178,15 @@ function rootReducer(state = initialState, action) {
         },
       };
 
+    case "SEARCH_BY_QUERYFILTERS":
+      return {
+        ...state,
+        filteredsDashboard: {
+          ...state.filteredsDashboard,
+          emailsFiltereds: action.payload,
+        }
+      }
+
     case "GET_ALL_COLORS":
       return {
         ...state,
@@ -180,7 +200,7 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         usersLoaded: action.payload,
-      }
+      };
 
     case "LOCATION_LOADED":
       return {
@@ -195,7 +215,7 @@ function rootReducer(state = initialState, action) {
       };
 
     case "CARDS_LOADED":
-      console.log(action.payload)
+      console.log(action.payload);
       return {
         ...state,
         carsLoaded: action.payload,
@@ -240,21 +260,37 @@ function rootReducer(state = initialState, action) {
         ...state,
         pageFiltered: filteredData,
       };
+
+    case "APPLY_FILTERS_Db":
+      let filteredData2;
+      if (action.payload === "originEmails") {
+        filteredData2 = state.filteredsDashboard.emailsOrigins;
+      } else if (action.payload === "FilteredEmails") {
+        filteredData2 = state.filteredsDashboard.emailsFiltereds;
+      }
+      return {
+        ...state,
+        pageFilteredDb: filteredData2,
+      }
+
     case "SET_USER_ID":
       return {
         ...state,
         userId: action.payload,
       };
+
     case "SET_USER_TYPE":
       return {
         ...state,
         userType: action.payload,
       };
+
     case "GET_DETAIL":
       return {
         ...state,
         detail: action.payload,
       };
+
     case "RESET_DETAIL":
       return {
         ...state,

@@ -136,7 +136,6 @@ export const searchByQueryFilters = (queryParamsF) => {
   return async (dispatch) => {
     try {
       const { data } = await axios(endpoint);
-      console.log(data);
       return dispatch({
         type: "SEARCH_BY_QUERYFILTERS",
         payload: data,
@@ -297,6 +296,13 @@ export const applyFilters = (filters) => {
     payload: filters,
   };
 };
+
+export const applyFilterDb = (filters) => {
+  return {
+    type: "APPLY_FILTERS_Db",
+    payload: filters,
+  }
+}
 
 export const orderFilters = (order) => {
   return {
