@@ -1,4 +1,6 @@
-import { enqueueSnackbar, closeSnackbar } from "notistack";
+import { enqueueSnackbar } from "notistack";
+
+const autoHideDurationInSeconds = 10000; // Tiempo en segundos para que la notificación se cierre automáticamente
 
 export const CarRemovedFromCart = () => {
     enqueueSnackbar('The car has been removed from cart', {
@@ -29,6 +31,7 @@ export const SignedSuccesfully = () => {
         }
     });
 }
+
 export const AlreadyAccountWithEmail = () => {
     enqueueSnackbar('Already have a user account with this email', {
         variant: 'error',
@@ -87,4 +90,35 @@ export const FillInputsFixErrors = () => {
             horizontal: 'right',
         }
     });
+}
+
+export const MercadoPagoSuccess = () => {
+    enqueueSnackbar('Thanks for buying at VehiBuy', {
+        variant: 'success',
+        anchorOrigin: {
+            vertical: 'top',
+            horizontal: 'right',
+        },
+        autoHideDuration: autoHideDurationInSeconds,
+    })
+}
+
+export const MercadoPagoFail = () => {
+    enqueueSnackbar('There was a problem with the payment method, try with another later', {
+        variant: 'error',
+        anchorOrigin: {
+            vertical: 'top',
+            horizontal: 'right',
+        }
+    })
+}
+
+export const NeedToLogin = () => {
+    enqueueSnackbar('You need to Log In to buy a car', {
+        variant: 'error',
+        anchorOrigin: {
+            vertical: 'top',
+            horizontal: 'right',
+        }
+    })
 }

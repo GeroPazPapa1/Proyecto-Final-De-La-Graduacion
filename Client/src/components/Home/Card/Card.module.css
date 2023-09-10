@@ -71,3 +71,7 @@
     border: transparent;
     cursor: pointer;
 }
+
+.container.selectedCard {
+    background-color: rgb(188, 154, 87); /* Cambia el color de fondo a rojo */
+}

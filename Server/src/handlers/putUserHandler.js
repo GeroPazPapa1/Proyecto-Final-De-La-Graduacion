@@ -7,14 +7,14 @@ const putUserHandler = async (req, res) => {
       req.body;
     const user = await putUserController(id);
     if (!user) return res.status(404).send("User not found");
-    user.name = name;
-    user.lastName = lastName;
-    user.age = age;
-    user.country = country;
-    user.email = email;
-    user.password = password;
-    user.image = image;
-    user.tel = tel;
+    if (name) user.name = name;
+    if (lastName) user.lastName = lastName;
+    if (age) user.age = age;
+    if (country) user.country = country;
+    if (email) user.email = email;
+    if (password) user.password = password;
+    if (image) user.image = image;
+    if (tel) user.tel = tel;
     await user.save();
     return res.status(200).json("user updated successfully");
   } catch (error) {

@@ -183,25 +183,25 @@ export default function Filters() {
             console.log(price)
             return alert("arreglalo putito");
         }
-    
+
         if (price.min !== "") {
             queryParams.minPrice = price.min;
         } else {
             queryParams.minPrice = "";
         }
-    
+
         if (price.max !== "") {
             queryParams.maxPrice = price.max;
         } else {
             queryParams.maxPrice = "";
         }
-    
+
         price.price = "";
-    
+
         await dispatch(searchByQuery(queryParams));
         dispatch(applyFilters("queryCars"));
     };
-    
+
 
     const toggleShowAllBrands = () => {
         setShowAllBrands(!showAllBrands);
@@ -301,7 +301,7 @@ export default function Filters() {
                 <button onClick={toggleShowAllBrands} className={styles.buttonToggle}>
                     {showAllBrands ? (
                         <>
-                            Show less <img className={styles.iconF} src={ICONUP} alt="IconU..." /> 
+                            Show less <img className={styles.iconF} src={ICONUP} alt="IconU..." />
                         </>
                     ) : (
                         <>
@@ -330,7 +330,7 @@ export default function Filters() {
                 <button onClick={toggleShowAllColors} className={styles.buttonToggle}>
                     {showAllColors ? (
                         <>
-                            Show less <img className={styles.iconF} src={ICONUP} alt="IconU..." /> 
+                            Show less <img className={styles.iconF} src={ICONUP} alt="IconU..." />
                         </>
                     ) : (
                         <>

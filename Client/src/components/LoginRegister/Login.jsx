@@ -2,14 +2,18 @@ import React, { useState, useEffect } from "react";
 import styles from "./Login.module.css";
 import validate from "./validate";
 import { useDispatch } from "react-redux";
-import Swal from "sweetalert2";
 import { Link, useNavigate } from "react-router-dom";
 import { GoogleAuthProvider, signInWithPopup, getAuth } from "firebase/auth";
 import { setUserId, setUserType } from "../../Redux/actions";
 import axios from "axios";
 import { OpenEye, ClosedEye, Google } from "./svgs.jsx";
 import { ButtonBack } from "../../assets/svgs";
-
+import {
+  AlreadyAccountWithEmail,
+  PutEmailPassword,
+  SignedSuccesfully,
+  WrongEmailPassword,
+} from "../NotiStack";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -36,45 +40,57 @@ export default function Login() {
     try {
       const result = await signInWithPopup(auth, provider);
       const user = auth.currentUser;
-      const token = await user.getIdToken(true);
+      const tokenFirebase = await user.getIdToken(true);
       const response = await axios.post(
         "http://localhost:3001/user/google",
-        { token },
+        { tokenFirebase },
         {
           headers: {
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${tokenFirebase}`,
           },
         }
       );
       console.log("Respuesta del backend:", response.data);
+
       const userId = response.data.id;
       const userType = response.data.type;
       dispatch(setUserId(userId));
       dispatch(setUserType(userType));
       const { access } = response.data;
+      SignedSuccesfully();
       setAccess(true);
+      localStorage.setItem("userId", response.data.id);
+      localStorage.setItem("userType", response.data.type);
+      localStorage.setItem(
+        "authToken",
+        JSON.stringify({ response: response.data, email: input.email })
+      );
       access && navigate("/home");
     } catch (error) {
-      Swal.fire({
-        title: "Error!",
-        text: "Already have a user account with this email",
-        icon: "error",
-        confirmButtonText: "OK",
-      });
+      AlreadyAccountWithEmail();
     }
   };
 
   function handleChange(e) {
     const { name, value } = e.target;
-    setInput(prevInput => ({
+
+    setInput((prevInput) => ({
       ...prevInput,
       [name]: value,
     }));
     // Setea para renderizar errores
-    setErrors(validate({
-      ...input,
-      [name]: value,
-    }));
+    setErrors(
+      validate({
+        ...input,
+        [name]: value,
+      })
+    );
+    setErrors(
+      validate({
+        ...input,
+        [name]: value,
+      })
+    );
     // Setea para que solo actue el error en el campo seleccionado
     setTouchedFields((prevTouchedFields) => ({
       ...prevTouchedFields,
@@ -103,38 +119,33 @@ export default function Login() {
           email: input.email,
           password: input.password,
         });
-        Swal.fire({
-          title: "Succcess",
-          text: "Signed In successfully",
-          icon: "success",
-          confirmButtonText: "Cool",
-        });
+        console.log(response);
+        SignedSuccesfully();
         const userId = response.data.id;
         const userType = response.data.type;
         dispatch(setUserId(userId));
         dispatch(setUserType(userType));
         const { access } = response.data;
         setAccess(true);
+        localStorage.setItem("userId", response.data.id);
+        localStorage.setItem("userType", response.data.type);
+        localStorage.setItem(
+          "authToken",
+          JSON.stringify({
+            response: response.data,
+            email: response.data.email,
+          })
+        );
         access && navigate("/home");
       } catch (error) {
-        Swal.fire({
-          title: "Error!",
-          text: "Wrong email or password",
-          icon: "error",
-          confirmButtonText: "OK",
-        });
+        WrongEmailPassword();
       }
       setInput({
         email: "",
         password: "",
       });
     } else {
-      Swal.fire({
-        title: "Error!",
-        text: "Put your email and password",
-        icon: "error",
-        confirmButtonText: "OK",
-      });
+      PutEmailPassword();
       return;
     }
   }
@@ -145,9 +156,22 @@ export default function Login() {
   useEffect(() => {
     !access && navigate("/login");
   }, [access]);
+  useEffect(() => {
+    const loggedUserJson = localStorage.getItem("authToken");
+    const user = JSON.parse(loggedUserJson);
+    if (user) {
+      dispatch(setUserId(user.response.id));
+      dispatch(setUserType(user.response.type));
+      const { access } = user.response;
+      setAccess(true);
+      // access && navigate("/home");
+    }
+  }, []);
   return (
     <div className={styles.login}>
-      <Link to={"/home"}><ButtonBack /></Link>
+      <Link to={"/home"}>
+        <ButtonBack />
+      </Link>
       <div className={styles.login_form}>
         <form className={styles.form_in} onSubmit={(e) => handleSubmitLogin(e)}>
           <h1 className={styles.title_login}>Log In</h1>
@@ -163,7 +187,12 @@ export default function Login() {
             name="email"
             onChange={(e) => handleChange(e)}
           />
-          {touchedFields.email && errors.email && <p className={styles.errors}>{errors.email}</p>}
+          {touchedFields.email && errors.email && (
+            <p className={styles.errors}>{errors.email}</p>
+          )}
+          {touchedFields.email && errors.email && (
+            <p className={styles.errors}>{errors.email}</p>
+          )}
           <label className={styles.label}>Password</label>
           <input
             className={styles.input}
@@ -176,12 +205,12 @@ export default function Login() {
             onChange={(e) => handleChange(e)}
           />
           <div className={styles.btn_hideandshow}>
-            <button type='button' className={styles.show_hide_password} onClick={() => setShowPassword(!showPassword)}>
-              {showPassword ?
-                <ClosedEye />
-                :
-                <OpenEye />
-              }
+            <button
+              type="button"
+              className={styles.show_hide_password}
+              onClick={() => setShowPassword(!showPassword)}
+            >
+              {showPassword ? <ClosedEye /> : <OpenEye />}
             </button>
           </div>
           {touchedFields.password && errors.password && (

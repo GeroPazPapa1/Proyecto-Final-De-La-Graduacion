@@ -9,7 +9,11 @@ const corsOptions = {
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   credentials: true,
 };
+const mercadoPago = require('mercadopago');
 const requestIp = require("request-ip");
+
+const { configureMercaPago } = require('./utils/configureMercaPago.js')
+
 
 //Initializing Firebase________________________________________________
 const admin = require("firebase-admin");
@@ -23,11 +27,11 @@ admin.initializeApp({
 require("./db.js");
 
 const server = express();
+server.set("view engine", "ejs");
+server.name = "API";
 
-server.name = 'API';
-
-server.use(bodyParser.urlencoded({ extended: true, limit: '100mb' }));
-server.use(bodyParser.json({ limit: '100mb' }));
+server.use(bodyParser.urlencoded({ extended: true, limit: "100mb" }));
+server.use(bodyParser.json({ limit: "100mb" }));
 server.use(cookieParser());
 server.use(morgan("dev"));
 server.use(cors(corsOptions));
@@ -41,6 +45,9 @@ server.use((req, res, next) => {
   res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
   next();
 });
+
+configureMercaPago(mercadoPago);
+
 
 // Error catching endware.
 server.use((err, req, res, next) => {

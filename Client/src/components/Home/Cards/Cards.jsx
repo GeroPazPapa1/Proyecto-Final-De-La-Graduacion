@@ -19,11 +19,11 @@ export default function Cards() {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        if (!carsLoadeds) {
+        if (carsLoadeds === false) {
             const fetchCars = async () => {
+                await dispatch(cardsLoadedTrue());
                 await dispatch(getAllCars());
                 await dispatch(applyFilters("originCars"));
-                dispatch(cardsLoadedTrue());
             };
             fetchCars();
         }
@@ -46,17 +46,16 @@ export default function Cards() {
             <div className={styles.container2}>
                 <div className={styles.containerNF}>
                     <div>
-                      <img src={NOTFOUND} alt="NotFound..." />
+                        <img src={NOTFOUND} alt="NotFound..." />
                     </div>
                     <div>
-                        <p>Not Found</p> 
+                        <p>Not Found</p>
                         <span>Check the spelling of the word</span>
                     </div>
                 </div>
             </div>
         );
     }
-
 
     const totalPages = Math.ceil(pageFiltereds.length / carsForPage); // Total de páginas
     const indexOfLastCar = currentPage * carsForPage;
@@ -70,7 +69,7 @@ export default function Cards() {
     return (
         <div className={styles.containerDiv}>
             <div className={styles.container}>
-                {currentCar?.map((car) => (
+                {currentCar.map((car) => (
                     <Card
                         key={car.id}
                         id={car.id}

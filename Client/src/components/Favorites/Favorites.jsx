@@ -1,15 +1,14 @@
-import React from "react";
-import { useState } from "react";
-import style from "./Favorites.module.css";
-import { connect, useSelector, useDispatch } from "react-redux";
-import Card from "../Home/Card/Card";
-import { ButtonBack } from "../../assets/svgs";
+import React, { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { ButtonBack } from "../../assets/svgs";
+import Card from "../Home/Card/Card";
+import style from "./Favorites.module.css";
+
 
 export default function Favorites() {
-  const favorites = useSelector((state) => state.favorites); // ACLARACION
+  const favorites = useSelector((state) => state.favorites);
   const dispatch = useDispatch();
-  console.log(favorites);
   const [booleano, setBooleano] = useState(false);
 
   return (
@@ -17,7 +16,9 @@ export default function Favorites() {
       <Link to={"/home"}>
         <ButtonBack />
       </Link>
-      <h2 className={style.favorites_title}>Autos Favoritos</h2>
+      <h2 className={`${style.favorites_title} ${style.title}`}>
+        Tus Favoritos
+      </h2>
       <div className={style.container}>
         {favorites?.map((char) => (
           <Card

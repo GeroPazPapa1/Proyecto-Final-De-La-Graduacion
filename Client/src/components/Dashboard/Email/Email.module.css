@@ -1,0 +1,39 @@
+/* Email.module.css */
+
+.emailContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    margin-bottom: 5px;
+    background-color: #fff;
+}
+
+.emailItem {
+    flex: 1;
+    padding: 2px;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    color: #333;
+    overflow: hidden;
+}
+
+.emailItemVerifyYes {
+    flex: 1;
+    padding: 5px;
+    background-color: rgb(97, 201, 97);
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 11px;
+    color: white;
+}
+
+.emailItemVerifyNot {
+    flex: 1;
+    padding: 5px;
+    background-color: rgb(210, 45, 45);
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 11px;
+    color: white;
+}
+
+/* Estilos adicionales según tus preferencias */

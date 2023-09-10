@@ -4,11 +4,9 @@ const initialState = {
   purchasedProducts: [],
   allCarsID: [],
   detail: {},
-  pageFiltered: [],
   userId: "",
   userType: "",
   pageFiltered: [],
-
   queryParams: {
     name: "",
     state: "",
@@ -25,11 +23,15 @@ const initialState = {
     colorQuery: [],
     locationQuery: [],
   },
-
+  filteredsDashboard: {
+    emailsOrigins: [],
+    emailsFiltereds: [],
+  },
   carsLoaded: false,
   brandLoaded: false,
   colorsLoaded: false,
   locationLoaded: false,
+  usersLoaded: false,
 };
 
 function rootReducer(state = initialState, action) {
@@ -66,10 +68,12 @@ function rootReducer(state = initialState, action) {
       };
     case "PURCHASE_PRODUCTS":
       // Agregar los productos comprados al estado purchasedProducts
+      const newPurchasedProducts = action.payload.filter(product => {
+        return !state.purchasedProducts.some(purchasedProduct => purchasedProduct.id === product.id);
+      });
       return {
         ...state,
-        purchasedProducts: [...state.purchasedProducts, ...action.payload],
-        cartList: [], // Vaciar el carrito después de la compra
+        purchasedProducts: [...state.purchasedProducts, ...newPurchasedProducts],
       };
     case "DELETE_PRODUCT":
       return {
@@ -94,6 +98,17 @@ function rootReducer(state = initialState, action) {
           byQueryOrigin: action.payload, // Actualiza byQueryOrigin con el valor de action.payload
         },
       };
+
+    case "GET_ALL_USERS":
+      console.log(action.payload);
+      return {
+        ...state,
+        filteredsDashboard: {
+          ...state.filteredsDashboard,
+          emailsOrigins: action.payload,
+          emailsFiltereds: action.payload,
+        }
+      }
 
     case "GET_ALL_BRAND":
       return {
@@ -139,6 +154,12 @@ function rootReducer(state = initialState, action) {
         },
       };
 
+    case "USERS_LOADED":
+      return {
+        ...state,
+        usersLoaded: action.payload,
+      }
+
     case "LOCATION_LOADED":
       return {
         ...state,
@@ -152,6 +173,7 @@ function rootReducer(state = initialState, action) {
       };
 
     case "CARDS_LOADED":
+      console.log(action.payload)
       return {
         ...state,
         carsLoaded: action.payload,
@@ -195,11 +217,6 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         pageFiltered: filteredData,
-      };
-
-    case "CREATE_USER":
-      return {
-        ...state,
       };
     case "SET_USER_ID":
       return {
