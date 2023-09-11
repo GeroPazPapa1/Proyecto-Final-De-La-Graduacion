@@ -5,7 +5,7 @@ import styles from "./Card.module.css";
 import { addToCart, addToFav, removeFromFav } from "../../../Redux/actions";
 
 export default function Card(props) {
-    const { id, name, price, image, location, state} = props;
+    const { id, name, price, image, location, state } = props;
     const dispatch = useDispatch();
     const myFavorites = useSelector((state) => state.favorites);
     const formatPrice = (price) => {
@@ -52,14 +52,14 @@ export default function Card(props) {
                 </Link>
             </div>
             <div className={styles.name}>{name}</div>
-            <div className={styles.price}>$ {formatPrice(price)}</div>
+            <div className={styles.price}>$ {formatPrice(price)} USD </div>
             <div className={styles.state}>{state}</div>
             <div className={styles.locationAndFav}>
                 <div className={styles.location}>
                     {location}
                 </div>
                 <div className={styles.heart} onClick={toggleFav}>
-                <button onClick={handleFavorite}>{isFav ? "⭐" : "☆"}</button>
+                    <button onClick={handleFavorite}>{isFav ? "⭐" : "☆"}</button>
                 </div>
             </div>
         </div>

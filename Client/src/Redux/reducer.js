@@ -7,6 +7,8 @@ const initialState = {
   userId: "",
   userType: "",
   pageFiltered: [],
+  cartHistory: [],
+
   queryParams: {
     name: "",
     state: "",
@@ -47,7 +49,11 @@ function rootReducer(state = initialState, action) {
         ...state,
         cartList: [...state.cartList, action.payload],
       };
-
+    case "ADD_BUY_TO_HISTORY":
+      return {
+        ...state,
+        cartHistory: [...state.cartHistory, action.payload],
+      };
     case "ADD_TO_FAV":
       const isProductInFav = state.favorites.some(
         (product) => product.name === action.payload.name
@@ -68,12 +74,17 @@ function rootReducer(state = initialState, action) {
       };
     case "PURCHASE_PRODUCTS":
       // Agregar los productos comprados al estado purchasedProducts
-      const newPurchasedProducts = action.payload.filter(product => {
-        return !state.purchasedProducts.some(purchasedProduct => purchasedProduct.id === product.id);
+      const newPurchasedProducts = action.payload.filter((product) => {
+        return !state.purchasedProducts.some(
+          (purchasedProduct) => purchasedProduct.id === product.id
+        );
       });
       return {
         ...state,
-        purchasedProducts: [...state.purchasedProducts, ...newPurchasedProducts],
+        purchasedProducts: [
+          ...state.purchasedProducts,
+          ...newPurchasedProducts,
+        ],
       };
     case "DELETE_PRODUCT":
       return {
@@ -107,8 +118,8 @@ function rootReducer(state = initialState, action) {
           ...state.filteredsDashboard,
           emailsOrigins: action.payload,
           emailsFiltereds: action.payload,
-        }
-      }
+        },
+      };
 
     case "GET_ALL_BRAND":
       return {
@@ -158,7 +169,7 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         usersLoaded: action.payload,
-      }
+      };
 
     case "LOCATION_LOADED":
       return {
@@ -173,7 +184,7 @@ function rootReducer(state = initialState, action) {
       };
 
     case "CARDS_LOADED":
-      console.log(action.payload)
+      console.log(action.payload);
       return {
         ...state,
         carsLoaded: action.payload,
