@@ -6,9 +6,11 @@ const { loginHandler } = require("../handlers/loginHandler");
 const { getUsersHandler } = require("../handlers/getUsersHandler");
 const { putUserHandler } = require("../handlers/putUserHandler");
 const { googleLoginHandler } = require("../handlers/googleLoginHandler");
-const { verifyTokenHandler } = require("../handlers/verifyTokenHandler");
+const { getFiltersHandler } = require("../handlers/handlerUserFilter");
 const { checkUserRole } = require("../handlers/CheckUserRole");
 const { getUsersInDashboard } = require("../controllers/getUsersInDashboard");
+const { getUserbyEmailHandler } = require("../handlers/getUserbyEmailHandler");
+const { verifyTokenHandler } = require("../handlers/verifyTokenHandler");
 const router = Router();
 
 //configuracion de rutas
@@ -21,6 +23,7 @@ router.post("/", loginHandler);
 router.put("/:id", putUserHandler);
 
 //Configuracion de rutas de admi
-router.get("/dashboard/users", checkUserRole("admin"), getUsersInDashboard)
+router.get("/dashboard/filter", getFiltersHandler)
+router.get("/dashboard/users", checkUserRole("admin"), getUsersInDashboard);
 
 module.exports = router;

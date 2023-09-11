@@ -40,25 +40,32 @@ export default function Login() {
     try {
       const result = await signInWithPopup(auth, provider);
       const user = auth.currentUser;
-      const token = await user.getIdToken(true);
+      const tokenFirebase = await user.getIdToken(true);
       const response = await axios.post(
         "http://localhost:3001/user/google",
-        { token },
+        { tokenFirebase },
         {
           headers: {
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${tokenFirebase}`,
           },
         }
       );
       console.log("Respuesta del backend:", response.data);
+
       const userId = response.data.id;
       const userType = response.data.type;
-      localStorage.setItem("authToken", token );
+      localStorage.setItem("authToken", token);
       dispatch(setUserId(userId));
       dispatch(setUserType(userType));
       const { access } = response.data;
       SignedSuccesfully();
       setAccess(true);
+      localStorage.setItem("userId", response.data.id);
+      localStorage.setItem("userType", response.data.type);
+      localStorage.setItem(
+        "authToken",
+        JSON.stringify({ response: response.data, email: input.email })
+      );
       access && navigate("/home");
     } catch (error) {
       console.error("Error durante la autenticación con Google:", error);
@@ -114,6 +121,7 @@ export default function Login() {
           email: input.email,
           password: input.password,
         });
+        console.log(response);
         SignedSuccesfully();
         const userId = response.data.id;
         const userType = response.data.type;
@@ -125,7 +133,10 @@ export default function Login() {
         localStorage.setItem("userType", response.data.type);
         localStorage.setItem(
           "authToken",
-          JSON.stringify({ response: response.data, email: input.email })
+          JSON.stringify({
+            response: response.data,
+            email: response.data.email,
+          })
         );
         access && navigate("/home");
       } catch (error) {
