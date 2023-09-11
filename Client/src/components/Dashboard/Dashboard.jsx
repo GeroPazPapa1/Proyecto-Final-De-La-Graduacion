@@ -5,9 +5,11 @@ import { getDashboard, usersLoadedTrue } from "../../Redux/actions";
 import styles from "./Dashboard.module.css";
 import SETTING from "./Icons/SETTING.svg";
 import DashBoardEmail from "./Emails/Emails";
+import SearchBarDashboard from "./SearchBar/SearchBar";
+import Filters from "./Filters/Filters";
 
 export default function Dashboard() {
-    const [selectedTab, setSelectedTab] = useState("USER");
+    const [selectedTab, setSelectedTab] = useState("USERS");
 
     const location = useLocation();
     const dispatch = useDispatch();
@@ -71,8 +73,8 @@ export default function Dashboard() {
                                 </div>
                                 <div>
                                     <>
-                                        <button onClick={() => handleTabChange("USER")}>USERS</button>
-                                        <button onClick={() => handleTabChange("HISTORY")}>HISTORY</button>
+                                        <button onClick={() => handleTabChange("USERS")}>USERS</button>
+                                        <button onClick={() => handleTabChange("SALES")}>SALES</button>
                                         <Link to={"/home"}>
                                             <button>HOME</button>
                                         </Link>
@@ -89,7 +91,11 @@ export default function Dashboard() {
                                 <div className={styles.hello}>
                                     <h2>DashBoard</h2>
                                 </div>
-                                <div>{selectedTab === "USER" && (
+                                <div>
+                                    <SearchBarDashboard/>
+                                    <Filters/>
+                                </div>
+                                <div>{selectedTab === "USERS" && (
                                     <div className={styles.DashboardUser}>
                                         <DashBoardEmail/>
                                     </div>

@@ -1,35 +1,38 @@
-import React from "react"
-import { useSelector } from "react-redux"
-import LOADING from "./Icons/LOADING.svg"
+import React, { useEffect } from "react"
+import { useDispatch, useSelector } from "react-redux"
 import Email from "../Email/Email";
 import styles from "./Emails.module.css";
+import { applyFilterDb, getDashboard } from "../../../Redux/actions";
 
 export default function DashBoardEmail() {
 
-    const emails = useSelector((state) => state.filteredsDashboard.emailsOrigins);
-    const usersLoaded = useSelector((state) => state.usersLoaded);
+    const pageFilteredDb = useSelector((state) => state.pageFilteredDb);
+    const EmailsLoaded = useSelector((state) => state.EmailsLoaded);
+    const dispatch = useDispatch();
 
-    if (!usersLoaded) {
-        return (
-            <div>
-                <img src={LOADING} alt="Loading..." />
-            </div>
-        );
-    }
+    useEffect(() => {
+        if (!EmailsLoaded) {
+            const handleChangeEmails = async () => {
+                await dispatch(getDashboard());
+                await dispatch(applyFilterDb("originEmails"));
+            };
+            handleChangeEmails();
+        }
+    }, [EmailsLoaded, dispatch])
 
     return (
         <div>
             <div className={styles.emailContainer}>
                 <div className={styles.emailItem}>Email</div>
-                <div className={styles.emailItem}>Name</div>
+                <div className={styles.emailItem}>Full Name</div>
                 <div className={styles.emailItem}>Country</div>
-                <div className={styles.emailItem}>Status</div>
+                <div className={styles.emailItem}>Type</div>
                 <div className={styles.emailItem}>Verify</div>
+                <div className={styles.emailItem}>Banned</div>
                 <div className={styles.emailItem}>Actions</div>
             </div>
             <div>
-                
-                {emails.map((email) => (
+                {pageFilteredDb?.map((email) => (
                     <Email
                         key={email.id}
                         id={email.id}
@@ -37,7 +40,8 @@ export default function DashBoardEmail() {
                         email={email.email}
                         country={email.country}
                         status={email.status}
-                        verify={email.verify} />
+                        verify={email.verify}
+                        ban={email.ban} />
                 ))
                 }
             </div>

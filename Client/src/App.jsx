@@ -12,7 +12,7 @@ import Detail from "./components/Home/Detail/Detail";
 import Favorites from "./components/Favorites/Favorites";
 import Dashboard from "./components/Dashboard/Dashboard";
 import Modification from "./components/Modification/Modification";
-import ProfileDashboard from "./components/Profile/ProfileDashboard";
+import ProfileDashboard from "./components/ProfileDashboard/ProfileDashboard.jsx";
 
 function App() {
   return (
