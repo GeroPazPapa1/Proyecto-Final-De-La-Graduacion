@@ -19,7 +19,7 @@ export default function Cards() {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        if (carsLoadeds === false) {
+        if (!carsLoadeds) {
             const fetchCars = async () => {
                 await dispatch(cardsLoadedTrue());
                 await dispatch(getAllCars());

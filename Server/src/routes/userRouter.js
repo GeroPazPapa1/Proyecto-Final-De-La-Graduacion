@@ -7,8 +7,11 @@ const { getUsersHandler } = require("../handlers/getUsersHandler");
 const { putUserHandler } = require("../handlers/putUserHandler");
 const { googleLoginHandler } = require("../handlers/googleLoginHandler");
 const { verifyTokenHandler } = require("../handlers/verifyTokenHandler");
-const { checkUserRole } = require("../handlers/CheckUserRole");
+// const { checkUserRole } = require("../handlers/CheckUserRole");
 const { getUsersInDashboard } = require("../controllers/getUsersInDashboard");
+const { adminDeleteUser } = require("../controllers/adminDeleteUser");
+const { adminInputUser } = require("../controllers/adminPutUser");
+const { getFiltersHandler } = require("../handlers/handlerUserFilter");
 const router = Router();
 
 //configuracion de rutas
@@ -21,6 +24,9 @@ router.post("/", loginHandler);
 router.put("/:id", putUserHandler);
 
 //Configuracion de rutas de admi
-router.get("/dashboard/users", checkUserRole("admin"), getUsersInDashboard)
+router.get("/dashboard/users", getUsersInDashboard)
+router.delete("/dashboard/users/:id", adminDeleteUser)
+router.put("/dashboard/users/:id", adminInputUser);
+router.get("/dashboard/filter", getFiltersHandler) 
 
 module.exports = router;

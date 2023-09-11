@@ -42,3 +42,4 @@ module.exports = (sequelize) => {
     verify: { type: DataTypes.BOOLEAN, allowNull: false, defaultValue: false },
   });
 };
+  

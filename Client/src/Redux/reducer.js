@@ -7,6 +7,7 @@ const initialState = {
   userId: "",
   userType: "",
   pageFiltered: [],
+  pageFilteredDb: [],
   cartHistory: [],
 
   queryParams: {
@@ -26,10 +27,18 @@ const initialState = {
     locationQuery: [],
   },
   filteredsDashboard: {
+    queryParamsF: {
+      name: "",
+      status: "",
+      ban: "",
+      verify: "",
+      country: "",
+    },
     emailsOrigins: [],
     emailsFiltereds: [],
   },
   carsLoaded: false,
+  EmailsLoaded: false,
   brandLoaded: false,
   colorsLoaded: false,
   locationLoaded: false,
@@ -111,7 +120,26 @@ function rootReducer(state = initialState, action) {
       };
 
     case "GET_ALL_USERS":
-      console.log(action.payload);
+      return {
+        ...state,
+        filteredsDashboard: {
+          ...state.filteredsDashboard,
+          emailsOrigins: action.payload,
+          emailsFiltereds: action.payload,
+        },
+      };
+
+    case "DELETED_USER":
+      return {
+        ...state,
+        filteredsDashboard: {
+          ...state.filteredsDashboard,
+          emailsOrigins: action.payload,
+          emailsFiltereds: action.payload,
+        },
+      };
+
+    case "EDITED_USER":
       return {
         ...state,
         filteredsDashboard: {
@@ -153,6 +181,15 @@ function rootReducer(state = initialState, action) {
           ...state.filtereds,
           byQuery: action.payload,
           byQueryOrigin: action.payload,
+        },
+      };
+
+    case "SEARCH_BY_QUERYFILTERS":
+      return {
+        ...state,
+        filteredsDashboard: {
+          ...state.filteredsDashboard,
+          emailsFiltereds: action.payload,
         },
       };
 
@@ -229,21 +266,37 @@ function rootReducer(state = initialState, action) {
         ...state,
         pageFiltered: filteredData,
       };
+
+    case "APPLY_FILTERS_Db":
+      let filteredData2;
+      if (action.payload === "originEmails") {
+        filteredData2 = state.filteredsDashboard.emailsOrigins;
+      } else if (action.payload === "FilteredEmails") {
+        filteredData2 = state.filteredsDashboard.emailsFiltereds;
+      }
+      return {
+        ...state,
+        pageFilteredDb: filteredData2,
+      };
+
     case "SET_USER_ID":
       return {
         ...state,
         userId: action.payload,
       };
+
     case "SET_USER_TYPE":
       return {
         ...state,
         userType: action.payload,
       };
+
     case "GET_DETAIL":
       return {
         ...state,
         detail: action.payload,
       };
+
     case "RESET_DETAIL":
       return {
         ...state,
