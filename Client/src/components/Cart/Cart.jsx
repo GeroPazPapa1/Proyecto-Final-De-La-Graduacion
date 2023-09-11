@@ -7,7 +7,7 @@ import {
   deleteProduct,
   purchaseProducts,
   setCart,
-} from "../../redux/actions";
+} from "../../Redux/actions";
 import { NoCarsSVG } from "../../assets/svgs";
 import { CarRemovedFromCart, MercadoPagoFail, NeedToLogin } from "../NotiStack";
 import { initMercadoPago, Wallet } from "@mercadopago/sdk-react";
