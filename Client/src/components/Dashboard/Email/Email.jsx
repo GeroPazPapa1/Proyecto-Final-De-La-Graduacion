@@ -5,20 +5,25 @@ import { useDispatch } from "react-redux";
 import { applyFilterDb, deleteUserWithID, editPutUser, getDashboard } from "../../../Redux/actions";
 import TRASH from "./Icons/TRASH.svg";
 import EDIT from "./Icons/EDIT.svg";
-
+import { useState } from "react";
 
 export default function Email(props) {
-    const { id, name, email, country, status, verify, ban } = props;
+    const { id, name, email, country, status, verify, ban, onCheckboxChange, isChecked } = props;
 
     const dispatch = useDispatch();
+    const [checkbox, setCheckbox] = useState({});
 
     const verifyText = verify ? "Yes" : "Not";
     const banText = ban ? "Banned" : "Not";
     const veryClass = verify ? styles.emailItemVerifyYes : styles.emailItemVerifyNot;
     const veryClassB = ban ? styles.emailItemVerifyNot : styles.emailItemVerifyYes;
 
+    // const handleCheckboxChange = () => {
+    //     setCheckbox(!checkbox);
+    //   };
+
     const handleDeletedEmail = async (id) => {
-        Swal.fire({
+            Swal.fire({
             title: "¿Are you sure?",
             text: `You are about to delete ${name} from the database`,
             icon: "warning",
@@ -71,6 +76,11 @@ export default function Email(props) {
 
     return (
         <div className={styles.emailContainer}>
+            <input 
+            type="checkbox" 
+            checked={isChecked}
+            onChange={() => onCheckboxChange(id)}>
+            </input>
             <div className={styles.emailItem}>{email}</div>
             <div className={styles.emailItem}>{name}</div>
             <div className={styles.emailItem}>{country}</div>
