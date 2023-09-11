@@ -1,23 +1,15 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import styles from './CartHistory.module.css';
-import { Link } from 'react-router-dom'
+import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import styles from './CartHistory.module.css';
+import { Link } from 'react-router-dom';
 
 export default function CartHistory() {
-    // const [compras, setCompras] = useState([]);
-    const cartHistory = useSelector(state => state.cartHistory)
-    // useEffect(() => {
-    //     // Hacer una solicitud GET al backend para obtener el historial de compras del usuario actual
-    //     const userId = localStorage.getItem("userId");
-    //     axios.get(`/car/compras/${userId}`)
-    //         .then((response) => {
-    //             setCompras(response.data);
-    //         })
-    //         .catch((error) => {
-    //             console.error("Error al obtener el historial de compras:", error);
-    //         });
-    // }, []);
+    const purchaseHistory = useSelector(state => state.purchaseHistory);
+
+    useEffect(() => {
+        // Aquí puedes realizar alguna acción adicional si es necesario, como cargar el historial
+        // de compras cuando el componente se monte.
+    }, []);
 
     return (
         <div className={styles.carthistory}>
@@ -29,9 +21,9 @@ export default function CartHistory() {
                 <option>Last year</option>
             </select>
             <div className={styles.container_bought}>
-                {cartHistory.map(compra => (
+                {purchaseHistory.map(compra => (
                     <div className={styles.new_buy} key={compra.id}>
-                        <img src={compra.image} className={`${styles.bought} ${styles.bought_img}`} />
+                        <img src={compra.image} className={`${styles.bought} ${styles.bought_img}`} alt="product" />
                         <h1 className={styles.bought}> {compra.name}</h1>
                         <h1 className={styles.bought}> {compra.brand}</h1>
                         <h1 className={styles.bought}> {compra.model}</h1>

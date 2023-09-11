@@ -53,14 +53,15 @@ export default function Login() {
       console.log("Respuesta del backend:", response.data);
       const userId = response.data.id;
       const userType = response.data.type;
+      localStorage.setItem("authToken", token );
       dispatch(setUserId(userId));
       dispatch(setUserType(userType));
       const { access } = response.data;
       SignedSuccesfully();
       setAccess(true);
-      localStorage.setItem("authToken", token);
       access && navigate("/home");
     } catch (error) {
+      console.error("Error durante la autenticación con Google:", error);
       AlreadyAccountWithEmail();
     }
   };

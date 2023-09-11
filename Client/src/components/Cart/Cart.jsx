@@ -29,15 +29,20 @@ export default function Cart() {
         unit_price: product.price,
         quantity: 1,
       }));
+      const currentDate = new Date().toISOString();
       console.log(items);
       const response = await axios.post(
         "http://localhost:3001/create_preference/",
-        { items }
+        { items, date: currentDate }
       );
       const { id } = response.data;
       console.log(id);
       console.log(response);
       localStorage.setItem("transactionStatus", "success");
+      if (localStorage.getItem("transactionStatus") === "success") {
+        const userId = localStorage.getItem("userId");
+        dispatch(addBoughtToHistory(cartList));
+      }
       return id;
     } catch (error) {
       console.error(error);
@@ -67,7 +72,6 @@ export default function Cart() {
         dispatch(purchaseProducts(cartList));
         const id = await createPreference();
         if (id) {
-          dispatch(addBoughtToHistory(cartList));
           setPreferenceId(id);
           setShowMercadoPago(true);
         }

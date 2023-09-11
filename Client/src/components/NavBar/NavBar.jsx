@@ -8,7 +8,7 @@ export default function NavBar() {
   const location = useLocation();
 
   const loggedUserJson = localStorage.getItem("authToken");
-  const loggedUser = loggedUserJson ? JSON.parse(loggedUserJson) : null;
+  const loggedUser = loggedUserJson ? loggedUserJson : null;
 
   const handleLogout = () => {
     localStorage.clear();
@@ -39,6 +39,7 @@ export default function NavBar() {
           ) : (
             <>
               <p>Welcome {loggedUser.name}</p>
+              <Link to='/profile'></Link>
               {loggedUser.response?.type === "admin" && (
                 <Link to={"/admin/dashboard"}>
                   <button>Dashboard</button>
