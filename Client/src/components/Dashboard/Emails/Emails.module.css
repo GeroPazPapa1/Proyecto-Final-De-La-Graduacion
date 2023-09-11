@@ -1,0 +1,16 @@
+.emailContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: #bdac9b   ;
+}
+
+.emailItem {
+    flex: 1;
+    padding: 2px;
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 13px;
+    color: white;
+    overflow: hidden;
+}
