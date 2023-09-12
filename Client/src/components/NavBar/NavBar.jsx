@@ -6,14 +6,14 @@ import { Link, useLocation } from "react-router-dom";
 
 export default function NavBar() {
   const location = useLocation();
-  
+
   const loggedUserJson = localStorage.getItem("authToken");
   const loggedUser = loggedUserJson ? JSON.parse(loggedUserJson) : null;
-  
+
   if (location.pathname.startsWith("/admin")) {
     return null;
   }
-  
+
   const handleLogout = () => {
     localStorage.clear();
   };
@@ -164,7 +164,7 @@ export default function NavBar() {
             </div>
           </div>
           <div>
-          <div className={styles.containerL}>
+            <div className={styles.containerL}>
               {loggedUser && (
                 <>
                   <span>{loggedUser.email}</span>
@@ -175,7 +175,7 @@ export default function NavBar() {
                   )}
                   <Link to={"/modification"}>
                     <button className={styles.button} id={loggedUser.id}>
-                      Modification
+                      My profile
                     </button>
                   </Link>
                   <Link to={"/home"}>
@@ -200,7 +200,7 @@ export default function NavBar() {
               </Link>
             </div>
           </div>
-            </>
+        </>
       )}
       {location.pathname === "/login" ||
         (location.pathname === "/register" && null)}

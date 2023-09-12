@@ -121,10 +121,6 @@ export default function Login() {
           email: input.email,
           password: input.password,
         });
-<<<<<<< HEAD
-        console.log(response);
-=======
->>>>>>> 1eb7604c2432f50f5ed097fbcb3845f7c9db19ae
         SignedSuccesfully();
         const userId = response.data.id;
         const userType = response.data.type;
