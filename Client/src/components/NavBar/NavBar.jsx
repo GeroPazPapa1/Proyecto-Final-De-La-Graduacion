@@ -56,7 +56,63 @@ export default function NavBar() {
               <Link to={"/home"}>
                 <button className={styles.button}>Home</button>
               </Link>
-              <button className={styles.button}>Contacts</button>
+              <Link to={"/contacts"}>
+                <button className={styles.button}>Contacts</button>
+              </Link>
+              <Link to={"/favorites"}>
+                <button className={styles.button}>Favorites</button>
+              </Link>
+            </div>
+          </div>
+          <div>
+            <div className={styles.containerL}>
+              {loggedUser && (
+                <>
+                  <span>{loggedUser.email}</span>
+                  {loggedUser.response?.type === "admin" && (
+                    <Link to={"/admin/dashboard"}>
+                      <button>Dashboard</button>
+                    </Link>
+                  )}
+                  <Link to={"/modification"}>
+                    <button className={styles.button} id={loggedUser.id}>
+                      Modification
+                    </button>
+                  </Link>
+                  <Link to={"/home"}>
+                    <button onClick={handleLogout} className={styles.button}>
+                      Log out
+                    </button>
+                  </Link>
+                </>
+              )}
+              {!loggedUser && (
+                <>
+                  <Link to={"/login"}>
+                    <button className={styles.button}>Log in</button>
+                  </Link>
+                  <Link to={"/register"}>
+                    <button className={styles.button}>Register</button>
+                  </Link>
+                </>
+              )}
+              <Link to="/cart">
+                <img className={styles.icons} src={CART} alt="Cart..." />
+              </Link>
+            </div>
+          </div>
+        </>
+      )}
+      {location.pathname === "/contacts" && (
+        <>
+          <div className={styles.containerLP}>
+            <div>
+              <Link to={"/home"}>
+                <button className={styles.button}>Home</button>
+              </Link>
+              <Link to={"/contacts"}>
+                <button className={styles.button}>Contacts</button>
+              </Link>
               <Link to={"/favorites"}>
                 <button className={styles.button}>Favorites</button>
               </Link>
@@ -108,7 +164,9 @@ export default function NavBar() {
               <Link to={"/home"}>
                 <button className={styles.button}>Home</button>
               </Link>
-              <button className={styles.button}>Contacts</button>
+              <Link to={"/contacts"}>
+                <button className={styles.button}>Contacts</button>
+              </Link>
               <Link to={"/favorites"}>
                 <button className={styles.button}>Favorites</button>
               </Link>
@@ -160,7 +218,9 @@ export default function NavBar() {
               <Link to={"/home"}>
                 <button className={styles.button}>Home</button>
               </Link>
-              <button className={styles.button}>Contacts</button>
+              <Link to={"/contacts"}>
+                <button className={styles.button}>Contacts</button>
+              </Link>
             </div>
           </div>
           <div>

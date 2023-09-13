@@ -1,17 +1,18 @@
 import React from "react";
+import AboutUs from "./components/AboutUs/AboutUs.jsx";
 import { Routes, Route } from "react-router-dom";
 import Cart from "./components/Cart/Cart.jsx";
+import Dashboard from "./components/Dashboard/Dashboard";
+import Detail from "./components/Home/Detail/Detail";
+import Footer from "./components/Home/Footer/Footer";
+import ForgotPassword from "./components/LoginRegister/ForgotPassword";
 import Home from "./components/Home/Home";
 import LandingPage from "./components/LandingPage/LandingPage";
-import Footer from "./components/Home/Footer/Footer";
 import Login from "./components/LoginRegister/Login";
-import Register from "./components/LoginRegister/Register";
-import ForgotPassword from "./components/LoginRegister/ForgotPassword";
-import NavBar from "./components/NavBar/NavBar";
-import Detail from "./components/Home/Detail/Detail";
-import Favorites from "./components/Favorites/Favorites";
-import Dashboard from "./components/Dashboard/Dashboard";
 import Modification from "./components/Modification/Modification";
+import NavBar from "./components/NavBar/NavBar";
+import Register from "./components/LoginRegister/Register";
+import Favorites from "./components/Favorites/Favorites";
 import ProfileDashboard from "./components/ProfileDashboard/ProfileDashboard.jsx";
 
 function App() {
@@ -30,6 +31,7 @@ function App() {
         <Route path="/profile" element={<ProfileDashboard />} />
         <Route path="/admin/dashboard" element={<Dashboard />} />
         <Route path="/modification" element={<Modification />} />
+        <Route path="/contacts" element={<AboutUs />} />
       </Routes>
       <Footer />
     </>

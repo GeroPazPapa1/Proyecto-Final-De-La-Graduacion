@@ -65,6 +65,7 @@ export default function Filters() {
         dispatch(applyFilterDb("FilteredEmails"));
     }
 
+
     return (
         <div className={styles.container}>
             <div className={styles.filters}>
