@@ -36,7 +36,7 @@ export default function CartHistory() {
       <div className={styles.titleContainer}>
         <div className={styles.emptyContainer}></div>
         <div className={styles.h6Container}>
-          <h6>Price</h6>
+          <h6>Total Price</h6>
         </div>
         <div className={styles.h6Container}>
           <h6>Date</h6>
