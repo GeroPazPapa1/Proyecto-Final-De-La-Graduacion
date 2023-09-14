@@ -2,20 +2,18 @@ import React from "react";
 import LOGO from "./Icons/LOGO.svg";
 import CART from "./Icons/CART.svg";
 import styles from "./NavBar.module.css";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
 
 export default function NavBar() {
   const location = useLocation();
-  const navigate = useNavigate();
   const [user, setUser] = useState([]);
   const loggedUserJson = localStorage.getItem("authToken");
   const loggedUser = loggedUserJson ? JSON.parse(loggedUserJson) : null;
 
   const handleLogout = () => {
     localStorage.clear();
-    navigate("/");
   };
 
   if (location.pathname.startsWith("/admin")) {
@@ -183,7 +181,7 @@ export default function NavBar() {
             </div>
           </div>
           <div>
-          <div className={styles.containerL}>
+            <div className={styles.containerL}>
               {loggedUser && (
                 <>
                   <span>{loggedUser.email}</span>
@@ -195,6 +193,7 @@ export default function NavBar() {
                   <Link to={"/profileSettings"}>
                     <button className={styles.button} id={loggedUser.id}>
                     Edit Profile
+                      My profile
                     </button>
                   </Link>
                   <Link to={"/"}>
@@ -219,7 +218,7 @@ export default function NavBar() {
               </Link>
             </div>
           </div>
-            </>
+        </>
       )}
       {location.pathname === "/login" ||
         (location.pathname === "/register" && null)}

@@ -19,7 +19,7 @@ export default function Cards() {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        if (carsLoadeds === false) {
+        if (!carsLoadeds) {
             const fetchCars = async () => {
                 await dispatch(cardsLoadedTrue());
                 await dispatch(getAllCars());
@@ -61,7 +61,7 @@ export default function Cards() {
     const indexOfLastCar = currentPage * carsForPage;
     const indexOfFirstCar = indexOfLastCar - carsForPage;
     const currentCar = pageFiltereds.slice(indexOfFirstCar, indexOfLastCar);
-
+    if (totalPages <= 1) { null }
     const handlePageChange = (newPage) => {
         setCurrentPage(newPage);
     };
@@ -82,25 +82,27 @@ export default function Cards() {
                 ))}
             </div>
 
-            <div className={styles.pagination}>
-                <button
-                    onClick={() => handlePageChange(currentPage - 1)}
-                    disabled={currentPage === 1}
-                >
-                    ˂ Prev
-                </button>
-                <span>
-                    <span style={{ fontWeight: 'bold', fontFamily: "'Inter', sans-serif'" }}>{currentPage}</span>
-                    <span> to </span>
-                    <span style={{ fontWeight: 'bold', fontFamily: "'Inter', sans-serif'" }}>{totalPages}</span>
-                </span>
-                <button
-                    onClick={() => handlePageChange(currentPage + 1)}
-                    disabled={currentPage === totalPages}
-                >
-                    Next ˃
-                </button>
-            </div>
+            {totalPages === 1 ? <div></div> :
+                <div className={styles.pagination}>
+                    <button
+                        onClick={() => handlePageChange(currentPage - 1)}
+                        disabled={currentPage === 1}
+                    >
+                        ˂ Prev
+                    </button>
+                    <span>
+                        <span style={{ fontWeight: 'bold', fontFamily: "'Inter', sans-serif'" }}>{currentPage}</span>
+                        <span> to </span>
+                        <span style={{ fontWeight: 'bold', fontFamily: "'Inter', sans-serif'" }}>{totalPages}</span>
+                    </span>
+                    <button
+                        onClick={() => handlePageChange(currentPage + 1)}
+                        disabled={currentPage === totalPages}
+                    >
+                        Next ˃
+                    </button>
+                </div>
+            }
         </div>
     );
 }

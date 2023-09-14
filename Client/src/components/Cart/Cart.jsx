@@ -2,7 +2,12 @@ import React, { useState, useEffect } from "react";
 import styles from "./Cart.module.css";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { deleteProduct, purchaseProducts, setCart } from "../../Redux/actions";
+import {
+  addBoughtToHistory,
+  deleteProduct,
+  purchaseProducts,
+  setCart,
+} from "../../Redux/actions";
 import { NoCarsSVG } from "../../assets/svgs";
 import { CarRemovedFromCart, MercadoPagoFail, NeedToLogin } from "../NotiStack";
 import { initMercadoPago, Wallet } from "@mercadopago/sdk-react";
@@ -67,6 +72,7 @@ export default function Cart() {
         dispatch(purchaseProducts(cartList));
         const id = await createPreference();
         if (id) {
+          dispatch(addBoughtToHistory(cartList));
           setPreferenceId(id);
           setShowMercadoPago(true);
         }
