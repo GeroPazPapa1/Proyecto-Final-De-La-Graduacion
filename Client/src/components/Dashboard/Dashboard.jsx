@@ -64,7 +64,7 @@ export default function Dashboard() {
                                     </div>
                                     <div>
                                         <Link to="/home">
-                                            <button>COME HOME</button>
+                                            <button>GO HOME</button>
                                         </Link>
                                     </div>
                                 </div>
@@ -123,7 +123,7 @@ export default function Dashboard() {
                                     </div>
                                     <div>
                                         <Link to="/home">
-                                            <button>COME HOME</button>
+                                            <button>GO HOME</button>
                                         </Link>
                                     </div>
                                 </div>

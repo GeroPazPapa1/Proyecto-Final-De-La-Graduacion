@@ -81,7 +81,7 @@
   padding: 0 0 20px 0;
   text-align: center;
   transition: transform 0.2s ease-in-out;
-  height: 350px;
+  height: 400px;
   width: 250px;
   margin: 20px;
   border-radius: 10px;
@@ -108,14 +108,15 @@
 
 .country {
   font-family: "Nunito Sans", sans-serif;
+  margin-right: 10px;
   font-size: 14px;
   color: #cfc8bf;
-  margin-bottom: 5px;
 }
 
 .fullS {
   font-family: "Inter", sans-serif;
   font-size: 13px;
+  margin-top: 10px;
 }
 
 .students {
@@ -134,4 +135,27 @@
 
 .students img {
   width: 100px;
+}
+
+.containerCount {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  }
+
+.countryI {
+  width: 20px
+}
+
+.redes {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 18px;
+}
+
+.redes img {
+  width: 23px;
+  margin-right: 10px;
+  cursor: pointer;
 }
