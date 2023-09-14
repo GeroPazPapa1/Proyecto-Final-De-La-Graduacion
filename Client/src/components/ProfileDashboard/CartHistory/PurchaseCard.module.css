@@ -1,0 +1,28 @@
+.mainContainer{
+    margin-bottom: 2em;
+    margin-top: 2em;
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1px white solid;
+}
+.flexContainer{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.descriptionContainer{
+    height: auto;
+    width: 30%; 
+    margin-bottom: 2em;
+    
+}
+.priceContainer{
+    height: auto;
+    width: 20%; 
+    margin-bottom: 2em
+}
+.dateContainer{
+    height: auto;
+    width: 20%; 
+    margin-bottom: 2em
+}

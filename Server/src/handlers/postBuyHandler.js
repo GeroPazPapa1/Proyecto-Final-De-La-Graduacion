@@ -8,7 +8,7 @@ const postBuyHandler = async (req, res) => {
     console.log(description);
     const descriptionArray = JSON.parse(description);
     const totalDescription = descriptionArray.join(", ");
-    const finalDescription = `Quantity total: ${amount}, Purshased items: ${totalDescription}`;
+    const finalDescription = `Total quantity: ${amount}, Purshased items: ${totalDescription}`;
     postBuyController({ userId, carsId, amount, finalDescription, price });
     return res.status(200).json({ status: "Purchase stored successfully." });
   } catch (error) {
