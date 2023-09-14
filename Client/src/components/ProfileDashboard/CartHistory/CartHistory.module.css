@@ -1,0 +1,22 @@
+.carthistory {}
+
+.container_bought {
+    display: grid;
+    gap: 3rem;
+    margin: 1rem;
+}
+
+.new_buy {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    background-color: var(--colorBlanco);
+    padding: 1rem;
+}
+
+.bought{
+    font-family: var(--fontNunito);
+}
+
+.bought_img{
+    width: 200px;
+}

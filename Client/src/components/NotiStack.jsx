@@ -141,3 +141,22 @@ export const logOut = () => {
         }
     });
 }
+export const modificationUserSuccess = () => {
+    enqueueSnackbar('Your account has been successfully modified!', {
+        variant: 'success',
+        anchorOrigin: {
+            vertical: 'top',
+            horizontal: 'right',
+        }
+    });
+}
+
+export const deleteUserSuccess = () => {
+    enqueueSnackbar('Your account has been successfully deleted!', {
+        variant: 'success',
+        anchorOrigin: {
+            vertical: 'top',
+            horizontal: 'right',
+        }
+    });
+}

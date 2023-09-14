@@ -3,14 +3,20 @@ import LOGO from "./Icons/LOGO.svg";
 import CART from "./Icons/CART.svg";
 import styles from "./NavBar.module.css";
 import { Link, useLocation } from "react-router-dom";
+import { useState, useEffect } from "react";
+import axios from "axios";
 import { logOut } from '../NotiStack'
 
 export default function NavBar() {
   const location = useLocation();
-  
+  const [user, setUser] = useState([]);
   const loggedUserJson = localStorage.getItem("authToken");
   const loggedUser = loggedUserJson ? JSON.parse(loggedUserJson) : null;
-  
+
+  const handleLogout = () => {
+    localStorage.clear();
+  };
+
   if (location.pathname.startsWith("/admin")) {
     return null;
   }
@@ -19,6 +25,18 @@ export default function NavBar() {
     localStorage.clear();
     logOut();
   };
+
+  useEffect(() => {
+    const userInfoFn = async () => {
+      try {
+        const { data } = await axios.get(`http://localhost:3001/user/${loggedUser.response.id}`);
+        setUser(data);
+      } catch (error) {
+        console.log(`The request could not be completed because of the following error: ${error.message}`);
+      }
+    }
+    userInfoFn();
+  }, []);
 
   return (
     <div className={styles.container}>
@@ -46,7 +64,9 @@ export default function NavBar() {
                   <button>Dashboard</button>
                 </Link>
               )}
+              <Link to="/">
               <button onClick={handleLogout}>Logout</button>
+              </Link>
             </>
           )}
         </div>
@@ -68,15 +88,16 @@ export default function NavBar() {
             <div className={styles.containerL}>
               {loggedUser && (
                 <>
-                  <span>{loggedUser.email}</span>
+                  <img src={user.image} alt="" className={styles.iconImage} />
+                  <span className={styles.name}>{user.name}</span>
                   {loggedUser.response?.type === "admin" && (
                     <Link to={"/admin/dashboard"}>
                       <button>Dashboard</button>
                     </Link>
                   )}
-                  <Link to={"/modification"}>
+                  <Link to={"/profileSettings"}>
                     <button className={styles.button} id={loggedUser.id}>
-                      Modification
+                    Edit Profile
                     </button>
                   </Link>
                   <Link to={"/"}>
@@ -126,9 +147,9 @@ export default function NavBar() {
                       <button>Dashboard</button>
                     </Link>
                   )}
-                  <Link to={"/modification"}>
+                  <Link to={"/profileSettings"}>
                     <button className={styles.button} id={loggedUser.id}>
-                      Modification
+                    Edit Profile
                     </button>
                   </Link>
                   <Link to={"/"}>
@@ -166,7 +187,7 @@ export default function NavBar() {
             </div>
           </div>
           <div>
-          <div className={styles.containerL}>
+            <div className={styles.containerL}>
               {loggedUser && (
                 <>
                   <span>{loggedUser.email}</span>
@@ -175,9 +196,10 @@ export default function NavBar() {
                       <button>Dashboard</button>
                     </Link>
                   )}
-                  <Link to={"/modification"}>
+                  <Link to={"/profileSettings"}>
                     <button className={styles.button} id={loggedUser.id}>
-                      Modification
+                    Edit Profile
+                      My profile
                     </button>
                   </Link>
                   <Link to={"/"}>
@@ -202,7 +224,7 @@ export default function NavBar() {
               </Link>
             </div>
           </div>
-            </>
+        </>
       )}
       {location.pathname === "/login" ||
         (location.pathname === "/register" && null)}

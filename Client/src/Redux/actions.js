@@ -8,6 +8,13 @@ export const addToCart = (product) => {
   };
 };
 
+export const addBoughtToHistory = (cartProducts) => {
+  return {
+    type: 'ADD_BUY_TO_HISTORY',
+    payload: cartProducts,
+  }
+}
+
 export const addToFav = (product) => {
   return {
     type: "ADD_TO_FAV",

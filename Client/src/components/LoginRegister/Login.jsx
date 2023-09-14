@@ -143,7 +143,7 @@ export default function Login() {
           const { status } = error.response;
           if (status === 400) {
             return Banned();
-          } 
+          }
         }
         WrongEmailPassword();
       }

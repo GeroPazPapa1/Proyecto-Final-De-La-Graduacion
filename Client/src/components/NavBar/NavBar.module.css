@@ -52,3 +52,20 @@
 .button:hover {
     border-bottom-color: black;
 }
+
+.name {
+    border: none;
+    background-color: transparent;
+    font-family: 'Inter', sans-serif;
+    font-size: 17px;
+    margin: 0 13px;
+    border-bottom: 2px solid transparent;
+    transition: border-bottom-color 0.3 ease;
+}
+
+.iconImage {
+    margin-left: 15px;
+    width: 30px;
+    height: auto;
+    border-radius: 50%;
+}

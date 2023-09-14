@@ -8,6 +8,8 @@ const initialState = {
   userType: "",
   pageFiltered: [],
   pageFilteredDb: [],
+  cartHistory: [],
+
   queryParams: {
     name: "",
     state: "",
@@ -56,7 +58,11 @@ function rootReducer(state = initialState, action) {
         ...state,
         cartList: [...state.cartList, action.payload],
       };
-
+    case "ADD_BUY_TO_HISTORY":
+      return {
+        ...state,
+        cartHistory: [...state.cartHistory, action.payload],
+      };
     case "ADD_TO_FAV":
       const isProductInFav = state.favorites.some(
         (product) => product.name === action.payload.name
@@ -184,8 +190,8 @@ function rootReducer(state = initialState, action) {
         filteredsDashboard: {
           ...state.filteredsDashboard,
           emailsFiltereds: action.payload,
-        }
-      }
+        },
+      };
 
     case "GET_ALL_COLORS":
       return {
@@ -271,7 +277,7 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         pageFilteredDb: filteredData2,
-      }
+      };
 
     case "SET_USER_ID":
       return {

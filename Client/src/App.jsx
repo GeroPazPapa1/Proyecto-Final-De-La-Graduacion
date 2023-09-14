@@ -12,7 +12,7 @@ import Detail from "./components/Home/Detail/Detail";
 import Favorites from "./components/Favorites/Favorites";
 import Dashboard from "./components/Dashboard/Dashboard";
 import Modification from "./components/Modification/Modification";
-import ProfileDashboard from "./components/Profile/ProfileDashboard";
+import ProfileDashboard from "./components/ProfileDashboard/ProfileDashboard.jsx";
 
 function App() {
   return (
@@ -29,7 +29,7 @@ function App() {
         <Route path="/favorites" element={<Favorites />} />
         <Route path="/profile" element={<ProfileDashboard />} />
         <Route path="/admin/dashboard" element={<Dashboard />} />
-        <Route path="/modification" element={<Modification />} />
+        <Route path="/profileSettings" element={<Modification />} />
       </Routes>
       <Footer />
     </>
