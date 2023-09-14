@@ -13,12 +13,12 @@ const UserImage = () => {
 
   const handleImageUpload = async (selectedFile) => {
     if (!selectedFile) {
-      setError("Por favor, seleccione una imagen.");
+      setError("please select an image");
       return;
     }
 
     if (!selectedFile.type.startsWith("image/")) {
-      setError("El archivo seleccionado no es una imagen vÃ¡lida.");
+      setError("The selected file is not a valid image");
       return;
     }
 
@@ -43,12 +43,12 @@ const UserImage = () => {
       const response = await axios.post(cloudinaryUploadUrl, formData);
       if (response.status === 200) {
         setImageUrl(response.data.secure_url);
-        setError("Imagen subida con existo");
+        setError("Image uploaded successfully");
         localStorage.setItem("userImage", response.data.secure_url);
         const { data } = await axios.put(`http://localhost:3001/user/${userId}`, {image: response.data.secure_url});
       }
     } catch (error) {
-      setError("Error al subir la imagen a Cloudinary");
+      setError("Error uploading image to Cloudinary");
     }
   };
 

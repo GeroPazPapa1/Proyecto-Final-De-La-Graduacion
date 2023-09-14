@@ -86,7 +86,7 @@ export default function NavBar() {
                   <span className={styles.name}>{user.name}</span>
                   {loggedUser.response?.type === "admin" && (
                     <Link to={"/admin/dashboard"}>
-                      <button>Dashboard</button>
+                      <button className={styles.button}>Dashboard</button>
                     </Link>
                   )}
                   <Link to={"/profileSettings"}>
