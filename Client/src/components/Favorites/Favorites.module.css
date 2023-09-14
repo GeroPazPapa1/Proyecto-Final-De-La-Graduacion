@@ -1,7 +1,7 @@
 .container {
   display: flex;
-  flex-direction: row;
-  align-items: center; /* Centrar horizontalmente */
+  flex-wrap: wrap; /* Permite que los elementos se envuelvan en varias líneas */
+  justify-content: center; /* Centra horizontalmente los elementos */
   margin: 15px;
   gap: 20px;
   background-color: rgba(0, 0, 0, 0.23);
@@ -24,6 +24,7 @@
 }
 
 .card {
+  flex: 1 1 300px; /* Permite que las tarjetas tengan un ancho fijo y se ajusten al ancho del contenedor */
   border-radius: 10px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
   transition: box-shadow 0.3s ease-in-out;
