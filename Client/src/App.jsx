@@ -29,7 +29,7 @@ function App() {
         <Route path="/favorites" element={<Favorites />} />
         <Route path="/profile" element={<ProfileDashboard />} />
         <Route path="/admin/dashboard" element={<Dashboard />} />
-        <Route path="/modification" element={<Modification />} />
+        <Route path="/profileSettings" element={<Modification />} />
       </Routes>
       <Footer />
     </>

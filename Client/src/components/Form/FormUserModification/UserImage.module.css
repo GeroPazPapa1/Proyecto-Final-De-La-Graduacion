@@ -1,0 +1,17 @@
+.buttonImage {
+  cursor: pointer;
+  padding: 0.3rem;
+  border: none;
+  border-radius: 3px;
+  margin-top: 10px;
+  font-family: var(--fontNunito);
+  font-weight: bold;
+}
+
+.buttonImage:hover {
+  background-color: var(--colorGrisClaro);
+}
+
+.buttonImage:hover {
+  border-bottom-color: black;
+}
