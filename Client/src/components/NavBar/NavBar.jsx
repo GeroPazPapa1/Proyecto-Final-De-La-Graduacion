@@ -8,15 +8,15 @@ export default function NavBar() {
   const location = useLocation();
 
   const loggedUserJson = localStorage.getItem("authToken");
-  const loggedUser = loggedUserJson ? loggedUserJson : null;
-
-  if (location.pathname.startsWith("/admin")) {
-    return null;
-  }
+  const loggedUser = loggedUserJson ? JSON.parse(loggedUserJson) : null;
 
   const handleLogout = () => {
     localStorage.clear();
   };
+
+  if (location.pathname.startsWith("/admin")) {
+    return null;
+  }
 
   return (
     <div className={styles.container}>
@@ -87,6 +87,7 @@ export default function NavBar() {
               )}
               {!loggedUser && (
                 <>
+
                   <Link to={"/login"}>
                     <button className={styles.button}>Log in</button>
                   </Link>

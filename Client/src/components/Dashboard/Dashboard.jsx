@@ -29,28 +29,28 @@ export default function Dashboard() {
 
     useEffect(() => {
         const handleChargedUsers = async () => {
-          if (
-            location.pathname === "/admin/dashboard" &&
-            loggedUser &&
-            loggedUser.response &&
-            loggedUser.response.type === "admin"
-          ) {
-            // Verifica si los usuarios ya están cargados o no
-            if (!usersLoaded) {
-              try {
-                // Realiza la solicitud y carga los usuarios
-                await dispatch(usersLoadedTrue());
-                await dispatch(getDashboard(loggedUser));
-              } catch (error) {
-                console.error("Error al obtener los usuarios:", error);
-              }
+            if (
+                location.pathname === "/admin/dashboard" &&
+                loggedUser &&
+                loggedUser.response &&
+                loggedUser.response.type === "admin"
+            ) {
+                // Verifica si los usuarios ya están cargados o no
+                if (!usersLoaded) {
+                    try {
+                        // Realiza la solicitud y carga los usuarios
+                        await dispatch(usersLoadedTrue());
+                        await dispatch(getDashboard(loggedUser));
+                    } catch (error) {
+                        console.error("Error al obtener los usuarios:", error);
+                    }
+                }
             }
-          }
         };
-      
+
         handleChargedUsers(); // Llama a la función para cargar los usuarios
-      }, [dispatch, location.pathname, loggedUser, usersLoaded]);
-      
+    }, [dispatch, location.pathname, loggedUser, usersLoaded]);
+
     return (
         <div>
             {location.pathname === "/admin/dashboard" && (
@@ -65,45 +65,45 @@ export default function Dashboard() {
                     ) : loggedUser.response.type === "admin" ? (
                         // Aquí puedes agregar el contenido que se mostrará para los usuarios admin
                         <>
-                        <div className={styles.containerP}>
-                            <div className={styles.containerLeft}>
-                                <div className={styles.adminTools}>
-                                    <h2>Admin <br />Tools</h2>
-                                    <img className={styles.img} src={SETTING} alt="Setting..." />
-                                </div>
-                                <div>
-                                    <>
-                                        <button onClick={() => handleTabChange("USERS")}>USERS</button>
-                                        <button onClick={() => handleTabChange("SALES")}>SALES</button>
-                                        <Link to={"/home"}>
-                                            <button>HOME</button>
-                                        </Link>
-                                        <Link to={"/login"}>
-                                            <button onClick={handleLogout}>LOGOUT</button>
-                                        </Link>
-                                    </>
-                                </div>
-                            </div>
-                            <div className={styles.containerRight}>
-                                <div className={styles.stateUp}>
-                                    <h2>{selectedTab}</h2>
-                                </div>
-                                <div className={styles.hello}>
-                                    <h2>DashBoard</h2>
-                                </div>
-                                <div>
-                                    <SearchBarDashboard/>
-                                    <Filters/>
-                                </div>
-                                <div>{selectedTab === "USERS" && (
-                                    <div className={styles.DashboardUser}>
-                                        <DashBoardEmail/>
+                            <div className={styles.containerP}>
+                                <div className={styles.containerLeft}>
+                                    <div className={styles.adminTools}>
+                                        <h2>Admin <br />Tools</h2>
+                                        <img className={styles.img} src={SETTING} alt="Setting..." />
                                     </div>
-                                )
+                                    <div>
+                                        <>
+                                            <button onClick={() => handleTabChange("USERS")}>USERS</button>
+                                            <button onClick={() => handleTabChange("SALES")}>SALES</button>
+                                            <Link to={"/home"}>
+                                                <button>HOME</button>
+                                            </Link>
+                                            <Link to={"/login"}>
+                                                <button onClick={handleLogout}>LOGOUT</button>
+                                            </Link>
+                                        </>
+                                    </div>
+                                </div>
+                                <div className={styles.containerRight}>
+                                    <div className={styles.stateUp}>
+                                        <h2>{selectedTab}</h2>
+                                    </div>
+                                    <div className={styles.hello}>
+                                        <h2>DashBoard</h2>
+                                    </div>
+                                    <div>
+                                        <SearchBarDashboard />
+                                        <Filters />
+                                    </div>
+                                    <div>{selectedTab === "USERS" && (
+                                        <div className={styles.DashboardUser}>
+                                            <DashBoardEmail />
+                                        </div>
+                                    )
                                     }
+                                    </div>
                                 </div>
                             </div>
-                        </div>
                         </>
                     ) : (
                         // Agrega el contenido que se mostrará para los usuarios no admin aquí

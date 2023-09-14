@@ -11,6 +11,10 @@
     margin: 0;
 }
 
+.button {
+    color: white
+}
+
 .containerSecond p {
     font-family: 'Nunito Sans', sans-serif;
     color: white;

@@ -13,11 +13,12 @@ export default function Favorites() {
 
   return (
     <div>
+      <div className={style.coverImage}></div>
       <Link to={"/home"}>
         <ButtonBack />
       </Link>
       <h2 className={`${style.favorites_title} ${style.title}`}>
-        Tus Favoritos
+        Your Favorites
       </h2>
       <div className={style.container}>
         {favorites?.map((char) => (

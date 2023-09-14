@@ -20,46 +20,47 @@ export default function DashBoardEmail() {
     const aux = selectedEmailObjects.length;
     console.log(aux, "soy aux");
     console.log(emailSelection, "soy el DashboardEmail");
-    
+
     const handleCheckboxActionEdit = async () => {
-                Swal.fire({
-                    title: "Select options",
-                    icon: "question",
-                    html: '<select id="select-status" class="swal2-select">' +
-                        '<option value="admin">Admin</option>' +
-                        '<option value="user">User</option>' +
-                        '</select>' +
-                        '<select id="select-ban" class="swal2-select">' +
-                        '<option value=true>Banned</option>' +
-                        '<option value=false>Not Banned</option>' +
-                        '</select>',
-                    showCancelButton: true,
-                    confirmButtonText: "Accept",
-                    cancelButtonText: "Cancel",
-                    preConfirm: () => {
-                        const selectedStatus = document.getElementById('select-status').value;
-                        const selectedBan = document.getElementById('select-ban').value;
-                        return {
-                            type: selectedStatus,
-                            ban: selectedBan
-                        };
-                    }
-                }).then(async (result) => {
-                    if (result.isConfirmed) {
-                        const { type, ban } = result.value;
-                        // Aquí puedes utilizar los valores seleccionados (type y ban) como desees
-                        console.log("Type seleccionado:", status);
-                        console.log("Ban seleccionado:", ban);
-                        for (const id in emailSelection) {
-                        await dispatch(editPutUser(id, type, ban));}
-                        await dispatch(getDashboard());
-                        await dispatch(applyFilterDb("originEmails"));
-                    }
-                });
-            };
+        Swal.fire({
+            title: "Select options",
+            icon: "question",
+            html: '<select id="select-status" class="swal2-select">' +
+                '<option value="admin">Admin</option>' +
+                '<option value="user">User</option>' +
+                '</select>' +
+                '<select id="select-ban" class="swal2-select">' +
+                '<option value=true>Banned</option>' +
+                '<option value=false>Not Banned</option>' +
+                '</select>',
+            showCancelButton: true,
+            confirmButtonText: "Accept",
+            cancelButtonText: "Cancel",
+            preConfirm: () => {
+                const selectedStatus = document.getElementById('select-status').value;
+                const selectedBan = document.getElementById('select-ban').value;
+                return {
+                    type: selectedStatus,
+                    ban: selectedBan
+                };
+            }
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                const { type, ban } = result.value;
+                // Aquí puedes utilizar los valores seleccionados (type y ban) como desees
+                console.log("Type seleccionado:", status);
+                console.log("Ban seleccionado:", ban);
+                for (const id in emailSelection) {
+                    await dispatch(editPutUser(id, type, ban));
+                }
+                await dispatch(getDashboard());
+                await dispatch(applyFilterDb("originEmails"));
+            }
+        });
+    };
 
     const handleCheckboxActionDelete = async () => {
-            Swal.fire({
+        Swal.fire({
             title: "¿Are you sure?",
             text: `You are about to delete ${name} from the database`,
             icon: "warning",
@@ -69,7 +70,8 @@ export default function DashBoardEmail() {
         }).then((result) => {
             if (result.isConfirmed) {
                 for (const id in emailSelection) {
-                dispatch(deleteUserWithID(id));}
+                    dispatch(deleteUserWithID(id));
+                }
                 dispatch(applyFilterDb("originEmails"));
             }
         });
@@ -78,10 +80,10 @@ export default function DashBoardEmail() {
     const handleCheckboxChange = (id) => {
         // Actualiza el estado de selección cuando se cambia el checkbox
         setEmailSelection((prevState) => ({
-          ...prevState,
-          [id]: !prevState[id],
+            ...prevState,
+            [id]: !prevState[id],
         }));
-      };
+    };
 
     useEffect(() => {
         if (!EmailsLoaded) {
@@ -98,13 +100,13 @@ export default function DashBoardEmail() {
             {aux >= 2 ? (
                 <div>
                     <button className={styles.edit} onClick={handleCheckboxActionEdit}>
-                       <img className={styles.img} src={EDIT} alt="Icon..." title="Editar usuario" />
+                        <img className={styles.img} src={EDIT} alt="Icon..." title="Editar usuario" />
                     </button>
                     <button className={styles.delete} onClick={handleCheckboxActionDelete}>
-                       <img className={styles.img} src={TRASH} alt="Icon..." title="Eliminar usuario" />
+                        <img className={styles.img} src={TRASH} alt="Icon..." title="Eliminar usuario" />
                     </button>
                 </div>
-) : null}
+            ) : null}
             <div className={styles.emailContainer}>
                 <div className={styles.emailItem}>Email</div>
                 <div className={styles.emailItem}>Full Name</div>
@@ -123,11 +125,7 @@ export default function DashBoardEmail() {
                         email={email.email}
                         country={email.country}
                         status={email.status}
-                        verify={email.verify}
-                        ban={email.ban} 
-                        isChecked={emailSelection[email.id] || false}
-                        onCheckboxChange={handleCheckboxChange}
-                        />
+                        verify={email.verify} />
                 ))
                 }
             </div>

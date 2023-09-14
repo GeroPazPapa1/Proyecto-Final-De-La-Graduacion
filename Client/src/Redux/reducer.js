@@ -58,11 +58,6 @@ function rootReducer(state = initialState, action) {
         ...state,
         cartList: [...state.cartList, action.payload],
       };
-    case "ADD_BUY_TO_HISTORY":
-      return {
-        ...state,
-        purchaseHistory: [...state.purchaseHistory, action.payload],
-      };
     case "ADD_TO_FAV":
       const isProductInFav = state.favorites.some(
         (product) => product.name === action.payload.name
@@ -284,19 +279,16 @@ function rootReducer(state = initialState, action) {
         ...state,
         userId: action.payload,
       };
-
     case "SET_USER_TYPE":
       return {
         ...state,
         userType: action.payload,
       };
-
     case "GET_DETAIL":
       return {
         ...state,
         detail: action.payload,
       };
-
     case "RESET_DETAIL":
       return {
         ...state,

@@ -19,6 +19,10 @@ export default function Home() {
 
   return (
     <div className={styles.container}>
+      <div className={styles.coverImage}></div>
+      <nav>
+        {/* Código para la barra de navegación */}
+      </nav>
       <Search />
       <div className={styles.container2}>
         <Filters />

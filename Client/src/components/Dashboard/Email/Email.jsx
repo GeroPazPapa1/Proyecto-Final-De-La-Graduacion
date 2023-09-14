@@ -23,7 +23,7 @@ export default function Email(props) {
     //   };
 
     const handleDeletedEmail = async (id) => {
-            Swal.fire({
+        Swal.fire({
             title: "¿Are you sure?",
             text: `You are about to delete ${name} from the database`,
             icon: "warning",
@@ -37,7 +37,7 @@ export default function Email(props) {
             }
         });
     };
-    
+
     const handlePutEmail = (id) => {
         Swal.fire({
             title: "Select options",
@@ -76,10 +76,10 @@ export default function Email(props) {
 
     return (
         <div className={styles.emailContainer}>
-            <input 
-            type="checkbox" 
-            checked={isChecked}
-            onChange={() => onCheckboxChange(id)}>
+            <input
+                type="checkbox"
+                checked={isChecked}
+                onChange={() => onCheckboxChange(id)}>
             </input>
             <div className={styles.emailItem}>{email}</div>
             <div className={styles.emailItem}>{name}</div>

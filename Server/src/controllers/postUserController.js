@@ -40,9 +40,8 @@ const postUserController = async (dataUserBody) => {
       status,
     },
   });
-  console.log([user, created]);
   if (created) {
-    const token = jsonwebtoken.sign({ email }, "SECRET_KEY", {
+    const token = jsonwebtoken.sign({ email }, SECRET_KEY, {
       expiresIn: "24h",
     });
 

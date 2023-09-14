@@ -8,13 +8,6 @@ export const addToCart = (product) => {
   };
 };
 
-export const addBoughtToHistory = (cartProducts) => {
-  return {
-    type: 'ADD_BUY_TO_HISTORY',
-    payload: cartProducts,
-  }
-}
-
 export const addToFav = (product) => {
   return {
     type: "ADD_TO_FAV",
@@ -198,11 +191,13 @@ export const locationByQuery = () => {
   };
 };
 
-export const getDashboard = () => {
+export const getDashboard = (loggedUser) => {
   const endpoint = "http://localhost:3001/user/dashboard/users";
+  const config = loggedUser;
   return async (dispatch) => {
     try {
-      const { data } = await axios(endpoint);
+      const { data } = await axios(endpoint, config);
+      console.log(data)
       return dispatch({
         type: "GET_ALL_USERS",
         payload: data,
