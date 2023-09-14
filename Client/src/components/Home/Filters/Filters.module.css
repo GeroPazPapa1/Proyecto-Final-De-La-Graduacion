@@ -12,8 +12,8 @@
 
 .buttonCF {
     font-family: 'Nunito Sans', sans-serif;
-    border: 1px solid #bdac9b;
-    background-color: #bdac9b;
+    border: 1px solid #bbb3ab;
+    background-color: #ddd4d4;
     color: white;
     padding: 8px 20px;
     margin-top: 0px;
@@ -25,8 +25,8 @@
 
 .buttonCF:hover {
     background-color: transparent;
-    color: #bdac9b;
-    border: 1px solid #bdac9b;
+    color: #bbb3ab;
+    border: 1px solid #bbb3ab;
 }
 
 .column h3 {
@@ -83,7 +83,7 @@
     background-color: transparent;
     border: none;
     font-family: 'Nunito Sans', sans-serif;
-    color: #95887c;
+    color: #bbb3ab;
     margin-top: 7px;
 }
 

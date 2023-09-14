@@ -86,6 +86,9 @@ export default function NavBar() {
               )}
               {!loggedUser && (
                 <>
+                  <Link to={"/termsAndConditions"}>
+                    <button className={styles.button}>TermsAndConditions</button>
+                  </Link>
                   <Link to={"/login"}>
                     <button className={styles.button}>Log in</button>
                   </Link>
