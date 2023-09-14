@@ -132,3 +132,12 @@ export const Banned = () => {
         }
     });
 }
+export const logOut = () => {
+    enqueueSnackbar('You logged out successfully', {
+        variant: "info",
+        anchorOrigin: {
+            vertical: 'top',
+            horizontal: 'right',
+        }
+    });
+}

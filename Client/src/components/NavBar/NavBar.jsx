@@ -3,6 +3,7 @@ import LOGO from "./Icons/LOGO.svg";
 import CART from "./Icons/CART.svg";
 import styles from "./NavBar.module.css";
 import { Link, useLocation } from "react-router-dom";
+import { logOut } from '../NotiStack'
 
 export default function NavBar() {
   const location = useLocation();
@@ -16,6 +17,7 @@ export default function NavBar() {
   
   const handleLogout = () => {
     localStorage.clear();
+    logOut();
   };
 
   return (
@@ -77,7 +79,7 @@ export default function NavBar() {
                       Modification
                     </button>
                   </Link>
-                  <Link to={"/home"}>
+                  <Link to={"/"}>
                     <button onClick={handleLogout} className={styles.button}>
                       Log out
                     </button>
@@ -129,7 +131,7 @@ export default function NavBar() {
                       Modification
                     </button>
                   </Link>
-                  <Link to={"/home"}>
+                  <Link to={"/"}>
                     <button onClick={handleLogout} className={styles.button}>
                       Log out
                     </button>
@@ -178,7 +180,7 @@ export default function NavBar() {
                       Modification
                     </button>
                   </Link>
-                  <Link to={"/home"}>
+                  <Link to={"/"}>
                     <button onClick={handleLogout} className={styles.button}>
                       Log out
                     </button>

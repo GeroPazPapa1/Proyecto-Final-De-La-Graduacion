@@ -6,7 +6,9 @@ import styles from "./Dashboard.module.css";
 import SETTING from "./Icons/SETTING.svg";
 import DashBoardEmail from "./Emails/Emails";
 import SearchBarDashboard from "./SearchBar/SearchBar";
+import { logOut } from "../NotiStack";
 import Filters from "./Filters/Filters";
+import DashBoardProducts from "./Products/Products"
 
 export default function Dashboard() {
     const [selectedTab, setSelectedTab] = useState("USERS");
@@ -25,6 +27,7 @@ export default function Dashboard() {
 
     const handleLogout = () => {
         localStorage.clear();
+        logOut();
     };
 
     useEffect(() => {
@@ -75,10 +78,11 @@ export default function Dashboard() {
                                     <>
                                         <button onClick={() => handleTabChange("USERS")}>USERS</button>
                                         <button onClick={() => handleTabChange("SALES")}>SALES</button>
+                                        <button onClick={() => handleTabChange("PRODUCTS")}>PRODUCTS</button>
                                         <Link to={"/home"}>
                                             <button>HOME</button>
                                         </Link>
-                                        <Link to={"/login"}>
+                                        <Link to={"/"}>
                                             <button onClick={handleLogout}>LOGOUT</button>
                                         </Link>
                                     </>
@@ -93,11 +97,17 @@ export default function Dashboard() {
                                 </div>
                                 <div>
                                     <SearchBarDashboard/>
-                                    <Filters/>
                                 </div>
                                 <div>{selectedTab === "USERS" && (
                                     <div className={styles.DashboardUser}>
                                         <DashBoardEmail/>
+                                    </div>
+                                )
+                                    }
+                                </div>
+                                <div>{selectedTab === "PRODUCTS" && (
+                                    <div className={styles.DashboardUser}>
+                                        <DashBoardProducts/>
                                     </div>
                                 )
                                     }

@@ -6,6 +6,7 @@ import { applyFilterDb, deleteUserWithID, editPutUser, getDashboard } from "../.
 import EDIT from "../Email/Icons/EDIT.svg";
 import TRASH from "../Email/Icons/TRASH.svg";
 import Swal from "sweetalert2";
+import Filters from "../Filters/Filters";
 
 export default function DashBoardEmail() {
 
@@ -13,14 +14,13 @@ export default function DashBoardEmail() {
     const EmailsLoaded = useSelector((state) => state.EmailsLoaded);
     const dispatch = useDispatch();
     const [emailSelection, setEmailSelection] = useState([]);
+    const [selectAll, setSelectAll] = useState(false);
     const selectedEmails = Object.keys(emailSelection).filter((key) => emailSelection[key]);
     const selectedEmailObjects = selectedEmails.map((emailId) => {
         return { id: emailId };
     });
     const aux = selectedEmailObjects.length;
-    console.log(aux, "soy aux");
-    console.log(emailSelection, "soy el DashboardEmail");
-    
+
     const handleCheckboxActionEdit = async () => {
                 Swal.fire({
                     title: "Select options",
@@ -83,6 +83,20 @@ export default function DashBoardEmail() {
         }));
       };
 
+      const handleSelectAllChange = () => {
+          setSelectAll(!selectAll);
+          pageFilteredDb.forEach((email) => {
+            console.log(email.id, "emailid en checkbox");
+        
+            setEmailSelection((prevState) => ({
+              ...prevState,
+              [email.id]: !selectAll,
+            }));
+          });
+            
+              
+      };
+
     useEffect(() => {
         if (!EmailsLoaded) {
             const handleChangeEmails = async () => {
@@ -95,17 +109,22 @@ export default function DashBoardEmail() {
 
     return (
         <div>
-            {aux >= 2 ? (
-                <div>
-                    <button className={styles.edit} onClick={handleCheckboxActionEdit}>
-                       <img className={styles.img} src={EDIT} alt="Icon..." title="Editar usuario" />
-                    </button>
-                    <button className={styles.delete} onClick={handleCheckboxActionDelete}>
+                <div className={styles.filtersEdit}>
+                    <Filters/>
+                    <button className={aux<2 ? styles.deleteDisabled : styles.delete} onClick={handleCheckboxActionDelete} disabled={aux<2}>
                        <img className={styles.img} src={TRASH} alt="Icon..." title="Eliminar usuario" />
                     </button>
+                    <button className={aux<2 ? styles.editDisabled : styles.edit} onClick={handleCheckboxActionEdit} disabled={aux<2}>
+                       <img className={styles.img} src={EDIT} alt="Icon..." title="Editar usuario" />
+                    </button>
                 </div>
-) : null}
             <div className={styles.emailContainer}>
+                <input 
+                type="checkbox" 
+                checked={selectAll}
+                onChange= {handleSelectAllChange}
+                >
+                </input>
                 <div className={styles.emailItem}>Email</div>
                 <div className={styles.emailItem}>Full Name</div>
                 <div className={styles.emailItem}>Country</div>

@@ -11,16 +11,11 @@ export default function Email(props) {
     const { id, name, email, country, status, verify, ban, onCheckboxChange, isChecked } = props;
 
     const dispatch = useDispatch();
-    const [checkbox, setCheckbox] = useState({});
 
     const verifyText = verify ? "Yes" : "Not";
     const banText = ban ? "Banned" : "Not";
     const veryClass = verify ? styles.emailItemVerifyYes : styles.emailItemVerifyNot;
     const veryClassB = ban ? styles.emailItemVerifyNot : styles.emailItemVerifyYes;
-
-    // const handleCheckboxChange = () => {
-    //     setCheckbox(!checkbox);
-    //   };
 
     const handleDeletedEmail = async (id) => {
             Swal.fire({
