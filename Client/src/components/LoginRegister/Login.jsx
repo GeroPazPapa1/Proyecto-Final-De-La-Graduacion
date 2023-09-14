@@ -10,10 +10,12 @@ import { OpenEye, ClosedEye, Google } from "./svgs.jsx";
 import { ButtonBack } from "../../assets/svgs";
 import {
   AlreadyAccountWithEmail,
+  Banned,
   PutEmailPassword,
   SignedSuccesfully,
   WrongEmailPassword,
 } from "../NotiStack";
+import { enqueueSnackbar } from "notistack";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -121,7 +123,6 @@ export default function Login() {
           email: input.email,
           password: input.password,
         });
-        console.log(response);
         SignedSuccesfully();
         const userId = response.data.id;
         const userType = response.data.type;
@@ -140,6 +141,12 @@ export default function Login() {
         );
         access && navigate("/home");
       } catch (error) {
+        if (error.response) {
+          const { status } = error.response;
+          if (status === 400) {
+            return Banned();
+          }
+        }
         WrongEmailPassword();
       }
       setInput({
@@ -158,6 +165,7 @@ export default function Login() {
   useEffect(() => {
     !access && navigate("/login");
   }, [access]);
+
   useEffect(() => {
     const loggedUserJson = localStorage.getItem("authToken");
     const user = JSON.parse(loggedUserJson);
@@ -169,6 +177,7 @@ export default function Login() {
       // access && navigate("/home");
     }
   }, []);
+
   return (
     <div className={styles.login}>
       <Link to={"/home"}>

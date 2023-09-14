@@ -10,13 +10,13 @@ export default function NavBar() {
   const loggedUserJson = localStorage.getItem("authToken");
   const loggedUser = loggedUserJson ? loggedUserJson : null;
 
-  const handleLogout = () => {
-    localStorage.clear();
-  };
-
   if (location.pathname.startsWith("/admin")) {
     return null;
   }
+
+  const handleLogout = () => {
+    localStorage.clear();
+  };
 
   return (
     <div className={styles.container}>
@@ -165,7 +165,7 @@ export default function NavBar() {
             </div>
           </div>
           <div>
-          <div className={styles.containerL}>
+            <div className={styles.containerL}>
               {loggedUser && (
                 <>
                   <span>{loggedUser.email}</span>
@@ -176,7 +176,7 @@ export default function NavBar() {
                   )}
                   <Link to={"/modification"}>
                     <button className={styles.button} id={loggedUser.id}>
-                      Modification
+                      My profile
                     </button>
                   </Link>
                   <Link to={"/home"}>
@@ -201,7 +201,7 @@ export default function NavBar() {
               </Link>
             </div>
           </div>
-            </>
+        </>
       )}
       {location.pathname === "/login" ||
         (location.pathname === "/register" && null)}
