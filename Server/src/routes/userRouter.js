@@ -11,7 +11,6 @@ const { checkUserRole } = require("../handlers/CheckUserRole");
 const { getUsersInDashboard } = require("../controllers/getUsersInDashboard");
 const { getUserbyEmailHandler } = require("../handlers/getUserbyEmailHandler");
 const { getUserbyIdHandler } = require("../handlers/getUserbyIdHandler");
-const { verifyTokenHandler } = require("../handlers/verifyTokenHandler");
 const { adminDeleteUser } = require("../controllers/adminDeleteUser");
 const { adminInputUser } = require("../controllers/adminPutUser");
 const { getFiltersHandler } = require("../handlers/handlerUserFilter");
