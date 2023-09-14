@@ -9,6 +9,7 @@ const { googleLoginHandler } = require("../handlers/googleLoginHandler");
 const { checkUserRole } = require("../handlers/CheckUserRole");
 const { getUsersInDashboard } = require("../controllers/getUsersInDashboard");
 const { getUserbyEmailHandler } = require("../handlers/getUserbyEmailHandler");
+const { getUserbyIdHandler } = require("../handlers/getUserbyIdHandler");
 const { verifyTokenHandler } = require("../handlers/verifyTokenHandler");
 const router = Router();
 
@@ -18,6 +19,7 @@ router.post("/google", googleLoginHandler);
 router.post("/create", postUserHandler);
 router.delete("/delete/:id", deleteUserHandler);
 router.get("/", getUsersHandler);
+router.get("/:id", getUserbyIdHandler);
 router.post("/", loginHandler);
 router.put("/:id", putUserHandler);
 
