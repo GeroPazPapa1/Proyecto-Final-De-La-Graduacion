@@ -45,7 +45,7 @@ const UserImage = () => {
         setImageUrl(response.data.secure_url);
         setError("Image uploaded successfully");
         localStorage.setItem("userImage", response.data.secure_url);
-        const { data } = await axios.put(`http://localhost:3001/user/${userId}`, {image: response.data.secure_url});
+        const { data } = await axios.put(`/user/${userId}`, {image: response.data.secure_url});
       }
     } catch (error) {
       setError("Error uploading image to Cloudinary");

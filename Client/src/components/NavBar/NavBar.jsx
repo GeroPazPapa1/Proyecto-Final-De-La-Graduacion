@@ -23,9 +23,7 @@ export default function NavBar() {
   useEffect(() => {
     const userInfoFn = async () => {
       try {
-        const { data } = await axios.get(
-          `http://localhost:3001/user/${loggedUser.response.id}`
-        );
+        const { data } = await axios.get(`/user/${loggedUser.response.id}`);
         setUser(data);
       } catch (error) {
         console.log(

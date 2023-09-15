@@ -19,7 +19,7 @@ export default function Home() {
         "purchasedProductsName"
       );
       try {
-        const response = axios.post("http://localhost:3001/buy/create", {
+        const response = axios.post("/buy/create", {
           userId: userId,
           carsId: purshasedCars,
           price: subPrice,

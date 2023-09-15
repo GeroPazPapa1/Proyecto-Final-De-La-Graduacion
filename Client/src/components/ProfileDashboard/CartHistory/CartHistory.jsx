@@ -9,7 +9,7 @@ export default function CartHistory() {
 
   const getPurchasesHandler = async (userId) => {
     try {
-      const endpoint = "http://localhost:3001/buy/getByuser/";
+      const endpoint = "/buy/getByuser/";
       const { data } = await axios.get(`${endpoint}${userId}`);
       setPurchases(data);
     } catch (error) {
