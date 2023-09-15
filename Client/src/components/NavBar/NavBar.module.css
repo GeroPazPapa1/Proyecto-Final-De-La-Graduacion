@@ -1,54 +1,89 @@
+/* Estilos generales de la barra de navegación */
 .container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    align-content: center;
-    margin: 2.5vw 9vw;
-}
-
-.nombrelogo {
-    font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 2.5vw 9vw;
+  flex-wrap: wrap; /* Permite que los elementos se envuelvan en pantallas pequeñas */
 }
 
 .containerLP {
-    display: flex;
-    align-items: center;
-    align-content: center;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap; /* Envuelve los elementos en pantallas pequeñas */
 }
 
 .containerL {
-    display: flex;
-    align-items: center;
-    align-content: center;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap; /* Envuelve los elementos en pantallas pequeñas */
 }
 
 .logo {
-    display: flex;
-    width: 120px;
-    height: auto;
-    padding-right: 60px;
-    cursor: pointer;
-    align-content: center;
+  width: 120px;
+  height: auto;
+  cursor: pointer;
+  margin-right: 15px; /* Espacio entre el logo y otros elementos en pantallas grandes */
 }
 
 .icons {
-    margin-left: 15px;
-    width: 30px;
-    height: auto;
-    cursor: pointer;
+  width: 30px;
+  height: auto;
+  cursor: pointer;
 }
 
 .button {
-    border: none;
-    background-color: transparent;
-    font-family: 'Inter', sans-serif;
-    font-size: 17px;
-    margin: 0 13px;
-    cursor: pointer;
-    border-bottom: 2px solid transparent;
-    transition: border-bottom-color 0.3 ease;
+  border: none;
+  background-color: transparent;
+  font-family: "Inter", sans-serif;
+  font-size: 17px;
+  margin: 0 13px;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: border-bottom-color 0.3s ease;
 }
 
 .button:hover {
-    border-bottom-color: black;
+  border-bottom-color: black;
+}
+
+.menu_button {
+  display: none; /* Oculta el botón en pantallas grandes */
+  border: none;
+  background-color: transparent;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.menu {
+    width: 30px;
+}
+
+/* Estilos para pantallas pequeñas (por ejemplo, dispositivos móviles) */
+@media screen and (max-width: 768px) {
+  .container {
+    align-items: flex-start; /* Alinea los elementos a la izquierda */
+    margin: 2.5vw 0; /* Elimina el margen horizontal en pantallas pequeñas */
+  }
+
+  .navRight {
+    margin: 16px 25px; /* Elimina el margen horizontal en pantallas pequeñas */
+  }
+
+  .logo {
+    margin: 10px 25px;
+  }
+
+  .containerLP,
+  .containerL {
+    flex-direction: column;
+  }
+
+  .button {
+    margin: 5px 0; /* Agrega margen vertical a los botones en pantallas pequeñas */
+  }
+
+  .menu_button {
+    display: block; /* Muestra el botón en pantallas pequeñas */
+  }
 }

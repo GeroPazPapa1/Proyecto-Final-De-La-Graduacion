@@ -7,8 +7,10 @@ import DANIEL from "./IMG/DANIEL.webp";
 import MICHE from "./IMG/MICHE.webp";
 import CRISTIAN from "./IMG/CRISTIAN.webp";
 import JOSE from "./IMG/JOSE.webp";
+import SEBAS from "./IMG/SEBAS.webp";
 import HENRY from "./IMG/HENRY.png";
 import Colombia from "./Countrys/colombia.png";
+import Chile from "./Countrys/Chile.png";
 import Argentina from "./Countrys/argentina.png";
 import GMAIL from "./RedesS/GMAIL.png";
 import LIMKEDIN from "./RedesS/LINKEDIN.svg";
@@ -180,6 +182,30 @@ export default function AboutUs() {
                             <img src={LIMKEDIN} alt="LinkedIn..." />
                         </Link>
                         <Link to={"https://walink.co/b95455"} target="_blank">
+                            <img src={WHATSAPP} alt="WhatsApp..." />
+                        </Link>
+                    </div>
+                </div>
+                <div className={styles.cards}>
+                    <div>
+                        <Link to={"http://www.linkedin.com/in/sebastián-castro-pavez"} target="_blank">
+                            <img className={styles.img} src={SEBAS} alt={SEBAS} />
+                        </Link>
+                    </div>
+                    <div className={styles.name}>Sebastian Castro</div>
+                    <div className={styles.containerCount}>
+                        <div className={styles.country}>Chile</div>
+                        <img className={styles.countryI} src={Chile} alt="Chile ..." />
+                    </div>
+                    <div className={styles.fullS}>Full Stack Developer</div>
+                    <div className={styles.redes}>
+                        <Link to={"mailto:castropavezs@gmail.com"} target="_blank">
+                            <img src={GMAIL} alt="Gmail..." />
+                        </Link>
+                        <Link to={"http://www.linkedin.com/in/sebastián-castro-pavez"} target="_blank">
+                            <img src={LIMKEDIN} alt="LinkedIn..." />
+                        </Link>
+                        <Link to={"https://walink.co/ceae03"} target="_blank">
                             <img src={WHATSAPP} alt="WhatsApp..." />
                         </Link>
                     </div>

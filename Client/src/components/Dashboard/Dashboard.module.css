@@ -65,6 +65,8 @@
 }
 
 .DashboardUser {
+  max-height: 440px;
+  overflow-y: auto;
   margin: 0 2vw;
 }
 
