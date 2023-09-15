@@ -1,8 +1,8 @@
-require('dotenv').config();
+require("dotenv").config();
 const { DB_USER, DB_PASSWORD, DB_HOST, DB_NAME } = process.env;
-const { Sequelize } = require('sequelize');
-const fs = require('fs');
-const path = require('path');
+const { Sequelize } = require("sequelize");
+const fs = require("fs");
+const path = require("path");
 
 const sequelize = new Sequelize(
   `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}`,
@@ -12,39 +12,44 @@ const sequelize = new Sequelize(
 const basename = path.basename(__filename);
 const modelDefiners = [];
 
-fs.readdirSync(path.join(__dirname, 'models'))
-  .filter((file) => file.indexOf('.') !== 0 && file !== basename && file.slice(-3) === '.js')
+// Leemos todos los archivos de la carpeta Models, los requerimos y agregamos al arreglo modelDefiners
+fs.readdirSync(path.join(__dirname, "/models"))
+  .filter(
+    (file) =>
+      file.indexOf(".") !== 0 && file !== basename && file.slice(-3) === ".js"
+  )
   .forEach((file) => {
-    const model = require(path.join(__dirname, 'models', file));
-    modelDefiners.push(model);
+    modelDefiners.push(require(path.join(__dirname, "/models", file)));
   });
 
-try {
-  modelDefiners.forEach((model) => model(sequelize));
+// Injectamos la conexion (sequelize) a todos los modelos
+modelDefiners.forEach((model) => model(sequelize));
+// Capitalizamos los nombres de los modelos ie: product => Product
+let entries = Object.entries(sequelize.models);
+let capsEntries = entries.map((entry) => [
+  entry[0][0].toUpperCase() + entry[0].slice(1),
+  entry[1],
+]);
+sequelize.models = Object.fromEntries(capsEntries);
 
-  // Capitalizamos los nombres de los modelos, por ejemplo: product => Product
-  const entries = Object.entries(sequelize.models);
-  const capsEntries = entries.map((entry) => [
-    entry[0][0].toUpperCase() + entry[0].slice(1),
-    entry[1],
-  ]);
+// En sequelize.models están todos los modelos importados como propiedades
+// Para relacionarlos hacemos un destructuring
+const { Brand, Buy, Car, Review, User, Sell } = sequelize.models;
 
-  sequelize.models = Object.fromEntries(capsEntries);
-} catch (error) {
-  console.error('Error cargando modelos:', error);
-}
-
-const { Admin, Brand, Buy, Car, Review, User, Sell } = sequelize.models;
-
-// Relacion Car-Review;
+// Aca vendrian las relaciones
+// Product.hasMany(Reviews);
 Car.hasMany(Review, { foreignKey: 'carId' });
 Review.belongsTo(Car, { foreignKey: 'carId' });
-// Relacion User-Review;
 User.hasMany(Review, { foreignKey: 'userId' });
 Review.belongsTo(User, { foreignKey: 'userId' });
-// Relacion Brand-Car;
 Brand.hasMany(Car, { foreignKey: 'brandId' });
 Car.belongsTo(Brand, { foreignKey: 'brandId' });
+Car.belongsToMany(Sell, { through: "carSells" });
+Sell.belongsToMany(Car, { through: "carSells" });
+Car.belongsToMany(Buy, { through: "carBuys" });
+Buy.belongsToMany(Car, { through: "carBuys" });
+Sell.belongsTo(Buy, { foreignKey: "buySellId" });
+Buy.belongsTo(Sell, { foreignKey: "buySellId" });
 
 module.exports = {
   ...sequelize.models,

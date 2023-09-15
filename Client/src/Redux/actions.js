@@ -1,4 +1,5 @@
 import axios from "axios";
+import { enqueueSnackbar } from "notistack";
 
 export const addToCart = (product) => {
   return {
@@ -6,6 +7,13 @@ export const addToCart = (product) => {
     payload: product,
   };
 };
+
+export const addBoughtToHistory = (cartProducts) => {
+  return {
+    type: 'ADD_BUY_TO_HISTORY',
+    payload: cartProducts,
+  }
+}
 
 export const addToFav = (product) => {
   return {
@@ -129,6 +137,23 @@ export const searchByQuery = (queryParams) => {
   };
 };
 
+export const searchByQueryFilters = (queryParamsF) => {
+  const endpoint = `http://localhost:3001/user/dashboard/filter?${new URLSearchParams(
+    queryParamsF
+  ).toString()}`;
+  return async (dispatch) => {
+    try {
+      const { data } = await axios(endpoint);
+      return dispatch({
+        type: "SEARCH_BY_QUERYFILTERS",
+        payload: data,
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+};
+
 export const brandByQuery = () => {
   const endpoint = "http://localhost:3001/car/brand";
   return async (dispatch) => {
@@ -175,19 +200,66 @@ export const locationByQuery = () => {
   };
 };
 
-export const getDashboard = (loggedUser) => {
+export const getDashboard = () => {
   const endpoint = "http://localhost:3001/user/dashboard/users";
-  const config = loggedUser;
   return async (dispatch) => {
     try {
-      const { data } = await axios(endpoint, config);
-      console.log(data)
+      const { data } = await axios(endpoint);
       return dispatch({
         type: "GET_ALL_USERS",
         payload: data,
       });
     } catch (error) {
       console.error(error);
+    }
+  };
+};
+
+export const deleteUserWithID = (id) => {
+  const endpoint = `http://localhost:3001/user/dashboard/users/${id}`;
+  return async (dispatch) => {
+    try {
+      const { status, data } = await axios.delete(endpoint);
+      if (status === 200) {
+        enqueueSnackbar("Successfully deleted user", { variant: "success" });
+      }
+      return dispatch({
+        type: "DELETED_USER",
+        payload: data,
+      });
+    } catch (error) {
+      if (error.response) {
+        const { status } = error.response;
+        if (status === 403) {
+          enqueueSnackbar("Can't remove admin", { variant: "error" });
+        }
+      }
+    }
+  };
+};
+
+export const editPutUser = (id, type, ban) => {
+  const endpoint = `http://localhost:3001/user/dashboard/users/${id}`;
+  return async (dispatch) => {
+    try {
+      const { status, data } = await axios.put(endpoint, {
+        status: type,
+        ban: ban,
+      });
+      if (status === 200) {
+        enqueueSnackbar("User edited successfully", { variant: "success" });
+      }
+      return dispatch({
+        type: "EDITED_USER",
+        payload: data,
+      });
+    } catch (error) {
+      if (error.response) {
+        const { status } = error.response;
+        if (status === 403) {
+          enqueueSnackbar("User not found", { variant: "error" });
+        }
+      }
     }
   };
 };
@@ -234,13 +306,19 @@ export const applyFilters = (filters) => {
   };
 };
 
+export const applyFilterDb = (filters) => {
+  return {
+    type: "APPLY_FILTERS_Db",
+    payload: filters,
+  }
+}
+
 export const orderFilters = (order) => {
   return {
     type: "SORT_FILTER",
     payload: order,
   };
 };
-
 //------------------------------------------------------------------------
 
 export const postReview = (data) => {
@@ -304,3 +382,4 @@ export const updateReview = (newData) => {
     }
   }
 }
+

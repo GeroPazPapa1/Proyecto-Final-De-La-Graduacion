@@ -123,42 +123,72 @@ export const NeedToLogin = () => {
     })
 }
 
+export const Banned = () => {
+    enqueueSnackbar('You have been banned by an Admin', {
+        variant: "error",
+        anchorOrigin: {
+            vertical: 'top',
+            horizontal: 'right',
+        }
+    });
+}
+
+export const modificationUserSuccess = () => {
+    enqueueSnackbar('Your account has been successfully modified!', {
+        variant: 'success',
+        anchorOrigin: {
+            vertical: 'top',
+            horizontal: 'right',
+        }
+    });
+}
+
+export const deleteUserSuccess = () => {
+    enqueueSnackbar('Your account has been successfully deleted!', {
+        variant: 'success',
+        anchorOrigin: {
+            vertical: 'top',
+            horizontal: 'right',
+        }
+    });
+}
+
 export const postReviewNoti = () => {
-enqueueSnackbar('Your review is successfully published', {
-        variant: 'success',
-        anchorOrigin: {
-            vertical: 'top',
-            horizontal: 'right',
-        }
-    })
-}
-
-export const deleteReviewNoti = () => {
-enqueueSnackbar('Your review is successfully deleted', {
-        variant: 'error',
-        anchorOrigin: {
-            vertical: 'top',
-            horizontal: 'right',
-        }
-    })
-}
-
-export const updateReviewNoti = () => {
-enqueueSnackbar('Your review is successfully updated', {
-        variant: 'success',
-        anchorOrigin: {
-            vertical: 'top',
-            horizontal: 'right',
-        }
-    })
-}
-
-export const errorReviewNoti = () => {
-enqueueSnackbar('You have already published a review', {
-        variant: 'error',
-        anchorOrigin: {
-            vertical: 'top',
-            horizontal: 'right',
-        }
-    })
-}
+    enqueueSnackbar('Your review is successfully published', {
+            variant: 'success',
+            anchorOrigin: {
+                vertical: 'top',
+                horizontal: 'right',
+            }
+        })
+    }
+    
+    export const deleteReviewNoti = () => {
+    enqueueSnackbar('Your review is successfully deleted', {
+            variant: 'error',
+            anchorOrigin: {
+                vertical: 'top',
+                horizontal: 'right',
+            }
+        })
+    }
+    
+    export const updateReviewNoti = () => {
+    enqueueSnackbar('Your review is successfully updated', {
+            variant: 'success',
+            anchorOrigin: {
+                vertical: 'top',
+                horizontal: 'right',
+            }
+        })
+    }
+    
+    export const errorReviewNoti = () => {
+    enqueueSnackbar('You have already published a review', {
+            variant: 'error',
+            anchorOrigin: {
+                vertical: 'top',
+                horizontal: 'right',
+            }
+        })
+    }

@@ -2,7 +2,12 @@ import React, { useState, useEffect } from "react";
 import styles from "./Cart.module.css";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { deleteProduct, purchaseProducts, setCart } from "../../Redux/actions";
+import {
+  addBoughtToHistory,
+  deleteProduct,
+  purchaseProducts,
+  setCart,
+} from "../../Redux/actions";
 import { NoCarsSVG } from "../../assets/svgs";
 import { CarRemovedFromCart, MercadoPagoFail, NeedToLogin } from "../NotiStack";
 import { initMercadoPago, Wallet } from "@mercadopago/sdk-react";
@@ -38,6 +43,20 @@ export default function Cart() {
       console.log(id);
       console.log(response);
       localStorage.setItem("transactionStatus", "success");
+      const storedCart = localStorage.getItem("cart");
+      const parsedCart = JSON.parse(storedCart);
+      const purchasedProductsMap = parsedCart.map((car) => car.id);
+      const purchasedProductsName = parsedCart.map((car) => car.name);
+      const subPrice = totalPrice();
+      localStorage.setItem("subPrice", JSON.stringify(subPrice));
+      localStorage.setItem(
+        "purshasedCars",
+        JSON.stringify(purchasedProductsMap)
+      );
+      localStorage.setItem(
+        "purchasedProductsName",
+        JSON.stringify(purchasedProductsName)
+      );
       return id;
     } catch (error) {
       console.error(error);
@@ -65,6 +84,7 @@ export default function Cart() {
     } else {
       try {
         dispatch(purchaseProducts(cartList));
+        console.log(purchasedProducts);
         const id = await createPreference();
         if (id) {
           setPreferenceId(id);
@@ -79,6 +99,7 @@ export default function Cart() {
   useEffect(() => {
     // Carga el carrito desde localStorage
     const storedCart = localStorage.getItem("cart");
+    console.log(storedCart);
     if (storedCart) {
       const parsedCart = JSON.parse(storedCart);
       dispatch(setCart(parsedCart));

@@ -70,6 +70,8 @@
     background-color: transparent;
     border: transparent;
     cursor: pointer;
+    color: yellow;
+    -webkit-text-stroke: 0.5px black;
 }
 
 .container.selectedCard {
