@@ -57,10 +57,18 @@ export default function Dashboard() {
                 <div>
                     {!loggedUser ? (
                         <>
-                            <h2>You must log in and be an Administrator to access here</h2>
-                            <Link to="/home">
-                                <button>Come Home</button>
-                            </Link>
+                            <div className={styles.notAccess}>
+                                <div>
+                                    <div>
+                                        <h2>You must log in and be an <br />Administrator to access here</h2>
+                                    </div>
+                                    <div>
+                                        <Link to="/home">
+                                            <button>GO HOME</button>
+                                        </Link>
+                                    </div>
+                                </div>
+                            </div>
                         </>
                     ) : loggedUser.response.type === "admin" ? (
                         // Aquí puedes agregar el contenido que se mostrará para los usuarios admin
@@ -108,10 +116,18 @@ export default function Dashboard() {
                     ) : (
                         // Agrega el contenido que se mostrará para los usuarios no admin aquí
                         <>
-                            <h2>You must be an administrator to access these functions</h2>
-                            <Link to="/home">
-                                <button>Come Home</button>
-                            </Link>
+                            <div className={styles.notAccess}>
+                                <div>
+                                    <div>
+                                        <h2>You must be an administrator <br /> to access these functions</h2>
+                                    </div>
+                                    <div>
+                                        <Link to="/home">
+                                            <button>GO HOME</button>
+                                        </Link>
+                                    </div>
+                                </div>
+                            </div>
                         </>
                     )}
                 </div>

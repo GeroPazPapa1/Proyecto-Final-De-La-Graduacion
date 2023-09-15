@@ -3,32 +3,32 @@ import React, { useState } from 'react';
 import styles from './TermsAndConditions.module.css';
 
 const TermsAndConditions = () => {
-  const termsText = `Bienvenido a nuestra sección de Términos y Condiciones para la venta de autos de lujo. A continuación, encontrarás información importante para garantizar una experiencia satisfactoria al adquirir uno de nuestros vehículos.
+  const termsText = `Welcome to our Terms & Conditions section, for the sale of luxury cars. Below you will find important information to ensure a satisfactory experience when purchasing one of our vehicles.
 
-Garantía
-Nuestros autos de lujo vienen con una garantía estándar de [X] años que cubre defectos de fabricación y problemas mecánicos. Sin embargo, tenga en cuenta que la garantía no cubre daños causados por accidentes, mal uso o modificaciones no autorizadas.
+  Warranty
+  Our luxury cars come with a standard [X] year warranty that covers manufacturing defects and mechanical problems. However, please note that the warranty does not cover damage caused by accidents, misuse or unauthorized modifications.
+  
+  Responsability:
+  When purchasing a luxury car, the buyer accepts the responsibility of maintaining the vehicle in good condition and following the maintenance instructions provided by the manufacturer. We are not responsible for any damage or injury caused by misuse of the vehicle.
+  
+  Delivery and Deadlines:
+  We will do our best to deliver your luxury car in the shortest possible time. However, please note that delivery times may vary depending on the availability of the model and other external factors. We will keep you informed about the progress of your order.
+  
+  Legal Issues:
+  It is important that you are familiar with the laws and regulations related to the sale of luxury cars. By making a purchase, you agree to comply with all applicable laws, including those related to import and export, taxes, and any other legal requirements specific to your country or region.
+  
+  Return Policy:
+  We offer an [X]day return policy for our luxury cars. If you are not satisfied with your purchase, please contact us within this period for more information on how to proceed with the return.
+  
+  Privacy and Data Protection:
+  We respect your privacy and protect your personal data in accordance with applicable privacy laws. We will use your personal information only for purposes related to your purchase and will not share it with third parties without your consent.
+  
+  Contact us:
+  If you have any questions or concerns related to our Terms and Conditions, please do not hesitate to contact us through the communication channels provided on our website.
+  
+  Thank you for choosing us as your luxury car supplier. We look forward to providing you with an exceptional experience.`;
 
-Responsabilidad:
-Al adquirir un auto de lujo, el comprador acepta la responsabilidad de mantener el vehículo en buen estado y seguir las instrucciones de mantenimiento proporcionadas por el fabricante. No nos hacemos responsables de ningún daño o lesión causada por un mal uso del vehículo.
-
-Entrega y Plazos:
-Haremos todo lo posible para entregar su auto de lujo en el menor tiempo posible. Sin embargo, tenga en cuenta que los plazos de entrega pueden variar según la disponibilidad del modelo y otros factores externos. Le mantendremos informado sobre el progreso de su pedido.
-
-Temas Legales:
-Es importante que esté familiarizado con las leyes y regulaciones relacionadas con la venta de autos de lujo. Al realizar una compra, acepta cumplir con todas las leyes aplicables, incluidas las relacionadas con la importación y exportación, impuestos, y cualquier otro requisito legal específico de su país o región.
-
-Política de Devoluciones:
-Ofrecemos una política de devoluciones de [X] días para nuestros autos de lujo. Si no está satisfecho con su compra, contáctenos dentro de este período para obtener más información sobre cómo proceder con la devolución.
-
-Privacidad y Protección de Datos:
-Respetamos su privacidad y protegemos sus datos personales de acuerdo con las leyes de privacidad aplicables. Utilizaremos su información personal únicamente para fines relacionados con su compra y no la compartiremos con terceros sin su consentimiento.
-
-Contacto:
-Si tiene alguna pregunta o inquietud relacionada con nuestros Términos y Condiciones, no dude en ponerse en contacto con nosotros a través de los canales de comunicación proporcionados en nuestro sitio web.
-
-Gracias por elegirnos como su proveedor de autos de lujo. Esperamos brindarle una experiencia excepcional.`;
-
-  const [activeSection, setActiveSection] = useState('Garantía');
+  const [activeSection, setActiveSection] = useState('Warranty');
 
   const handleButtonClick = (section) => {
     setActiveSection(section);
@@ -40,96 +40,96 @@ Gracias por elegirnos como su proveedor de autos de lujo. Esperamos brindarle un
     <div className={styles.container}>
       <div className={styles.coverImage}></div>
       <div className={styles.content}>
-        <h1 className={styles.title}>Términos y Condiciones</h1>
+        <h1 className={styles.title}>Terms & Conditions</h1>
         <div className={styles.buttonsContainer}>
           <button
-            className={`${styles.button} ${activeSection === 'Garantía' ? styles.active : ''}`}
-            onClick={() => handleButtonClick('Garantía')}
+            className={`${styles.button} ${activeSection === 'Warranty' ? styles.active : ''}`}
+            onClick={() => handleButtonClick('Warranty')}
           >
-            Garantía
+            Warranty
           </button>
           <button
-            className={`${styles.button} ${activeSection === 'Responsabilidad' ? styles.active : ''}`}
-            onClick={() => handleButtonClick('Responsabilidad')}
+            className={`${styles.button} ${activeSection === 'Responsability' ? styles.active : ''}`}
+            onClick={() => handleButtonClick('Responsability')}
           >
-            Responsabilidad
+            Responsability
           </button>
           <button
-            className={`${styles.button} ${activeSection === 'Entrega y Plazos' ? styles.active : ''}`}
-            onClick={() => handleButtonClick('Entrega y Plazos')}
+            className={`${styles.button} ${activeSection === 'Delivery and Deadlines' ? styles.active : ''}`}
+            onClick={() => handleButtonClick('Delivery and Deadlines')}
           >
-            Entrega y Plazos
+            Delivery and Deadlines
           </button>
           <button
-            className={`${styles.button} ${activeSection === 'Temas Legales' ? styles.active : ''}`}
-            onClick={() => handleButtonClick('Temas Legales')}
+            className={`${styles.button} ${activeSection === 'Legal Issues' ? styles.active : ''}`}
+            onClick={() => handleButtonClick('Legal Issues')}
           >
-            Temas Legales
+            Legal Issues
           </button>
           <button
-            className={`${styles.button} ${activeSection === 'Política de Devoluciones' ? styles.active : ''}`}
-            onClick={() => handleButtonClick('Política de Devoluciones')}
+            className={`${styles.button} ${activeSection === 'Return Policy' ? styles.active : ''}`}
+            onClick={() => handleButtonClick('Return Policy')}
           >
-            Política de Devoluciones
+            Return Policy
           </button>
           <button
-            className={`${styles.button} ${activeSection === 'Privacidad y Protección de Datos' ? styles.active : ''}`}
-            onClick={() => handleButtonClick('Privacidad y Protección de Datos')}
+            className={`${styles.button} ${activeSection === 'Privacy and Data Protection' ? styles.active : ''}`}
+            onClick={() => handleButtonClick('Privacy and Data Protection')}
           >
-            Privacidad y Protección de Datos
+            Privacy and Data Protection
           </button>
           <button
-            className={`${styles.button} ${activeSection === 'Contacto' ? styles.active : ''}`}
-            onClick={() => handleButtonClick('Contacto')}
+            className={`${styles.button} ${activeSection === 'Contact' ? styles.active : ''}`}
+            onClick={() => handleButtonClick('Contact')}
           >
-            Contacto
+            Contact
           </button>
         </div>
         <div className={styles.paragraphsContainer}>
-          <h2 className={styles.subtitle} id="Garantía">
-            Garantía
+          <h2 className={styles.subtitle} id="Warranty">
+            Warranty
           </h2>
-          <p>{termsText.substring(0, termsText.indexOf('Responsabilidad'))}</p>
-          <h2 className={styles.subtitle} id="Responsabilidad">
-            Responsabilidad
+          <p>{termsText.substring(0, termsText.indexOf('Responsability'))}</p>
+          <h2 className={styles.subtitle} id="Responsability">
+            Responsability
           </h2>
-          <p>{termsText.substring(termsText.indexOf('Responsabilidad'), termsText.indexOf('Entrega y Plazos'))}</p>
-          <h2 className={styles.subtitle} id="Entrega y Plazos">
-            Entrega y Plazos
+          <p>{termsText.substring(termsText.indexOf('Responsability'), termsText.indexOf('Delivery and Deadlines'))}</p>
+          <h2 className={styles.subtitle} id="Delivery and Deadlines">
+            Delivery and Deadlines
           </h2>
-          <p>{termsText.substring(termsText.indexOf('Entrega y Plazos'), termsText.indexOf('Temas Legales'))}</p>
-          <h2 className={styles.subtitle} id="Temas Legales">
-            Temas Legales
+          <p>{termsText.substring(termsText.indexOf('Delivery and Deadlines'), termsText.indexOf('Legal Issues'))}</p>
+          <h2 className={styles.subtitle} id="Legal Issues">
+            Legal Issues
           </h2>
-          <p>{termsText.substring(termsText.indexOf('Temas Legales'), termsText.indexOf('Política de Devoluciones'))}</p>
-          <h2 className={styles.subtitle} id="Política de Devoluciones">
-            Política de Devoluciones
+          <p>{termsText.substring(termsText.indexOf('Legal Issues'), termsText.indexOf('Return Policy'))}</p>
+          <h2 className={styles.subtitle} id="Return Policy">
+            Return Policy
           </h2>
-          <p>{termsText.substring(termsText.indexOf('Política de Devoluciones'), termsText.indexOf('Privacidad y Protección de Datos'))}</p>
-          <h2 className={styles.subtitle} id="Privacidad y Protección de Datos">
-            Privacidad y Protección de Datos
+          <p>{termsText.substring(termsText.indexOf('Return Policy'), termsText.indexOf('Privacy and Data Protection'))}</p>
+          <h2 className={styles.subtitle} id="Privacy and Data Protection">
+            Privacy and Data Protection
           </h2>
-          <p>{termsText.substring(termsText.indexOf('Privacidad y Protección de Datos'), termsText.indexOf('Contacto'))}</p>
-          <h2 className={styles.subtitle} id="Contacto">
-            Contacto
+          <p>{termsText.substring(termsText.indexOf('Privacy and Data Protection'), termsText.indexOf('Contact'))}</p>
+          <h2 className={styles.subtitle} id="Contact">
+            Contact
           </h2>
-          <p>{termsText.substring(termsText.indexOf('Contacto'))}</p>
+          <p>{termsText.substring(termsText.indexOf('Contact'))}</p>
         </div>
         <div className={styles.cardContainer}>
           <div className={styles.card}>
             <img src="../../../public/frontal.jpg" alt="Auto 1" />
-            <p>(No cubre choques frontales)</p>
+            <p>(Does not cover front crashes)</p>
           </div>
           <div className={styles.card}>
             <img src="../../../public/lateral.jpg" alt="Auto 2" />
-            <p>(No cubre choques laterales)</p>
+            <p>(Does not cover side crashes)</p>
           </div>
           <div className={styles.card}>
             <img src="../../../public/trasero.jpg" alt="Auto 3" />
-            <p>(No cubre choques traseros)</p>
+            <p>(Does not cover back crashes)</p>
           </div>
         </div>
-        <p className={styles.thanks}>Gracias por elegirnos como su proveedor de autos de lujo. Esperamos brindarle una experiencia excepcional.</p>
+        <p className={styles.thanks}>Thank you for choosing us as your luxury car supplier. We look forward to providing you with an exceptional experience.</p>
       </div>
     </div>
   );

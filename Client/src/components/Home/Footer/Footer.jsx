@@ -15,11 +15,12 @@ export default function Footer() {
       <div className={styles.container2}>
         <div className={styles.containerLeft}>
           <div>
-            <img className={styles.logo} src={LOGO_NV} alt="Logo..." />
-          </div>
-          <div>
+            <div className={styles.footer_icon_company}>
+              <img className={styles.logo} src={LOGO_NV} alt="Logo..." />
+              <p>VehiBuy</p>
+            </div>
             <span>
-              <p>VehiBuy</p>Elevating Driving Luxury. Discover a curated
+              Elevating Driving Luxury. Discover a curated
               selection of exquisite luxury cars that redefine elegance and
               performance. Explore the epitome of automotive refinement with
               Elegance Motors.
@@ -30,9 +31,9 @@ export default function Footer() {
           <p>Our Service</p>
           <ul>
             <Link to={"/termsAndConditions"}>
-              <li>TermsAndConditions</li>
+              <li>Terms&Conditions</li>
             </Link>
-            <Link to={"/"}>
+            <Link to={"/about"}>
               <li>About Us</li>
             </Link>
           </ul>
@@ -76,6 +77,6 @@ export default function Footer() {
           <p>Copyrigth ® 2023 | vehiBuy</p>
         </div>
       </div>
-    </div>
+    </div >
   );
 }

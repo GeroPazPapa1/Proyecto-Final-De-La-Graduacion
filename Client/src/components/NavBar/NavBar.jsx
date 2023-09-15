@@ -45,7 +45,7 @@ export default function NavBar() {
           <img className={styles.logo} src={LOGO} alt="Logo..." />
         </Link>
       </div>
-      {location.pathname === "/" && !loggedUser && (
+      {location.pathname === "/" && (
         <div className={styles.containerL}>
           {!loggedUser ? (
             <>
@@ -58,15 +58,22 @@ export default function NavBar() {
             </>
           ) : (
             <>
-              <p>Welcome {loggedUser.name}</p>
-              <Link to='/profile'></Link>
+              <Link to={"/profileSettings"} className={styles.icon_name_user}>
+                <img src={user.image} alt="" className={styles.iconImage} />
+                {" "}
+                <button className={styles.button} id={loggedUser.id}>
+                  {user.name}
+                </button>
+              </Link>
               {loggedUser.response?.type === "admin" && (
                 <Link to={"/admin/dashboard"}>
                   <button>Dashboard</button>
                 </Link>
               )}
-              <Link to="/">
-                <button onClick={handleLogout}>Logout</button>
+              <Link to={"/"}>
+                <button onClick={handleLogout} className={styles.button}>
+                  Log out
+                </button>
               </Link>
             </>
           )}
@@ -89,21 +96,18 @@ export default function NavBar() {
             <div className={styles.containerL}>
               {loggedUser && (
                 <>
-                  <img src={user.image} alt="" className={styles.iconImage} />
-                  <Link to={"/profile"}>
+                  <Link to={"/profileSettings"} className={styles.icon_name_user}>
+                    <img src={user.image} alt="" className={styles.iconImage} />
                     {" "}
-                    <span className={styles.name}>{user.name}</span>
+                    <button className={styles.button} id={loggedUser.id}>
+                      {user.name}
+                    </button>
                   </Link>
                   {loggedUser.response?.type === "admin" && (
                     <Link to={"/admin/dashboard"}>
                       <button className={styles.button}>Dashboard</button>
                     </Link>
                   )}
-                  <Link to={"/profileSettings"}>
-                    <button className={styles.button} id={loggedUser.id}>
-                      Edit Profile
-                    </button>
-                  </Link>
                   <Link to={"/"}>
                     <button onClick={handleLogout} className={styles.button}>
                       Log out
@@ -113,7 +117,6 @@ export default function NavBar() {
               )}
               {!loggedUser && (
                 <>
-
                   <Link to={"/login"}>
                     <button className={styles.button}>Log in</button>
                   </Link>
@@ -152,9 +155,11 @@ export default function NavBar() {
                       <button>Dashboard</button>
                     </Link>
                   )}
-                  <Link to={"/profileSettings"}>
+                  <Link to={"/profileSettings"} className={styles.icon_name_user}>
+                    <img src={user.image} alt="" className={styles.iconImage} />
+                    {" "}
                     <button className={styles.button} id={loggedUser.id}>
-                      Edit Profile
+                      {user.name}
                     </button>
                   </Link>
                   <Link to={"/"}>
@@ -201,9 +206,11 @@ export default function NavBar() {
                       <button>Dashboard</button>
                     </Link>
                   )}
-                  <Link to={"/profileSettings"}>
+                  <Link to={"/profileSettings"} className={styles.icon_name_user}>
+                    <img src={user.image} alt="" className={styles.iconImage} />
+                    {" "}
                     <button className={styles.button} id={loggedUser.id}>
-                      Edit Profile My profile
+                      {user.name}
                     </button>
                   </Link>
                   <Link to={"/"}>

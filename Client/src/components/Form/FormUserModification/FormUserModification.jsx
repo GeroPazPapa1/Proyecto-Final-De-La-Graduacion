@@ -5,7 +5,7 @@ import validation from "../Validation/validationModification";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { ButtonBack } from "../../../assets/svgs";
-import { modificationUserSuccess } from "../../NotiStack";
+import { modificationUserSuccess, uploadImageFail, uploadImageSuccess } from "../../NotiStack";
 import { OpenEye, ClosedEye } from "../../LoginRegister/svgs.jsx";
 import UserImage from "./UserImage";
 

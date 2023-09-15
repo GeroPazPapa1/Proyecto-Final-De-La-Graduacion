@@ -1,6 +1,8 @@
 import style from "./UserImage.module.css";
 import React, { useState } from "react";
 import axios from "axios";
+import { uploadImageFail, uploadImageSuccess } from "../../NotiStack";
+
 
 const cloudinaryUploadUrl = "https://api.cloudinary.com/v1_1/Vehibuy/upload";
 
@@ -43,11 +45,13 @@ const UserImage = () => {
       const response = await axios.post(cloudinaryUploadUrl, formData);
       if (response.status === 200) {
         setImageUrl(response.data.secure_url);
+        uploadImageSuccess()
         setError("Image uploaded successfully");
         localStorage.setItem("userImage", response.data.secure_url);
-        const { data } = await axios.put(`/user/${userId}`, {image: response.data.secure_url});
+        const { data } = await axios.put(`/user/${userId}`, { image: response.data.secure_url });
       }
     } catch (error) {
+      uploadImageFail()
       setError("Error uploading image to Cloudinary");
     }
   };

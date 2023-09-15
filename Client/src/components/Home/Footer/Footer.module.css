@@ -24,13 +24,10 @@
 .container2 {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: top;
     margin: 0 9vw;
     padding: 2vw 0;
-}
-
-.container2 {
-    color: white;
+    color: var(--colorBlanco);
     font-family: 'Inter', sans-serif;
     font-size: 12px;
     line-height: 17px;
@@ -68,6 +65,17 @@
 .logo {
     width: 45px;
     height: auto;
+}
+
+.footer_icon_company {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+    gap: 0.5rem;
+}
+
+Link{
+    text-decoration: none;
 }
 
 @media (max-width: 480px) {
