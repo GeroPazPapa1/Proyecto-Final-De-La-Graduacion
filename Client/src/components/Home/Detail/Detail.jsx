@@ -73,7 +73,7 @@ export default function Detail() {
     const idCar = detail.id
     return (
         <div className={styles.detail}>
-            <Link to={"/home"}><ButtonBack/></Link>
+            <Link to={"/home"}><ButtonBack /></Link>
             <div className={styles.detail_card}>
                 <div className={`${styles.carrousel_img} ${styles.custom_carrousel}`}>
                     <div ref={secondSliderRef} className={styles.selected_imgs}>
@@ -118,24 +118,16 @@ export default function Detail() {
                         </div>
                     </h1>
                     <h1 className={`${styles.h1_detail} ${styles.detail_price}`}>$ {formatPrice(detail.price)} USD</h1>
-                    {isInCart() ? (
-                        <div className={styles.div_removegocart}>
-                            <Link to="/cart"><button className={styles.btn_gocart}>Go to cart</button></Link>
-                            <button className={styles.btn_removecart} onClick={handleRemoveFromCart}>
-                                Remove from cart
-                            </button>
-                        </div>
-                    ) : (
-                        <button className={styles.btn_addcart} onClick={handleAddToCart}>
-                            Add to cart
-                        </button>
-                    )}
+                    <button className={styles.btn_addcart} onClick={handleAddToCart}>
+                        Add to cart
+                    </button>
+
                 </div>
                 <div className={styles.description_car}>
                     <h1 className={`${styles.h1_detail} ${styles.detail_description}`}>Description:<p> {detail.description && detail.description}</p></h1>
                 </div>
                 <div>
-                    <Review/>
+                    <Review />
                 </div>
             </div>
         </div >

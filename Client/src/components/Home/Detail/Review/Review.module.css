@@ -1,4 +1,4 @@
-form {
+.form {
   font-family: var(--fontInter);
   font-size: 20px;
   flex-wrap: wrap;
@@ -31,7 +31,7 @@ form {
 
 .star_label svg:hover {
   color: #636060;
-}  
+}
 
 .image {
   margin-right: 8px;
@@ -43,8 +43,8 @@ form {
   background-color: #e0e0e080;
 }
 
-input[type='text'],
-textarea {
+.input,
+.textarea {
   resize: none;
   display: block;
   width: 100%;
@@ -56,28 +56,33 @@ textarea {
   line-height: 1.5;
 }
 
-input[type='text']:focus {
+.input:focus {
   outline: none;
-  border-color: var(--colorGris); 
+  border-color: var(--colorGris);
 }
 
-textarea:focus {
+.textarea:focus {
   outline: none;
-  border-color: var(--colorGris); 
+  border-color: var(--colorGris);
 }
+
 .title {
   font-weight: bold;
   font-size: 20px;
 }
+
 .review {
   font-size: 16px;
   color: var(--colorGris);
 }
+
 hr {
-color: var(--colorGris);
+  color: var(--colorGris);
 }
 
-.btn_submit, .btn_update_review, .btn_delete{
+.btn_submit,
+.btn_update_review,
+.btn_delete {
   width: auto;
   border: 1px solid var(--colorNegro);
   background-color: var(--colorBlanco);
@@ -86,6 +91,7 @@ color: var(--colorGris);
   font-size: 0.9rem;
   cursor: pointer;
   transition: ease-in-out 0.1s;
+  text-transform: uppercase;
 }
 
 .btn_edit {
@@ -98,12 +104,15 @@ color: var(--colorGris);
 .btn_submit:hover {
   background-color: var(--colorGrisClaro);
 }
+
 .btn_update_review:hover {
   background-color: var(--colorGrisClaro);
 }
+
 .btn_edit:hover {
   background-color: var(--colorGrisClaro);
 }
+
 .btn_delete:hover {
   background-color: var(--colorGrisClaro);
 }
@@ -115,7 +124,8 @@ color: var(--colorGris);
   text-align: center;
 }
 
-.btn_no, .btn_yes {
+.btn_no,
+.btn_yes {
   width: auto;
   background-color: var(--colorBlanco);
   border: 1px solid var(--colorGris);
@@ -124,4 +134,3 @@ color: var(--colorGris);
   font-size: 0.9rem;
   cursor: pointer;
 }
-

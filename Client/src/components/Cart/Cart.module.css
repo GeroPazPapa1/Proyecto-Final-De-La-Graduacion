@@ -117,13 +117,3 @@
     border-color: var(--colorNegroClaro);
     background-color: var(--colorGrisClaro);
 }
-
-.swal_button_confirm {
-    float: right;
-    /* Espacio entre los botones */
-}
-
-.swal_button_cancel {
-    float: left;
-    /* Espacio entre los botones */
-}

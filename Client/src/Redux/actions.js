@@ -317,7 +317,7 @@ export const orderFilters = (order) => {
 //------------------------------------------------------------------------
 
 export const postReview = (data) => {
-  const endpoint = "http://localhost:3001/review/"
+  const endpoint = "/review/"
   return async (dispatch) => {
     try {
       const response = await axios.post(endpoint, data)
@@ -329,7 +329,7 @@ export const postReview = (data) => {
 }
 
 export const getReviews = (carId) => {
-  const endpoint = `http://localhost:3001/review/${carId}`;
+  const endpoint = `/review/${carId}`;
   if (carId) {
     return async (dispatch) => {
       try {
@@ -355,7 +355,7 @@ export const resetReview = () => {
 };
 
 export const deleteReview = (idReview) => {
-  const endpoint = `http://localhost:3001/review/${idReview}`;
+  const endpoint = `/review/${idReview}`;
   return async (dispatch) => {
     try {
       const { data } = await axios.delete(endpoint);
@@ -367,7 +367,7 @@ export const deleteReview = (idReview) => {
 }
 
 export const updateReview = (newData) => {
-  const endpoint = "http://localhost:3001/review/"
+  const endpoint = "/review/"
   return async (dispatch) => {
     try {
       const { data } = await axios.put(endpoint, newData)
