@@ -171,3 +171,43 @@ export const uploadImageFail = () => {
         }
     });
 }
+
+export const postReviewNoti = () => {
+    enqueueSnackbar('Your review is successfully published', {
+            variant: 'success',
+            anchorOrigin: {
+                vertical: 'top',
+                horizontal: 'right',
+            }
+        })
+    }
+    
+    export const deleteReviewNoti = () => {
+    enqueueSnackbar('Your review is successfully deleted', {
+            variant: 'error',
+            anchorOrigin: {
+                vertical: 'top',
+                horizontal: 'right',
+            }
+        })
+    }
+    
+    export const updateReviewNoti = () => {
+    enqueueSnackbar('Your review is successfully updated', {
+            variant: 'success',
+            anchorOrigin: {
+                vertical: 'top',
+                horizontal: 'right',
+            }
+        })
+    }
+    
+    export const errorReviewNoti = () => {
+    enqueueSnackbar('You have already published a review', {
+            variant: 'error',
+            anchorOrigin: {
+                vertical: 'top',
+                horizontal: 'right',
+            }
+        })
+    }

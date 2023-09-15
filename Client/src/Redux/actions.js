@@ -47,6 +47,7 @@ export const getAllCars = () => {
   return async (dispatch) => {
     try {
       const { data } = await axios(endpoint);
+      console.log(data);
       return dispatch({
         type: "GET_ALL_CARS",
         payload: data,
@@ -151,6 +152,7 @@ export const brandByQuery = () => {
   return async (dispatch) => {
     try {
       const { data } = await axios(endpoint);
+      console.log(data, 'brands');
       return dispatch({
         type: "GET_ALL_BRAND",
         payload: data,
@@ -312,3 +314,67 @@ export const orderFilters = (order) => {
     payload: order,
   };
 };
+//------------------------------------------------------------------------
+
+export const postReview = (data) => {
+  const endpoint = "http://localhost:3001/review/"
+  return async (dispatch) => {
+    try {
+      const response = await axios.post(endpoint, data)
+      return response.data
+    } catch (error) {
+      console.error(error)
+    }
+  }
+}
+
+export const getReviews = (carId) => {
+  const endpoint = `http://localhost:3001/review/${carId}`;
+  if (carId) {
+    return async (dispatch) => {
+      try {
+        const {data} = await axios.get(endpoint);
+        dispatch({
+          type: "REVIEWS_CAR",
+          payload: data,
+        });
+      } catch (error) {
+        console.error(error)
+      }
+    };
+  }
+  return {
+    type: "RESET_REVIEWS",
+  };
+}
+
+export const resetReview = () => {
+  return {
+    type: "RESET_REVIEWS",
+  };
+};
+
+export const deleteReview = (idReview) => {
+  const endpoint = `http://localhost:3001/review/${idReview}`;
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.delete(endpoint);
+      console.log(data)
+      } catch (error) {
+        console.error(error)
+    }
+  }
+}
+
+export const updateReview = (newData) => {
+  const endpoint = "http://localhost:3001/review/"
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.put(endpoint, newData)
+      console.log(data)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+}
+
