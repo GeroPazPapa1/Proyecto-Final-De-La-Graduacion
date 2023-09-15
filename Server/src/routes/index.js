@@ -4,6 +4,7 @@ const carRouter = require("./carRouter");
 const mercadoPagoRouter = require('./mercadoPagoRouter')
 const sellRouter = require("./sellBuyRouter");
 const adminRouter = require("./adminRouter");
+const reviewRouter = require("./reviewRouter")
 
 const routes = Router();
 
@@ -12,5 +13,6 @@ routes.use("/car", carRouter);
 routes.use("/admin", adminRouter);
 routes.use('/create_preference', mercadoPagoRouter)
 routes.use("/admin", adminRouter);
+routes.use("/review", reviewRouter)
 
 module.exports = routes;

@@ -3,8 +3,6 @@ const bcrypt = require("bcrypt");
 const jsonwebtoken = require("jsonwebtoken");
 require("dotenv").config();
 const { SECRET_KEY } = process.env;
-const mailOptions = require("../utils/mailOptions");
-const transporter = require("../utils/transporter");
 
 const loginHandler = async (req, res) => {
   try {

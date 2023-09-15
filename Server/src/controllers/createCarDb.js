@@ -14,21 +14,24 @@ const createCarDb = async () => {
     });
 
     if (!matchingBrand) {
-      matchingBrand = await Brand.create({
-        name: newCar.brand,
+      matchingBrand = await Brand.findOrCreate({
+        where: {
+          name: newCar.brand,
+        }
       });
     }
 
     const carInstance = await Car.create({
-      name: newCar.name,
-      image: newCar.image,
-      model: newCar.model,
-      state: newCar.state,
-      price: newCar.price,
-      location: newCar.location,
-      color: newCar.color,
-      description: newCar.description,
-      brandId: matchingBrand.id,
+        name: newCar.name,
+        image: newCar.image,
+        brand: newCar.brand,
+        model: newCar.model,
+        state: newCar.state,
+        price: newCar.price,
+        location: newCar.location,
+        color: newCar.color,
+        description: newCar.description,
+        brandId: matchingBrand.id,
     });
   }
 }

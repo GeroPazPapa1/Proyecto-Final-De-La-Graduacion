@@ -1,4 +1,4 @@
-const { Car, Reviews, Brand } = require('../db');
+const { Car, Review, Brand, User } = require('../db');
 
 const getCarById = async (id) => {
 
@@ -6,31 +6,21 @@ const getCarById = async (id) => {
       {
         include: [
           {
-            model: Reviews,
+            model: Review,
+            attributes: ["id", "rating", "title", "review"],
+            include: [
+              {
+                model: User,
+                attributes: ["name", "lastName"]
+              }
+            ]
           }
       ]
     });
-    
-    const brand = await Brand.findByPk(carIdDb.brandId)
-    
-    const carById = {
-      name: carIdDb.name,
-      color: carIdDb.color,
-      description: carIdDb.description,
-      id: carIdDb.id,
-      image: carIdDb.image,
-      brand: brand.name,
-      location: carIdDb.location,
-      model: carIdDb.model,
-      price: carIdDb.price,
-      state: carIdDb.state,
-      reviews: carIdDb.Reviews
-    }
-    
     if (!carIdDb) {
       return "Car not found";
     }
-    return carById;
+    return carIdDb;
   };
 
   module.exports = {getCarById};
