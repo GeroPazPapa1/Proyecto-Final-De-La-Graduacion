@@ -20,6 +20,7 @@ const postBuyController = async ({
     return { CarId: carId, BuyId };
   });
   await carBuys.bulkCreate(carsIdMap);
+  return BuyId;
 };
 
 module.exports = {
