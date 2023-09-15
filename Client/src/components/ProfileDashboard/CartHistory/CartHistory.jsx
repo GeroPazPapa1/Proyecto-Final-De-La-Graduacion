@@ -1,40 +1,101 @@
-import React, { useEffect } from 'react';
-import { useSelector } from 'react-redux';
-import styles from './CartHistory.module.css';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import styles from "./CartHistory.module.css";
+import PurchaseCard from "./PurchaseCard";
 
 export default function CartHistory() {
-    const purchaseHistory = useSelector(state => state.purchaseHistory);
+  const [purchases, setPurchases] = useState([]);
+  const userId = localStorage.getItem("userId");
 
-    useEffect(() => {
-        // Aquí puedes realizar alguna acción adicional si es necesario, como cargar el historial
-        // de compras cuando el componente se monte.
-    }, []);
+  const getPurchasesHandler = async (userId) => {
+    try {
+      const endpoint = "http://localhost:3001/buy/getByuser/";
+      const { data } = await axios.get(`${endpoint}${userId}`);
+      setPurchases(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  useEffect(() => {
+    try {
+      getPurchasesHandler(userId);
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
 
-    return (
-        <div className={styles.carthistory}>
-            <h2>Shopping history</h2>
-            <select name="" id="">
-                <option hidden={true}>Date...</option>
-                <option>Last week</option>
-                <option>Last month</option>
-                <option>Last year</option>
-            </select>
-            <div className={styles.container_bought}>
-                {purchaseHistory.map(compra => (
-                    <div className={styles.new_buy} key={compra.id}>
-                        <img src={compra.image} className={`${styles.bought} ${styles.bought_img}`} alt="product" />
-                        <h1 className={styles.bought}> {compra.name}</h1>
-                        <h1 className={styles.bought}> {compra.brand}</h1>
-                        <h1 className={styles.bought}> {compra.model}</h1>
-                        <h1 className={styles.bought}> ${compra.price} USD</h1>
-                        <h1 className={styles.bought}>Bought at {compra.date}</h1>
-                        <Link to={`/detail/${compra.id}`}>
-                            <button className={styles.bought}>Buy Again</button>
-                        </Link>
-                    </div>
-                ))}
-            </div>
-        </div>
-    );
+  //-----------------------------------------------------
+  const [selectedOption, setSelectedOption] = useState("Date...");
+  const filterPurchasesByLastWeek = () => {
+    const currentDate = new Date();
+    const lastWeekDate = new Date();
+    lastWeekDate.setDate(lastWeekDate.getDate() - 7);
+
+    const filteredPurchases = purchases.filter((purchase) => {
+      const purchaseDate = new Date(purchase.createdAt);
+      return purchaseDate >= lastWeekDate && purchaseDate <= currentDate;
+    });
+
+    return filteredPurchases;
+  };
+  const filterPurchasesByLastMonth = () => {
+    const currentDate = new Date();
+    const lastMonthDate = new Date();
+    lastMonthDate.setMonth(lastMonthDate.getMonth() - 1);
+
+    const filteredPurchases = purchases.filter((purchase) => {
+      const purchaseDate = new Date(purchase.createdAt);
+      return purchaseDate >= lastMonthDate && purchaseDate <= currentDate;
+    });
+
+    return filteredPurchases;
+  };
+  const filterPurchasesByLastYear = () => {
+    const currentDate = new Date();
+    const lastYearDate = new Date();
+    lastYearDate.setFullYear(lastYearDate.getFullYear() - 1);
+
+    const filteredPurchases = purchases.filter((purchase) => {
+      const purchaseDate = new Date(purchase.createdAt);
+      return purchaseDate >= lastYearDate && purchaseDate <= currentDate;
+    });
+
+    return filteredPurchases;
+  };
+  const handleSelectChange = (event) => {
+    setSelectedOption(event.target.value);
+  };
+
+  let filteredPurchases = purchases;
+
+  if (selectedOption === "Last week") {
+    filteredPurchases = filterPurchasesByLastWeek();
+  } else if (selectedOption === "Last month") {
+    filteredPurchases = filterPurchasesByLastMonth();
+  } else if (selectedOption === "Last year") {
+    filteredPurchases = filterPurchasesByLastYear();
+  }
+
+  return (
+    <div className={styles.carthistory}>
+      <h2>Shopping history</h2>
+      <select name="" id="" onChange={handleSelectChange}>
+        <option hidden={true}>Date...</option>
+        <option>Last week</option>
+        <option>Last month</option>
+        <option>Last year</option>
+      </select>
+      <div className={styles.container}>
+        {filteredPurchases.map((purchase) => (
+          <PurchaseCard
+            key={purchase.id}
+            id={purchase.id}
+            date={purchase.createdAt}
+            price={purchase.price}
+            description={purchase.description}
+          />
+        ))}
+      </div>
+    </div>
+  );
 }

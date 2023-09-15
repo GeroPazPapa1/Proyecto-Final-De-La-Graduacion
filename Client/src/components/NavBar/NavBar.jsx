@@ -3,16 +3,38 @@ import LOGO from "./Icons/LOGO.svg";
 import CART from "./Icons/CART.svg";
 import styles from "./NavBar.module.css";
 import { Link, useLocation } from "react-router-dom";
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 export default function NavBar() {
   const location = useLocation();
-
+  const [user, setUser] = useState([]);
   const loggedUserJson = localStorage.getItem("authToken");
   const loggedUser = loggedUserJson ? JSON.parse(loggedUserJson) : null;
 
   const handleLogout = () => {
     localStorage.clear();
   };
+
+  if (location.pathname.startsWith("/admin")) {
+    return null;
+  }
+
+  useEffect(() => {
+    const userInfoFn = async () => {
+      try {
+        const { data } = await axios.get(
+          `http://localhost:3001/user/${loggedUser.response.id}`
+        );
+        setUser(data);
+      } catch (error) {
+        console.log(
+          `The request could not be completed because of the following error: ${error.message}`
+        );
+      }
+    };
+    userInfoFn();
+  }, []);
 
   if (location.pathname.startsWith("/admin")) {
     return null;
@@ -45,7 +67,9 @@ export default function NavBar() {
                   <button>Dashboard</button>
                 </Link>
               )}
-              <button onClick={handleLogout}>Logout</button>
+              <Link to="/">
+                <button onClick={handleLogout}>Logout</button>
+              </Link>
             </>
           )}
         </div>
@@ -67,18 +91,22 @@ export default function NavBar() {
             <div className={styles.containerL}>
               {loggedUser && (
                 <>
-                  <span>{loggedUser.email}</span>
+                  <img src={user.image} alt="" className={styles.iconImage} />
+                  <Link to={"/profile"}>
+                    {" "}
+                    <span className={styles.name}>{user.name}</span>
+                  </Link>
                   {loggedUser.response?.type === "admin" && (
                     <Link to={"/admin/dashboard"}>
-                      <button>Dashboard</button>
+                      <button className={styles.button}>Dashboard</button>
                     </Link>
                   )}
-                  <Link to={"/modification"}>
+                  <Link to={"/profileSettings"}>
                     <button className={styles.button} id={loggedUser.id}>
-                      Modification
+                      Edit Profile
                     </button>
                   </Link>
-                  <Link to={"/home"}>
+                  <Link to={"/"}>
                     <button onClick={handleLogout} className={styles.button}>
                       Log out
                     </button>
@@ -126,12 +154,12 @@ export default function NavBar() {
                       <button>Dashboard</button>
                     </Link>
                   )}
-                  <Link to={"/modification"}>
+                  <Link to={"/profileSettings"}>
                     <button className={styles.button} id={loggedUser.id}>
-                      Modification
+                      Edit Profile
                     </button>
                   </Link>
-                  <Link to={"/home"}>
+                  <Link to={"/"}>
                     <button onClick={handleLogout} className={styles.button}>
                       Log out
                     </button>
@@ -175,12 +203,12 @@ export default function NavBar() {
                       <button>Dashboard</button>
                     </Link>
                   )}
-                  <Link to={"/modification"}>
+                  <Link to={"/profileSettings"}>
                     <button className={styles.button} id={loggedUser.id}>
-                      My profile
+                      Edit Profile My profile
                     </button>
                   </Link>
-                  <Link to={"/home"}>
+                  <Link to={"/"}>
                     <button onClick={handleLogout} className={styles.button}>
                       Log out
                     </button>

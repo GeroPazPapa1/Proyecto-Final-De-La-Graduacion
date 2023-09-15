@@ -1,17 +1,4 @@
-.carthistory {}
 
-.container_bought {
-    display: grid;
-    gap: 3rem;
-    margin: 1rem;
-}
-
-.new_buy {
-    display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    background-color: var(--colorBlanco);
-    padding: 1rem;
-}
 
 .bought{
     font-family: var(--fontNunito);
@@ -19,4 +6,22 @@
 
 .bought_img{
     width: 200px;
+}
+.titleContainer{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 2px white solid;
+}
+
+.emptyContainer{
+    height: auto;
+    width: 30%; 
+}
+.h6Container{
+    height: auto;
+    width: 20%; 
+}
+h6{
+    font-size: 1em;
 }

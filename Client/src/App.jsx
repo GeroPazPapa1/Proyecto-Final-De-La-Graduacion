@@ -34,7 +34,7 @@ function App() {
         <Route path="/termsandconditions" element={<Termsandconditions />} />
         <Route path="/profile" element={<ProfileDashboard />} />
         <Route path="/admin/dashboard" element={<Dashboard />} />
-        <Route path="/modification" element={<Modification />} />
+        <Route path="/profileSettings" element={<Modification />} />
       </Routes>
       <Footer />
     </>
