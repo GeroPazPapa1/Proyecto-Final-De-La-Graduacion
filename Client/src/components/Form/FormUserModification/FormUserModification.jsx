@@ -48,7 +48,7 @@ export default function FormUserModification ({id}) {
     try {
       // Create a copy of the current input object to send to the server
       let updatedInput = { ...input };
-      const { data } = await axios.put(`http://localhost:3001/user/${id}`, updatedInput);
+      const { data } = await axios.put(`/user/${id}`, updatedInput);
       // Stores the response in the 'response' state
       setResponse(data);
     } catch (error) {

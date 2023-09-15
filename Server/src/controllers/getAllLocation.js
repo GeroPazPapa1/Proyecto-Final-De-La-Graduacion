@@ -2,7 +2,7 @@ const axios = require("axios");
 
 const getAllLocation = async (req, res) => {
   try {
-    const { data } = await axios.get("http://localhost:3001/car/search");
+    const { data } = await axios.get("http://localhost:7143/car/search");
 
     const carLocation = data.map((car) => car.location);
 

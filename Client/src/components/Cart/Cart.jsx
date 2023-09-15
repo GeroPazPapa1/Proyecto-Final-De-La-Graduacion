@@ -32,7 +32,7 @@ export default function Cart() {
       const currentDate = new Date().toISOString();
       console.log(items);
       const response = await axios.post(
-        "http://localhost:3001/create_preference/",
+        "/create_preference/",
         { items, date: currentDate }
       );
       const { id } = response.data;

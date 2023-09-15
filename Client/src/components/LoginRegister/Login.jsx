@@ -43,7 +43,7 @@ export default function Login() {
       const user = auth.currentUser;
       const tokenFirebase = await user.getIdToken(true);
       const response = await axios.post(
-        "http://localhost:3001/user/google",
+        "/user/google",
         { tokenFirebase },
         {
           headers: {
@@ -117,7 +117,7 @@ export default function Login() {
       input.password
     ) {
       try {
-        const response = await axios.post("http://localhost:3001/user", {
+        const response = await axios.post("/user", {
           email: input.email,
           password: input.password,
         });

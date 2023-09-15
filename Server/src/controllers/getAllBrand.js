@@ -3,7 +3,7 @@ const { Brand } = require("../db");
 
 const getAllBrand = async (req, res) => {
   try {
-    const { data } = await axios.get("http://localhost:3001/car/search");
+    const { data } = await axios.get("http://localhost:7143/car/search");
 
     const carBrands = data.map((car) => car.brand);
 

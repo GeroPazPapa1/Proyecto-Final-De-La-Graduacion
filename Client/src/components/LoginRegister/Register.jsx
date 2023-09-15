@@ -66,8 +66,7 @@ export default function Register() {
       const result = await signInWithPopup(auth, provider);
       const user = auth.currentUser;
       const tokenFirebase = await user.getIdToken(true);
-      const response = await axios.post(
-        "http://localhost:3001/user/google",
+      const response = await axios.post('/user/google',
         { tokenFirebase },
         {
           headers: {
@@ -137,7 +136,7 @@ export default function Register() {
       input.age
     ) {
       try {
-        const response = await axios.post("http://localhost:3001/user/create", {
+        const response = await axios.post("/user/create", {
           email: input.email,
           password: input.password,
           name: input.name,

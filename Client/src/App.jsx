@@ -16,7 +16,7 @@ import ProfileDashboard from "./components/Profile/ProfileDashboard";
 import Termsandconditions from "./components/TermsAndConditions/TermsAndConditions";
 //SI O SI PARA LINKEAR REDUX Y DEMAS METHODS
 import axios from 'axios'
-axios.defaults.baseURL = "http://localhost:3001/"
+axios.defaults.baseURL = "http://localhost:7143/"
 
 function App() {
   return (

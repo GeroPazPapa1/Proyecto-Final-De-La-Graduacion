@@ -39,18 +39,18 @@ const { Brand, Buy, Car, Review, User, Sell } = sequelize.models;
 
 // Aca vendrian las relaciones
 // Product.hasMany(Reviews);
-Car.belongsToMany(Review, { through: "carReviews" });
-Review.belongsTo(Car, { through: "carReviews" });
-User.belongsToMany(Review, { through: "userReviews" });
-Review.belongsTo(User, { through: "userReviews" });
 Brand.hasMany(Car, { foreignKey: 'brandId' });
+Buy.belongsToMany(Car, { through: "carBuys" });
+Buy.belongsTo(Sell, { foreignKey: "buySellId" });
+Car.belongsToMany(Review, { through: "carReviews" });
 Car.belongsTo(Brand, { foreignKey: 'brandId' });
 Car.belongsToMany(Sell, { through: "carSells" });
-Sell.belongsToMany(Car, { through: "carSells" });
 Car.belongsToMany(Buy, { through: "carBuys" });
-Buy.belongsToMany(Car, { through: "carBuys" });
-Sell.belongsTo(Buy, { foreignKey: "buySellId" });
-Buy.belongsTo(Sell, { foreignKey: "buySellId" });
+Review.belongsTo(Car, { through: "carReviews" });
+Review.belongsTo(User, { through: "userReviews" });
+User.belongsToMany(Review, { through: "userReviews" });
+Sell.belongsToMany(Car, { through: "carSells" });
+Sell.belongsToMany(Buy, { foreignKey: "buySellId" });
 
 module.exports = {
   ...sequelize.models,
