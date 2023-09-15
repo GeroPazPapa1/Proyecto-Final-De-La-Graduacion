@@ -7,6 +7,7 @@ import { NoCarsSVG } from "../../assets/svgs";
 import { CarRemovedFromCart, MercadoPagoFail, NeedToLogin } from "../NotiStack";
 import { initMercadoPago, Wallet } from "@mercadopago/sdk-react";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 export default function Cart() {
   const cartList = useSelector((state) => state.cartList);
@@ -15,8 +16,20 @@ export default function Cart() {
   const [showMercadoPago, setShowMercadoPago] = useState(false);
   const purchasedProducts = useSelector((state) => state.purchasedProducts);
   const removeFromCart = (productId) => {
-    dispatch(deleteProduct(productId));
-    CarRemovedFromCart();
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      reverseButtons: true,
+      cancelButtonText: "No, keep it",
+      confirmButtonText: "Yes, remove it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        dispatch(deleteProduct(productId));
+        CarRemovedFromCart();
+      }
+    });
   };
   console.log(cartList);
   // initMercadoPago('TEST-620ddc2a-2dd8-487a-a99e-61892333c8d0');
