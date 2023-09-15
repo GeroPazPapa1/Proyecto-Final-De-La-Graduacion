@@ -128,6 +128,7 @@ export default function DashBoardEmail() {
                         verify={email.verify} />
                 ))
                 }
+                
             </div>
         </div>
     )

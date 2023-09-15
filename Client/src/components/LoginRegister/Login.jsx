@@ -197,9 +197,6 @@ export default function Login() {
           {touchedFields.email && errors.email && (
             <p className={styles.errors}>{errors.email}</p>
           )}
-          {touchedFields.email && errors.email && (
-            <p className={styles.errors}>{errors.email}</p>
-          )}
           <label className={styles.label}>Password</label>
           <input
             className={styles.input}

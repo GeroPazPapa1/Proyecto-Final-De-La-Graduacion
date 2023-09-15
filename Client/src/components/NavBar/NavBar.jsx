@@ -16,10 +16,6 @@ export default function NavBar() {
     localStorage.clear();
   };
 
-  if (location.pathname.startsWith("/admin")) {
-    return null;
-  }
-
   useEffect(() => {
     const userInfoFn = async () => {
       try {
