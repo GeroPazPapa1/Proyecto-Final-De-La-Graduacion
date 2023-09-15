@@ -13,6 +13,8 @@ export default function Card(props) {
   const splitDate = date.split("T");
   const newDate = splitDate[0].split("-");
   const formatDate = `${newDate[2]}-${newDate[1]}-${newDate[0]}`;
+  const splitId = id.split("-");
+  const formatId = splitId[0];
   const [cars, setCars] = useState([]);
 
   const getCarsHandler = async (id) => {
@@ -38,9 +40,9 @@ export default function Card(props) {
     <div className={styles.mainContainer}>
       <div className={styles.infoContainer}>
         <div className={styles.h2Container}>
-          <h2 className={styles.h2}>Order id: {id} </h2>
+          <h2 className={styles.h2}>Order id: {formatId} </h2>
           <div className={styles.dateContainer}>
-            <h3>{formatDate}</h3>
+            <h3 className={styles.date}>{formatDate}</h3>
           </div>
         </div>
       </div>
