@@ -13,7 +13,6 @@ import Favorites from "./components/Favorites/Favorites";
 import Dashboard from "./components/Dashboard/Dashboard";
 import Modification from "./components/Modification/Modification";
 import ProfileDashboard from "./components/ProfileDashboard/ProfileDashboard.jsx";
-import PurchaseDetail from "./components/ProfileDashboard/PurchaseDetail/PurchaseDetail.jsx";
 
 function App() {
   return (
@@ -31,7 +30,6 @@ function App() {
         <Route path="/profile" element={<ProfileDashboard />} />
         <Route path="/admin/dashboard" element={<Dashboard />} />
         <Route path="/modification" element={<Modification />} />
-        <Route path="/purchaseDetail/:id" element={<PurchaseDetail />} />
       </Routes>
       <Footer />
     </>

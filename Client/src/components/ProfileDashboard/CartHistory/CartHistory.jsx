@@ -24,26 +24,69 @@ export default function CartHistory() {
     }
   }, []);
 
+  //-----------------------------------------------------
+  const [selectedOption, setSelectedOption] = useState("Date...");
+  const filterPurchasesByLastWeek = () => {
+    const currentDate = new Date();
+    const lastWeekDate = new Date();
+    lastWeekDate.setDate(lastWeekDate.getDate() - 7);
+
+    const filteredPurchases = purchases.filter((purchase) => {
+      const purchaseDate = new Date(purchase.createdAt);
+      return purchaseDate >= lastWeekDate && purchaseDate <= currentDate;
+    });
+
+    return filteredPurchases;
+  };
+  const filterPurchasesByLastMonth = () => {
+    const currentDate = new Date();
+    const lastMonthDate = new Date();
+    lastMonthDate.setMonth(lastMonthDate.getMonth() - 1);
+
+    const filteredPurchases = purchases.filter((purchase) => {
+      const purchaseDate = new Date(purchase.createdAt);
+      return purchaseDate >= lastMonthDate && purchaseDate <= currentDate;
+    });
+
+    return filteredPurchases;
+  };
+  const filterPurchasesByLastYear = () => {
+    const currentDate = new Date();
+    const lastYearDate = new Date();
+    lastYearDate.setFullYear(lastYearDate.getFullYear() - 1);
+
+    const filteredPurchases = purchases.filter((purchase) => {
+      const purchaseDate = new Date(purchase.createdAt);
+      return purchaseDate >= lastYearDate && purchaseDate <= currentDate;
+    });
+
+    return filteredPurchases;
+  };
+  const handleSelectChange = (event) => {
+    setSelectedOption(event.target.value);
+  };
+
+  let filteredPurchases = purchases;
+
+  if (selectedOption === "Last week") {
+    filteredPurchases = filterPurchasesByLastWeek();
+  } else if (selectedOption === "Last month") {
+    filteredPurchases = filterPurchasesByLastMonth();
+  } else if (selectedOption === "Last year") {
+    filteredPurchases = filterPurchasesByLastYear();
+  }
+
   return (
     <div className={styles.carthistory}>
       <h2>Shopping history</h2>
-      <select name="" id="">
+      <select name="" id="" onChange={handleSelectChange}>
         <option hidden={true}>Date...</option>
         <option>Last week</option>
         <option>Last month</option>
         <option>Last year</option>
       </select>
-      <div className={styles.titleContainer}>
-        <div className={styles.emptyContainer}></div>
-        <div className={styles.h6Container}>
-          <h6>Total Price</h6>
-        </div>
-        <div className={styles.h6Container}>
-          <h6>Date</h6>
-        </div>
-      </div>
       <div className={styles.container}>
-        {purchases.map((purchase) => (
+        {filteredPurchases.map((purchase) => (
           <PurchaseCard
             key={purchase.id}
             id={purchase.id}
