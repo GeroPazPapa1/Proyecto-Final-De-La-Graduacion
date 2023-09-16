@@ -99,7 +99,7 @@ export default function NavBar() {
                   )}
                   <Link to={"/profileSettings"}>
                     <button className={styles.button} id={loggedUser.id}>
-                      Edit Profile
+                      My Profile
                     </button>
                   </Link>
                   <Link to={"/"}>
@@ -151,7 +151,7 @@ export default function NavBar() {
                   )}
                   <Link to={"/profileSettings"}>
                     <button className={styles.button} id={loggedUser.id}>
-                      Edit Profile
+                      My Profile
                     </button>
                   </Link>
                   <Link to={"/"}>
@@ -200,7 +200,7 @@ export default function NavBar() {
                   )}
                   <Link to={"/profileSettings"}>
                     <button className={styles.button} id={loggedUser.id}>
-                      Edit Profile My profile
+                      My profile
                     </button>
                   </Link>
                   <Link to={"/"}>
