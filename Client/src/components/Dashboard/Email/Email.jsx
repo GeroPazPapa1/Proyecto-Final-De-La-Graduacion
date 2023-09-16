@@ -8,7 +8,7 @@ import EDIT from "./Icons/EDIT.svg";
 import { useState } from "react";
 
 export default function Email(props) {
-    const { id, name, email, country, status, verify, ban, onCheckboxChange, isChecked } = props;
+    const { id, name, lastName, email, country, status, verify, ban, image, onCheckboxChange, isChecked } = props;
 
     const dispatch = useDispatch();
 
@@ -16,6 +16,14 @@ export default function Email(props) {
     const banText = ban ? "Banned" : "Not";
     const veryClass = verify ? styles.emailItemVerifyYes : styles.emailItemVerifyNot;
     const veryClassB = ban ? styles.emailItemVerifyNot : styles.emailItemVerifyYes;
+    let icon = "question";
+    let imageTag = "";
+
+    if (image) {
+        icon = null;
+        imageTag = `<img src="${image}" alt="User Image" width="100" style="border-radius: 50%;">`;
+    }
+    console.log(image);
 
     const handleDeletedEmail = async (id) => {
             Swal.fire({
@@ -23,8 +31,8 @@ export default function Email(props) {
             text: `You are about to delete ${name} from the database`,
             icon: "warning",
             showCancelButton: true,
-            confirmButtonText: "Accept",
             cancelButtonText: "Cancel",
+            confirmButtonText: "Accept",
         }).then((result) => {
             if (result.isConfirmed) {
                 dispatch(deleteUserWithID(id));
@@ -36,8 +44,16 @@ export default function Email(props) {
     const handlePutEmail = (id) => {
         Swal.fire({
             title: "Select options",
-            icon: "question",
-            html: '<select id="select-status" class="swal2-select">' +
+            icon: icon,
+            html:
+                imageTag +
+                '<br>' +
+                '<input id="input-name" class="swal2-input" type="text" placeholder="Name">' +
+                '<input id="input-lastname" class="swal2-input" type="text" placeholder="Lastname">' +
+                '<input id="input-age" class="swal2-input" type="number" placeholder="Age">' +
+                '<input id="input-country" class="swal2-input" type="text" placeholder="Country">' +
+                '<input id="input-phone" class="swal2-input" type="text" placeholder="Phone">' +
+                '<select id="select-status" class="swal2-select">' +
                 '<option value="admin">Admin</option>' +
                 '<option value="user">User</option>' +
                 '</select>' +
@@ -46,23 +62,53 @@ export default function Email(props) {
                 '<option value=false>Not Banned</option>' +
                 '</select>',
             showCancelButton: true,
-            confirmButtonText: "Accept",
             cancelButtonText: "Cancel",
+            confirmButtonText: "Accept",
             preConfirm: () => {
+                const selectedName = document.getElementById('input-name').value;
+                const selectedLastname = document.getElementById('input-lastname').value;
+                const selectedAge = document.getElementById('input-age').value;
+                const selectedCountry = document.getElementById('input-country').value;
+                const selectedPhone = document.getElementById('input-phone').value;
                 const selectedStatus = document.getElementById('select-status').value;
                 const selectedBan = document.getElementById('select-ban').value;
                 return {
                     type: selectedStatus,
-                    ban: selectedBan
+                    ban: selectedBan,
+                    name: selectedName,
+                    lastName: selectedLastname,
+                    age: selectedAge,
+                    country: selectedCountry,
+                    phone: selectedPhone
                 };
             }
         }).then(async (result) => {
             if (result.isConfirmed) {
-                const { type, ban } = result.value;
+                // const { type, ban, name, lastName, age, country, phone } = result.value;
+                let objeto = {}
+                if (result.value.type){
+                    objeto.type = result.value.type
+                }
+                if (result.value.ban){
+                    objeto.ban = result.value.ban
+                }
+                if (result.value.name){
+                    objeto.name = result.value.name
+                }
+                if (result.value.lastName){
+                    objeto.lastName = result.value.lastName
+                }
+                if (result.value.age){
+                    objeto.age = result.value.age
+                }
+                if (result.value.country){
+                    objeto.country = result.value.country
+                }
+                if (result.value.phone){
+                    objeto.phone = result.value.phone
+                }
                 // Aquí puedes utilizar los valores seleccionados (type y ban) como desees
-                console.log("Type seleccionado:", status);
-                console.log("Ban seleccionado:", ban);
-                await dispatch(editPutUser(id, type, ban));
+                await dispatch(editPutUser(objeto, id));
                 await dispatch(getDashboard());
                 await dispatch(applyFilterDb("originEmails"));
             }
@@ -77,7 +123,7 @@ export default function Email(props) {
             onChange={() => onCheckboxChange(id)}>
             </input>
             <div className={styles.emailItem}>{email}</div>
-            <div className={styles.emailItem}>{name}</div>
+            <div className={styles.emailItem}>{name} {lastName}</div>
             <div className={styles.emailItem}>{country}</div>
             <div className={styles.emailItem}>{status}</div>
             <div className={`${veryClass}`}>{verifyText}</div>

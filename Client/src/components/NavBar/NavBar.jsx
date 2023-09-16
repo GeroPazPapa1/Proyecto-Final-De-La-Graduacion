@@ -4,18 +4,17 @@ import CART from "./Icons/CART.svg";
 import styles from "./NavBar.module.css";
 import { Link, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 import axios from "axios";
 import { logOut } from '../NotiStack'
 
 export default function NavBar() {
   const location = useLocation();
   const [user, setUser] = useState([]);
+  // const user = useSelector((state) => )
   const loggedUserJson = localStorage.getItem("authToken");
   const loggedUser = loggedUserJson ? JSON.parse(loggedUserJson) : null;
 
-  const handleLogout = () => {
-    localStorage.clear();
-  };
 
   if (location.pathname.startsWith("/admin")) {
     return null;
@@ -27,16 +26,19 @@ export default function NavBar() {
   };
 
   useEffect(() => {
-    const userInfoFn = async () => {
-      try {
+  const userInfoFn = async () => {
+    try {
+      if (loggedUser.response && loggedUser.response.id) {
         const { data } = await axios.get(`http://localhost:3001/user/${loggedUser.response.id}`);
         setUser(data);
-      } catch (error) {
-        console.log(`The request could not be completed because of the following error: ${error.message}`);
       }
+    } catch (error) {
+      console.log(`The request could not be completed because of the following error: ${error.message}`);
     }
-    userInfoFn();
-  }, []);
+  };
+
+  userInfoFn();
+}, []);
 
   return (
     <div className={styles.container}>

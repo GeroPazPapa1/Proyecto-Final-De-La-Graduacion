@@ -7,6 +7,7 @@ import EDIT from "../Email/Icons/EDIT.svg";
 import TRASH from "../Email/Icons/TRASH.svg";
 import Swal from "sweetalert2";
 import Filters from "../Filters/Filters";
+import SearchBarDashboard from "../SearchBar/SearchBar";
 
 export default function DashBoardEmail() {
 
@@ -34,8 +35,8 @@ export default function DashBoardEmail() {
                         '<option value=false>Not Banned</option>' +
                         '</select>',
                     showCancelButton: true,
-                    confirmButtonText: "Accept",
                     cancelButtonText: "Cancel",
+                    confirmButtonText: "Accept",
                     preConfirm: () => {
                         const selectedStatus = document.getElementById('select-status').value;
                         const selectedBan = document.getElementById('select-ban').value;
@@ -46,12 +47,10 @@ export default function DashBoardEmail() {
                     }
                 }).then(async (result) => {
                     if (result.isConfirmed) {
-                        const { type, ban } = result.value;
+                        const objeto = result.value;
                         // Aquí puedes utilizar los valores seleccionados (type y ban) como desees
-                        console.log("Type seleccionado:", status);
-                        console.log("Ban seleccionado:", ban);
                         for (const id in emailSelection) {
-                        await dispatch(editPutUser(id, type, ban));}
+                        await dispatch(editPutUser(objeto, id));}
                         await dispatch(getDashboard());
                         await dispatch(applyFilterDb("originEmails"));
                     }
@@ -64,8 +63,8 @@ export default function DashBoardEmail() {
             text: `You are about to delete ${name} from the database`,
             icon: "warning",
             showCancelButton: true,
-            confirmButtonText: "Accept",
             cancelButtonText: "Cancel",
+            confirmButtonText: "Accept",
         }).then((result) => {
             if (result.isConfirmed) {
                 for (const id in emailSelection) {
@@ -109,6 +108,9 @@ export default function DashBoardEmail() {
 
     return (
         <div>
+                <div>
+                    <SearchBarDashboard/>
+                </div>
                 <div className={styles.filtersEdit}>
                     <Filters/>
                     <button className={aux<2 ? styles.deleteDisabled : styles.delete} onClick={handleCheckboxActionDelete} disabled={aux<2}>
@@ -139,6 +141,8 @@ export default function DashBoardEmail() {
                         key={email.id}
                         id={email.id}
                         name={email.name}
+                        lastName={email.lastName}
+                        image={email.image}
                         email={email.email}
                         country={email.country}
                         status={email.status}

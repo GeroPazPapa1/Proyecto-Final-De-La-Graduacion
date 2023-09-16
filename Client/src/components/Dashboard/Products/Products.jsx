@@ -6,7 +6,8 @@ import { cardsLoadedTrue, applyFilters, getAllCars, editPutUser, getDashboard } 
 import EDIT from "../Email/Icons/EDIT.svg";
 import TRASH from "../Email/Icons/TRASH.svg";
 import Swal from "sweetalert2";
-import Filters from "../Filters/Filters";
+import FiltersCar from "../Filters/FiltersCar";
+import SearchBarCar from "../SearchBar/SearchBarCar";
 
 export default function DashBoardProducts() {
 
@@ -118,8 +119,9 @@ const handleSelectAllChange = () => {
 
     return (
         <div>
+                {/* <SearchBarCar/>*/}
                 <div className={styles.filtersEdit}>
-                    <Filters/>
+                    {/*<FiltersCar/>*/}
                     <button className={aux<2 ? styles.deleteDisabled : styles.delete} disabled={aux<2}>
                        <img className={styles.img} src={TRASH} alt="Icon..." title="Eliminar usuario" />
                     </button>

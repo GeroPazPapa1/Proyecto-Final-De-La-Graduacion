@@ -236,14 +236,17 @@ export const deleteUserWithID = (id) => {
   };
 };
 
-export const editPutUser = (id, type, ban) => {
+
+export const editPutUser = (objeto, id) => {
   const endpoint = `http://localhost:3001/user/dashboard/users/${id}`;
   return async (dispatch) => {
+
+    console.log(id, "Soy el id");
+
     try {
-      const { status, data } = await axios.put(endpoint, {
-        status: type,
-        ban: ban,
-      });
+      const { status, data } = await axios.put(endpoint, objeto);
+
+      console.log(data, "soy el data");
       if (status === 200) {
         enqueueSnackbar("User edited successfully", { variant: "success" });
       }
@@ -315,5 +318,33 @@ export const orderFilters = (order) => {
   return {
     type: "SORT_FILTER",
     payload: order,
+  };
+};
+
+export const editPutCar = (objeto, id) => {
+  const endpoint = `http://localhost:3001/car/edit/${id}`;
+  return async (dispatch) => {
+
+    console.log(id, "Soy el id");
+
+    try {
+      const { status, data } = await axios.put(endpoint, objeto);
+
+      console.log(data, "soy el data");
+      if (status === 200) {
+        enqueueSnackbar("Car edited successfully", { variant: "success" });
+      }
+      return dispatch({
+        type: "EDITED_CAR",
+        payload: data,
+      });
+    } catch (error) {
+      if (error.response) {
+        const { status } = error.response;
+        if (status === 403) {
+          enqueueSnackbar("Car not found", { variant: "error" });
+        }
+      }
+    }
   };
 };

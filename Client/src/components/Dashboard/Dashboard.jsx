@@ -95,9 +95,6 @@ export default function Dashboard() {
                                 <div className={styles.hello}>
                                     <h2>DashBoard</h2>
                                 </div>
-                                <div>
-                                    <SearchBarDashboard/>
-                                </div>
                                 <div>{selectedTab === "USERS" && (
                                     <div className={styles.DashboardUser}>
                                         <DashBoardEmail/>
