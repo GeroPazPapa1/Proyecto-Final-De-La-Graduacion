@@ -1,20 +1,40 @@
-import React, { useEffect } from 'react';
+import React, { useEffect } from "react";
 import Cards from "./Cards/Cards.jsx";
 import Filters from "./Filters/Filters.jsx";
 import Search from "./Search/Search.jsx";
 import styles from "./Home.module.css";
-import { MercadoPagoFail, MercadoPagoSuccess } from '../NotiStack.jsx';
+import { MercadoPagoFail, MercadoPagoSuccess } from "../NotiStack.jsx";
+import axios from "axios";
 
 export default function Home() {
   useEffect(() => {
-    const transactionStatus = localStorage.getItem('transactionStatus');
+    const transactionStatus = localStorage.getItem("transactionStatus");
     // Comprueba el estado de la compra y muestra la notificación adecuada
     if (transactionStatus === "success") {
       MercadoPagoSuccess();
+      const subPrice = localStorage.getItem("subPrice");
+      const purshasedCars = localStorage.getItem("purshasedCars");
+      const userId = localStorage.getItem("userId");
+      const purchasedProductsName = localStorage.getItem(
+        "purchasedProductsName"
+      );
+      try {
+        const response = axios.post("http://localhost:3001/buy/create", {
+          userId: userId,
+          carsId: purshasedCars,
+          price: subPrice,
+          description: purchasedProductsName,
+        });
+      } catch (error) {
+        console.log(error);
+      }
     } else if (transactionStatus === "fail") {
       MercadoPagoFail();
     }
-    localStorage.removeItem('transactionStatus');
+    localStorage.removeItem("transactionStatus");
+    localStorage.removeItem("subPrice");
+    localStorage.removeItem("purshasedCars");
+    localStorage.removeItem("cart");
   }, []);
 
   return (

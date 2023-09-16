@@ -1,10 +1,8 @@
 const { putCarController } = require("../controllers/putCarController");
-const { allCar } = require("../controllers/getAllCar");
 
 const putCarHandler = async (req, res) => {
   try {
-    const {name, image, brand, model, state, price, location, color, description } = req.body;
-    const { id } = req.params;
+    const { id, name, image, brand, model, state, price, location, color, description } = req.body;
     // An object is created with the modifications that arrive by body and, if there are modifications, they are added
     const modifications = {id};
     if (name) modifications.name = name;
@@ -16,13 +14,9 @@ const putCarHandler = async (req, res) => {
     if (location) modifications.location = location;
     if (color) modifications.color = color;
     if (description) modifications.description = description;
-
-    console.log(modifications);
     // When all the modifications are ready, they are sent to the controller.
     const carModified = await putCarController(modifications);
-    const allCarEdited = await allCar();
-
-    return res.status(200).json(allCarEdited);
+    return res.status(200).json(carModified);
   } catch (error) {
     return res.status(500).json({ error: error.message });
   }

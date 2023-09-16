@@ -10,7 +10,7 @@ let transporter = nodemailer.createTransport({
       "385426413118-qtcv0kd8so271r879rhbopiunf8mjpm7.apps.googleusercontent.com",
     clientSecret: "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",
     refreshToken:
-      "1//04D3fv7-WM4MKCgYIARAAGAQSNwF-L9Irqo0goFV05ppJSv_GVUWpdLE0t828ncVRTsvYfwf73cl0A_nPxniZ_rZaD9RrP3i2OyY",
+      "1//047171sTOtbhbCgYIARAAGAQSNwF-L9Irb81srx28yuNHt8y9CutU-zeIb-8jZwGlbYIneTy4AUeHoNb_atLxJaPYFzqCgAC1OCE",
   },
 });
 module.exports = transporter;

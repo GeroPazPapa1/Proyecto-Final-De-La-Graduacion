@@ -26,19 +26,16 @@ export default function NavBar() {
   };
 
   useEffect(() => {
-  const userInfoFn = async () => {
-    try {
-      if (loggedUser.response && loggedUser.response.id) {
+    const userInfoFn = async () => {
+      try {
         const { data } = await axios.get(`http://localhost:3001/user/${loggedUser.response.id}`);
         setUser(data);
+      } catch (error) {
+        console.log(`The request could not be completed because of the following error: ${error.message}`);
       }
-    } catch (error) {
-      console.log(`The request could not be completed because of the following error: ${error.message}`);
     }
-  };
-
-  userInfoFn();
-}, []);
+    userInfoFn();
+  }, []);
 
   return (
     <div className={styles.container}>
@@ -67,7 +64,7 @@ export default function NavBar() {
                 </Link>
               )}
               <Link to="/">
-              <button onClick={handleLogout}>Logout</button>
+                <button onClick={handleLogout}>Logout</button>
               </Link>
             </>
           )}
@@ -91,15 +88,18 @@ export default function NavBar() {
               {loggedUser && (
                 <>
                   <img src={user.image} alt="" className={styles.iconImage} />
-                  <span className={styles.name}>{user.name}</span>
+                  <Link to={"/profile"}>
+                    {" "}
+                    <span className={styles.name}>{user.name}</span>
+                  </Link>
                   {loggedUser.response?.type === "admin" && (
                     <Link to={"/admin/dashboard"}>
-                      <button>Dashboard</button>
+                      <button className={styles.button}>Dashboard</button>
                     </Link>
                   )}
                   <Link to={"/profileSettings"}>
                     <button className={styles.button} id={loggedUser.id}>
-                    Edit Profile
+                      Edit Profile
                     </button>
                   </Link>
                   <Link to={"/"}>
@@ -151,7 +151,7 @@ export default function NavBar() {
                   )}
                   <Link to={"/profileSettings"}>
                     <button className={styles.button} id={loggedUser.id}>
-                    Edit Profile
+                      Edit Profile
                     </button>
                   </Link>
                   <Link to={"/"}>
@@ -200,8 +200,7 @@ export default function NavBar() {
                   )}
                   <Link to={"/profileSettings"}>
                     <button className={styles.button} id={loggedUser.id}>
-                    Edit Profile
-                      My profile
+                      Edit Profile My profile
                     </button>
                   </Link>
                   <Link to={"/"}>

@@ -233,7 +233,6 @@ export default function FormUserModification({ id, image }) {
             {/* Show error message if exists*/}
             {error.password && <p className={style.errors}>{error.password}</p>}
           </div>
-
           <button
             type="submit"
             className={style.btn_register}
