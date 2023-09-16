@@ -5,8 +5,11 @@ import styles from "./NavBar.module.css";
 import { Link, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { addMenuOption } from "../../Redux/actions";
+import { connect, useDispatch } from "react-redux";
 
 export default function NavBar() {
+  const dispatch = useDispatch();
   const location = useLocation();
   const [user, setUser] = useState([]);
   const loggedUserJson = localStorage.getItem("authToken");
@@ -74,9 +77,24 @@ export default function NavBar() {
                   </div>
                   <div className={styles.dropdownContent}>
                     {/* Aquí agregamos las opciones del menú */}
-                    <Link to="/purchases">Purchases</Link>
-                    <Link to="/profile">My Profile</Link>
-                    <Link to="/reviews">Reviews</Link>
+                    <Link
+                      onClick={() => dispatch(addMenuOption("Purchases"))}
+                      to="/profile"
+                    >
+                      Purchases
+                    </Link>
+                    <Link
+                      to="/profile"
+                      onClick={() => dispatch(addMenuOption("Profile"))}
+                    >
+                      My Profile
+                    </Link>
+                    <Link
+                      to="/profile"
+                      onClick={() => dispatch(addMenuOption("Reviews"))}
+                    >
+                      Reviews
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -127,9 +145,24 @@ export default function NavBar() {
                       </div>
                       <div className={styles.dropdownContent}>
                         {/* Aquí agregamos las opciones del menú */}
-                        <Link to="/purchases">Purchases</Link>
-                        <Link to="/profile">My Profile</Link>
-                        <Link to="/reviews">Reviews</Link>
+                        <Link
+                          onClick={() => dispatch(addMenuOption("Purchases"))}
+                          to="/profile"
+                        >
+                          Purchases
+                        </Link>
+                        <Link
+                          to="/profile"
+                          onClick={() => dispatch(addMenuOption("Profile"))}
+                        >
+                          My Profile
+                        </Link>
+                        <Link
+                          to="/profile"
+                          onClick={() => dispatch(addMenuOption("Reviews"))}
+                        >
+                          Reviews
+                        </Link>
                       </div>
                     </div>
                   </div>
@@ -195,9 +228,24 @@ export default function NavBar() {
                       </div>
                       <div className={styles.dropdownContent}>
                         {/* Aquí agregamos las opciones del menú */}
-                        <Link to="/purchases">Purchases</Link>
-                        <Link to="/profile">My Profile</Link>
-                        <Link to="/reviews">Reviews</Link>
+                        <Link
+                          onClick={() => dispatch(addMenuOption("Purchases"))}
+                          to="/profile"
+                        >
+                          Purchases
+                        </Link>
+                        <Link
+                          to="/profile"
+                          onClick={() => dispatch(addMenuOption("Profile"))}
+                        >
+                          My Profile
+                        </Link>
+                        <Link
+                          to="/profile"
+                          onClick={() => dispatch(addMenuOption("Reviews"))}
+                        >
+                          Reviews
+                        </Link>
                       </div>
                     </div>
                   </div>
@@ -265,9 +313,24 @@ export default function NavBar() {
                       </div>
                       <div className={styles.dropdownContent}>
                         {/* Aquí agregamos las opciones del menú */}
-                        <Link to="/purchases">Purchases</Link>
-                        <Link to="/profile">My Profile</Link>
-                        <Link to="/reviews">Reviews</Link>
+                        <Link
+                          onClick={() => dispatch(addMenuOption("Purchases"))}
+                          to="/profile"
+                        >
+                          Purchases
+                        </Link>
+                        <Link
+                          to="/profile"
+                          onClick={() => dispatch(addMenuOption("Profile"))}
+                        >
+                          My Profile
+                        </Link>
+                        <Link
+                          to="/profile"
+                          onClick={() => dispatch(addMenuOption("Reviews"))}
+                        >
+                          Reviews
+                        </Link>
                       </div>
                     </div>
                   </div>
@@ -328,9 +391,24 @@ export default function NavBar() {
                       </div>
                       <div className={styles.dropdownContent}>
                         {/* Aquí agregamos las opciones del menú */}
-                        <Link to="/purchases">Purchases</Link>
-                        <Link to="/profile">My Profile</Link>
-                        <Link to="/reviews">Reviews</Link>
+                        <Link
+                          onClick={() => dispatch(addMenuOption("Purchases"))}
+                          to="/profile"
+                        >
+                          Purchases
+                        </Link>
+                        <Link
+                          to="/profile"
+                          onClick={() => dispatch(addMenuOption("Profile"))}
+                        >
+                          My Profile
+                        </Link>
+                        <Link
+                          to="/profile"
+                          onClick={() => dispatch(addMenuOption("Reviews"))}
+                        >
+                          Reviews
+                        </Link>
                       </div>
                     </div>
                   </div>

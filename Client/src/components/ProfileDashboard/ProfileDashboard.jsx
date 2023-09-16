@@ -1,17 +1,25 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./ProfileDashboard.module.css";
 import Posts from "./Posts/Posts";
 import Reviews from "./Reviews/Reviews";
 import CartHistory from "./CartHistory/CartHistory";
 import Modification from "../Modification/Modification";
+import { useSelector } from "react-redux";
 
 export default function ProfileDashboard() {
-  const [selectedTopic, setSelectedTopic] = useState("Cart History");
+  const [selectedTopic, setSelectedTopic] = useState("Purchases");
 
   const handleTopic = (topic) => {
     setSelectedTopic(topic);
   };
-
+  let menuOption = useSelector((state) => state.menuOption);
+  useEffect(() => {
+    if (!menuOption) {
+      menuOption = "Profile";
+      handleTopic(menuOption);
+    }
+    handleTopic(menuOption);
+  }, []);
   return (
     <>
       <div className={styles.profile}>
@@ -19,11 +27,11 @@ export default function ProfileDashboard() {
           <div className={styles.topics}>
             <button
               className={
-                selectedTopic === "Profile"
+                selectedTopic === "Purchases"
                   ? styles.selectedTopic
                   : styles.topic
               }
-              onClick={() => handleTopic("Profile")}
+              onClick={() => handleTopic("Purchases")}
             >
               <img
                 src="https://img.icons8.com/ios/50/paid--v1.png"
@@ -34,11 +42,11 @@ export default function ProfileDashboard() {
             </button>
             <button
               className={
-                selectedTopic === "Cart History"
+                selectedTopic === "Profile"
                   ? styles.selectedTopic
                   : styles.topic
               }
-              onClick={() => handleTopic("Cart History")}
+              onClick={() => handleTopic("Profile")}
             >
               <img
                 src="https://img.icons8.com/material-outlined/24/admin-settings-male.png"
@@ -66,14 +74,14 @@ export default function ProfileDashboard() {
         </div>
         <div className={styles.col2}>
           <div className={styles.col2a}>
-            {selectedTopic === "Profile" && (
+            {selectedTopic === "Purchases" && (
               <div className={styles.profile}>
                 <div className={styles.carthistory}>
                   <CartHistory />
                 </div>
               </div>
             )}
-            {selectedTopic === "Cart History" && (
+            {selectedTopic === "Profile" && (
               <div className={styles.myProfile}>
                 <Modification />
               </div>
