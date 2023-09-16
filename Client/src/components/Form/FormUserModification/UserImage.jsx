@@ -1,6 +1,7 @@
 import style from "./UserImage.module.css";
 import React, { useState } from "react";
 import axios from "axios";
+import { uploadImageFail, uploadImageSuccess } from "../../NotiStack";
 
 const cloudinaryUploadUrl = "https://api.cloudinary.com/v1_1/Vehibuy/upload";
 
@@ -43,22 +44,26 @@ const UserImage = () => {
       const response = await axios.post(cloudinaryUploadUrl, formData);
       if (response.status === 200) {
         setImageUrl(response.data.secure_url);
-        setError("Image uploaded successfully");
+        uploadImageSuccess();
         localStorage.setItem("userImage", response.data.secure_url);
         const { data } = await axios.put(`http://localhost:3001/user/${userId}`, {image: response.data.secure_url});
       }
     } catch (error) {
-      setError("Error uploading image to Cloudinary");
+      uploadImageFail();
     }
   };
 
   return (
     <div>
+      <label htmlFor="imageInput" className={style.buttonImage}>
+        Select File
+      </label>
       <input
         type="file"
         accept="image/*"
         id="imageInput"
-        className={style.buttonImage}
+        className={style.hiddenInput}
+        title="No files selected" // Texto en inglés
       />
       <button onClick={handleButton} className={style.buttonImage}>
         Upload
