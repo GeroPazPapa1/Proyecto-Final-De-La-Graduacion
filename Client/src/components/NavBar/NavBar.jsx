@@ -251,7 +251,7 @@ export default function NavBar() {
                   </div>
                   {loggedUser.response?.type === "admin" && (
                     <Link to={"/admin/dashboard"}>
-                      <button>Dashboard</button>
+                      <button className={styles.button}>Dashboard</button>
                     </Link>
                   )}
                   <Link to={"/"}>
@@ -385,36 +385,18 @@ export default function NavBar() {
                           className={styles.iconImage}
                         />{" "}
                         <button className={styles.buttonDropdown}>
-                          {user.name} &#9660;{" "}
+                          {user.name}
                           {/* Agregamos una flecha hacia abajo para indicar que es desplegable */}
                         </button>
                       </div>
                       <div className={styles.dropdownContent}>
                         {/* Aquí agregamos las opciones del menú */}
-                        <Link
-                          onClick={() => dispatch(addMenuOption("Purchases"))}
-                          to="/profile"
-                        >
-                          Purchases
-                        </Link>
-                        <Link
-                          to="/profile"
-                          onClick={() => dispatch(addMenuOption("Profile"))}
-                        >
-                          My Profile
-                        </Link>
-                        <Link
-                          to="/profile"
-                          onClick={() => dispatch(addMenuOption("Reviews"))}
-                        >
-                          Reviews
-                        </Link>
                       </div>
                     </div>
                   </div>
                   {loggedUser.response?.type === "admin" && (
                     <Link to={"/admin/dashboard"}>
-                      <button>Dashboard</button>
+                      <button className={styles.button}>Dashboard</button>
                     </Link>
                   )}
                   <Link to={"/"}>
