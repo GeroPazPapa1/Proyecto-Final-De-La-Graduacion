@@ -152,3 +152,42 @@ export const deleteUserSuccess = () => {
         }
     });
 }
+
+export const createProductSuccess = () => {
+    enqueueSnackbar('Your product has been successfully created!', {
+        variant: 'success',
+        anchorOrigin: {
+            vertical: 'top',
+            horizontal: 'right',
+        }
+    });
+}
+
+export const processCancelSuccess = () => {
+    enqueueSnackbar('Your update has been canceled successfully!', {
+        variant: 'success',
+        anchorOrigin: {
+            vertical: 'top',
+            horizontal: 'right',
+        }
+    });
+}
+
+export const uploadImageSuccess = () => {
+    enqueueSnackbar('Your image has been upload successfully!', {
+        variant: 'success',
+        anchorOrigin: {
+            vertical: 'bottom',
+            horizontal: 'right',
+        }
+    });
+}
+export const uploadImageFail = () => {
+    enqueueSnackbar('The image upload failed', {
+        variant: 'error',
+        anchorOrigin: {
+            vertical: 'bottom',
+            horizontal: 'right',
+        }
+    });
+}
