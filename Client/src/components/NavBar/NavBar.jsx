@@ -12,11 +12,20 @@ export default function NavBar() {
   const loggedUserJson = localStorage.getItem("authToken");
   const loggedUser = loggedUserJson ? JSON.parse(loggedUserJson) : null;
 
+  useEffect(() => {
+    const loggedUserJson = localStorage.getItem("authToken");
+    const loggedUser = loggedUserJson ? JSON.parse(loggedUserJson) : null;
+    setUser(loggedUser?.response || []);
+  }, []);
+
   const handleLogout = () => {
+    setUser([]);
     localStorage.clear();
   };
 
   useEffect(() => {
+    handleLogout;
+    console.log(loggedUser);
     const userInfoFn = async () => {
       try {
         const { data } = await axios.get(`/user/${loggedUser.response.id}`);
@@ -28,7 +37,7 @@ export default function NavBar() {
       }
     };
     userInfoFn();
-  }, []);
+  }, [location.pathname]);
 
   if (location.pathname.startsWith("/admin")) {
     return null;
@@ -55,8 +64,7 @@ export default function NavBar() {
           ) : (
             <>
               <Link to={"/profileSettings"} className={styles.icon_name_user}>
-                <img src={user.image} alt="" className={styles.iconImage} />
-                {" "}
+                <img src={user.image} alt="" className={styles.iconImage} />{" "}
                 <button className={styles.button} id={loggedUser.id}>
                   {user.name}
                 </button>
@@ -92,9 +100,11 @@ export default function NavBar() {
             <div className={styles.containerL}>
               {loggedUser && (
                 <>
-                  <Link to={"/profileSettings"} className={styles.icon_name_user}>
-                    <img src={user.image} alt="" className={styles.iconImage} />
-                    {" "}
+                  <Link
+                    to={"/profileSettings"}
+                    className={styles.icon_name_user}
+                  >
+                    <img src={user.image} alt="" className={styles.iconImage} />{" "}
                     <button className={styles.button} id={loggedUser.id}>
                       {user.name}
                     </button>
@@ -151,9 +161,11 @@ export default function NavBar() {
                       <button>Dashboard</button>
                     </Link>
                   )}
-                  <Link to={"/profileSettings"} className={styles.icon_name_user}>
-                    <img src={user.image} alt="" className={styles.iconImage} />
-                    {" "}
+                  <Link
+                    to={"/profileSettings"}
+                    className={styles.icon_name_user}
+                  >
+                    <img src={user.image} alt="" className={styles.iconImage} />{" "}
                     <button className={styles.button} id={loggedUser.id}>
                       {user.name}
                     </button>
@@ -202,9 +214,11 @@ export default function NavBar() {
                       <button>Dashboard</button>
                     </Link>
                   )}
-                  <Link to={"/profileSettings"} className={styles.icon_name_user}>
-                    <img src={user.image} alt="" className={styles.iconImage} />
-                    {" "}
+                  <Link
+                    to={"/profileSettings"}
+                    className={styles.icon_name_user}
+                  >
+                    <img src={user.image} alt="" className={styles.iconImage} />{" "}
                     <button className={styles.button} id={loggedUser.id}>
                       {user.name}
                     </button>
