@@ -47,6 +47,7 @@ export const getAllCars = () => {
   return async (dispatch) => {
     try {
       const { data } = await axios(endpoint);
+      console.log(data);
       return dispatch({
         type: "GET_ALL_CARS",
         payload: data,
@@ -113,9 +114,7 @@ export const resetDetail = () => {
 //----------------------------------------------------------------
 
 export const searchByQuery = (queryParams) => {
-  const endpoint = `/car/search?${new URLSearchParams(
-    queryParams
-  ).toString()}`;
+  const endpoint = `/car/search?${new URLSearchParams(queryParams).toString()}`;
   return async (dispatch) => {
     try {
       const { data } = await axios(endpoint);
@@ -151,6 +150,7 @@ export const brandByQuery = () => {
   return async (dispatch) => {
     try {
       const { data } = await axios(endpoint);
+      console.log(data, "brands");
       return dispatch({
         type: "GET_ALL_BRAND",
         payload: data,
@@ -197,7 +197,7 @@ export const getDashboard = (loggedUser) => {
   return async (dispatch) => {
     try {
       const { data } = await axios(endpoint, config);
-      console.log(data)
+      console.log(data);
       return dispatch({
         type: "GET_ALL_USERS",
         payload: data,
@@ -303,12 +303,82 @@ export const applyFilterDb = (filters) => {
   return {
     type: "APPLY_FILTERS_Db",
     payload: filters,
-  }
-}
+  };
+};
 
 export const orderFilters = (order) => {
   return {
     type: "SORT_FILTER",
     payload: order,
+  };
+};
+//------------------------------------------------------------------------
+
+export const postReview = (data) => {
+  const endpoint = "/review/";
+  return async (dispatch) => {
+    try {
+      const response = await axios.post(endpoint, data);
+      return response.data;
+    } catch (error) {
+      console.error(error);
+    }
+  };
+};
+
+export const getReviews = (carId) => {
+  const endpoint = `/review/${carId}`;
+  if (carId) {
+    return async (dispatch) => {
+      try {
+        const { data } = await axios.get(endpoint);
+        dispatch({
+          type: "REVIEWS_CAR",
+          payload: data,
+        });
+      } catch (error) {
+        console.error(error);
+      }
+    };
+  }
+  return {
+    type: "RESET_REVIEWS",
+  };
+};
+
+export const resetReview = () => {
+  return {
+    type: "RESET_REVIEWS",
+  };
+};
+
+export const deleteReview = (idReview) => {
+  const endpoint = `/review/${idReview}`;
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.delete(endpoint);
+      console.log(data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+};
+
+export const updateReview = (newData) => {
+  const endpoint = "/review/";
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.put(endpoint, newData);
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const addMenuOption = (option) => {
+  return {
+    type: "ADD_MENU_OPTION",
+    payload: option,
   };
 };

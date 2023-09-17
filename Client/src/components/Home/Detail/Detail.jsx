@@ -4,11 +4,12 @@ import { useParams } from 'react-router-dom';
 import { getDetail, resetDetail, addToCart, deleteProduct } from '../../../Redux/actions';
 import styles from './Detail.module.css';
 import { useSelector, useDispatch } from 'react-redux';
-import { LocationSvg } from '../../../assets/svgs'
+import { LocationSvg, ButtonBack } from '../../../assets/svgs'
 import { CarRemovedFromCart, CarAddedToCart } from '../../NotiStack';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import Review from './Review/Review';
 
 export default function Detail() {
     const { id } = useParams();
@@ -16,6 +17,7 @@ export default function Detail() {
     const detail = useSelector((state) => state.detail);
     const cartList = useSelector((state) => state.cartList);
     const [selectedImage, setSelectedImage] = useState(null);
+    const [firstImageBordered, setFirstImageBordered] = useState(false)
     const mainSliderRef = useRef(null);
     const secondSliderRef = useRef(null);
 
@@ -68,9 +70,10 @@ export default function Detail() {
             setSelectedImage(index);
         },
     };
-
+    const idCar = detail.id
     return (
         <div className={styles.detail}>
+            <Link to={"/home"}><ButtonBack /></Link>
             <div className={styles.detail_card}>
                 <div className={`${styles.carrousel_img} ${styles.custom_carrousel}`}>
                     <div ref={secondSliderRef} className={styles.selected_imgs}>
@@ -118,9 +121,13 @@ export default function Detail() {
                     <button className={styles.btn_addcart} onClick={handleAddToCart}>
                         Add to cart
                     </button>
+
                 </div>
                 <div className={styles.description_car}>
                     <h1 className={`${styles.h1_detail} ${styles.detail_description}`}>Description:<p> {detail.description && detail.description}</p></h1>
+                </div>
+                <div>
+                    <Review />
                 </div>
             </div>
         </div >

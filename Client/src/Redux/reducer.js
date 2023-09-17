@@ -9,6 +9,7 @@ const initialState = {
   pageFiltered: [],
   pageFilteredDb: [],
   cartHistory: [],
+  menuOption: "",
 
   queryParams: {
     name: "",
@@ -43,6 +44,7 @@ const initialState = {
   colorsLoaded: false,
   locationLoaded: false,
   usersLoaded: false,
+  reviews: [],
 };
 
 function rootReducer(state = initialState, action) {
@@ -294,6 +296,18 @@ function rootReducer(state = initialState, action) {
         ...state,
         detail: {}, // Restablecer los detalles a un objeto vacío
       };
+    case "REVIEWS_CAR":
+      return {
+        ...state,
+        reviews: action.payload,
+      };
+    case "RESET_REVIEWS":
+      return {
+        ...state,
+        reviews: [], // Restablecer las reviews a un objeto vacío
+      };
+    case "ADD_MENU_OPTION":
+      return { ...state, menuOption: action.payload };
     default:
       return state;
   }

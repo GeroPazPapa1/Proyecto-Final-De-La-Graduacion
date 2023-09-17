@@ -12,15 +12,23 @@ module.exports = (sequelize) => {
       },
       rating: {
         type: DataTypes.INTEGER,
-        allowNull: false,
         validate: {
-          min: 1,
-          max: 5
+          isInt: true,
+            min: 1,
+            max: 5
         }
       },
+      title: {
+        type: DataTypes.STRING(20),
+        validate: {
+         len: { 
+          arg: [1, 20],
+          msg: 'The title cannot exceed 20 characters'
+        }
+      }
+      },
       review: {
-        type: DataTypes.TEXT,
-        allowNull: false,
+        type: DataTypes.TEXT
       },
     },
     {

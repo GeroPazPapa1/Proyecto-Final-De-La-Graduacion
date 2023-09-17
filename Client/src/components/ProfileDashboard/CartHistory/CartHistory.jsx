@@ -78,8 +78,13 @@ export default function CartHistory() {
 
   return (
     <div className={styles.carthistory}>
-      <h2>Shopping history</h2>
-      <select name="" id="" onChange={handleSelectChange}>
+      <h2 className={styles.title}>Purchases</h2>
+      <select
+        name=""
+        id=""
+        onChange={handleSelectChange}
+        className={styles.select}
+      >
         <option hidden={true}>Date...</option>
         <option>Last week</option>
         <option>Last month</option>

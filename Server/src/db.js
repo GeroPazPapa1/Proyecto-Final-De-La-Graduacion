@@ -1,5 +1,5 @@
 require("dotenv").config();
-const { DB_USER, DB_PASSWORD, DB_HOST, DB_NAME, DB_PORT } = process.env;
+const { DB_USER, DB_PASSWORD, DB_HOST, DB_NAME } = process.env;
 const { Sequelize } = require("sequelize");
 const fs = require("fs");
 const path = require("path");
@@ -10,8 +10,8 @@ const path = require("path");
 
 //conexión de sequelize
 const sequelize = new Sequelize(
-  `postgresql://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_NAME}`,
-    { logging: false, native: false }
+  `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}`,
+  { logging: false, native: false }
 );
 const basename = path.basename(__filename);
 
@@ -50,6 +50,7 @@ Review.belongsTo(User, { through: "userReviews" });
 Brand.hasMany(Car, { foreignKey: "brandId" });
 Car.belongsTo(Brand, { foreignKey: "brandId" });
 Car.belongsToMany(Sell, { through: "carSells" });
+Sell.belongsToMany(Car, { through: "carSells" });
 Car.belongsToMany(Buy, { through: "carBuys" });
 Buy.belongsToMany(Car, { through: "carBuys" });
 Sell.belongsTo(Buy, { foreignKey: "buySellId" });
