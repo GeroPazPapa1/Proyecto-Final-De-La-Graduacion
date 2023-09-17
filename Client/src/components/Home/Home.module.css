@@ -1,0 +1,26 @@
+.container {
+  margin: 2rem 9vw;
+}
+
+.container2 {
+  display: flex;
+}
+
+.imageContainer {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.horizontalCarImage {
+  max-width: 100%;
+  height: auto;
+}
+
+.coverImage {
+  width: 100%;
+  height: 300px;
+  background-image: url('../../../public/home.jpg');
+  background-size: cover;
+  background-position: center;
+}

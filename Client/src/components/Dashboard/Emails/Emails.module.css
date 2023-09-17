@@ -1,0 +1,37 @@
+.emailContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: #bdac9b   ;
+}
+
+.emailItem {
+    flex: 1;
+    padding: 2px;
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 13px;
+    color: white;
+    overflow: hidden;
+}
+.img {
+    width: 15px;
+  }
+.edit {
+    background-color: rgb(79, 144, 241);
+    border: none;
+    border-radius: 20%;
+    padding: 5px;
+    cursor: pointer;
+    margin-right: 3px;
+    margin-bottom: 5px;
+  }
+.delete {
+    background-color: rgb(210, 45, 45);
+    border: none;
+    border-radius: 20%;
+    padding: 5px;
+    cursor: pointer;
+    margin-right: 3px;
+    margin-bottom: 5px;
+  }
