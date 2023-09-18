@@ -15,11 +15,12 @@ export default function Footer() {
       <div className={styles.container2}>
         <div className={styles.containerLeft}>
           <div>
-            <img className={styles.logo} src={LOGO_NV} alt="Logo..." />
-          </div>
-          <div>
+            <div className={styles.footer_icon_company}>
+              <img className={styles.logo} src={LOGO_NV} alt="Logo..." />
+              <p>VehiBuy</p>
+            </div>
             <span>
-              <p>VehiBuy</p>Elevating Driving Luxury. Discover a curated
+              Elevating Driving Luxury. Discover a curated
               selection of exquisite luxury cars that redefine elegance and
               performance. Explore the epitome of automotive refinement with
               Elegance Motors.
@@ -29,45 +30,45 @@ export default function Footer() {
         <div className={styles.containerList}>
           <p>Our Service</p>
           <ul>
-            <Link to={"/"}>
+            <Link to={"/termsAndConditions"}>
+              <li>Terms&Conditions</li>
+            </Link>
+            <Link to={"/about"}>
               <li>About Us</li>
-            </Link>
-            <Link to={"/login"}>
-              <li>Login</li>
-            </Link>
-            <Link to={"/home"}>
-              <li>Search your car</li>
-            </Link>
-            <Link>
-              <li>Post your Car</li>
             </Link>
           </ul>
         </div>
         <div className={styles.containerList}>
           <p>Company</p>
           <ul>
-            <li>
-              <b>Tel: </b>+54 3498 437601
-            </li>
-            <li>
-              <b>Email: </b>vehibuy@vehibuy.com
-            </li>
-            <li>
-              <b>WhatsApp: </b>+54 3498 437601
-            </li>
-            <li>
-              <b>Youtube: </b>VehiBuy
-            </li>
+            <Link to={"https://wa.link/bu5p4z"}>
+              <li><b>Tel: </b>+54 3498 436701</li>
+            </Link>
+            <a href="mailto:vehibuy@vehibuy.com">
+              <li><b>Email: </b>vehibuy@vehibuy.com</li>
+            </a>
+            <Link to={"https://wa.link/bu5p4z"}>
+              <li><b>WhatsApp: </b>+54 3498 437601</li>
+            </Link>
+            <a href="https://www.youtube.com/watch?v=mmzn77xOCe0">
+              <li>Youtube</li>
+            </a>
           </ul>
         </div>
         <div className={styles.containerList}>
           <p>
-            Follow the <br /> developers
+            Q&A
           </p>
           <ul>
-            <li>Github</li>
-            <li>LinkeIn</li>
-            <li>Instagram</li>
+            <Link to={"/termsAndConditions"}>
+              <li>How to buy</li>
+            </Link>
+            <Link to={"/termsAndConditions"}>
+              <li>Warranty</li>
+            </Link>
+            <Link to={"/termsAndConditions"}>
+              <li>Shipping time</li>
+            </Link>
           </ul>
         </div>
       </div>
@@ -76,6 +77,6 @@ export default function Footer() {
           <p>Copyrigth ® 2023 | vehiBuy</p>
         </div>
       </div>
-    </div>
+    </div >
   );
 }

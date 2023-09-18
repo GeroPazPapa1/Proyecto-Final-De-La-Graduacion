@@ -74,7 +74,6 @@ const filteredCars = async (
     const filtersCar = await Car.findAll({
       where: conditions,
     })
-
     return filtersCar;
   } catch (error) {
     return error.message;

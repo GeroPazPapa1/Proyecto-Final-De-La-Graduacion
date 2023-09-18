@@ -22,7 +22,7 @@ function createPreference(req, res) {
       .then(function (response) {
         res.json({
           id: response.body.id,
-          status: "success"
+          status: "approved"
         });
       })
       .catch(function (error) {

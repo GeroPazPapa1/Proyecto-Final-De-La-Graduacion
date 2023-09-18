@@ -9,7 +9,7 @@ export default function CartHistory() {
 
   const getPurchasesHandler = async (userId) => {
     try {
-      const endpoint = "http://localhost:3001/buy/getByuser/";
+      const endpoint = "/buy/getByuser/";
       const { data } = await axios.get(`${endpoint}${userId}`);
       setPurchases(data);
     } catch (error) {
@@ -78,8 +78,13 @@ export default function CartHistory() {
 
   return (
     <div className={styles.carthistory}>
-      <h2>Shopping history</h2>
-      <select name="" id="" onChange={handleSelectChange}>
+      <h2 className={styles.title}>Purchases</h2>
+      <select
+        name=""
+        id=""
+        onChange={handleSelectChange}
+        className={styles.select}
+      >
         <option hidden={true}>Date...</option>
         <option>Last week</option>
         <option>Last month</option>

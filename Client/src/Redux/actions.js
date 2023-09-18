@@ -8,13 +8,6 @@ export const addToCart = (product) => {
   };
 };
 
-export const addBoughtToHistory = (cartProducts) => {
-  return {
-    type: 'ADD_BUY_TO_HISTORY',
-    payload: cartProducts,
-  }
-}
-
 export const addToFav = (product) => {
   return {
     type: "ADD_TO_FAV",
@@ -50,10 +43,11 @@ export const purchaseProducts = (product) => {
 };
 
 export const getAllCars = () => {
-  const endpoint = "http://localhost:3001/car";
+  const endpoint = "/car";
   return async (dispatch) => {
     try {
       const { data } = await axios(endpoint);
+      console.log(data);
       return dispatch({
         type: "GET_ALL_CARS",
         payload: data,
@@ -65,7 +59,7 @@ export const getAllCars = () => {
 };
 
 export const register = (payload) => {
-  const userCreate = "http://localhost:3001/user/create";
+  const userCreate = "/user/create";
   return async function (dispatch) {
     const response = await axios.post(userCreate, payload);
     return response;
@@ -93,7 +87,7 @@ export const setCart = (cartItems) => {
 };
 
 export const getDetail = (id) => {
-  const carId = `http://localhost:3001/car/detail/${id}`;
+  const carId = `/car/detail/${id}`;
   if (id) {
     return async function (dispatch) {
       try {
@@ -120,9 +114,7 @@ export const resetDetail = () => {
 //----------------------------------------------------------------
 
 export const searchByQuery = (queryParams) => {
-  const endpoint = `http://localhost:3001/car/search?${new URLSearchParams(
-    queryParams
-  ).toString()}`;
+  const endpoint = `/car/search?${new URLSearchParams(queryParams).toString()}`;
   return async (dispatch) => {
     try {
       const { data } = await axios(endpoint);
@@ -137,7 +129,7 @@ export const searchByQuery = (queryParams) => {
 };
 
 export const searchByQueryFilters = (queryParamsF) => {
-  const endpoint = `http://localhost:3001/user/dashboard/filter?${new URLSearchParams(
+  const endpoint = `/user/dashboard/filter?${new URLSearchParams(
     queryParamsF
   ).toString()}`;
   return async (dispatch) => {
@@ -154,10 +146,11 @@ export const searchByQueryFilters = (queryParamsF) => {
 };
 
 export const brandByQuery = () => {
-  const endpoint = "http://localhost:3001/car/brand";
+  const endpoint = "/car/brand";
   return async (dispatch) => {
     try {
       const { data } = await axios(endpoint);
+      console.log(data, "brands");
       return dispatch({
         type: "GET_ALL_BRAND",
         payload: data,
@@ -169,7 +162,7 @@ export const brandByQuery = () => {
 };
 
 export const colorByQuery = () => {
-  const endpoint = "http://localhost:3001/car/color";
+  const endpoint = "/car/color";
   return async (dispatch) => {
     try {
       const { data } = await axios(endpoint);
@@ -184,7 +177,7 @@ export const colorByQuery = () => {
 };
 
 export const locationByQuery = () => {
-  const endpoint = "http://localhost:3001/car/location";
+  const endpoint = "/car/location";
   return async (dispatch) => {
     try {
       const { data } = await axios(endpoint);
@@ -198,11 +191,13 @@ export const locationByQuery = () => {
   };
 };
 
-export const getDashboard = () => {
-  const endpoint = "http://localhost:3001/user/dashboard/users";
+export const getDashboard = (loggedUser) => {
+  const endpoint = "/user/dashboard/users";
+  const config = loggedUser;
   return async (dispatch) => {
     try {
-      const { data } = await axios(endpoint);
+      const { data } = await axios(endpoint, config);
+      console.log(data);
       return dispatch({
         type: "GET_ALL_USERS",
         payload: data,
@@ -214,7 +209,7 @@ export const getDashboard = () => {
 };
 
 export const deleteUserWithID = (id) => {
-  const endpoint = `http://localhost:3001/user/dashboard/users/${id}`;
+  const endpoint = `/user/dashboard/users/${id}`;
   return async (dispatch) => {
     try {
       const { status, data } = await axios.delete(endpoint);
@@ -237,7 +232,7 @@ export const deleteUserWithID = (id) => {
 };
 
 export const editPutUser = (id, type, ban) => {
-  const endpoint = `http://localhost:3001/user/dashboard/users/${id}`;
+  const endpoint = `/user/dashboard/users/${id}`;
   return async (dispatch) => {
     try {
       const { status, data } = await axios.put(endpoint, {
@@ -308,12 +303,82 @@ export const applyFilterDb = (filters) => {
   return {
     type: "APPLY_FILTERS_Db",
     payload: filters,
-  }
-}
+  };
+};
 
 export const orderFilters = (order) => {
   return {
     type: "SORT_FILTER",
     payload: order,
+  };
+};
+//------------------------------------------------------------------------
+
+export const postReview = (data) => {
+  const endpoint = "/review/";
+  return async (dispatch) => {
+    try {
+      const response = await axios.post(endpoint, data);
+      return response.data;
+    } catch (error) {
+      console.error(error);
+    }
+  };
+};
+
+export const getReviews = (carId) => {
+  const endpoint = `/review/${carId}`;
+  if (carId) {
+    return async (dispatch) => {
+      try {
+        const { data } = await axios.get(endpoint);
+        dispatch({
+          type: "REVIEWS_CAR",
+          payload: data,
+        });
+      } catch (error) {
+        console.error(error);
+      }
+    };
+  }
+  return {
+    type: "RESET_REVIEWS",
+  };
+};
+
+export const resetReview = () => {
+  return {
+    type: "RESET_REVIEWS",
+  };
+};
+
+export const deleteReview = (idReview) => {
+  const endpoint = `/review/${idReview}`;
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.delete(endpoint);
+      console.log(data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+};
+
+export const updateReview = (newData) => {
+  const endpoint = "/review/";
+  return async (dispatch) => {
+    try {
+      const { data } = await axios.put(endpoint, newData);
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const addMenuOption = (option) => {
+  return {
+    type: "ADD_MENU_OPTION",
+    payload: option,
   };
 };

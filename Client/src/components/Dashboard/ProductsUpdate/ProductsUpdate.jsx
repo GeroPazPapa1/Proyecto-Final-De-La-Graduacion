@@ -67,7 +67,7 @@ export default function ProductsUpdate(id) {
       // Create a copy of the current input object to send to the server
       let updatedInput = { ...input };
       const { data } = await axios.put(
-        `http://localhost:3001/car/edit/${id}`,
+        `/car/edit/${id}`,
         updatedInput
       );
       modificationUserSuccess();
@@ -97,14 +97,14 @@ export default function ProductsUpdate(id) {
 
   return (
     <div className={style.login}>
-    <Link to={"/home"}>
-      <ButtonBack />
-    </Link>
+      <Link to={"/home"}>
+        <ButtonBack />
+      </Link>
       <div className={style.register_form}>
         <form onSubmit={handleSubmit} className={style.form_in}>
-        <h1 className={style.title_register}>Update</h1>
+          <h1 className={style.title_register}>Update</h1>
 
-        <label htmlFor="name" className={style.label_name}>
+          <label htmlFor="name" className={style.label_name}>
             Name: <br />
             <input
               type="text"
@@ -115,9 +115,9 @@ export default function ProductsUpdate(id) {
               className={style.input}
               placeholder={user.name}
             />
-          {/* Show error message if exists*/}
-          {error.name && <p className={style.errors}>{error.name}</p>}
-        </label>
+            {/* Show error message if exists*/}
+            {error.name && <p className={style.errors}>{error.name}</p>}
+          </label>
 
           <label htmlFor="brand" className={style.label_lastName}>
             Brand: <br />
@@ -129,13 +129,13 @@ export default function ProductsUpdate(id) {
               onChange={handleChange}
               className={style.input}
               placeholder={user.brand}
-              />
+            />
             {/* Show error message if exists*/}
             {error.brand && <p className={style.errors}>{error.brand}</p>}
           </label>
 
-            <label htmlFor="model" className={style.label_name}>
-              Model: <br />
+          <label htmlFor="model" className={style.label_name}>
+            Model: <br />
             <input
               type="text"
               id="model"
@@ -145,8 +145,8 @@ export default function ProductsUpdate(id) {
               className={style.input}
               placeholder={user.model}
             />
-          {/* Show error message if exists*/}
-          {error.model && <p className={style.errors}>{error.model}</p>}
+            {/* Show error message if exists*/}
+            {error.model && <p className={style.errors}>{error.model}</p>}
           </label>
 
           <label htmlFor="state" className={style.label_lastName}>
@@ -159,7 +159,7 @@ export default function ProductsUpdate(id) {
               onChange={handleChange}
               className={style.input}
               placeholder={user.state}
-              />
+            />
             {/* Show error message if exists*/}
             {error.state && <p className={style.errors}>{error.state}</p>}
           </label>
@@ -175,8 +175,8 @@ export default function ProductsUpdate(id) {
               className={style.input}
               placeholder={user.price}
             />
-          {/* Show error message if exists*/}
-          {error.price && <p className={style.errors}>{error.price}</p>}
+            {/* Show error message if exists*/}
+            {error.price && <p className={style.errors}>{error.price}</p>}
           </label>
 
           <label htmlFor="location" className={style.label_lastName}>
@@ -189,7 +189,7 @@ export default function ProductsUpdate(id) {
               onChange={handleChange}
               className={style.input}
               placeholder={user.location}
-              />
+            />
             {/* Show error message if exists*/}
             {error.location && <p className={style.errors}>{error.location}</p>}
           </label>
@@ -205,8 +205,8 @@ export default function ProductsUpdate(id) {
               className={style.input}
               placeholder={user.color}
             />
-          {/* Show error message if exists*/}
-          {error.color && <p className={style.errors}>{error.color}</p>}
+            {/* Show error message if exists*/}
+            {error.color && <p className={style.errors}>{error.color}</p>}
           </label>
 
           <label htmlFor="description" className={style.label_lastName}>
@@ -219,7 +219,7 @@ export default function ProductsUpdate(id) {
               onChange={handleChange}
               className={style.input}
               placeholder={user.description}
-              />
+            />
             {/* Show error message if exists*/}
             {error.description && <p className={style.errors}>{error.description}</p>}
           </label>

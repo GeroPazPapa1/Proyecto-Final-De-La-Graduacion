@@ -3,14 +3,8 @@ const { Brand } = require("../db");
 
 const getAllBrand = async (req, res) => {
   try {
-    const { data } = await axios.get("http://localhost:3001/car/search");
-
-    const carBrands = data.map((car) => car.brand);
-
-    // Eliminar marcas duplicadas utilizando un conjunto (Set)
-    const uniqueCarsBrand = [...new Set(carBrands)];
-
-    return res.status(200).json(uniqueCarsBrand);
+    const data = await Brand.findAll()
+    return res.status(200).json(data);
   } catch (error) {
     return res
       .status(500)

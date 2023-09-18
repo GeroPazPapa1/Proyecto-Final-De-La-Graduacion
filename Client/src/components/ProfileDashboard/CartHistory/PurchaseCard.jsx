@@ -19,7 +19,7 @@ export default function Card(props) {
 
   const getCarsHandler = async (id) => {
     try {
-      const endpoint = "http://localhost:3001/buy/detail/";
+      const endpoint = "/buy/detail/";
       const { data } = await axios.get(`${endpoint}${id}`);
       return setCars(data);
     } catch (error) {
