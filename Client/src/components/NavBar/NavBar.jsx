@@ -7,6 +7,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { addMenuOption } from "../../Redux/actions";
 import { connect, useDispatch } from "react-redux";
+import { logOutUserSuccess } from "../NotiStack"
 
 export default function NavBar() {
   const dispatch = useDispatch();
@@ -24,6 +25,7 @@ export default function NavBar() {
   const handleLogout = () => {
     setUser([]);
     localStorage.clear();
+    logOutUserSuccess();
   };
 
   useEffect(() => {

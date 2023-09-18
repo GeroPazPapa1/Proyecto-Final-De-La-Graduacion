@@ -211,3 +211,13 @@ export const postReviewNoti = () => {
             }
         })
     }
+
+    export const logOutUserSuccess = () => {
+        enqueueSnackbar('session has been successfully log out!', {
+            variant: 'success',
+            anchorOrigin: {
+                vertical: 'bottom',
+                horizontal: 'right',
+            }
+        });
+    }
