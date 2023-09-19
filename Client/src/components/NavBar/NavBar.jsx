@@ -7,7 +7,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { addMenuOption } from "../../Redux/actions";
 import { connect, useDispatch } from "react-redux";
-import { logOutUserSuccess } from "../NotiStack"
+import { logOutUserSuccess } from "../NotiStack";
 
 export default function NavBar() {
   const dispatch = useDispatch();
@@ -97,20 +97,15 @@ export default function NavBar() {
                     >
                       Reviews
                     </Link>
+                    {loggedUser.response?.type === "admin" && (
+                      <Link to={"/admin/dashboard"}>Dashboard</Link>
+                    )}
+                    <Link to={"/"} onClick={handleLogout}>
+                      Log out
+                    </Link>
                   </div>
                 </div>
               </div>
-
-              {loggedUser.response?.type === "admin" && (
-                <Link to={"/admin/dashboard"}>
-                  <button className={styles.button}>Dashboard</button>
-                </Link>
-              )}
-              <Link to={"/"}>
-                <button onClick={handleLogout} className={styles.button}>
-                  Log out
-                </button>
-              </Link>
             </>
           )}
         </div>
@@ -132,9 +127,13 @@ export default function NavBar() {
             <div className={styles.containerL}>
               {loggedUser && (
                 <>
+                  <span className={styles.spanWelcome}>Welcome</span>
                   <div className={styles.dropdownContainer}>
                     <div className={styles.dropdown}>
                       <div className={styles.icon_name_user}>
+                        {loggedUser.response?.type === "admin" && (
+                          <span className={styles.spanAdmin}>Admin</span>
+                        )}
                         <img
                           src={user.image}
                           alt=""
@@ -165,19 +164,15 @@ export default function NavBar() {
                         >
                           Reviews
                         </Link>
+                        {loggedUser.response?.type === "admin" && (
+                          <Link to={"/admin/dashboard"}>Dashboard</Link>
+                        )}
+                        <Link to={"/"} onClick={handleLogout}>
+                          Log out
+                        </Link>
                       </div>
                     </div>
                   </div>
-                  {loggedUser.response?.type === "admin" && (
-                    <Link to={"/admin/dashboard"}>
-                      <button className={styles.button}>Dashboard</button>
-                    </Link>
-                  )}
-                  <Link to={"/"}>
-                    <button onClick={handleLogout} className={styles.button}>
-                      Log out
-                    </button>
-                  </Link>
                 </>
               )}
               {!loggedUser && (
@@ -218,6 +213,9 @@ export default function NavBar() {
                   <div className={styles.dropdownContainer}>
                     <div className={styles.dropdown}>
                       <div className={styles.icon_name_user}>
+                        {loggedUser.response?.type === "admin" && (
+                          <span className={styles.spanAdmin}>Admin</span>
+                        )}
                         <img
                           src={user.image}
                           alt=""
@@ -248,19 +246,15 @@ export default function NavBar() {
                         >
                           Reviews
                         </Link>
+                        {loggedUser.response?.type === "admin" && (
+                          <Link to={"/admin/dashboard"}>Dashboard</Link>
+                        )}
+                        <Link to={"/"} onClick={handleLogout}>
+                          Log out
+                        </Link>
                       </div>
                     </div>
                   </div>
-                  {loggedUser.response?.type === "admin" && (
-                    <Link to={"/admin/dashboard"}>
-                      <button className={styles.button}>Dashboard</button>
-                    </Link>
-                  )}
-                  <Link to={"/"}>
-                    <button onClick={handleLogout} className={styles.button}>
-                      Log out
-                    </button>
-                  </Link>
                 </>
               )}
               {!loggedUser && (
@@ -295,14 +289,12 @@ export default function NavBar() {
               {loggedUser && (
                 <>
                   <span>{loggedUser.email}</span>
-                  {loggedUser.response?.type === "admin" && (
-                    <Link to={"/admin/dashboard"}>
-                      <button className={styles.button}>Dashboard</button>
-                    </Link>
-                  )}
                   <div className={styles.dropdownContainer}>
                     <div className={styles.dropdown}>
                       <div className={styles.icon_name_user}>
+                        {loggedUser.response?.type === "admin" && (
+                          <span className={styles.spanAdmin}>Admin</span>
+                        )}
                         <img
                           src={user.image}
                           alt=""
@@ -333,14 +325,15 @@ export default function NavBar() {
                         >
                           Reviews
                         </Link>
+                        {loggedUser.response?.type === "admin" && (
+                          <Link to={"/admin/dashboard"}>Dashboard</Link>
+                        )}
+                        <Link to={"/"} onClick={handleLogout}>
+                          Log out
+                        </Link>
                       </div>
                     </div>
                   </div>
-                  <Link to={"/"}>
-                    <button onClick={handleLogout} className={styles.button}>
-                      Log out
-                    </button>
-                  </Link>
                 </>
               )}
               {!loggedUser && (
@@ -368,9 +361,6 @@ export default function NavBar() {
                 <button className={styles.button}>Home</button>
               </Link>
               <button className={styles.button}>Contacts</button>
-              <Link to={"/favorites"}>
-                <button className={styles.button}>Favorites</button>
-              </Link>
             </div>
           </div>
           <div>
@@ -381,31 +371,48 @@ export default function NavBar() {
                   <div className={styles.dropdownContainer}>
                     <div className={styles.dropdown}>
                       <div className={styles.icon_name_user}>
+                        {loggedUser.response?.type === "admin" && (
+                          <span className={styles.spanAdmin}>Admin</span>
+                        )}
                         <img
                           src={user.image}
                           alt=""
                           className={styles.iconImage}
                         />{" "}
                         <button className={styles.buttonDropdown}>
-                          {user.name}
+                          {user.name} &#9660;{" "}
                           {/* Agregamos una flecha hacia abajo para indicar que es desplegable */}
                         </button>
                       </div>
                       <div className={styles.dropdownContent}>
                         {/* Aquí agregamos las opciones del menú */}
+                        <Link
+                          onClick={() => dispatch(addMenuOption("Purchases"))}
+                          to="/profile"
+                        >
+                          Purchases
+                        </Link>
+                        <Link
+                          to="/profile"
+                          onClick={() => dispatch(addMenuOption("Profile"))}
+                        >
+                          My Profile
+                        </Link>
+                        <Link
+                          to="/profile"
+                          onClick={() => dispatch(addMenuOption("Reviews"))}
+                        >
+                          Reviews
+                        </Link>
+                        {loggedUser.response?.type === "admin" && (
+                          <Link to={"/admin/dashboard"}>Dashboard</Link>
+                        )}
+                        <Link to={"/"} onClick={handleLogout}>
+                          Log out
+                        </Link>
                       </div>
                     </div>
                   </div>
-                  {loggedUser.response?.type === "admin" && (
-                    <Link to={"/admin/dashboard"}>
-                      <button className={styles.button}>Dashboard</button>
-                    </Link>
-                  )}
-                  <Link to={"/"}>
-                    <button onClick={handleLogout} className={styles.button}>
-                      Log out
-                    </button>
-                  </Link>
                 </>
               )}
               {!loggedUser && (
