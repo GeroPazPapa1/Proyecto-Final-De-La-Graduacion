@@ -142,10 +142,12 @@ export default function DashBoardEmail() {
                         id={email.id}
                         name={email.name}
                         lastName={email.lastName}
+                        age={email.age}
                         image={email.image}
                         email={email.email}
                         country={email.country}
                         status={email.status}
+                        phone={email.phone}
                         verify={email.verify}
                         ban={email.ban} 
                         isChecked={emailSelection[email.id] || false}

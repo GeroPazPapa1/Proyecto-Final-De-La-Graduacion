@@ -8,7 +8,7 @@ import EDIT from "./Icons/EDIT.svg";
 import { useState } from "react";
 
 export default function Email(props) {
-    const { id, name, lastName, email, country, status, verify, ban, image, onCheckboxChange, isChecked } = props;
+    const { id, name, lastName, email, country, age, status, verify, ban, image, phone, onCheckboxChange, isChecked } = props;
 
     const dispatch = useDispatch();
 
@@ -30,9 +30,9 @@ export default function Email(props) {
             title: "¿Are you sure?",
             text: `You are about to delete ${name} from the database`,
             icon: "warning",
-            showCancelButton: true,
             cancelButtonText: "Cancel",
             confirmButtonText: "Accept",
+            showCancelButton: true,
         }).then((result) => {
             if (result.isConfirmed) {
                 dispatch(deleteUserWithID(id));
@@ -40,30 +40,36 @@ export default function Email(props) {
             }
         });
     };
-    
     const handlePutEmail = (id) => {
+        const htmlContent = `
+                              ${imageTag}
+                              <br />
+                              <input id="input-name" class="swal2-input" type="text" placeholder="${name !== undefined ? name : 'Name'}">
+                              <input id="input-lastname" class="swal2-input" type="text" placeholder="${lastName !== undefined ? lastName : 'Lastname'}">
+                              <input id="input-age" class="swal2-input" type="number" placeholder="${age !== undefined ? age : 'Age'}">
+                              <input id="input-country" class="swal2-input" type="text" placeholder="${country !== undefined ? country : 'Country'}">
+                              <input id="input-phone" class="swal2-input" type="text" placeholder="${phone !== undefined ? phone : 'Phone'}">
+                              <select id="select-status" class="swal2-select">
+                                <option value="admin">Admin</option>
+                                <option value="user">User</option>
+                              </select>
+                              <select id="select-ban" class="swal2-select">
+                                <option value=true>Banned</option>
+                                <option value=false>Not Banned</option>
+                              </select>
+                            `;
         Swal.fire({
-            title: "Select options",
+            title: "Edit User",
             icon: icon,
             html:
                 imageTag +
-                '<br>' +
-                '<input id="input-name" class="swal2-input" type="text" placeholder="Name">' +
-                '<input id="input-lastname" class="swal2-input" type="text" placeholder="Lastname">' +
-                '<input id="input-age" class="swal2-input" type="number" placeholder="Age">' +
-                '<input id="input-country" class="swal2-input" type="text" placeholder="Country">' +
-                '<input id="input-phone" class="swal2-input" type="text" placeholder="Phone">' +
-                '<select id="select-status" class="swal2-select">' +
-                '<option value="admin">Admin</option>' +
-                '<option value="user">User</option>' +
-                '</select>' +
-                '<select id="select-ban" class="swal2-select">' +
-                '<option value=true>Banned</option>' +
-                '<option value=false>Not Banned</option>' +
-                '</select>',
-            showCancelButton: true,
+                htmlContent,
             cancelButtonText: "Cancel",
+            showCancelButton: true,
             confirmButtonText: "Accept",
+            customClass: {
+                actions: styles.customSwal2Actions, // Aplica la clase de estilo CSS Modules
+              },
             preConfirm: () => {
                 const selectedName = document.getElementById('input-name').value;
                 const selectedLastname = document.getElementById('input-lastname').value;
@@ -87,7 +93,7 @@ export default function Email(props) {
                 // const { type, ban, name, lastName, age, country, phone } = result.value;
                 let objeto = {}
                 if (result.value.type){
-                    objeto.type = result.value.type
+                    objeto.status = result.value.type
                 }
                 if (result.value.ban){
                     objeto.ban = result.value.ban
@@ -107,6 +113,8 @@ export default function Email(props) {
                 if (result.value.phone){
                     objeto.phone = result.value.phone
                 }
+
+                console.log(objeto);
                 // Aquí puedes utilizar los valores seleccionados (type y ban) como desees
                 await dispatch(editPutUser(objeto, id));
                 await dispatch(getDashboard());

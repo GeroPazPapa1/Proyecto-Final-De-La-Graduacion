@@ -226,12 +226,38 @@
   }
 }
 
-.input_images{
-  display: flex;
-  flex-direction: column;
+.input_image{
+  background-color: var(--colorGrisClaro);
+  border: 1px solid transparent;
+  border-radius: 3px;
+  outline: var(--colorGris);
+  padding: 0.5rem;
+  width: 200px;
+  display: none;
 }
 
 .btn_image {
+  cursor: pointer;
+  padding: 0.5rem;
+  border: none;
+  border-radius: 3px;
+  margin-top: 10px;
+  font-family: var(--fontNunito);
+  font-weight: bold;
+  font-size: 1.2rem;
+  width: 438px;
+  grid-column: 1/-1;
+}
+
+.btn_image:hover {
+  background-color: var(--colorGrisClaro);
+}
+
+.btn_image:hover {
+  border-bottom-color: black;
+}
+
+.btn_image1 {
   cursor: pointer;
   padding: 0.5rem;
   border: none;
@@ -244,11 +270,11 @@
   grid-column: 1/-1;
 }
 
-.btn_image:hover {
+.btn_image1:hover {
   background-color: var(--colorGrisClaro);
 }
 
-.btn_image:hover {
+.btn_image1:hover {
   border-bottom-color: black;
 }
 

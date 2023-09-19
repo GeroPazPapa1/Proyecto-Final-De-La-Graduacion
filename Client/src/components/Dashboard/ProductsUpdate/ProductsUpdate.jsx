@@ -7,20 +7,39 @@ import { modificationUserSuccess } from "../../NotiStack";
 import validationProductsUpdate from "./validation/validationProductsUpdate";
 import style from "./ProductsUpdate.module.css"
 import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { resetDetail, getDetail } from "../../../Redux/actions";
 
 export default function ProductsUpdate() {
 
   const {id} = useParams();
+  const dispatch = useDispatch();
+  const detail = useSelector((state) => state.detail);
 
+  useEffect(() => {
+    dispatch(getDetail(id));
+    return () => {
+        dispatch(resetDetail());
+    };
+}, [id, dispatch]);
+  
   console.log(id, "edit");
 
   const navigate = useNavigate();
 
   const [countries, setCountries] = useState([])
 
+  const [imageValue, setImageValue] = useState({
+    image1: false,
+    image2: false,
+    image3: false,
+    image4: false,
+    image5: false,
+  });
+
   const [input, setInput] = useState({
     name: "",
-    image: "",
+    image: [],
     brand: "",
     model: "",
     state: "",
@@ -103,6 +122,109 @@ export default function ProductsUpdate() {
     fetchCountries();
   }, []);
 
+   //----------------------------------------------------------Cloudinary---------------------------------------------------------------------------------------
+
+   const [errors, setErrors] = useState(null);
+   const cloudinaryUploadUrl =  "https://api.cloudinary.com/v1_1/Vehibuy/upload";
+    
+   const handleChangeImage = async (id) => {
+         
+     switch (id) {
+       case "1":
+         setImageValue({
+               ...imageValue,
+               image1: true,
+             });
+         break;
+      case "2":
+        setImageValue({
+              ...imageValue,
+              image2: true
+            });
+        break;
+      case "3":
+          setImageValue({
+                ...imageValue,
+                image3: true
+              });
+          break;
+      case "4":
+        setImageValue({
+              ...imageValue,
+              image4: true
+            });
+         break;
+      case "5":
+        setImageValue({
+              ...imageValue,
+              image5: true
+            });
+        break;
+     }  
+     };
+ 
+   const handleImageUpload = async (selectedFile) => {
+     setErrors(null);
+ 
+ 
+     if (!selectedFile) {
+       setErrors("Please, select an image.");
+       return;
+     }
+ 
+     if (!selectedFile.type.startsWith("image/")) {
+       setErrors("The selected file is not a valid image.");
+       return;
+     }
+ 
+ 
+     return selectedFile;
+   };
+ 
+   const handleButton = async (event) => {
+     event.preventDefault();
+ 
+     const formDataArray = [];
+ 
+     for (let i = 1; i <= 5; i++) 
+     {
+         const inputElement = document.getElementById(`imageInput${i}`);
+         if (inputElement.files[0]) {
+           const file = await handleImageUpload(inputElement.files[0]);
+           if (file) {
+             const formData = new FormData();
+             formData.append("file", file);
+             formData.append("upload_preset", "jsnxe58v");
+             formData.append("folder", `${input.name}${input.brand}_car`);
+             formDataArray.push(formData);
+           }
+         }
+     }
+ 
+     try {
+           const uploadPromises = formDataArray.map((formData) =>
+             axios.post(cloudinaryUploadUrl, formData)
+           );
+       
+           const responses = await Promise.all(uploadPromises);
+       
+           const imageUrls = responses.map((response) => response.data.secure_url);
+ 
+           setInput({
+             ...input,
+             image: imageUrls,
+           });
+ 
+           setErrors('Images uploaded successfully');
+         } catch (error) {
+           setErrors("Error uploading images to Cloudinary");
+         }
+   }
+ 
+   //----------------------------------------------------------Cloudinary---------------------------------------------------------------------------------------
+ 
+
+
   return (
     <div className={style.login}>
     <Link to={"/admin/dashboard"}>
@@ -121,6 +243,7 @@ export default function ProductsUpdate() {
               value={input.name}
               onChange={handleChange}
               className={style.input}
+              placeholder={detail.name}
             />
           {/* Show error message if exists*/}
           {error.name && <p className={style.errors}>{error.name}</p>}
@@ -135,6 +258,7 @@ export default function ProductsUpdate() {
               value={input.brand}
               onChange={handleChange}
               className={style.input}
+              placeholder={detail.brand}
               />
             {/* Show error message if exists*/}
             {error.brand && <p className={style.errors}>{error.brand}</p>}
@@ -149,6 +273,7 @@ export default function ProductsUpdate() {
               value={input.model}
               onChange={handleChange}
               className={style.input}
+              placeholder={detail.model}
             />
           {/* Show error message if exists*/}
           {error.model && <p className={style.errors}>{error.model}</p>}
@@ -162,7 +287,7 @@ export default function ProductsUpdate() {
                 name="state"
                 onChange={handleChange}
               >
-                <option hidden></option>
+                <option value={detail.state}>{detail.state}</option>
                 <option value="New">New</option>
                 <option value="Used">Used</option>
               </select>
@@ -179,24 +304,28 @@ export default function ProductsUpdate() {
               value={input.price}
               onChange={handleChange}
               className={style.input}
+              placeholder={detail.price}
             />
           {/* Show error message if exists*/}
           {error.price && <p className={style.errors}>{error.price}</p>}
           </label>
 
-          <label htmlFor="location" className={style.label_lastName}>
-            Location: <br />
-            <input
-              type="text"
-              id="location"
-              name="location"
-              value={input.location}
-              onChange={handleChange}
-              className={style.input}
-              />
-            {/* Show error message if exists*/}
-            {error.location && <p className={style.errors}>{error.location}</p>}
-          </label>
+          <label className={style.label_country}>
+              Location: <br />
+              <select
+                className={style.input_country}
+                id="location"
+                name="location"
+                onChange={(e) => handleChange(e)}
+              >
+                <option value={detail.location}>{detail.location}</option>
+                {countries.map((country, index) => (
+                  <option key={index} value={country}>
+                    {country}
+                  </option>
+                ))}
+              </select>
+            </label>
 
           <label htmlFor="color" className={style.label_name}>
             Color: <br />
@@ -207,6 +336,7 @@ export default function ProductsUpdate() {
               value={input.color}
               onChange={handleChange}
               className={style.input}
+              placeholder={detail.color}
             />
           {/* Show error message if exists*/}
           {error.color && <p className={style.errors}>{error.color}</p>}
@@ -221,10 +351,53 @@ export default function ProductsUpdate() {
               value={input.description}
               onChange={handleChange}
               className={style.input}
+              placeholder={detail.description}
               />
             {/* Show error message if exists*/}
             {error.description && <p className={style.errors}>{error.description}</p>}
           </label>
+          <input className={style.input_image} type="file" accept="image/*" id="imageInput1" onChange={() => handleChangeImage("1")}/>
+            <label htmlFor="imageInput1" className={style.btn_image}>
+            Select file 1
+            </label>
+            {
+              imageValue.image1 ? <span>The image loaded successfully</span> : null
+            }
+            
+            <input className={style.input_image} type="file" accept="image/*" id="imageInput2" onChange={() => handleChangeImage("2")}/>
+            <label htmlFor="imageInput2" className={style.btn_image}>
+            Select file 2
+            </label>
+            {
+              imageValue.image2 ? <span>The image loaded successfully</span> : null
+            }
+            
+            <input className={style.input_image} type="file" accept="image/*" id="imageInput3" onChange={() => handleChangeImage("3")}/>
+            <label htmlFor="imageInput3" className={style.btn_image}>
+            Select file 3
+            </label>
+            {
+              imageValue.image3 ? <span>The image loaded successfully</span> : null
+            }
+            
+            <input className={style.input_image} type="file" accept="image/*" id="imageInput4" onChange={() => handleChangeImage("4")}/>
+            <label htmlFor="imageInput4" className={style.btn_image}>
+            Select file 4
+            </label>
+            {
+              imageValue.image4 ? <span>The image loaded successfully</span> : null
+            }
+
+            <input className={style.input_image} type="file" accept="image/*" id="imageInput5" onChange={() => handleChangeImage("5")}/>
+            <label htmlFor="imageInput5" className={style.btn_image}>
+            Select file 5
+            </label>
+            {
+              imageValue.image5 ? <span>The image loaded successfully</span> : null
+            }
+
+            <button className={style.btn_image1} onClick={handleButton}>Upload</button>
+            {errors && <span>{errors}</span>}
 
           <button
             type="submit"

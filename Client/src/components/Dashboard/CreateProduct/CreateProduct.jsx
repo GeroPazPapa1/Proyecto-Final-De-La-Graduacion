@@ -13,6 +13,13 @@ export default function CreateProduct() {
   const navigate = useNavigate();
   const [countries, setCountries] = useState([]);
 
+  const [imageValue, setImageValue] = useState({
+    image1: false,
+    image2: false,
+    image3: false,
+    image4: false,
+    image5: false,
+  });
   const [input, setInput] = useState({
     name: "",
     image: [],
@@ -33,8 +40,6 @@ export default function CreateProduct() {
     color: "",
     description: "",
   });
-
-  const [isImageSelected, setIsImageSelected] = useState(false);
 
   const handleChange = (event) => {
     setInput({
@@ -99,13 +104,46 @@ export default function CreateProduct() {
     fetchCountries();
   }, []);
 
-
-
   //----------------------------------------------------------Cloudinary---------------------------------------------------------------------------------------
 
   const [errors, setErrors] = useState(null);
   const cloudinaryUploadUrl =  "https://api.cloudinary.com/v1_1/Vehibuy/upload";
    
+  const handleChangeImage = async (id) => {
+        
+    switch (id) {
+      case "1":
+        setImageValue({
+              ...imageValue,
+              image1: true,
+            });
+        break;
+     case "2":
+       setImageValue({
+             ...imageValue,
+             image2: true
+           });
+       break;
+     case "3":
+         setImageValue({
+               ...imageValue,
+               image3: true
+             });
+         break;
+     case "4":
+       setImageValue({
+             ...imageValue,
+             image4: true
+           });
+        break;
+     case "5":
+       setImageValue({
+             ...imageValue,
+             image5: true
+           });
+       break;
+    }  
+    };
 
   const handleImageUpload = async (selectedFile) => {
     setErrors(null);
@@ -165,13 +203,7 @@ export default function CreateProduct() {
         }
   }
 
-  const handleInputChange = () => {
-    console.log("algo cambio");
-  }
-
   //----------------------------------------------------------Cloudinary---------------------------------------------------------------------------------------
-  
-  console.log(input, "Informacion del JSON");
 
   return (
     <div className={style.login}>
@@ -303,31 +335,47 @@ export default function CreateProduct() {
             {error.description && <p className={style.errors}>{error.description}</p>}
           </label>
 
-            <input className={style.input_image} type="file" accept="image/*" id="imageInput1" style={{ display: "none" }}/>
+            <input className={style.input_image} type="file" accept="image/*" id="imageInput1" onChange={() => handleChangeImage("1")}/>
             <label htmlFor="imageInput1" className={style.btn_image}>
-            Select file
+            Select file 1
             </label>
+            {
+              imageValue.image1 ? <span>The image loaded successfully</span> : null
+            }
             
-            <input className={style.input_image} type="file" accept="image/*" id="imageInput2" style={{ display: "none" }}/>
-            <label htmlFor="imageInput1" className={style.btn_image}>
-            Select file
+            <input className={style.input_image} type="file" accept="image/*" id="imageInput2" onChange={() => handleChangeImage("2")}/>
+            <label htmlFor="imageInput2" className={style.btn_image}>
+            Select file 2
             </label>
+            {
+              imageValue.image2 ? <span>The image loaded successfully</span> : null
+            }
             
-            <input className={style.input_image} type="file" accept="image/*" id="imageInput3" style={{ display: "none" }}/>
-            <label htmlFor="imageInput1" className={style.btn_image}>
-            Select file
+            <input className={style.input_image} type="file" accept="image/*" id="imageInput3" onChange={() => handleChangeImage("3")}/>
+            <label htmlFor="imageInput3" className={style.btn_image}>
+            Select file 3
             </label>
+            {
+              imageValue.image3 ? <span>The image loaded successfully</span> : null
+            }
             
-            <input className={style.input_image} type="file" accept="image/*" id="imageInput4" style={{ display: "none" }}/>
-            <label htmlFor="imageInput1" className={style.btn_image}>
-            Select file
+            <input className={style.input_image} type="file" accept="image/*" id="imageInput4" onChange={() => handleChangeImage("4")}/>
+            <label htmlFor="imageInput4" className={style.btn_image}>
+            Select file 4
             </label>
+            {
+              imageValue.image4 ? <span>The image loaded successfully</span> : null
+            }
 
-            <input className={style.input_image} type="file" accept="image/*" id="imageInput5" style={{ display: "none" }} />
-            <label htmlFor="imageInput1" className={style.btn_image}>
-            Select file
+            <input className={style.input_image} type="file" accept="image/*" id="imageInput5" onChange={() => handleChangeImage("5")}/>
+            <label htmlFor="imageInput5" className={style.btn_image}>
+            Select file 5
             </label>
-            <button className={style.btn_image} onClick={handleButton}>Upload</button>
+            {
+              imageValue.image5 ? <span>The image loaded successfully</span> : null
+            }
+
+            <button className={style.btn_image1} onClick={handleButton}>Upload</button>
             {errors && <span>{errors}</span>}
           <button
             type="submit"
