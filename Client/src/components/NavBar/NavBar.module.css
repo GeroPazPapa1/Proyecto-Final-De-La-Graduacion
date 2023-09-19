@@ -7,7 +7,23 @@
   flex-wrap: wrap;
   /* Permite que los elementos se envuelvan en pantallas pequeñas */
 }
+.spanWelcome{
+  border: none;
+  background-color: transparent;
+  font-family: 'Inter', sans-serif;
+  font-size: 17px;
+  margin: 0 13px;
+  border-bottom: 2px solid transparent;
+  transition: border-bottom-color 0.3 ease;
+}
 
+.spanAdmin{
+  z-index: 1;
+  position: absolute;
+  bottom: -35%;
+  font-size: 12px;  
+  right: 50%;
+}
 .containerLP {
   display: flex;
   align-items: center;

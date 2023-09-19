@@ -10,7 +10,7 @@
   border-radius: 3px;
   outline: var(--colorGris);
   padding: 0.5rem;
-  width: 433px;
+  width: 436px;
 }
 
 .iconImage {
@@ -30,7 +30,7 @@
 }
 
 .register_form {
-  width: 450px;
+  width: 520px;
   margin: 2rem 0;
   background-color: var(--colorBlanco);
   color: var(--colorGris);
@@ -139,11 +139,12 @@
   border: none;
   border-radius: 3px;
   background-color: #3e6ae1;
+  margin: 1.2rem 0;
   color: var(--colorBlanco);
   font-family: var(--fontNunito);
   font-weight: bold;
   font-size: 1.2rem;
-  flex: 2; /* Esto hace que ocupe el 66% del espacio disponible */
+  width: 454px;
 }
 
 .btn_register:hover {
@@ -222,34 +223,4 @@
   .input_country {
       width: 79vw;
   }
-}
-
-.btn_cancel{
-  cursor: pointer;
-  padding: 0.5rem;
-  border: none;
-  border-radius: 3px;
-  background-color: #e13e3e;
-  color: var(--colorBlanco);
-  font-family: var(--fontNunito);
-  font-weight: bold;
-  font-size: 1.2rem;
-  flex: 1; /* Esto hace que ocupe el 33% del espacio disponible */
-  margin-right: 1rem; /* Espacio entre los botones */
-}
-
-.btn_cancel:hover {
-  background-color: #b30000;
-}
-
-.divCenter{
-  display:grid;
-  place-items:center;
-  grid-column: 1/-1;
-}
-
-.divButtons{
-  display: flex;
-  justify-content: space-between;
-  grid-column: 1/-1;
 }

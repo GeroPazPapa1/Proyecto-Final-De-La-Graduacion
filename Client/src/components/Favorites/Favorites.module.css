@@ -1,3 +1,31 @@
+.buttonBackContainer{
+  margin-top: 1.2em;
+  justify-self: left;
+  text-decoration: none;
+  height: auto;
+  font-size: 1.2em;
+  margin-left:1em;
+  
+}
+.buttonBackLink{
+  display: flex;
+  align-items: center;
+  border: none;
+  height: 1.5em;
+  background-color: transparent;
+  font-family: "Inter", sans-serif;
+  font-size: 17px;
+  margin: 0 13px;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  transition: border-bottom-color 0.3s ease;
+  width: 6em;
+}
+.buttonBackLink:hover{border-bottom-color: black;}
+.buttonBackH5{
+  color: black;
+}
+
 .container {
   display: flex;
   flex-wrap: wrap;

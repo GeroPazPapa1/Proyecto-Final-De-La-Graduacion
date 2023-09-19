@@ -13,9 +13,12 @@ export default function Favorites() {
   return (
     <div>
       <div className={style.coverImage}></div>
-      <Link to={"/home"}>
-        <ButtonBack />
-      </Link>
+      <div className={style.buttonBackContainer}>
+        <Link to={"/home"} className={style.buttonBackLink}>
+          <ButtonBack className={style.buttonBack} />
+          <h5 className={style.buttonBackH5}>Go Back</h5>
+        </Link>
+      </div>
       <h2 className={`${style.favorites_title} ${style.title}`}>
         Your Favorites
       </h2>
@@ -49,3 +52,4 @@ export default function Favorites() {
     </div>
   );
 }
+
