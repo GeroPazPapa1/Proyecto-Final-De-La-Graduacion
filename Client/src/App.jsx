@@ -12,6 +12,7 @@ import Login from "./components/LoginRegister/Login";
 import Register from "./components/LoginRegister/Register";
 import NavBar from "./components/NavBar/NavBar";
 import Favorites from "./components/Favorites/Favorites";
+import CreateProductUser from "./components/Form/CreateProductUser/CreateProductUser.jsx";
 import CreateProduct from "./components/Dashboard/CreateProduct/CreateProduct.jsx";
 import ProductsUpdate from "./components/Dashboard/ProductsUpdate/ProductsUpdate.jsx"
 import Modification from "./components/Modification/Modification";
@@ -35,7 +36,7 @@ function App() {
         <Route path="/favorites" element={<Favorites />} />
         <Route path="/termsandconditions" element={<Termsandconditions />} />
         <Route path="/profile" element={<ProfileDashboard />} />
-        <Route path="/create" element={<CreateProduct />} />
+        <Route path="/publish-your-car" element={<CreateProductUser />} />
         <Route path="/admin/dashboard" element={<Dashboard />} />
         <Route path="/admin/dashboard/create" element={<CreateProduct />} />
         <Route path="/admin/dashboard/edit/:id" element={<ProductsUpdate />} />

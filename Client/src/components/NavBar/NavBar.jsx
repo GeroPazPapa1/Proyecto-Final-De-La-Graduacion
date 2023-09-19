@@ -79,6 +79,9 @@ export default function NavBar() {
                   </div>
                   <div className={styles.dropdownContent}>
                     {/* Aquí agregamos las opciones del menú */}
+                    <Link to="/publish-your-car">
+                      Publish car
+                    </Link>
                     <Link
                       onClick={() => dispatch(addMenuOption("Purchases"))}
                       to="/profile"
@@ -147,6 +150,9 @@ export default function NavBar() {
                       </div>
                       <div className={styles.dropdownContent}>
                         {/* Aquí agregamos las opciones del menú */}
+                        <Link to="/publish-your-car">
+                          Publish car
+                        </Link>
                         <Link
                           onClick={() => dispatch(addMenuOption("Purchases"))}
                           to="/profile"
@@ -230,6 +236,9 @@ export default function NavBar() {
                       </div>
                       <div className={styles.dropdownContent}>
                         {/* Aquí agregamos las opciones del menú */}
+                        <Link to="/publish-your-car">
+                          Publish car
+                        </Link>
                         <Link
                           onClick={() => dispatch(addMenuOption("Purchases"))}
                           to="/profile"
@@ -315,6 +324,9 @@ export default function NavBar() {
                       </div>
                       <div className={styles.dropdownContent}>
                         {/* Aquí agregamos las opciones del menú */}
+                        <Link to="/publish-your-car">
+                          Publish car
+                        </Link>
                         <Link
                           onClick={() => dispatch(addMenuOption("Purchases"))}
                           to="/profile"

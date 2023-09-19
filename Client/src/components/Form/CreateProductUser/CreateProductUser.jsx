@@ -4,11 +4,12 @@ import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { ButtonBack } from "../../../assets/svgs";
 import { createProductSuccess } from "../../NotiStack";
-import validationProductsCreate from "./validation/validationProductsCreate";
-import style from "./CreateProduct.module.css"
+import validationCreateProductUser from "./validation/validationCreateProductUser";
+import style from "./CreateProductUser.module.css"
+import Swal from "sweetalert2";
 
 
-export default function CreateProduct() {
+export default function CreateProductUser() {
 
   const navigate = useNavigate();
   const [countries, setCountries] = useState([]);
@@ -34,8 +35,6 @@ export default function CreateProduct() {
     description: "",
   });
 
-  const [isImageSelected, setIsImageSelected] = useState(false);
-
   function handleFileChange(e, inputId) {
     const fileNameSpan = document.getElementById(`fileName${inputId}`);
     if (e.target.files.length > 0) {
@@ -52,11 +51,28 @@ export default function CreateProduct() {
     });
     // The form is validated and the local error status is updated with the corresponding validation error messages.
     setError(
-      validationProductsCreate({
+      validationCreateProductUser({
         ...input,
         [event.target.name]: event.target.value,
       })
     );
+  };
+
+  const handleCancelClick = () => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "Your car will not be published!",
+      icon: "warning",
+      showCancelButton: true,
+      reverseButtons: true,
+      cancelButtonText: "No, stay here",
+      confirmButtonText: "Yes, cancel publish!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        navigate('/home');
+        processCancelSuccess();
+      }
+    });
   };
 
   // Function to check for errors in the error state
@@ -84,7 +100,7 @@ export default function CreateProduct() {
         updatedInput
       );
       createProductSuccess();
-      navigate("/admin/dashboard");
+      navigate("/home");
     } catch (error) {
       alert(
         `The request could not be completed because of the following error: ${error.message}`
@@ -180,16 +196,17 @@ export default function CreateProduct() {
 
   //----------------------------------------------------------Cloudinary---------------------------------------------------------------------------------------
   
-  console.log(input, "Informacion del JSON");
-
   return (
     <div className={style.login}>
-    <Link to={"/admin/dashboard"}>
-      <ButtonBack />
-    </Link>
+      <div className={style.buttonBackContainer}>
+        <Link to={"/home"} className={style.buttonBackLink}>
+          <ButtonBack className={style.buttonBack} />
+          <h5 className={style.buttonBackH5}>Go Back</h5>
+        </Link>
+      </div>
       <div className={style.register_form}>
         <form onSubmit={handleSubmit} className={style.form_in}>
-        <h1 className={style.title_register}>Create</h1>
+        <h1 className={style.title_register}>Publish your car</h1>
 
         <label htmlFor="name" className={style.label_name}>
             Name: <br />
@@ -378,14 +395,24 @@ export default function CreateProduct() {
           </label>
 
             <button className={style.btn_image} onClick={handleButton}>Upload</button>
-            {errors && <span>{errors}</span>}
-          <button
-            type="submit"
-            className={style.btn_register}
-            disabled={hasErrors()}
-          >
-            Create
-          </button>
+              {errors && <span>{errors}</span>}
+
+          <div className={style.divButtons}>
+            <button
+              type="button"
+              className={style.btn_cancel}
+              onClick={handleCancelClick}
+            >
+              Cancel
+            </button>
+            <button
+              type="submit"
+              className={style.btn_register}
+              disabled={hasErrors()}
+            >
+              Publish
+            </button> 
+          </div>
         </form>
       </div>
     </div>
