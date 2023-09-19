@@ -27,6 +27,7 @@
   place-items: center;
   background-color: var(--colorCrema);
   font-family: var(--fontNunito);
+  height: 140vh;
 }
 
 .register_form {
@@ -223,4 +224,37 @@
   .input_country {
       width: 79vw;
   }
+}
+
+.input_images{
+  display: flex;
+  flex-direction: column;
+}
+
+.btn_image {
+  cursor: pointer;
+  padding: 0.5rem;
+  border: none;
+  border-radius: 3px;
+  margin-top: 10px;
+  font-family: var(--fontNunito);
+  font-weight: bold;
+  font-size: 1.2rem;
+  width: 454px;
+  grid-column: 1/-1;
+}
+
+.btn_image:hover {
+  background-color: var(--colorGrisClaro);
+}
+
+.btn_image:hover {
+  border-bottom-color: black;
+}
+
+.hiddenInput {
+  opacity: 0;
+  position: absolute;
+  overflow: hidden;
+  clip: rect(1px 1px 1px 1px); /* Ocultar el input de manera accesible */
 }

@@ -4,6 +4,7 @@ import CART from "./Icons/CART.svg";
 import styles from "./NavBar.module.css";
 import { Link, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 import axios from "axios";
 import { addMenuOption } from "../../Redux/actions";
 import { connect, useDispatch } from "react-redux";
@@ -13,6 +14,7 @@ export default function NavBar() {
   const dispatch = useDispatch();
   const location = useLocation();
   const [user, setUser] = useState([]);
+  // const user = useSelector((state) => )
   const loggedUserJson = localStorage.getItem("authToken");
   const loggedUser = loggedUserJson ? JSON.parse(loggedUserJson) : null;
 
@@ -36,11 +38,9 @@ export default function NavBar() {
         const { data } = await axios.get(`/user/${loggedUser.response.id}`);
         setUser(data);
       } catch (error) {
-        console.log(
-          `The request could not be completed because of the following error: ${error.message}`
-        );
+        console.log(`The request could not be completed because of the following error: ${error.message}`);
       }
-    };
+    }
     userInfoFn();
   }, [location.pathname]);
 

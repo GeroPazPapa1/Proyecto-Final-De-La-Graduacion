@@ -27,6 +27,7 @@
   place-items: center;
   background-color: var(--colorCrema);
   font-family: var(--fontNunito);
+  height: 100vh;
 }
 
 .register_form {

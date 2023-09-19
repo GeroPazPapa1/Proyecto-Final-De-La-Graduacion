@@ -132,9 +132,17 @@ export const Banned = () => {
         }
     });
 }
-
+export const logOut = () => {
+    enqueueSnackbar('You logged out successfully', {
+        variant: "info",
+        anchorOrigin: {
+            vertical: 'top',
+            horizontal: 'right',
+        }
+    });
+}
 export const modificationUserSuccess = () => {
-    enqueueSnackbar('Your account has been successfully modified!', {
+    enqueueSnackbar('Your product has been successfully modified!', {
         variant: 'success',
         anchorOrigin: {
             vertical: 'bottom',
@@ -217,6 +225,26 @@ export const postReviewNoti = () => {
             variant: 'success',
             anchorOrigin: {
                 vertical: 'bottom',
+                horizontal: 'right',
+            }
+        });
+    }
+
+    export const createProductSuccess = () => {
+        enqueueSnackbar('Your product has been successfully created!', {
+            variant: 'success',
+            anchorOrigin: {
+                vertical: 'top',
+                horizontal: 'right',
+            }
+        });
+    }
+    
+    export const processCancelSuccess = () => {
+        enqueueSnackbar('Your update has been canceled successfully!', {
+            variant: 'success',
+            anchorOrigin: {
+                vertical: 'top',
                 horizontal: 'right',
             }
         });

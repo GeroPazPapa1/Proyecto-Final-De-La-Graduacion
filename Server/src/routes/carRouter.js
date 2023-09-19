@@ -6,6 +6,7 @@ const {
   createCarDbHandler,
   getFiltersHandler,
   deleteCarHandler,
+  adminDeleteCarHandler,
 } = require("../handlers/handlerCar");
 const { putCarHandler } = require("../handlers/putCarHandler")
 
@@ -23,6 +24,7 @@ carRouter.get("/location", getAllLocation);
 carRouter.post("/create", postCarHandler);
 carRouter.post("/creates", createCarDbHandler);
 carRouter.delete("/delete/:id", deleteCarHandler);
+carRouter.delete("/dashboard/car/:id", adminDeleteCarHandler);
 carRouter.put("/edit/:id", putCarHandler);
 
 module.exports = carRouter;
