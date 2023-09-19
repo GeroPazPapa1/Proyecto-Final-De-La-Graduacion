@@ -13,13 +13,13 @@ export default function Filters() {
     const [verify, setVerify] = useState('');
 
     const dispatch = useDispatch();
-    const queryParamsF = useSelector((state) => state.filteredsDashboard.queryParamsF);    
+    const queryParamsF = useSelector((state) => state.filteredsDashboard.queryParamsF);
 
     useEffect(() => {
         const fetchCountriesDashboard = async () => {
-            const endpoint = "http://localhost:3001/user/dashboard/users";
+            const endpoint = "/user/dashboard/users";
             try {
-                const { data } = await axios(endpoint); 
+                const { data } = await axios(endpoint);
                 const countryNamesDashB = data.map(
                     (users) => users.country
                 );
@@ -64,6 +64,7 @@ export default function Filters() {
         await dispatch(searchByQueryFilters(queryParamsF))
         dispatch(applyFilterDb("FilteredEmails"));
     }
+
 
     return (
         <div className={styles.container}>

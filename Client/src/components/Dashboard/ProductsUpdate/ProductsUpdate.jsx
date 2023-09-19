@@ -94,7 +94,7 @@ export default function ProductsUpdate() {
       let updatedInput = { ...input };
       console.log(updatedInput, "Soy la informacion de car");
       const { data } = await axios.put(
-        `http://localhost:3001/car/edit/${id}`,
+        `/car/edit/${id}`,
         updatedInput
       );
       modificationUserSuccess();
@@ -232,9 +232,9 @@ export default function ProductsUpdate() {
     </Link>
       <div className={style.register_form}>
         <form onSubmit={handleSubmit} className={style.form_in}>
-        <h1 className={style.title_register}>Update</h1>
+          <h1 className={style.title_register}>Update</h1>
 
-        <label htmlFor="name" className={style.label_name}>
+          <label htmlFor="name" className={style.label_name}>
             Name: <br />
             <input
               type="text"
@@ -245,9 +245,9 @@ export default function ProductsUpdate() {
               className={style.input}
               placeholder={detail.name}
             />
-          {/* Show error message if exists*/}
-          {error.name && <p className={style.errors}>{error.name}</p>}
-        </label>
+            {/* Show error message if exists*/}
+            {error.name && <p className={style.errors}>{error.name}</p>}
+          </label>
 
           <label htmlFor="brand" className={style.label_lastName}>
             Brand: <br />
@@ -264,8 +264,8 @@ export default function ProductsUpdate() {
             {error.brand && <p className={style.errors}>{error.brand}</p>}
           </label>
 
-            <label htmlFor="model" className={style.label_name}>
-              Model: <br />
+          <label htmlFor="model" className={style.label_name}>
+            Model: <br />
             <input
               type="text"
               id="model"
@@ -275,8 +275,8 @@ export default function ProductsUpdate() {
               className={style.input}
               placeholder={detail.model}
             />
-          {/* Show error message if exists*/}
-          {error.model && <p className={style.errors}>{error.model}</p>}
+            {/* Show error message if exists*/}
+            {error.model && <p className={style.errors}>{error.model}</p>}
           </label>
 
           <label className={style.label_lastName}>
@@ -306,8 +306,8 @@ export default function ProductsUpdate() {
               className={style.input}
               placeholder={detail.price}
             />
-          {/* Show error message if exists*/}
-          {error.price && <p className={style.errors}>{error.price}</p>}
+            {/* Show error message if exists*/}
+            {error.price && <p className={style.errors}>{error.price}</p>}
           </label>
 
           <label className={style.label_country}>
@@ -338,8 +338,8 @@ export default function ProductsUpdate() {
               className={style.input}
               placeholder={detail.color}
             />
-          {/* Show error message if exists*/}
-          {error.color && <p className={style.errors}>{error.color}</p>}
+            {/* Show error message if exists*/}
+            {error.color && <p className={style.errors}>{error.color}</p>}
           </label>
 
           <label htmlFor="description" className={style.label_lastName}>

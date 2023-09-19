@@ -9,6 +9,7 @@ const initialState = {
   pageFiltered: [],
   pageFilteredDb: [],
   cartHistory: [],
+  menuOption: "",
 
   queryParams: {
     name: "",
@@ -43,6 +44,7 @@ const initialState = {
   colorsLoaded: false,
   locationLoaded: false,
   usersLoaded: false,
+  reviews: [],
 };
 
 function rootReducer(state = initialState, action) {
@@ -57,11 +59,6 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         cartList: [...state.cartList, action.payload],
-      };
-    case "ADD_BUY_TO_HISTORY":
-      return {
-        ...state,
-        cartHistory: [...state.cartHistory, action.payload],
       };
     case "ADD_TO_FAV":
       const isProductInFav = state.favorites.some(
@@ -304,24 +301,33 @@ function rootReducer(state = initialState, action) {
         ...state,
         userId: action.payload,
       };
-
     case "SET_USER_TYPE":
       return {
         ...state,
         userType: action.payload,
       };
-
     case "GET_DETAIL":
       return {
         ...state,
         detail: action.payload,
       };
-
     case "RESET_DETAIL":
       return {
         ...state,
         detail: {}, // Restablecer los detalles a un objeto vacío
       };
+    case "REVIEWS_CAR":
+      return {
+        ...state,
+        reviews: action.payload,
+      };
+    case "RESET_REVIEWS":
+      return {
+        ...state,
+        reviews: [], // Restablecer las reviews a un objeto vacío
+      };
+    case "ADD_MENU_OPTION":
+      return { ...state, menuOption: action.payload };
     default:
       return state;
   }

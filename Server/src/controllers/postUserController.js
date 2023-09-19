@@ -40,14 +40,13 @@ const postUserController = async (dataUserBody) => {
       status,
     },
   });
-  console.log([user, created]);
   if (created) {
     const token = jsonwebtoken.sign({ email }, SECRET_KEY, {
       expiresIn: "24h",
     });
 
     const subject = "Account Verification on Vehibuy.com";
-    let link = `http://localhost:3001/user/verify/${token}`;
+    let link = `http://localhost:7183/user/verify/${token}`;
     const html = verifyHTML(link);
     transporter.sendMail(mailOptions(email, subject, html), (error, info) => {
       if (error) {

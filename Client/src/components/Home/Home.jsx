@@ -19,7 +19,7 @@ export default function Home() {
         "purchasedProductsName"
       );
       try {
-        const response = axios.post("http://localhost:3001/buy/create", {
+        const response = axios.post("/buy/create", {
           userId: userId,
           carsId: purshasedCars,
           price: subPrice,
@@ -39,6 +39,10 @@ export default function Home() {
 
   return (
     <div className={styles.container}>
+      <div className={styles.coverImage}></div>
+      <nav>
+        {/* Código para la barra de navegación */}
+      </nav>
       <Search />
       <div className={styles.container2}>
         <Filters />

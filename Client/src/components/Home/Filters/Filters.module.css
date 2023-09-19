@@ -12,8 +12,8 @@
 
 .buttonCF {
     font-family: 'Nunito Sans', sans-serif;
-    border: 1px solid #bdac9b;
-    background-color: #bdac9b;
+    border: 1px solid #bbb3ab;
+    background-color: #ddd4d4;
     color: white;
     padding: 8px 20px;
     margin-top: 0px;
@@ -21,12 +21,12 @@
     vertical-align: middle;
     cursor: pointer;
     transition: background-color 0.3s, color 0.3s, border 0.3s;
-} 
+}
 
 .buttonCF:hover {
     background-color: transparent;
-    color: #bdac9b;
-    border: 1px solid #bdac9b;
+    color: #bbb3ab;
+    border: 1px solid #bbb3ab;
 }
 
 .column h3 {
@@ -50,10 +50,10 @@
 }
 
 .column input[type="number"]::-webkit-inner-spin-button,
-.column input[tyoe="number"]::-webkit-outer-spin-button { 
-    -webkit-appearance: none; 
-    margin: 0; 
-  } 
+.column input[tyoe="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
 
 .column input[type="checkbox"] {
     appearance: none;
@@ -77,13 +77,13 @@
     margin-top: 10px;
     vertical-align: middle;
     cursor: pointer;
-}   
+}
 
 .buttonToggle {
     background-color: transparent;
     border: none;
     font-family: 'Nunito Sans', sans-serif;
-    color: #95887c;
+    color: #bbb3ab;
     margin-top: 7px;
 }
 

@@ -3,8 +3,6 @@ const bcrypt = require("bcrypt");
 const jsonwebtoken = require("jsonwebtoken");
 require("dotenv").config();
 const { SECRET_KEY } = process.env;
-const mailOptions = require("../utils/mailOptions");
-const transporter = require("../utils/transporter");
 
 const loginHandler = async (req, res) => {
   try {
@@ -34,8 +32,6 @@ const loginHandler = async (req, res) => {
         .status(200)
         .json({ access: true, type: "user", id: userId, token: token });
   } catch (error) {
-    console.log(error);
-    console.error(error);
     console.error(error);
     return res.status(500).send(error.message);
   }

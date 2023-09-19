@@ -19,7 +19,7 @@ export default function Cards() {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        if (!carsLoadeds) {
+        if (carsLoadeds === false) {
             const fetchCars = async () => {
                 await dispatch(cardsLoadedTrue());
                 await dispatch(getAllCars());
@@ -41,7 +41,7 @@ export default function Cards() {
         );
     }
 
-    if (pageFiltereds.length === 0) {
+    if (!pageFiltereds || pageFiltereds.length === 0) {
         return (
             <div className={styles.container2}>
                 <div className={styles.containerNF}>
@@ -66,6 +66,7 @@ export default function Cards() {
         setCurrentPage(newPage);
     };
 
+
     return (
         <div className={styles.containerDiv}>
             <div className={styles.container}>
@@ -81,8 +82,7 @@ export default function Cards() {
                     />
                 ))}
             </div>
-
-            {totalPages === 1 ? <div></div> :
+            {totalPages === 1 ? <></> :
                 <div className={styles.pagination}>
                     <button
                         onClick={() => handlePageChange(currentPage - 1)}
@@ -101,8 +101,7 @@ export default function Cards() {
                     >
                         Next ˃
                     </button>
-                </div>
-            }
+                </div>}
         </div>
     );
 }

@@ -67,7 +67,7 @@ export default function Register() {
       const user = auth.currentUser;
       const tokenFirebase = await user.getIdToken(true);
       const response = await axios.post(
-        "http://localhost:3001/user/google",
+        "/user/google",
         { tokenFirebase },
         {
           headers: {
@@ -137,7 +137,7 @@ export default function Register() {
       input.age
     ) {
       try {
-        const response = await axios.post("http://localhost:3001/user/create", {
+        const response = await axios.post("/user/create", {
           email: input.email,
           password: input.password,
           name: input.name,
@@ -199,9 +199,12 @@ export default function Register() {
 
   return (
     <div className={styles.login}>
-      <Link to={"/home"}>
-        <ButtonBack />
-      </Link>
+      <div className={styles.buttonBackContainer}>
+        <Link to={"/home"} className={styles.buttonBackLink}>
+          <ButtonBack className={styles.buttonBack} />
+          <h5 className={styles.buttonBackH5}>Go Back</h5>
+        </Link>
+      </div>
       <div className={styles.register_form}>
         <form
           className={styles.form_in}

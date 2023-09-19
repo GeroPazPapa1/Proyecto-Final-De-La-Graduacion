@@ -58,7 +58,7 @@ export default function DashBoardEmail() {
             };
 
     const handleCheckboxActionDelete = async () => {
-            Swal.fire({
+        Swal.fire({
             title: "¿Are you sure?",
             text: `You are about to delete ${name} from the database`,
             icon: "warning",
@@ -68,7 +68,8 @@ export default function DashBoardEmail() {
         }).then((result) => {
             if (result.isConfirmed) {
                 for (const id in emailSelection) {
-                dispatch(deleteUserWithID(id));}
+                    dispatch(deleteUserWithID(id));
+                }
                 dispatch(applyFilterDb("originEmails"));
             }
         });
@@ -77,10 +78,10 @@ export default function DashBoardEmail() {
     const handleCheckboxChange = (id) => {
         // Actualiza el estado de selección cuando se cambia el checkbox
         setEmailSelection((prevState) => ({
-          ...prevState,
-          [id]: !prevState[id],
+            ...prevState,
+            [id]: !prevState[id],
         }));
-      };
+    };
 
       const handleSelectAllChange = () => {
           setSelectAll(!selectAll);
@@ -155,6 +156,7 @@ export default function DashBoardEmail() {
                         />
                 ))
                 }
+                
             </div>
         </div>
     )

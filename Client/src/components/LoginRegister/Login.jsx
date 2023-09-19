@@ -15,7 +15,6 @@ import {
   SignedSuccesfully,
   WrongEmailPassword,
 } from "../NotiStack";
-import { enqueueSnackbar } from "notistack";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -44,7 +43,7 @@ export default function Login() {
       const user = auth.currentUser;
       const tokenFirebase = await user.getIdToken(true);
       const response = await axios.post(
-        "http://localhost:3001/user/google",
+        "/user/google",
         { tokenFirebase },
         {
           headers: {
@@ -69,6 +68,7 @@ export default function Login() {
       );
       access && navigate("/home");
     } catch (error) {
+      console.error("Error durante la autenticación con Google:", error);
       AlreadyAccountWithEmail();
     }
   };
@@ -117,7 +117,7 @@ export default function Login() {
       input.password
     ) {
       try {
-        const response = await axios.post("http://localhost:3001/user", {
+        const response = await axios.post("/user", {
           email: input.email,
           password: input.password,
         });
@@ -163,7 +163,6 @@ export default function Login() {
   useEffect(() => {
     !access && navigate("/login");
   }, [access]);
-
   useEffect(() => {
     const loggedUserJson = localStorage.getItem("authToken");
     const user = JSON.parse(loggedUserJson);
@@ -175,12 +174,14 @@ export default function Login() {
       // access && navigate("/home");
     }
   }, []);
-
   return (
     <div className={styles.login}>
-      <Link to={"/home"}>
-        <ButtonBack />
-      </Link>
+      <div className={styles.buttonBackContainer}>
+        <Link to={"/home"} className={styles.buttonBackLink}>
+          <ButtonBack className={styles.buttonBack} />
+          <h5 className={styles.buttonBackH5}>Go Back</h5>
+        </Link>
+      </div>
       <div className={styles.login_form}>
         <form className={styles.form_in} onSubmit={(e) => handleSubmitLogin(e)}>
           <h1 className={styles.title_login}>Log In</h1>
@@ -196,9 +197,6 @@ export default function Login() {
             name="email"
             onChange={(e) => handleChange(e)}
           />
-          {touchedFields.email && errors.email && (
-            <p className={styles.errors}>{errors.email}</p>
-          )}
           {touchedFields.email && errors.email && (
             <p className={styles.errors}>{errors.email}</p>
           )}

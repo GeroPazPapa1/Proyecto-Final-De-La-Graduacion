@@ -5,7 +5,11 @@ import validation from "../Validation/validationModification";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { ButtonBack } from "../../../assets/svgs";
-import { modificationUserSuccess, processCancelSuccess } from "../../NotiStack";
+import {
+  modificationUserSuccess,
+  uploadImageFail,
+  uploadImageSuccess,
+} from "../../NotiStack";
 import { OpenEye, ClosedEye } from "../../LoginRegister/svgs.jsx";
 import UserImage from "./UserImage";
 import Swal from "sweetalert2";
@@ -72,10 +76,7 @@ export default function FormUserModification({ id, image }) {
     try {
       // Create a copy of the current input object to send to the server
       let updatedInput = { ...input };
-      const { data } = await axios.put(
-        `http://localhost:3001/user/${id}`,
-        updatedInput
-      );
+      const { data } = await axios.put(`/user/${id}`, updatedInput);
       modificationUserSuccess();
       navigate("/home");
     } catch (error) {
@@ -121,7 +122,7 @@ export default function FormUserModification({ id, image }) {
   useEffect(() => {
     const userInfoFn = async () => {
       try {
-        const { data } = await axios.get(`http://localhost:3001/user/${id}`);
+        const { data } = await axios.get(`/user/${id}`);
         setUser(data);
       } catch (error) {
         alert(
@@ -134,18 +135,16 @@ export default function FormUserModification({ id, image }) {
 
   return (
     <div className={style.login}>
-      <Link to={"/home"}>
-        <ButtonBack />
-      </Link>
       <div className={style.register_form}>
         <form onSubmit={handleSubmit} className={style.form_in}>
           <div className={style.divCenter}>
             <h1 className={style.title_register}>Update</h1>
 
-            {image
-            ? (<img src={image} alt="" className={style.iconImage} />)
-            : (<img src={user.image} alt="" className={style.iconImage} />)
-            }
+          {image ? (
+            <img src={image} alt="" className={style.iconImage} />
+          ) : (
+            <img src={user.image} alt="" className={style.iconImage} />
+          )}
 
             <UserImage />
             </div>
@@ -161,55 +160,54 @@ export default function FormUserModification({ id, image }) {
               className={style.input}
               placeholder={user.name}
             />
-          {/* Show error message if exists*/}
-          {error.name && <p className={style.errors}>{error.name}</p>}
+            {/* Show error message if exists*/}
+            {error.name && <p className={style.errors}>{error.name}</p>}
           </label>
 
           <label htmlFor="lastName" className={style.label_lastName}>
             Last Name: <br />
-          <input
-            type="text"
-            id="lastName"
-            name="lastName"
-            value={input.lastName}
-            onChange={handleChange}
-            className={style.input}
-            placeholder={user.lastName}
+            <input
+              type="text"
+              id="lastName"
+              name="lastName"
+              value={input.lastName}
+              onChange={handleChange}
+              className={style.input}
+              placeholder={user.lastName}
             />
-          {/* Show error message if exists*/}
-          {error.lastName && <p className={style.errors}>{error.lastName}</p>}
-            </label>
+            {/* Show error message if exists*/}
+            {error.lastName && <p className={style.errors}>{error.lastName}</p>}
+          </label>
 
           <label htmlFor="age" className={style.label_age}>
-            Age:
-          <br />
-          <input
-            type="text"
-            id="age"
-            name="age"
-            value={input.age}
-            onChange={handleChange}
-            className={style.input}
-            placeholder={user.age}
+            Age: <br />
+            <input
+              type="text"
+              id="age"
+              name="age"
+              value={input.age}
+              onChange={handleChange}
+              className={style.input}
+              placeholder={user.age}
             />
-          {/* Show error message if exists*/}
-          {error.age && <p className={style.errors}>{error.age}</p>}
-            </label>
+            {/* Show error message if exists*/}
+            {error.age && <p className={style.errors}>{error.age}</p>}
+          </label>
 
           <label htmlFor="tel" className={style.label_tel}>
             Phone: <br />
-          <input
-            type="text"
-            id="tel"
-            name="tel"
-            value={input.tel}
-            onChange={handleChange}
-            className={style.input}
-            placeholder={user.tel}
+            <input
+              type="text"
+              id="tel"
+              name="tel"
+              value={input.tel}
+              onChange={handleChange}
+              className={style.input}
+              placeholder={user.tel}
             />
-          {/* Show error message if exists*/}
-          {error.tel && <p className={style.errors}>{error.tel}</p>}
-            </label>
+            {/* Show error message if exists*/}
+            {error.tel && <p className={style.errors}>{error.tel}</p>}
+          </label>
 
           <div className={style.largeinput}>
             <label className={style.label_country}>
@@ -233,15 +231,15 @@ export default function FormUserModification({ id, image }) {
           <div className={style.largeinput}>
             <label htmlFor="password" className={style.label_password}>
               Password: <br />
-            <input
-              type={showPassword ? "text" : "password"}
-              id="password"
-              name="password"
-              value={input.password}
-              onChange={handleChange}
-              className={style.input_password2}
+              <input
+                type={showPassword ? "text" : "password"}
+                id="password"
+                name="password"
+                value={input.password}
+                onChange={handleChange}
+                className={style.input_password2}
               />
-              </label>
+            </label>
             <div className={style.btn_hideandshow}>
               <button
                 type="button"

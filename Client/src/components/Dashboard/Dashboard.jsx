@@ -32,38 +32,46 @@ export default function Dashboard() {
 
     useEffect(() => {
         const handleChargedUsers = async () => {
-          if (
-            location.pathname === "/admin/dashboard" &&
-            loggedUser &&
-            loggedUser.response &&
-            loggedUser.response.type === "admin"
-          ) {
-            // Verifica si los usuarios ya están cargados o no
-            if (!usersLoaded) {
-              try {
-                // Realiza la solicitud y carga los usuarios
-                await dispatch(usersLoadedTrue());
-                await dispatch(getDashboard(loggedUser));
-              } catch (error) {
-                console.error("Error al obtener los usuarios:", error);
-              }
+            if (
+                location.pathname === "/admin/dashboard" &&
+                loggedUser &&
+                loggedUser.response &&
+                loggedUser.response.type === "admin"
+            ) {
+                // Verifica si los usuarios ya están cargados o no
+                if (!usersLoaded) {
+                    try {
+                        // Realiza la solicitud y carga los usuarios
+                        await dispatch(usersLoadedTrue());
+                        await dispatch(getDashboard(loggedUser));
+                    } catch (error) {
+                        console.error("Error al obtener los usuarios:", error);
+                    }
+                }
             }
-          }
         };
-      
+
         handleChargedUsers(); // Llama a la función para cargar los usuarios
-      }, [dispatch, location.pathname, loggedUser, usersLoaded]);
-      
+    }, [dispatch, location.pathname, loggedUser, usersLoaded]);
+
     return (
         <div>
             {location.pathname === "/admin/dashboard" && (
                 <div>
                     {!loggedUser ? (
                         <>
-                            <h2>You must log in and be an Administrator to access here</h2>
-                            <Link to="/home">
-                                <button>Come Home</button>
-                            </Link>
+                            <div className={styles.notAccess}>
+                                <div>
+                                    <div>
+                                        <h2>You must log in and be an <br />Administrator to access here</h2>
+                                    </div>
+                                    <div>
+                                        <Link to="/home">
+                                            <button>GO HOME</button>
+                                        </Link>
+                                    </div>
+                                </div>
+                            </div>
                         </>
                     ) : loggedUser.response.type === "admin" ? (
                         // Aquí puedes agregar el contenido que se mostrará para los usuarios admin
@@ -82,7 +90,7 @@ export default function Dashboard() {
                                         <Link to={"/home"}>
                                             <button>HOME</button>
                                         </Link>
-                                        <Link to={"/"}>
+                                        <Link to={"/login"}>
                                             <button onClick={handleLogout}>LOGOUT</button>
                                         </Link>
                                     </>
@@ -94,6 +102,10 @@ export default function Dashboard() {
                                 </div>
                                 <div className={styles.hello}>
                                     <h2>DashBoard</h2>
+                                </div>
+                                <div>
+                                    <SearchBarDashboard/>
+                                    <Filters/>
                                 </div>
                                 <div>{selectedTab === "USERS" && (
                                     <div className={styles.DashboardUser}>
@@ -115,10 +127,18 @@ export default function Dashboard() {
                     ) : (
                         // Agrega el contenido que se mostrará para los usuarios no admin aquí
                         <>
-                            <h2>You must be an administrator to access these functions</h2>
-                            <Link to="/home">
-                                <button>Come Home</button>
-                            </Link>
+                            <div className={styles.notAccess}>
+                                <div>
+                                    <div>
+                                        <h2>You must be an administrator <br /> to access these functions</h2>
+                                    </div>
+                                    <div>
+                                        <Link to="/home">
+                                            <button>GO HOME</button>
+                                        </Link>
+                                    </div>
+                                </div>
+                            </div>
                         </>
                     )}
                 </div>

@@ -285,14 +285,14 @@ export default function Filters() {
                 <h3>Brand</h3>
                 {
                     brandQuerys.slice(0, showAllBrands ? undefined : 5)?.map((brand) => (
-                        <label key={brand}>
+                        <label key={brand.id}>
                             <input
                                 type="checkbox"
-                                value={brand}
-                                checked={brands === brand}
+                                value={brand.name}
+                                checked={brands === brand.name}
                                 onChange={handleChangeBrand}
                             />
-                            {brand}
+                            {brand.name}
                         </label>
                     ))
                 }
