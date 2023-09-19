@@ -53,9 +53,10 @@ const deleteReview = async (req, res) => {
 
 const updateReview = async (req, res) => {
     const { id, rating, title, review } = req.body;
-  
+
+    console.log(rating);
     try {
-      const fieldsToUpdate = {};
+      let fieldsToUpdate = {};
       if (rating !== undefined && rating > 0) fieldsToUpdate.rating = rating;
       if (title !== undefined) fieldsToUpdate.title = title;
       if (review !== undefined) fieldsToUpdate.review = review;
@@ -64,10 +65,9 @@ const updateReview = async (req, res) => {
         await Review.update(fieldsToUpdate, { where: { id: id } });
       }
   
-      const newReviews = await
       res.status(200).json(getReviewById)
     } catch (error) {
-      res.status(500).json({ error: error.message })
+      res.status(500).send(console.error(error.message))
     }
   }
   

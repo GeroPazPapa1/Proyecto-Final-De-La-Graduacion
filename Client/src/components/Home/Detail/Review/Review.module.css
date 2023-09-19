@@ -94,6 +94,18 @@ hr {
   text-transform: uppercase;
 }
 
+.btn_disabled{
+  width: auto;
+  border: 1px solid var(--colorNegro);
+  background-color: var(--colorAzulCielo);
+  margin: 5px;
+  padding: 0.5rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: ease-in-out 0.1s;
+  text-transform: uppercase;
+}
+
 .btn_edit {
   border: 1px solid var(--colorNegro);
   background-color: var(--colorBlanco);
