@@ -30,11 +30,34 @@
   /* Espacio entre el logo y otros elementos en pantallas grandes */
 }
 
+.cartIconContainer {
+  position: relative;
+  display: inline-block;
+}
+
 .icons {
+  margin-left: 10px;
   width: 30px;
   height: auto;
   cursor: pointer;
 }
+
+.itemCountCircle {
+  display: flex;
+  position: absolute;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--fontNunito);
+  font-size: 12px; /* Tamaño de la fuente del número */
+  color: #a39583; /* Color del texto (número) */
+  background-color: #ebe8e5;
+  bottom: 0;
+  right: 0;
+  border-radius: 50%; /* Para hacerlo circular */
+  width: 20px; /* Ancho del círculo */
+  height: 20px; /* Alto del círculo */
+}
+
 
 .button {
   border: none;
@@ -61,7 +84,7 @@
 .name {
   border: none;
   background-color: transparent;
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
   font-size: 17px;
   margin: 0 13px;
   border-bottom: 2px solid transparent;
@@ -122,8 +145,6 @@
   }
 }
 
-
-
 .dropdownContainer {
   position: relative;
 }
@@ -145,7 +166,7 @@
   position: absolute;
   background-color: #f9f9f9;
   min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
   font-family: "Inter", sans-serif;
 }

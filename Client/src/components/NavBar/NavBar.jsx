@@ -6,12 +6,18 @@ import { Link, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { addMenuOption } from "../../Redux/actions";
-import { connect, useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function NavBar() {
+
   const dispatch = useDispatch();
   const location = useLocation();
+
   const [user, setUser] = useState([]);
+
+  const cartList = useSelector((state) => state.cartList);
+  const itemCount = cartList.length;
+
   const loggedUserJson = localStorage.getItem("authToken");
   const loggedUser = loggedUserJson ? JSON.parse(loggedUserJson) : null;
 
@@ -98,7 +104,6 @@ export default function NavBar() {
                   </div>
                 </div>
               </div>
-
               {loggedUser.response?.type === "admin" && (
                 <Link to={"/admin/dashboard"}>
                   <button className={styles.button}>Dashboard</button>
@@ -191,7 +196,12 @@ export default function NavBar() {
                 </>
               )}
               <Link to="/cart">
-                <img className={styles.icons} src={CART} alt="Cart..." />
+                <div className={styles.cartIconContainer}>
+                  <img className={styles.icons} src={CART} alt="Cart..." />
+                  {itemCount > 0 && (
+                    <div className={styles.itemCountCircle}>{itemCount}</div>
+                  )}
+                </div>
               </Link>
             </div>
           </div>
@@ -206,7 +216,7 @@ export default function NavBar() {
               </Link>
               <Link to={"/about"}>
                 <button className={styles.button}>Contacts</button>
-              </Link>              
+              </Link>
               <Link to={"/favorites"}>
                 <button className={styles.button}>Favorites</button>
               </Link>
@@ -276,7 +286,12 @@ export default function NavBar() {
                 </>
               )}
               <Link to="/cart">
-                <img className={styles.icons} src={CART} alt="Cart..." />
+                <div className={styles.cartIconContainer}>
+                  <img className={styles.icons} src={CART} alt="Cart..." />
+                  {itemCount > 0 && (
+                    <div className={styles.itemCountCircle}>{itemCount}</div>
+                  )}
+                </div>
               </Link>
             </div>
           </div>
@@ -291,10 +306,10 @@ export default function NavBar() {
               </Link>
               <Link to={"/about"}>
                 <button className={styles.button}>Contacts</button>
-              </Link>  
+              </Link>
               <Link to={"/favorites"}>
                 <button className={styles.button}>Favorites</button>
-              </Link>          
+              </Link>
             </div>
           </div>
           <div>
@@ -302,123 +317,6 @@ export default function NavBar() {
               {loggedUser && (
                 <>
                   <span>{loggedUser.email}</span>
-                  {loggedUser.response?.type === "admin" && (
-                    <Link to={"/admin/dashboard"}>
-                      <button>Dashboard</button>
-                    </Link>
-                  )}
-                  <Link to={"/profileSettings"} className={styles.icon_name_user}>
-                    <img src={user.image} alt="" className={styles.iconImage} />
-                    {" "}
-                    <button className={styles.button} id={loggedUser.id}>
-                      {user.name}
-                    </button>
-                  </Link>
-                  <Link to={"/"}>
-                    <button onClick={handleLogout} className={styles.button}>
-                      Log out
-                    </button>
-                  </Link>
-                </>
-              )}
-              {!loggedUser && (
-                <>
-                  <Link to={"/login"}>
-                    <button className={styles.button}>Log in</button>
-                  </Link>
-                  <Link to={"/register"}>
-                    <button className={styles.button}>Register</button>
-                  </Link>
-                </>
-              )}
-              <Link to="/cart">
-                <img className={styles.icons} src={CART} alt="Cart..." />
-              </Link>
-            </div>
-          </div>
-        </>
-      )}
-      {location.pathname === "/about" && (
-        <>
-          <div className={styles.containerLP}>
-            <div>
-              <Link to={"/home"}>
-                <button className={styles.button}>Home</button>
-              </Link>
-              <Link to={"/about"}>
-                <button className={styles.button}>Contacts</button>
-              </Link>  
-              <Link to={"/favorites"}>
-                <button className={styles.button}>Favorites</button>
-              </Link>  
-            </div>
-          </div>
-          <div>
-            <div className={styles.containerL}>
-              {loggedUser && (
-                <>
-                  <span>{loggedUser.email}</span>
-                  {loggedUser.response?.type === "admin" && (
-                    <Link to={"/admin/dashboard"}>
-                      <button>Dashboard</button>
-                    </Link>
-                  )}
-                  <Link to={"/profileSettings"} className={styles.icon_name_user}>
-                    <img src={user.image} alt="" className={styles.iconImage} />
-                    {" "}
-                    <button className={styles.button} id={loggedUser.id}>
-                      {user.name}
-                    </button>
-                  </Link>
-                  <Link to={"/"}>
-                    <button onClick={handleLogout} className={styles.button}>
-                      Log out
-                    </button>
-                  </Link>
-                </>
-              )}
-              {!loggedUser && (
-                <>
-                  <Link to={"/login"}>
-                    <button className={styles.button}>Log in</button>
-                  </Link>
-                  <Link to={"/register"}>
-                    <button className={styles.button}>Register</button>
-                  </Link>
-                </>
-              )}
-              <Link to="/cart">
-                <img className={styles.icons} src={CART} alt="Cart..." />
-              </Link>
-            </div>
-          </div>
-        </>
-      )}
-      {location.pathname === "/favorites" && (
-        <>
-          <div className={styles.containerLP}>
-            <div>
-              <Link to={"/home"}>
-                <button className={styles.button}>Home</button>
-              </Link>
-              <Link to={"/about"}>
-                <button className={styles.button}>Contacts</button>
-              </Link>  
-              <Link to={"/favorites"}>
-                <button className={styles.button}>Favorites</button>
-              </Link>  
-            </div>
-          </div>
-          <div>
-            <div className={styles.containerL}>
-              {loggedUser && (
-                <>
-                  <span>{loggedUser.email}</span>
-                  {loggedUser.response?.type === "admin" && (
-                    <Link to={"/admin/dashboard"}>
-                      <button className={styles.button}>Dashboard</button>
-                    </Link>
-                  )}
                   <div className={styles.dropdownContainer}>
                     <div className={styles.dropdown}>
                       <div className={styles.icon_name_user}>
@@ -455,6 +353,99 @@ export default function NavBar() {
                       </div>
                     </div>
                   </div>
+                  {loggedUser.response?.type === "admin" && (
+                    <Link to={"/admin/dashboard"}>
+                      <button className={styles.button}>Dashboard</button>
+                    </Link>
+                  )}
+                  <Link to={"/"}>
+                    <button onClick={handleLogout} className={styles.button}>
+                      Log out
+                    </button>
+                  </Link>
+                </>)}
+              {!loggedUser && (
+                <>
+                  <Link to={"/login"}>
+                    <button className={styles.button}>Log in</button>
+                  </Link>
+                  <Link to={"/register"}>
+                    <button className={styles.button}>Register</button>
+                  </Link>
+                </>
+              )}
+              <Link to="/cart">
+                <div className={styles.cartIconContainer}>
+                  <img className={styles.icons} src={CART} alt="Cart..." />
+                  {itemCount > 0 && (
+                    <div className={styles.itemCountCircle}>{itemCount}</div>
+                  )}
+                </div>
+              </Link>
+            </div>
+          </div>
+        </>
+      )}
+      {location.pathname === "/about" && (
+        <>
+          <div className={styles.containerLP}>
+            <div>
+              <Link to={"/home"}>
+                <button className={styles.button}>Home</button>
+              </Link>
+              <Link to={"/about"}>
+                <button className={styles.button}>Contacts</button>
+              </Link>
+              <Link to={"/favorites"}>
+                <button className={styles.button}>Favorites</button>
+              </Link>
+            </div>
+          </div>
+          <div>
+            <div className={styles.containerL}>
+              {loggedUser && (
+                <>                  
+                <div className={styles.dropdownContainer}>
+                  <div className={styles.dropdown}>
+                    <div className={styles.icon_name_user}>
+                      <img
+                        src={user.image}
+                        alt=""
+                        className={styles.iconImage}
+                      />{" "}
+                      <button className={styles.buttonDropdown}>
+                        {user.name} &#9660;{" "}
+                        {/* Agregamos una flecha hacia abajo para indicar que es desplegable */}
+                      </button>
+                    </div>
+                    <div className={styles.dropdownContent}>
+                      {/* Aquí agregamos las opciones del menú */}
+                      <Link
+                        onClick={() => dispatch(addMenuOption("Purchases"))}
+                        to="/profile"
+                      >
+                        Purchases
+                      </Link>
+                      <Link
+                        to="/profile"
+                        onClick={() => dispatch(addMenuOption("Profile"))}
+                      >
+                        My Profile
+                      </Link>
+                      <Link
+                        to="/profile"
+                        onClick={() => dispatch(addMenuOption("Reviews"))}
+                      >
+                        Reviews
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+                  {loggedUser.response?.type === "admin" && (
+                    <Link to={"/admin/dashboard"}>
+                      <button>Dashboard</button>
+                    </Link>
+                  )}
                   <Link to={"/"}>
                     <button onClick={handleLogout} className={styles.button}>
                       Log out
@@ -473,7 +464,101 @@ export default function NavBar() {
                 </>
               )}
               <Link to="/cart">
-                <img className={styles.icons} src={CART} alt="Cart..." />
+                <div className={styles.cartIconContainer}>
+                  <img className={styles.icons} src={CART} alt="Cart..." />
+                  {itemCount > 0 && (
+                    <div className={styles.itemCountCircle}>{itemCount}</div>
+                  )}
+                </div>
+              </Link>
+            </div>
+          </div>
+        </>
+      )}
+      {location.pathname === "/favorites" && (
+        <>
+          <div className={styles.containerLP}>
+            <div>
+              <Link to={"/home"}>
+                <button className={styles.button}>Home</button>
+              </Link>
+              <Link to={"/about"}>
+                <button className={styles.button}>Contacts</button>
+              </Link>
+              <Link to={"/favorites"}>
+                <button className={styles.button}>Favorites</button>
+              </Link>
+            </div>
+          </div>
+          <div>
+            <div className={styles.containerL}>
+              {loggedUser && (
+                <>
+                  <div className={styles.dropdownContainer}>
+                    <div className={styles.dropdown}>
+                      <div className={styles.icon_name_user}>
+                        <img
+                          src={user.image}
+                          alt=""
+                          className={styles.iconImage}
+                        />{" "}
+                        <button className={styles.buttonDropdown}>
+                          {user.name} &#9660;{" "}
+                          {/* Agregamos una flecha hacia abajo para indicar que es desplegable */}
+                        </button>
+                      </div>
+                      <div className={styles.dropdownContent}>
+                        {/* Aquí agregamos las opciones del menú */}
+                        <Link
+                          onClick={() => dispatch(addMenuOption("Purchases"))}
+                          to="/profile"
+                        >
+                          Purchases
+                        </Link>
+                        <Link
+                          to="/profile"
+                          onClick={() => dispatch(addMenuOption("Profile"))}
+                        >
+                          My Profile
+                        </Link>
+                        <Link
+                          to="/profile"
+                          onClick={() => dispatch(addMenuOption("Reviews"))}
+                        >
+                          Reviews
+                        </Link>
+                      </div>
+                    </div>
+                  </div>
+                  {loggedUser.response?.type === "admin" && (
+                    <Link to={"/admin/dashboard"}>
+                      <button className={styles.button}>Dashboard</button>
+                    </Link>
+                  )}
+                  <Link to={"/"}>
+                    <button onClick={handleLogout} className={styles.button}>
+                      Log out
+                    </button>
+                  </Link>
+                </>
+              )}
+              {!loggedUser && (
+                <>
+                  <Link to={"/login"}>
+                    <button className={styles.button}>Log in</button>
+                  </Link>
+                  <Link to={"/register"}>
+                    <button className={styles.button}>Register</button>
+                  </Link>
+                </>
+              )}
+              <Link to="/cart">
+                <div className={styles.cartIconContainer}>
+                  <img className={styles.icons} src={CART} alt="Cart..." />
+                  {itemCount > 0 && (
+                    <div className={styles.itemCountCircle}>{itemCount}</div>
+                  )}
+                </div>
               </Link>
             </div>
           </div>
@@ -538,7 +623,12 @@ export default function NavBar() {
                 </>
               )}
               <Link to="/cart">
-                <img className={styles.icons} src={CART} alt="Cart..." />
+                <div className={styles.cartIconContainer}>
+                  <img className={styles.icons} src={CART} alt="Cart..." />
+                  {itemCount > 0 && (
+                    <div className={styles.itemCountCircle}>{itemCount}</div>
+                  )}
+                </div>
               </Link>
             </div>
           </div>

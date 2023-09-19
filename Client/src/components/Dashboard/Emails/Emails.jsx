@@ -6,6 +6,7 @@ import { applyFilterDb, deleteUserWithID, editPutUser, getDashboard } from "../.
 import EDIT from "../Email/Icons/EDIT.svg";
 import TRASH from "../Email/Icons/TRASH.svg";
 import Swal from "sweetalert2";
+import USER from "./Icons/USER.png";
 
 export default function DashBoardEmail() {
 
@@ -21,6 +22,8 @@ export default function DashBoardEmail() {
     console.log(aux, "soy aux");
     console.log(emailSelection, "soy el DashboardEmail");
 
+    console.log(pageFilteredDb)
+
     const handleCheckboxActionEdit = async () => {
         Swal.fire({
             title: "Select options",
@@ -34,8 +37,9 @@ export default function DashBoardEmail() {
                 '<option value=false>Not Banned</option>' +
                 '</select>',
             showCancelButton: true,
-            confirmButtonText: "Accept",
+            reverseButtons: true,
             cancelButtonText: "Cancel",
+            confirmButtonText: "Accept",
             preConfirm: () => {
                 const selectedStatus = document.getElementById('select-status').value;
                 const selectedBan = document.getElementById('select-ban').value;
@@ -65,8 +69,9 @@ export default function DashBoardEmail() {
             text: `You are about to delete ${name} from the database`,
             icon: "warning",
             showCancelButton: true,
-            confirmButtonText: "Accept",
+            reverseButtons: true,
             cancelButtonText: "Cancel",
+            confirmButtonText: "Accept",
         }).then((result) => {
             if (result.isConfirmed) {
                 for (const id in emailSelection) {
@@ -94,6 +99,23 @@ export default function DashBoardEmail() {
             handleChangeEmails();
         }
     }, [EmailsLoaded, dispatch])
+
+
+    if (pageFilteredDb.length === 0) {
+        return (
+            <div className={styles.containerCNF}>
+                <div className={styles.containerNF}>
+                    <div>
+                        <img src={USER} alt="NotFound..." />
+                    </div>
+                    <div className={styles.textNF}>
+                        <p>Not Found</p>
+                        <span>No users found</span>
+                    </div>
+                </div>
+            </div>
+        );
+    }
 
     return (
         <div>
@@ -128,7 +150,6 @@ export default function DashBoardEmail() {
                         verify={email.verify} />
                 ))
                 }
-                
             </div>
         </div>
     )
