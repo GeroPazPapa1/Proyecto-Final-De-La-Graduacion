@@ -204,29 +204,22 @@ export const updateReviewNoti = () => {
 
 export const errorReviewNoti = () => {
     enqueueSnackbar('You have already published a review', {
-            variant: 'error',
-            anchorOrigin: {
-                vertical: 'top',
-                horizontal: 'right',
-            }
-        })
-    }
-
-    export const logOutUserSuccess = () => {
-        enqueueSnackbar('session has been successfully log out!', {
-            variant: 'success',
-            anchorOrigin: {
-                vertical: 'bottom',
-                horizontal: 'right',
-            }
-        });
-    }
         variant: 'error',
         anchorOrigin: {
             vertical: 'top',
             horizontal: 'right',
         }
     })
+}
+
+export const logOutUserSuccess = () => {
+    enqueueSnackbar('session has been successfully log out!', {
+        variant: 'success',
+        anchorOrigin: {
+            vertical: 'bottom',
+            horizontal: 'right',
+        }
+    });
 }
 
 export const verifyDeleteFav = () => {

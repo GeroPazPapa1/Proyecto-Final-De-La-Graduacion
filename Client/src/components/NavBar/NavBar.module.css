@@ -20,6 +20,7 @@
 .spanAdmin{
   z-index: 1;
   position: absolute;
+  margin-right: 20px;
   bottom: -35%;
   font-size: 12px;  
   right: 50%;
@@ -171,10 +172,13 @@
 }
 
 .buttonDropdown {
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  margin-right: 20px  ;
+  font-weight: lighter;
   background-color: transparent;
   border: none;
   cursor: pointer;
-  font-size: 16px;
 }
 
 .dropdownContent {
