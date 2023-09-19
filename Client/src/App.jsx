@@ -11,6 +11,8 @@ import NavBar from "./components/NavBar/NavBar";
 import Detail from "./components/Home/Detail/Detail";
 import Favorites from "./components/Favorites/Favorites";
 import Dashboard from "./components/Dashboard/Dashboard";
+import CreateProduct from "./components/Dashboard/CreateProduct/CreateProduct.jsx";
+import ProductsUpdate from "./components/Dashboard/ProductsUpdate/ProductsUpdate.jsx"
 import Modification from "./components/Modification/Modification";
 import ProfileDashboard from "./components/ProfileDashboard/ProfileDashboard.jsx";
 
@@ -29,6 +31,8 @@ function App() {
         <Route path="/favorites" element={<Favorites />} />
         <Route path="/profile" element={<ProfileDashboard />} />
         <Route path="/admin/dashboard" element={<Dashboard />} />
+        <Route path="/admin/dashboard/create" element={<CreateProduct />} />
+        <Route path="/admin/dashboard/edit/:id" element={<ProductsUpdate />} />
         <Route path="/profileSettings" element={<Modification />} />
       </Routes>
       <Footer />

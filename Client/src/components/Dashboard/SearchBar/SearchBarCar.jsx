@@ -1,69 +1,57 @@
-import React, { useEffect } from 'react'
-import { useState } from "react";
-// import searchInput from "./searchInput.svg";
-import styles from "./SearchBarCar.module.css"
+import React, { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux";
-import { applyFilters, orderFilters, searchByQuery, getAllCars } from '../../../Redux/actions';
+import { applyFilters, searchByQuery, getAllCars } from "../../../Redux/actions";
+import styles from "./SearchBar.module.css";
 
-export default function SearchBarCar() {
+export default function SearchBarDashboard() {
 
     const [name, setName] = useState('');
-    const [filter, setFilter] = useState('');
-    const dispatch = useDispatch();
     const queryParams = useSelector((state) => state.queryParams);
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+                if (name !== '') {
+                    const delaySearch = setTimeout( async () => {
+                        queryParams.name = name;
+                        await dispatch(searchByQuery(queryParams));
+                        dispatch(applyFilters("queryCars"));
+                        setFilter('Defect')
+                    }, 1000);
+                    return () => clearTimeout(delaySearch);
+                } else if (name === '') {
+                    const delayNotSearch = async ()  => {
+                        queryParams.name = name;
+                        await dispatch(getAllCars());
+                        dispatch(applyFilters("originCars"));
+                        setFilter('Defect');
+                    };
+                    delayNotSearch();
+                }
+            }, [dispatch, name])
+    
 
     const handleChange = (e) => {
         const { value } = e.target;
         setName(value);
     };
 
-    useEffect(() => {
-        if (name !== '') {
-            const delaySearch = setTimeout( async () => {
-                queryParams.name = name;
-                await dispatch(searchByQuery(queryParams));
-                dispatch(applyFilters("queryCars"));
-                setFilter('Defect')
-            }, 1000);
-            return () => clearTimeout(delaySearch);
-        } else if (name === '') {
-            const delayNotSearch = async ()  => {
-                queryParams.name = name;
-                await dispatch(getAllCars());
-                dispatch(applyFilters("originCars"));
-                setFilter('Defect');
-            };
-            delayNotSearch();
-        }
-    }, [dispatch, name])
+    
 
-
-    const handleSelectFilter = (e) => {
-        const { value } = e.target;
-        setFilter(value);
-        dispatch((orderFilters(value)))
+    const buttonSubmit = async () => {
+        queryParams.name = value;
+        await dispatch(searchByQueryFilters(queryParams));
+        dispatch(applyFilterDb("FilteredEmails"));  
     }
 
     return (
         <div className={styles.container}>
-            <div className={styles.containerSearch}>
-                <input
-                    className={styles.input}
-                    type="search"
-                    placeholder="Search..."
-                    value={name}
-                    onChange={handleChange}
-                />
-                {/* <img className={styles.searchI} onClick={handleClickByQuery} src={searchInput} alt="searchInput" /> */}
-            </div>
-            <div className={styles.orden}>
-                <p>Sort by </p>
-                <select className={styles.select} value={filter} onChange={handleSelectFilter}>
-                    <option value="Defect">Default</option>
-                    <option value="Lower">Lower price</option>
-                    <option value="Higher">Higher price</option>
-                </select>
-            </div>
+            <input
+                type="search"
+                value={name}
+                onChange={handleChange}
+                placeholder="Search for name, brand..."
+            />
+            <button onClick={buttonSubmit}>SEARCH</button>
         </div>
-    );
+    )
 }

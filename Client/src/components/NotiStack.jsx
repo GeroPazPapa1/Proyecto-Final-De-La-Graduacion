@@ -142,7 +142,7 @@ export const logOut = () => {
     });
 }
 export const modificationUserSuccess = () => {
-    enqueueSnackbar('Your account has been successfully modified!', {
+    enqueueSnackbar('Your product has been successfully modified!', {
         variant: 'success',
         anchorOrigin: {
             vertical: 'top',

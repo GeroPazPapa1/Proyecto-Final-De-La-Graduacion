@@ -2,12 +2,15 @@ import React, { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import Product from "../Product/Product";
 import styles from "./Products.module.css";
-import { cardsLoadedTrue, applyFilters, getAllCars, editPutUser, getDashboard } from "../../../Redux/actions";
+import { cardsLoadedTrue, deleteCarWithID, applyFilters, getAllCars, editPutCar } from "../../../Redux/actions";
 import EDIT from "../Email/Icons/EDIT.svg";
 import TRASH from "../Email/Icons/TRASH.svg";
+import PLUS from "../Email/Icons/PLUS.svg";
 import Swal from "sweetalert2";
 import FiltersCar from "../Filters/FiltersCar";
 import SearchBarCar from "../SearchBar/SearchBarCar";
+import { Link } from "react-router-dom"
+import { enqueueSnackbar } from "notistack";
 
 export default function DashBoardProducts() {
 
@@ -35,59 +38,52 @@ export default function DashBoardProducts() {
 
     console.log(pageFilteredDb);
 
-//     const handleCheckboxActionEdit = async () => {
-//         Swal.fire({
-//             title: "Select options",
-//             icon: "question",
-//             html: '<select id="select-status" class="swal2-select">' +
-//                 '<option value="admin">Admin</option>' +
-//                 '<option value="user">User</option>' +
-//                 '</select>' +
-//                 '<select id="select-ban" class="swal2-select">' +
-//                 '<option value=true>Banned</option>' +
-//                 '<option value=false>Not Banned</option>' +
-//                 '</select>',
-//             showCancelButton: true,
-//             confirmButtonText: "Accept",
-//             cancelButtonText: "Cancel",
-//             preConfirm: () => {
-//                 const selectedStatus = document.getElementById('select-status').value;
-//                 const selectedBan = document.getElementById('select-ban').value;
-//                 return {
-//                     type: selectedStatus,
-//                     ban: selectedBan
-//                 };
-//             }
-//         }).then(async (result) => {
-//             if (result.isConfirmed) {
-//                 const { type, ban } = result.value;
-//                 // Aquí puedes utilizar los valores seleccionados (type y ban) como desees
-//                 console.log("Type seleccionado:", status);
-//                 console.log("Ban seleccionado:", ban);
-//                 for (const id in emailSelection) {
-//                 await dispatch(editPutUser(id, type, ban));}
-//                 await dispatch(getDashboard());
-//                 await dispatch(applyFilterDb("originEmails"));
-//             }
-//         });
-//     };
-
-// const handleCheckboxActionDelete = async () => {
-//     Swal.fire({
-//     title: "¿Are you sure?",
-//     text: `You are about to delete ${name} from the database`,
-//     icon: "warning",
-//     showCancelButton: true,
-//     confirmButtonText: "Accept",
-//     cancelButtonText: "Cancel",
-// }).then((result) => {
-//     if (result.isConfirmed) {
-//         for (const id in emailSelection) {
-//         dispatch(deleteUserWithID(id));}
-//         dispatch(applyFilterDb("originEmails"));
-//     }
-// });
-// };
+    const handleCheckboxActionEdit = async () => {
+        Swal.fire({
+            title: "Select options",
+            icon: "question",
+            html: 
+                '<select id="select-state" class="swal2-select">' +
+                '<option value="Used">Used</option>' +
+                '<option value="New">New</option>' +
+                '</select>',
+            confirmButtonText: "Accept",
+            showCancelButton: true,
+            cancelButtonText: "Cancel",
+            preConfirm: () => {
+                const selectedState = document.getElementById('select-state').value;
+                return {
+                    state: selectedState
+                };
+            }
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                const objeto = result.value;
+                // Aquí puedes utilizar los valores seleccionados (type y ban) como desees
+                for (const id in productSelection) {
+                await dispatch(editPutCar(objeto, id));}
+                await dispatch(getAllCars());
+                await dispatch(applyFilter("originCars"));
+            }
+        });             
+    };
+    
+const handleCheckboxActionDelete = async () => {
+    Swal.fire({
+    title: "¿Are you sure?",
+    text: `You are about to delete these cars from the database`,
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonText: "Accept",
+    cancelButtonText: "Cancel",
+}).then((result) => {
+    if (result.isConfirmed) {
+        for (const id in productSelection) {
+        dispatch(deleteCarWithID(id));}
+        dispatch(applyFilters("originCars"));
+    }
+});
+};
 
 const handleCheckboxChange = (id) => {
 // Actualiza el estado de selección cuando se cambia el checkbox
@@ -111,23 +107,22 @@ const handleSelectAllChange = () => {
       
 };
 
-
- 
-
-
-
-
     return (
         <div>
-                {/* <SearchBarCar/>*/}
+                <SearchBarCar/>
                 <div className={styles.filtersEdit}>
-                    {/*<FiltersCar/>*/}
-                    <button className={aux<2 ? styles.deleteDisabled : styles.delete} disabled={aux<2}>
+                    <FiltersCar/>
+                    <button className={aux<2 ? styles.deleteDisabled : styles.delete} onClick={handleCheckboxActionDelete} disabled={aux<2}>
                        <img className={styles.img} src={TRASH} alt="Icon..." title="Eliminar usuario" />
                     </button>
-                    <button className={aux<2 ? styles.editDisabled : styles.edit} disabled={aux<2}>
+                    <button className={aux<2 ? styles.editDisabled : styles.edit} onClick={handleCheckboxActionEdit} disabled={aux<2}>
                        <img className={styles.img} src={EDIT} alt="Icon..." title="Editar usuario" />
                     </button>
+                    <Link to={`/admin/dashboard/create`}>
+                        <button className={styles.create}>
+                        <img className={styles.img} src={PLUS} alt="Icon..." title="Create car" />
+                        </button>
+                    </Link>
                 </div>
             <div className={styles.emailContainer}>
                 <input 

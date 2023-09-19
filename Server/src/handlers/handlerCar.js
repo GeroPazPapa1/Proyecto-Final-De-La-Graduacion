@@ -4,6 +4,7 @@ const { carNameController } = require("../controllers/getCarByName");
 const { getCarById } = require("../controllers/getCarById");
 const { createCarDb } = require("../controllers/createCarDb");
 const { deleteCarController } = require("../controllers/deleteCar");
+const { adminDeleteCarController } = require("../controllers/adminDeleteCar");
 const { filteredCars } = require("../controllers/filters/filters");
 //-----------------------------getAllCar---------------------------------------------------------------
 //
@@ -98,7 +99,7 @@ const postCarHandler = async (req, res) => {
     } = req.body;
     if (
       !name ||
-      !image ||
+      // !image ||
       !brand ||
       !model ||
       !state ||
@@ -137,6 +138,19 @@ const createCarDbHandler = async (req, res) => {
   }
 };
 
+//-----------------------------adminDeleteCarHandler---------------------------------------------------------------
+//
+const adminDeleteCarHandler = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const adminDeletedCar = await adminDeleteCarController(id);
+    res.status(200).json(adminDeletedCar);
+  } catch (error) {
+    res.status(500).json(error.message);
+  }
+};
+
 module.exports = {
   getAllCarHandler,
   getAllMatchesHandler,
@@ -145,4 +159,5 @@ module.exports = {
   createCarDbHandler,
   getFiltersHandler,
   deleteCarHandler,
+  adminDeleteCarHandler,
 };

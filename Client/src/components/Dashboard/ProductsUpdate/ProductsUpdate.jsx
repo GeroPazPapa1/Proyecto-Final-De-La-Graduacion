@@ -5,13 +5,20 @@ import { Link, useNavigate } from "react-router-dom";
 import { ButtonBack } from "../../../assets/svgs";
 import { modificationUserSuccess } from "../../NotiStack";
 import validationProductsUpdate from "./validation/validationProductsUpdate";
+import style from "./ProductsUpdate.module.css"
+import { useParams } from "react-router-dom";
 
-export default function ProductsUpdate(id) {
+export default function ProductsUpdate() {
+
+  const {id} = useParams();
+
+  console.log(id, "edit");
 
   const navigate = useNavigate();
 
+  const [countries, setCountries] = useState([])
+
   const [input, setInput] = useState({
-    id,
     name: "",
     image: "",
     brand: "",
@@ -66,12 +73,13 @@ export default function ProductsUpdate(id) {
     try {
       // Create a copy of the current input object to send to the server
       let updatedInput = { ...input };
+      console.log(updatedInput, "Soy la informacion de car");
       const { data } = await axios.put(
         `http://localhost:3001/car/edit/${id}`,
         updatedInput
       );
       modificationUserSuccess();
-      navigate("/home");
+      navigate("/admin/dashboard");
     } catch (error) {
       alert(
         `The request could not be completed because of the following error: ${error.message}`
@@ -97,7 +105,7 @@ export default function ProductsUpdate(id) {
 
   return (
     <div className={style.login}>
-    <Link to={"/home"}>
+    <Link to={"/admin/dashboard"}>
       <ButtonBack />
     </Link>
       <div className={style.register_form}>
@@ -113,7 +121,6 @@ export default function ProductsUpdate(id) {
               value={input.name}
               onChange={handleChange}
               className={style.input}
-              placeholder={user.name}
             />
           {/* Show error message if exists*/}
           {error.name && <p className={style.errors}>{error.name}</p>}
@@ -128,7 +135,6 @@ export default function ProductsUpdate(id) {
               value={input.brand}
               onChange={handleChange}
               className={style.input}
-              placeholder={user.brand}
               />
             {/* Show error message if exists*/}
             {error.brand && <p className={style.errors}>{error.brand}</p>}
@@ -143,26 +149,26 @@ export default function ProductsUpdate(id) {
               value={input.model}
               onChange={handleChange}
               className={style.input}
-              placeholder={user.model}
             />
           {/* Show error message if exists*/}
           {error.model && <p className={style.errors}>{error.model}</p>}
           </label>
 
-          <label htmlFor="state" className={style.label_lastName}>
-            State: <br />
-            <input
-              type="text"
-              id="state"
-              name="state"
-              value={input.state}
-              onChange={handleChange}
-              className={style.input}
-              placeholder={user.state}
-              />
+          <label className={style.label_lastName}>
+              State: <br />
+              <select
+                className={style.input_country}
+                id="state"
+                name="state"
+                onChange={handleChange}
+              >
+                <option hidden></option>
+                <option value="New">New</option>
+                <option value="Used">Used</option>
+              </select>
             {/* Show error message if exists*/}
             {error.state && <p className={style.errors}>{error.state}</p>}
-          </label>
+            </label>
 
           <label htmlFor="price" className={style.label_name}>
             Price: <br />
@@ -173,7 +179,6 @@ export default function ProductsUpdate(id) {
               value={input.price}
               onChange={handleChange}
               className={style.input}
-              placeholder={user.price}
             />
           {/* Show error message if exists*/}
           {error.price && <p className={style.errors}>{error.price}</p>}
@@ -188,7 +193,6 @@ export default function ProductsUpdate(id) {
               value={input.location}
               onChange={handleChange}
               className={style.input}
-              placeholder={user.location}
               />
             {/* Show error message if exists*/}
             {error.location && <p className={style.errors}>{error.location}</p>}
@@ -203,7 +207,6 @@ export default function ProductsUpdate(id) {
               value={input.color}
               onChange={handleChange}
               className={style.input}
-              placeholder={user.color}
             />
           {/* Show error message if exists*/}
           {error.color && <p className={style.errors}>{error.color}</p>}
@@ -218,7 +221,6 @@ export default function ProductsUpdate(id) {
               value={input.description}
               onChange={handleChange}
               className={style.input}
-              placeholder={user.description}
               />
             {/* Show error message if exists*/}
             {error.description && <p className={style.errors}>{error.description}</p>}

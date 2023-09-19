@@ -181,7 +181,7 @@ export default function Filters() {
     const handleSubmitPrice = async () => {
         if (price.min !== "" && price.max !== "" && Number(price.min) > Number(price.max)) {
             console.log(price)
-            return alert("arreglalo putito");
+            return alert("");
         }
 
         if (price.min !== "") {

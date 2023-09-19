@@ -27,19 +27,25 @@ export default function ProfileDashboard() {
                             className={selectedTopic === "Cart History" ? styles.selectedTopic : styles.topic}
                             onClick={() => handleTopic("Cart History")}
                         >
-                            Cart History
+                            My orders
                         </button>
                         <button
                             className={selectedTopic === "Posts" ? styles.selectedTopic : styles.topic}
                             onClick={() => handleTopic("Posts")}
                         >
-                            Posts
+                            My sells
                         </button>
                         <button
                             className={selectedTopic === "Reviews" ? styles.selectedTopic : styles.topic}
                             onClick={() => handleTopic("Reviews")}
                         >
                             Reviews
+                        </button>
+                        <button
+                            className={selectedTopic === "New sell" ? styles.selectedTopic : styles.topic}
+                            onClick={() => handleTopic("New sell")}
+                        >
+                            New sell
                         </button>
                     </div>
                 </div>

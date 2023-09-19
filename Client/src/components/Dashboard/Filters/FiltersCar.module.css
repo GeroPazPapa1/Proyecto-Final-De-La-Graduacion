@@ -22,6 +22,21 @@
     background-color: transparent;
     font-family: "Inter", sans-serif;
 }
+.dropdown {
+    display: none; /* Inicialmente oculto */
+    position: absolute; /* Posición absoluta para que aparezca debajo del select */
+    margin-top: 10px; /* Espaciado superior */
+    background-color: white; /* Fondo blanco */
+    border: 1px solid #ccc; /* Borde gris */
+    padding: 10px; /* Espaciado interior */
+    z-index: 1; /* Asegúrate de que esté por encima de otros elementos */
+    align-items: center;
+}
+  
+  /* Mostrar el menú desplegable cuando es necesario */
+  .filters:hover .dropdown {
+    display: block;
+  }
 
 
 
