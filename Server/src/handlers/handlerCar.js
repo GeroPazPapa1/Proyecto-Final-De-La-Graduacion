@@ -96,6 +96,7 @@ const postCarHandler = async (req, res) => {
       location,
       color,
       description,
+      userId,
     } = req.body;
     if (
       !name ||
@@ -105,7 +106,8 @@ const postCarHandler = async (req, res) => {
       !state ||
       !price ||
       !location ||
-      !color
+      !color ||
+      !userId
     ) {
       return res.status(404).json({ error: "Missing data to post" });
     }
@@ -119,7 +121,8 @@ const postCarHandler = async (req, res) => {
       price,
       location,
       color,
-      description
+      description,
+      userId
     );
     res.status(200).json(createdCar);
   } catch (error) {

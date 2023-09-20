@@ -182,9 +182,11 @@ export default function CreateProduct() {
 
   return (
     <div className={style.login}>
-      <Link to={"/admin/dashboard"}>
-        <ButtonBack />
-      </Link>
+      <div className={style.goback}>
+        <Link to={"/admin/dashboard"} className={style.btn_back}>
+          <ButtonBack /> Go Back
+        </Link>
+      </div>
       <div className={style.register_form}>
         <form onSubmit={handleSubmit} className={style.form_in}>
           <h1 className={style.title_register}>Create</h1>

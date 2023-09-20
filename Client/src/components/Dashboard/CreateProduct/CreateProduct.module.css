@@ -1,3 +1,13 @@
+.goback {
+  display: flex;
+  margin-top: 1rem;
+}
+
+.btn_back {
+  display: flex;
+  align-items: center;
+  color: var(--colorNegro);
+}
 
 
 .largeinput {
@@ -27,7 +37,6 @@
   place-items: center;
   background-color: var(--colorCrema);
   font-family: var(--fontNunito);
-  height: 140vh;
 }
 
 .register_form {
@@ -199,33 +208,33 @@
 
 @media (max-width: 500px) {
   .form_in {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
   }
 
   .register_form {
-      width: 80vw;
+    width: 80vw;
   }
 
   .btn_register {
-      width: 98%;
+    width: 98%;
   }
 
   .btn_hideandshow {
-      margin: -2rem 0 0 70vw;
+    margin: -2rem 0 0 70vw;
   }
 
   .input {
-      width: 75vw;
+    width: 75vw;
   }
 
   .input_country {
-      width: 79vw;
+    width: 79vw;
   }
 }
 
-.input_images{
+.input_images {
   display: flex;
   flex-direction: column;
 }
@@ -255,5 +264,6 @@
   opacity: 0;
   position: absolute;
   overflow: hidden;
-  clip: rect(1px 1px 1px 1px); /* Ocultar el input de manera accesible */
+  clip: rect(1px 1px 1px 1px);
+  /* Ocultar el input de manera accesible */
 }

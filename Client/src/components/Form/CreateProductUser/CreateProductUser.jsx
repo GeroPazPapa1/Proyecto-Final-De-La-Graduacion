@@ -3,11 +3,10 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { ButtonBack } from "../../../assets/svgs";
-import { createProductSuccess, FillInputsFixErrors, removeImage, uploadImageFail, uploadImageSuccess } from "../../NotiStack";
+import { createProductSuccess , uploadImageFail, uploadImageSuccess} from "../../NotiStack";
 import validationCreateProductUser from "./validation/validationCreateProductUser";
 import style from "./CreateProductUser.module.css"
 import Swal from "sweetalert2";
-
 
 export default function CreateProductUser() {
 
@@ -34,6 +33,9 @@ export default function CreateProductUser() {
     color: "",
     description: "",
   });
+  const loggedUserJson = localStorage.getItem("authToken");
+  const loggedUser = loggedUserJson ? JSON.parse(loggedUserJson) : null;
+  const userId = loggedUser.response.id;
 
   function handleFileChange(e, inputId) {
     const fileNameSpan = document.getElementById(`fileName${inputId}`);
@@ -43,31 +45,6 @@ export default function CreateProductUser() {
       fileNameSpan.textContent = "";
     }
   }
-
-  const handleRemoveFile = (inputId) => {
-    Swal.fire({
-      title: "Are you sure?",
-      text: "Your image will be removed",
-      icon: "warning",
-      showCancelButton: true,
-      reverseButtons: true,
-      cancelButtonText: "No, keep image",
-      confirmButtonText: "Yes, remove it!",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        setInput((prevInput) => {
-          const updatedImages = [...prevInput.image];
-          updatedImages[inputId - 1] = null;
-          removeImage()
-          return { ...prevInput, image: updatedImages };
-        });
-        const inputElement = document.getElementById(`imageInput${inputId}`);
-        if (inputElement) {
-          inputElement.value = "";
-        }
-      }
-    });
-  };
 
   const handleChange = (event) => {
     setInput({
@@ -116,7 +93,7 @@ export default function CreateProductUser() {
     event.preventDefault();
     try {
       // Create a copy of the current input object to send to the server
-      let updatedInput = { ...input };
+      let updatedInput = { ...input, userId };
 
       console.log(updatedInput);
 
@@ -124,13 +101,17 @@ export default function CreateProductUser() {
         `/car/create/`,
         updatedInput
       );
+      localStorage.setItem(`${data.id}`, JSON.stringify(data.id));
+      const idProduct = localStorage.getItem(`${data.id}`);
       createProductSuccess();
       navigate("/home");
     } catch (error) {
-      FillInputsFixErrors()
-      console.error(error.message)
+      alert(
+        `The request could not be completed because of the following error: ${error.message}`
+      );
     }
   };
+  console.log(input)
 
   //api countries
   useEffect(() => {
@@ -147,9 +128,6 @@ export default function CreateProductUser() {
     };
     fetchCountries();
   }, []);
-
-
-
   //----------------------------------------------------------Cloudinary---------------------------------------------------------------------------------------
 
   const [errors, setErrors] = useState(null);

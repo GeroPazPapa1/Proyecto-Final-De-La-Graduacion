@@ -65,12 +65,25 @@ export default function ProfileDashboard() {
               />
               Reviews
             </button>
+            <button
+              className={
+                menuOption === "Posts" ? styles.selectedTopic : styles.topic
+              }
+              onClick={() => dispatch(addMenuOption("Posts"))}
+            >
+              <img
+                src="https://img.icons8.com/ios/50/paid--v1.png"
+                alt="Cart icon"
+                className={styles.img}
+              />
+              Posts
+            </button>
           </div>
         </div>
         <div className={styles.col2}>
           <div className={styles.col2a}>
             {menuOption === "Purchases" && (
-              <div className={styles.profile}>
+              <div className={styles.cart}>
                 <div className={styles.carthistory}>
                   <CartHistory />
                 </div>
