@@ -60,7 +60,7 @@ import styles from "./Filters.module.css";
 
 useEffect(() => {
     const fetchCountriesDashboard = async () => {
-        const endpoint = "http://localhost:3001/car";
+        const endpoint = "/car";
             try {
                 const { data } = await axios(endpoint);
                 console.log(data,"soy data dashboard"); 
@@ -79,7 +79,7 @@ useEffect(() => {
         
         useEffect(() => {
             const fetchCountriesDashboard = async () => {
-                const endpoint = "http://localhost:3001/car";
+                const endpoint = "/car";
             try {
                 const { data } = await axios(endpoint);
                 console.log(data, "soy data dashboard 2");
@@ -103,7 +103,7 @@ useEffect(() => {
     
     useEffect(() => {
         const fetchCountriesDashboard = async () => {
-            const endpoint = "http://localhost:3001/car";
+            const endpoint = "/car";
             try {
                 const { data } = await axios(endpoint);
                 console.log(data,"soy data dashboard 2"); 

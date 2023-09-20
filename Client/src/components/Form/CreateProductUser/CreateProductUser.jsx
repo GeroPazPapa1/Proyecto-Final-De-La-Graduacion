@@ -96,7 +96,7 @@ export default function CreateProductUser() {
       console.log(updatedInput);
 
       const { data } = await axios.post(
-        `http://localhost:3001/car/create/`,
+        `/car/create/`,
         updatedInput
       );
       createProductSuccess();

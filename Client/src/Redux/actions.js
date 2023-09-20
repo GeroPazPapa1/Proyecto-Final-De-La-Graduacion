@@ -367,7 +367,7 @@ export const deleteReview = (idReview) => {
 }
 
 export const editPutCar = (objeto, id) => {
-  const endpoint = `http://localhost:3001/car/edit/${id}`;
+  const endpoint = `/car/edit/${id}`;
   return async (dispatch) => {
 
     console.log(id, "Soy el id");
@@ -409,7 +409,7 @@ export const addMenuOption = (option) => {
   };
 };
 export const deleteCarWithID = (id) => {
-  const endpoint = `http://localhost:3001/car/dashboard/car/${id}`;
+  const endpoint = `/car/dashboard/car/${id}`;
   return async (dispatch) => {
     try {
       const { status, data } = await axios.delete(endpoint);

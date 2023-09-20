@@ -94,7 +94,7 @@ export default function ProductsUpdate() {
       let updatedInput = { ...input };
       console.log(updatedInput, "Soy la informacion de car");
       const { data } = await axios.put(
-        `http://localhost:3001/car/edit/${id}`,
+        `/car/edit/${id}`,
         updatedInput
       );
       modificationUserSuccess();
