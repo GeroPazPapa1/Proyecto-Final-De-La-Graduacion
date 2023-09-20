@@ -98,7 +98,7 @@ input:checked + .slider:before {
 
 .slider.round:before {
   border-radius: 50%;
-  content: "🌙";
+  content: "🌙  ";
   font-size: 16px;
   line-height: 26px;
   text-align: center;

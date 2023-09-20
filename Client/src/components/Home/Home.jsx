@@ -5,9 +5,14 @@ import Search from "./Search/Search.jsx";
 import styles from "./Home.module.css";
 import { MercadoPagoFail, MercadoPagoSuccess } from "../NotiStack.jsx";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { changeDarkMode } from "../../Redux/actions.js";
+import { useSelector } from "react-redux";
 
 export default function Home() {
-  const [darkMode, setDarkMode] = useState(false);
+  const dispatch = useDispatch();
+  const darkMode = useSelector((state) => state.darkMode);
+
   useEffect(() => {
     const transactionStatus = localStorage.getItem("transactionStatus");
     // Comprueba el estado de la compra y muestra la notificación adecuada
@@ -38,25 +43,10 @@ export default function Home() {
     localStorage.removeItem("cart");
   }, []);
 
-  const handleModeChange = () => {
-    setDarkMode(!darkMode);
-    document.body.classList.toggle("darkMode");
-  };
-
   return (
     <div className={`${styles.container} ${darkMode ? styles.darkMode : ""}`}>
       <div className={styles.coverImage}></div>
-      <nav>
-        {/* Código para la barra de navegación */}
-        <label className={`${styles.switch} ${styles.switchRight}`}>
-          <input
-            type="checkbox"
-            checked={darkMode}
-            onChange={handleModeChange}
-          />
-          <span className={`${styles.slider} ${styles.round}`}></span>
-        </label>
-      </nav>
+
       <Search />
       <div className={styles.container2}>
         <Filters />
