@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { ButtonBack } from "../../../assets/svgs";
 import { createProductSuccess } from "../../NotiStack";
 import validationProductsCreate from "./validation/validationProductsCreate";
@@ -12,6 +12,7 @@ export default function CreateProduct() {
 
   const navigate = useNavigate();
   const [countries, setCountries] = useState([]);
+  const location = useLocation();
 
   const [imageValue, setImageValue] = useState({
     image1: false,
@@ -79,8 +80,18 @@ export default function CreateProduct() {
         `http://localhost:3001/car/create/`,
         updatedInput
       );
+    
+      if(location.pathname === "/admin/dashboard/create")
+      {
       createProductSuccess();
       navigate("/admin/dashboard");
+      }
+
+      if(location.pathname === "/profile")
+      {
+        createProductSuccess();
+        navigate("/home");
+      }
     } catch (error) {
       alert(
         `The request could not be completed because of the following error: ${error.message}`
@@ -212,7 +223,8 @@ export default function CreateProduct() {
     </Link>
       <div className={style.register_form}>
         <form onSubmit={handleSubmit} className={style.form_in}>
-        <h1 className={style.title_register}>Create</h1>
+        {location.pathname === "/admin/dashboard/create" && (<h1 className={style.title_register}>Create</h1>)}
+        {location.pathname === "/profile" && (<h1 className={style.title_register}>Add Product</h1>)}
 
         <label htmlFor="name" className={style.label_name}>
             Name: <br />
@@ -377,6 +389,13 @@ export default function CreateProduct() {
 
             <button className={style.btn_image1} onClick={handleButton}>Upload</button>
             {errors && <span>{errors}</span>}
+          <button
+            type="submit"
+            className={style.btn_cancel}
+            disabled={hasErrors()}
+          >
+            cancel
+          </button>
           <button
             type="submit"
             className={style.btn_register}

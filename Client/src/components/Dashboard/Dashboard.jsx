@@ -24,6 +24,14 @@ export default function Dashboard() {
     const handleTabChange = (tab) => {
         setSelectedTab(tab);
     }
+    let dashboardOption = useSelector((state) => state.dashboardOption);
+      useEffect(() => {
+        if (!dashboardOption) {
+            dashboardOption = "USERS";
+            handleTabChange(dashboardOption);
+        }
+            handleTabChange(dashboardOption);
+      }, []);
 
     const handleLogout = () => {
         localStorage.clear();
@@ -85,7 +93,7 @@ export default function Dashboard() {
                                 <div>
                                     <>
                                         <button onClick={() => handleTabChange("USERS")}>USERS</button>
-                                        <button onClick={() => handleTabChange("SALES")}>SALES</button>
+                                        {/* <button onClick={() => handleTabChange("SALES")}>SALES</button> */}
                                         <button onClick={() => handleTabChange("PRODUCTS")}>PRODUCTS</button>
                                         <Link to={"/home"}>
                                             <button>HOME</button>
@@ -102,10 +110,6 @@ export default function Dashboard() {
                                 </div>
                                 <div className={styles.hello}>
                                     <h2>DashBoard</h2>
-                                </div>
-                                <div>
-                                    <SearchBarDashboard/>
-                                    <Filters/>
                                 </div>
                                 <div>{selectedTab === "USERS" && (
                                     <div className={styles.DashboardUser}>

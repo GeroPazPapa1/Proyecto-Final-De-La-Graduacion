@@ -55,7 +55,7 @@
   color: var(--colorNegro);
   grid-column: 1/-1;
 }
-
+.btn_register
 .errors {
   color: var(--colorRojo);
   margin: -0.01rem 0 0 0;
@@ -135,21 +135,38 @@
 }
 
 .btn_register {
-  cursor: pointer;
+  width: 40%;
+  font-weight: bold;
+  font-family: var(--fontNunito);
+  font-size: 1.2rem;
+  color: var(--colorBlanco);
   padding: 0.5rem;
+  cursor: pointer;
   border: none;
   border-radius: 3px;
   background-color: #3e6ae1;
   margin: 1.2rem 0;
-  color: var(--colorBlanco);
-  font-family: var(--fontNunito);
-  font-weight: bold;
-  font-size: 1.2rem;
-  width: 454px;
 }
 
 .btn_register:hover {
   background-color: #0030b3;
+}
+.btn_cancel {
+  width: 40%;
+  font-weight: bold;
+  font-family: var(--fontNunito);
+  font-size: 1.2rem;
+  color: var(--colorBlanco);
+  padding: 0.5rem;
+  cursor: pointer;
+  border: none;
+  border-radius: 3px;
+  background-color: var(--colorRojo);
+  margin: 1.2rem 0;
+}
+
+.btn_cancel:hover {
+  background-color: var(--colorRojo);
 }
 
 .auth {

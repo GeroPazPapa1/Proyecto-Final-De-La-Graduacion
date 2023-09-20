@@ -10,6 +10,7 @@ const initialState = {
   pageFilteredDb: [],
   cartHistory: [],
   menuOption: "",
+  dashboardOption: "",
 
   queryParams: {
     name: "",
@@ -328,6 +329,8 @@ function rootReducer(state = initialState, action) {
       };
     case "ADD_MENU_OPTION":
       return { ...state, menuOption: action.payload };
+    case "ADD_DASHBOARD_OPTION":
+      return { ...state, dashboardOption: action.payload };
     default:
       return state;
   }

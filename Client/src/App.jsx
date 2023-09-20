@@ -2,7 +2,6 @@ import React from "react";
 import AboutUs from "./components/AboutUs/AboutUs.jsx";
 import { Routes, Route } from "react-router-dom";
 import Cart from "./components/Cart/Cart.jsx";
-import Dashboard from "./components/Dashboard/Dashboard";
 import Detail from "./components/Home/Detail/Detail";
 import Footer from "./components/Home/Footer/Footer";
 import ForgotPassword from "./components/LoginRegister/ForgotPassword";

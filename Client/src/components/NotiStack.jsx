@@ -219,3 +219,13 @@ export const postReviewNoti = () => {
             }
         })
     }
+
+    export const createProductSuccess = () => {
+        enqueueSnackbar('Your product has been created sucessfully', {
+                variant: 'sucess',
+                anchorOrigin: {
+                    vertical: 'top',
+                    horizontal: 'right',
+                }
+            })
+        }

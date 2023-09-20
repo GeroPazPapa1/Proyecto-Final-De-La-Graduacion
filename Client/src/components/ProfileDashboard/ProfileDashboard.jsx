@@ -3,6 +3,7 @@ import styles from "./ProfileDashboard.module.css";
 import Posts from "./Posts/Posts";
 import Reviews from "./Reviews/Reviews";
 import CartHistory from "./CartHistory/CartHistory";
+import CreateProduct from "../Dashboard/CreateProduct/CreateProduct"
 import Modification from "../Modification/Modification";
 import { useSelector } from "react-redux";
 
@@ -57,6 +58,21 @@ export default function ProfileDashboard() {
             </button>
             <button
               className={
+                selectedTopic === "Add Product"
+                  ? styles.selectedTopic
+                  : styles.topic
+              }
+              onClick={() => handleTopic("Add Product")}
+            >
+              <img
+                src="https://img.icons8.com/ios/50/paid--v1.png"
+                alt="Cart icon"
+                className={styles.img}
+              />
+              Add Product
+            </button>
+            <button
+              className={
                 selectedTopic === "Reviews"
                   ? styles.selectedTopic
                   : styles.topic
@@ -86,9 +102,9 @@ export default function ProfileDashboard() {
                 <Modification />
               </div>
             )}
-            {selectedTopic === "Posts" && (
+            {selectedTopic === "Add Product" && (
               <div className={styles.posts}>
-                <Posts />
+                <CreateProduct />
               </div>
             )}
             {selectedTopic === "Reviews" && (

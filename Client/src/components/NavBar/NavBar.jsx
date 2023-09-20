@@ -163,6 +163,12 @@ export default function NavBar() {
                         >
                           Reviews
                         </Link>
+                        <Link
+                          to="/profile"
+                          onClick={() => dispatch(addMenuOption("Add Product"))}
+                        >
+                          Add Product
+                        </Link>
                       </div>
                     </div>
                   </div>

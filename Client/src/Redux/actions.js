@@ -431,3 +431,11 @@ export const addMenuOption = (option) => {
     payload: option,
   };
 };
+
+export const addDashboardOption = (option) => {
+  return {
+    type: "ADD_DASHBOARD_OPTION",
+    payload: option,
+  };
+};
+
