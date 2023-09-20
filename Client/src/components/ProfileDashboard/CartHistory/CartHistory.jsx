@@ -89,7 +89,7 @@ export default function CartHistory() {
             </div>
             <div>
               <h2>No purchases yet!</h2>
-              <p>Add the cars you want to purchase</p>
+              <p>Take look to our cars and make your first purchase</p>
               <Link to="/home" className={styles.keeplooking}>
                 <button>Keep looking</button>
               </Link>
