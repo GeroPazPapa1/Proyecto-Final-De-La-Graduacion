@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import styles from "./Card.module.css";
 import { addToCart, addToFav, removeFromFav } from "../../../Redux/actions";
+import Swal from "sweetalert2";
+import { verifyDeleteFav } from "../../NotiStack";
 
 export default function Card(props) {
   const { id, name, price, image, location, state } = props;
@@ -31,15 +33,29 @@ export default function Card(props) {
 
   const handleFavorite = () => {
     if (isFav) {
-      setIsFav(false);
-      dispatch(removeFromFav(props.id));
+      Swal.fire({
+        title: "¿Are you sure?",
+        text: "The cart will be removed from Favorites",
+        icon: "warning",
+        showCancelButton: true,
+        reverseButtons: true,
+        confirmButtonText: "Accept",
+        cancelButtonText: "Cancel",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          dispatch(removeFromFav(props.id));
+          verifyDeleteFav();// Mover la actualización de setIsFav aquí
+          setIsFav(false); 
+        } else {
+          setIsFav(true);
+        }
+      });
     } else {
       setIsFav(true);
       dispatch(addToFav(props));
-      console.log(myFavorites);
     }
   };
-
+  
   const toggleFav = () => {
     setIsFav(!isFav);
   };

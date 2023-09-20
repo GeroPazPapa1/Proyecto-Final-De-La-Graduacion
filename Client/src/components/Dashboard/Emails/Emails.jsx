@@ -6,8 +6,7 @@ import { applyFilterDb, deleteUserWithID, editPutUser, getDashboard } from "../.
 import EDIT from "../Email/Icons/EDIT.svg";
 import TRASH from "../Email/Icons/TRASH.svg";
 import Swal from "sweetalert2";
-import Filters from "../Filters/Filters";
-import SearchBarDashboard from "../SearchBar/SearchBar";
+import USER from "./Icons/USER.png";
 
 export default function DashBoardEmail() {
 
@@ -22,40 +21,46 @@ export default function DashBoardEmail() {
     });
     const aux = selectedEmailObjects.length;
 
+    console.log(pageFilteredDb)
+
     const handleCheckboxActionEdit = async () => {
-                Swal.fire({
-                    title: "Select options",
-                    icon: "question",
-                    html: '<select id="select-status" class="swal2-select">' +
-                        '<option value="admin">Admin</option>' +
-                        '<option value="user">User</option>' +
-                        '</select>' +
-                        '<select id="select-ban" class="swal2-select">' +
-                        '<option value=true>Banned</option>' +
-                        '<option value=false>Not Banned</option>' +
-                        '</select>',
-                    showCancelButton: true,
-                    cancelButtonText: "Cancel",
-                    confirmButtonText: "Accept",
-                    preConfirm: () => {
-                        const selectedStatus = document.getElementById('select-status').value;
-                        const selectedBan = document.getElementById('select-ban').value;
-                        return {
-                            type: selectedStatus,
-                            ban: selectedBan
-                        };
-                    }
-                }).then(async (result) => {
-                    if (result.isConfirmed) {
-                        const objeto = result.value;
-                        // Aquí puedes utilizar los valores seleccionados (type y ban) como desees
-                        for (const id in emailSelection) {
-                        await dispatch(editPutUser(objeto, id));}
-                        await dispatch(getDashboard());
-                        await dispatch(applyFilterDb("originEmails"));
-                    }
-                });
-            };
+        Swal.fire({
+            title: "Select options",
+            icon: "question",
+            html: '<select id="select-status" class="swal2-select">' +
+                '<option value="admin">Admin</option>' +
+                '<option value="user">User</option>' +
+                '</select>' +
+                '<select id="select-ban" class="swal2-select">' +
+                '<option value=true>Banned</option>' +
+                '<option value=false>Not Banned</option>' +
+                '</select>',
+            showCancelButton: true,
+            reverseButtons: true,
+            cancelButtonText: "Cancel",
+            confirmButtonText: "Accept",
+            preConfirm: () => {
+                const selectedStatus = document.getElementById('select-status').value;
+                const selectedBan = document.getElementById('select-ban').value;
+                return {
+                    type: selectedStatus,
+                    ban: selectedBan
+                };
+            }
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                const { type, ban } = result.value;
+                // Aquí puedes utilizar los valores seleccionados (type y ban) como desees
+                console.log("Type seleccionado:", status);
+                console.log("Ban seleccionado:", ban);
+                for (const id in emailSelection) {
+                    await dispatch(editPutUser(id, type, ban));
+                }
+                await dispatch(getDashboard());
+                await dispatch(applyFilterDb("originEmails"));
+            }
+        });
+    };
 
     const handleCheckboxActionDelete = async () => {
             Swal.fire({
@@ -63,6 +68,7 @@ export default function DashBoardEmail() {
             text: `You are about to delete ${name} from the database`,
             icon: "warning",
             showCancelButton: true,
+            reverseButtons: true,
             cancelButtonText: "Cancel",
             confirmButtonText: "Accept",
         }).then((result) => {
@@ -105,6 +111,23 @@ export default function DashBoardEmail() {
             handleChangeEmails();
         }
     }, [EmailsLoaded, dispatch])
+
+
+    if (pageFilteredDb.length === 0) {
+        return (
+            <div className={styles.containerCNF}>
+                <div className={styles.containerNF}>
+                    <div>
+                        <img src={USER} alt="NotFound..." />
+                    </div>
+                    <div className={styles.textNF}>
+                        <p>Not Found</p>
+                        <span>No users found</span>
+                    </div>
+                </div>
+            </div>
+        );
+    }
 
     return (
         <div>

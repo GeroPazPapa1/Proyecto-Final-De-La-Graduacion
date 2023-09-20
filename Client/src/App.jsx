@@ -19,7 +19,7 @@ import Modification from "./components/Modification/Modification";
 import Termsandconditions from "./components/TermsAndConditions/TermsAndConditions";
 import ProfileDashboard from "./components/ProfileDashboard/ProfileDashboard.jsx";
 import axios from "axios";
-axios.defaults.baseURL = "http://localhost:3001/";
+axios.defaults.baseURL = "http://localhost:7183/";
 
 function App() {
   return (
