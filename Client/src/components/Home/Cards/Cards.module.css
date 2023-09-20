@@ -6,7 +6,7 @@
 .container {
     display: flex;
     flex-wrap: wrap;
-    background-color:#66686a;
+    background-color: #EBE8E5;
     justify-content: center;
     align-items: flex-start;
     padding-bottom: 25px;

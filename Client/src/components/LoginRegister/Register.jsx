@@ -200,10 +200,7 @@ export default function Register() {
   return (
     <div className={styles.login}>
       <div className={styles.buttonBackContainer}>
-        <Link to={"/home"} className={styles.buttonBackLink}>
-          <ButtonBack className={styles.buttonBack} />
-          <h5 className={styles.buttonBackH5}>Go Back</h5>
-        </Link>
+        <ButtonBack className={styles.buttonBack} />
       </div>
       <div className={styles.register_form}>
         <form

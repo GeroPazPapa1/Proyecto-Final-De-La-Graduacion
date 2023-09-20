@@ -12,6 +12,10 @@
   border-radius: 6px; /* Añadido: esquinas redondas */
 }
 
+.cartIconContainer {
+  margin-left: 20px;
+}
+
 .containerLP {
   display: flex;
   align-items: center;

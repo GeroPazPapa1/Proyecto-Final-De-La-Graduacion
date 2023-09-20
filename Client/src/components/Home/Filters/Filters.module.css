@@ -15,7 +15,7 @@
 .buttonCF {
     font-family: 'Nunito Sans', sans-serif;
     border: 1px solid #bbb3ab;
-    background-color: #66686a;
+    background-color: #bbb3ab;
     color: white;
     padding: 8px 20px;
     margin-top: 0px;
@@ -81,13 +81,14 @@
 .button {
     font-family: 'Nunito Sans', sans-serif;
     border: 1px solid #bbb3ab;
-    background-color: #66686a;
+    background-color: #bbb3ab;
     color: white;
     padding: 8px 0;
     margin-top: 10px;
     vertical-align: middle;
     cursor: pointer;
     border-radius: 6px;
+    transition: background-color 0.3s, color 0.3s, border 0.3s;
 }
 
 .button:hover {
