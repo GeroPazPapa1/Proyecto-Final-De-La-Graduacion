@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import Cards from "./Cards/Cards.jsx";
 import Filters from "./Filters/Filters.jsx";
 import Search from "./Search/Search.jsx";
@@ -7,8 +7,6 @@ import { MercadoPagoFail, MercadoPagoSuccess } from "../NotiStack.jsx";
 import axios from "axios";
 
 export default function Home() {
-  const [darkMode, setDarkMode] = useState(false);
-
   useEffect(() => {
     const transactionStatus = localStorage.getItem("transactionStatus");
     // Comprueba el estado de la compra y muestra la notificación adecuada
@@ -39,24 +37,11 @@ export default function Home() {
     localStorage.removeItem("cart");
   }, []);
 
-  const handleModeChange = () => {
-    setDarkMode(!darkMode);
-    document.body.classList.toggle("darkMode");
-  };
-
   return (
-    <div className={`${styles.container} ${darkMode ? styles.darkMode : ""}`}>
+    <div className={styles.container}>
       <div className={styles.coverImage}></div>
       <nav>
         {/* Código para la barra de navegación */}
-        <label className={`${styles.switch} ${styles.switchRight}`}>
-          <input
-            type="checkbox"
-            checked={darkMode}
-            onChange={handleModeChange}
-          />
-          <span className={`${styles.slider} ${styles.round}`}></span>
-        </label>
       </nav>
       <Search />
       <div className={styles.container2}>

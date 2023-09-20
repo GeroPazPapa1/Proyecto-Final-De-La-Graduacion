@@ -12,12 +12,14 @@ import {
 } from "../../NotiStack";
 import { OpenEye, ClosedEye } from "../../LoginRegister/svgs.jsx";
 import UserImage from "./UserImage";
+import Swal from "sweetalert2";
 
 export default function FormUserModification({ id, image }) {
   const navigate = useNavigate();
   const [countries, setCountries] = useState([]);
   const [user, setUser] = useState([]);
   const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [input, setInput] = useState({
     id,
     name: "",
@@ -27,6 +29,7 @@ export default function FormUserModification({ id, image }) {
     country: "",
     email: "",
     password: "",
+    confirmPassword: "",
     image: "",
   });
   const [error, setError] = useState({
@@ -37,19 +40,21 @@ export default function FormUserModification({ id, image }) {
     country: "",
     email: "",
     password: "",
+    confirmPassword: "",
     image: "",
   });
 
   const handleChange = (event) => {
+    const {name, value} = event.target
     setInput({
       ...input,
-      [event.target.name]: event.target.value,
+      [name]: value,
     });
     // The form is validated and the local error status is updated with the corresponding validation error messages.
     setError(
       validation({
         ...input,
-        [event.target.name]: event.target.value,
+        [name]: value,
       })
     );
   };
@@ -79,6 +84,23 @@ export default function FormUserModification({ id, image }) {
         `The request could not be completed because of the following error: ${error.message}`
       );
     }
+  };
+
+  const handleCancelClick = () => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "Changes will not be updated!",
+      icon: "warning",
+      showCancelButton: true,
+      reverseButtons: true,
+      cancelButtonText: "No, stay here",
+      confirmButtonText: "Yes, cancel update!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        navigate('/home');
+        processCancelSuccess();
+      }
+    });
   };
 
   //api countries
@@ -115,15 +137,17 @@ export default function FormUserModification({ id, image }) {
     <div className={style.login}>
       <div className={style.register_form}>
         <form onSubmit={handleSubmit} className={style.form_in}>
-          <h1 className={style.title_register}>Update</h1>
+          <div className={style.divCenter}>
+            <h1 className={style.title_register}>Update</h1>
 
           {image ? (
             <img src={image} alt="" className={style.iconImage} />
           ) : (
-            <img src={user.image} alt="" className={style.iconImage} />
+            <img src={user?.image} alt="" className={style.iconImage} />
           )}
 
-          <UserImage />
+            <UserImage />
+            </div>
 
           <label htmlFor="name" className={style.label_name}>
             Name: <br />
@@ -134,7 +158,7 @@ export default function FormUserModification({ id, image }) {
               value={input.name}
               onChange={handleChange}
               className={style.input}
-              placeholder={user.name}
+              placeholder={user?.name}
             />
             {/* Show error message if exists*/}
             {error.name && <p className={style.errors}>{error.name}</p>}
@@ -149,7 +173,7 @@ export default function FormUserModification({ id, image }) {
               value={input.lastName}
               onChange={handleChange}
               className={style.input}
-              placeholder={user.lastName}
+              placeholder={user?.lastName}
             />
             {/* Show error message if exists*/}
             {error.lastName && <p className={style.errors}>{error.lastName}</p>}
@@ -164,7 +188,7 @@ export default function FormUserModification({ id, image }) {
               value={input.age}
               onChange={handleChange}
               className={style.input}
-              placeholder={user.age}
+              placeholder={user?.age}
             />
             {/* Show error message if exists*/}
             {error.age && <p className={style.errors}>{error.age}</p>}
@@ -179,7 +203,7 @@ export default function FormUserModification({ id, image }) {
               value={input.tel}
               onChange={handleChange}
               className={style.input}
-              placeholder={user.tel}
+              placeholder={user?.tel}
             />
             {/* Show error message if exists*/}
             {error.tel && <p className={style.errors}>{error.tel}</p>}
@@ -194,7 +218,7 @@ export default function FormUserModification({ id, image }) {
                 name="country"
                 onChange={(e) => handleChange(e)}
               >
-                <option hidden>{user.country}</option>
+                <option hidden>{user?.country}</option>
                 {countries.map((country, index) => (
                   <option key={index} value={country}>
                     {country}
@@ -228,15 +252,51 @@ export default function FormUserModification({ id, image }) {
             {/* Show error message if exists*/}
             {error.password && <p className={style.errors}>{error.password}</p>}
           </div>
-          <button
-            type="submit"
-            className={style.btn_register}
-            disabled={hasErrors()}
-          >
-            Save
-          </button>
+
+          <div className={style.largeinput}>
+            <label htmlFor="confirmPassword" className={style.label_password}>
+              Confirm Password: <br />
+              <input
+                type={showConfirmPassword ? "text" : "password"}
+                id="confirmPassword"
+                name="confirmPassword"
+                value={input.confirmPassword}
+                onChange={handleChange}
+                className={style.input_password2}
+              />
+            </label>
+            <div className={style.btn_hideandshow}>
+              <button
+                type="button"
+                className={style.show_hide_password}
+                onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+              >
+                {showConfirmPassword ? <ClosedEye /> : <OpenEye />}
+              </button>
+            </div>
+            {/* Show error message if exists */}
+            {error.confirmPassword && <p className={style.errors}>{error.confirmPassword}</p>}
+          </div>
+
+          <div className={style.divButtons}>
+            <button
+              type="button"
+              className={style.btn_cancel}
+              onClick={handleCancelClick}
+            >
+              Cancel
+            </button>
+
+            <button
+              type="submit"
+              className={style.btn_register}
+              disabled={hasErrors()}
+            >
+              Save
+            </button>
+          </div>
         </form>
       </div>
     </div>
   );
-}
+};

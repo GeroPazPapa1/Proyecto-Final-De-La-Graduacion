@@ -15,7 +15,7 @@ function LandingPage() {
       </div>
       <div className={`${style.Container} ${style.SecondSection}`}>
         <div className={style.ContainerText}>
-          <h2 className={style.sectionTitle}>Who are we?</h2>
+          <h2 className={style.sectionTitle}>¿Who we are?</h2>
           <p className={style.sectionText}>
           At our company, we specialize in providing you with a unique and personalized shopping experience so that you can acquire the luxury car of your dreams. We are here to help you find what you are looking for. Let us make your dreams of owning a luxury car come true today!
           </p>
