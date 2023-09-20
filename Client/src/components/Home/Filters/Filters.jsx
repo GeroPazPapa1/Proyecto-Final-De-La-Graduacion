@@ -14,6 +14,7 @@ import {
 import styles from "./Filters.module.css";
 import ICONDOWN from "./Icons/ICONDOWN.png";
 import ICONUP from "./Icons/ICONUP.png";
+import { alertFilterValues } from '../../NotiStack';
 
 export default function Filters() {
 
@@ -180,8 +181,7 @@ export default function Filters() {
 
     const handleSubmitPrice = async () => {
         if (price.min !== "" && price.max !== "" && Number(price.min) > Number(price.max)) {
-            console.log(price)
-            return alert("arreglalo putito");
+            return alertFilterValues();
         }
 
         if (price.min !== "") {

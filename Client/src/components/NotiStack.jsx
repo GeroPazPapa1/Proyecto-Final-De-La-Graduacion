@@ -251,3 +251,13 @@ export const typeAdmin = () => {
         }
     })
 }
+
+export const alertFilterValues = () => {
+    enqueueSnackbar('Please enter supported values', {
+        variant: 'error',
+        anchorOrigin: {
+            vertical: 'top',
+            horizontal: 'right',
+        }
+    })
+}
