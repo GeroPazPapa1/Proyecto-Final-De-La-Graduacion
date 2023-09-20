@@ -345,10 +345,31 @@ export const getReviews = (carId) => {
     type: "RESET_REVIEWS",
   };
 };
+export const getReviewsByUserId = (userId) => {
+  const endpoint = `/review/userid/${userId}`;
+  if (userId) {
+    return async (dispatch) => {
+      try {
+        const { data } = await axios.get(endpoint);
+        dispatch({
+          type: "REVIEWS_USER",
+          payload: data,
+        });
+      } catch (error) {
+        console.error(error);
+      }
+    };
+  }
+};
 
 export const resetReview = () => {
   return {
     type: "RESET_REVIEWS",
+  };
+};
+export const resetReviewByUser = () => {
+  return {
+    type: "RESET_REVIEWS_USER",
   };
 };
 

@@ -301,7 +301,6 @@ const Review = () => {
                   <span className={styles.title}>{review.title}</span><br />
                   <span className={styles.review}>{review.review}</span><br />
                   {idUser === review.User.id && <button className={styles.btn_delete} onClick={() => handleDeleteConfirmation(review.id)}>Delete</button>}
-                  <hr />
                 </div>
               )}
               {showConfirmation === review.id && (

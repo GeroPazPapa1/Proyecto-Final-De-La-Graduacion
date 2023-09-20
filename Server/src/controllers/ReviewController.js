@@ -1,4 +1,4 @@
-const { Review, User } = require('../db');
+const { Review, User, Car } = require('../db');
 
 const postReview = async (req, res) => {
     const {rating, title, review, carId, userId} = req.body
@@ -70,10 +70,31 @@ const updateReview = async (req, res) => {
       res.status(500).send(console.error(error.message))
     }
   }
+
+  const getReviewByUserId = async (req, res) => {
+    const {id} = req.params
+    try {
+        const review = await Review.findAll({
+            where: {
+                userId: id,
+            },
+            include: [
+                {
+                    model: Car,
+                    attributes: ["id", "name", "brand", "image"]
+                }
+            ]
+        });
+        res.status(200).json(review) 
+    } catch (error) {
+        res.status(400).json({error: error.message})
+    }
+};
   
 module.exports = {
     postReview,
     getReviewById,
     deleteReview,
-    updateReview
+    updateReview,
+    getReviewByUserId
 };

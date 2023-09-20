@@ -45,6 +45,7 @@ const initialState = {
   locationLoaded: false,
   usersLoaded: false,
   reviews: [],
+  reviewsByUserId: []
 };
 
 function rootReducer(state = initialState, action) {
@@ -305,6 +306,16 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         reviews: [], // Restablecer las reviews a un objeto vacío
+      };
+    case "REVIEWS_USER":
+      return {
+        ...state,
+        reviewsByUserId: action.payload,
+      };
+    case "RESET_REVIEWS_USER":
+      return {
+        ...state,
+        reviewsByUserId: [], // Restablecer las reviews a un objeto vacío
       };
     case "ADD_MENU_OPTION":
       return { ...state, menuOption: action.payload };
