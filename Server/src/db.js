@@ -45,6 +45,9 @@ Review.belongsTo(Car, { foreignKey: 'carId' });
 User.hasMany(Review, { foreignKey: 'userId' });
 Review.belongsTo(User, { foreignKey: 'userId' });
 
+User.hasMany(Car, { foreignKey: 'userId' });
+Car.belongsTo(User, { foreignKey: 'userId' });
+
 Brand.hasMany(Car, { foreignKey: 'brandId' });
 Car.belongsTo(Brand, { foreignKey: 'brandId' });
 

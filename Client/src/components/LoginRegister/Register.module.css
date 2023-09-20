@@ -1,12 +1,13 @@
-.buttonBackContainer{
+.buttonBackContainer {
     margin-top: 1.2em;
     justify-self: left;
     text-decoration: none;
     height: auto;
     font-size: 1.2em;
-    margin-left:1em
- }
- .buttonBackLink{
+    margin-left: 1em
+}
+
+.buttonBackLink {
     display: flex;
     align-items: center;
     border: none;
@@ -18,11 +19,16 @@
     cursor: pointer;
     border-bottom: 2px solid transparent;
     transition: border-bottom-color 0.3s ease;
- }
- .buttonBackLink:hover{border-bottom-color: black;}
- .buttonBackH5{
+}
+
+.buttonBackLink:hover {
+    border-bottom-color: black;
+}
+
+.buttonBackH5 {
     color: black;
- }
+}
+
 .login {
     display: grid;
     place-items: center;
@@ -168,6 +174,10 @@
     border: 1px solid var(--colorGrisClaro);
     transition: ease-in-out 0.1s;
     margin-bottom: 1rem;
+    font-size: 1rem;
+    font-family: var(--fontNunito);
+    justify-content: center;
+    gap: 1.5rem;
 }
 
 .btn_google:hover {
@@ -177,10 +187,6 @@
 .svg_google {
     filter: brightness(0.9);
     mix-blend-mode: multiply;
-}
-
-.p_google {
-    padding-left: 24%;
 }
 
 .btn_hideandshow {

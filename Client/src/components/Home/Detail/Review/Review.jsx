@@ -23,7 +23,7 @@ const Review = () => {
   const [newData, setNewData] = useState({})
   const [buyCars, setBuyCars] = useState(false)
   const [check, setCheck] = useState(false)
-  const [disabled, setDisabled] = useState(true )
+  const [disabled, setDisabled] = useState(true)
   const idUser = loggedUser?.response?.id
   const idCar = detail.id
 
@@ -31,7 +31,7 @@ const Review = () => {
     let errors = {}
 
     if (!data.rating) {
-     errors.rating = 'The rating cannot be empty';
+      errors.rating = 'The rating cannot be empty';
     } else if (isNaN(data.rating) || data.rating < 1 || data.rating > 5) {
       errors.rating = 'Rating must be a number between 1 and 5';
     }
@@ -43,13 +43,13 @@ const Review = () => {
     }
 
     if (!data.review) {
-      errors.review = 'The review cannot be empty' 
+      errors.review = 'The review cannot be empty'
     }
 
     if (Object.keys(errors).length === 0) {
       setDisabled(false)
       setError(null)
-    }else {
+    } else {
       setError(errors)
     }
   };
@@ -70,13 +70,13 @@ const Review = () => {
       console.log(error);
     }
   }, [idUser]);
-  
+
   const getCarId = async (userId) => {
     try {
       for (const purchase of purchases) {
         if (purchase.userId === userId) {
           const endpoint = `/buy/detail/${purchase.id}`;
-          const {data} = await axios.get(endpoint);
+          const { data } = await axios.get(endpoint);
           for (const idCars of data) {
             if (idCars.id === idCar) {
               setBuyCars(true)
@@ -88,7 +88,7 @@ const Review = () => {
       console.log(error);
     }
   };
-  
+
   useEffect(() => {
     try {
       resetReview()
@@ -125,7 +125,7 @@ const Review = () => {
     }
   }, [idCar, idUser])
 
-  const handleRating = (event, ratingValue,  id) => {
+  const handleRating = (event, ratingValue, id) => {
     event.preventDefault();
     setRating(ratingValue);
     setNewData({
@@ -248,7 +248,7 @@ const Review = () => {
             <input className={styles.input} type="text" name='title' onChange={handleChange} value={data.title} placeholder='Title:' />
             <textarea className={styles.textarea} name="review" value={data.review} onChange={handleChange} placeholder='Review:' cols="5" rows="3"></textarea>
           </div>
-          {check === false && <button disabled={disabled} type="submit" className={disabled? styles.btn_disabled :styles.btn_submit }>Submit Review</button>}
+          {check === false && <button disabled={disabled} type="submit" className={disabled ? styles.btn_disabled : styles.btn_submit}>Submit Review</button>}
           {error && <span>{error.rating || error.title || error.review}</span>}
         </form>}
       </div> <br />

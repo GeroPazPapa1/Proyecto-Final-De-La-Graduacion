@@ -99,7 +99,7 @@ const postCarHandler = async (req, res) => {
     } = req.body;
     if (
       !name ||
-      // !image ||
+      !image ||
       !brand ||
       !model ||
       !state ||
@@ -131,7 +131,8 @@ const postCarHandler = async (req, res) => {
 //
 const createCarDbHandler = async (req, res) => {
   try {
-    const createdCar = await createCarDb();
+    const { userId } = req.body
+    const createdCar = await createCarDb(userId);
     res.status(200).json(createdCar);
   } catch (error) {
     res.status(500).send(error.message);
