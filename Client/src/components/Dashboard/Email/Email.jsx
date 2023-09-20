@@ -112,6 +112,8 @@ export default function Email(props) {
                 if (result.value.phone){
                     objeto.phone = result.value.phone
                 }
+
+                console.log(objeto);
                 // Aquí puedes utilizar los valores seleccionados (type y ban) como desees
                 await dispatch(editPutUser(objeto, id));
                 await dispatch(getDashboard());

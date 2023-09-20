@@ -8,17 +8,18 @@ import ForgotPassword from "./components/LoginRegister/ForgotPassword";
 import Home from "./components/Home/Home";
 import LandingPage from "./components/LandingPage/LandingPage";
 import Login from "./components/LoginRegister/Login";
-import NavBar from "./components/NavBar/NavBar";
-import Termsandconditions from "./components/TermsAndConditions/TermsAndConditions";
 import Register from "./components/LoginRegister/Register";
+import NavBar from "./components/NavBar/NavBar";
 import Favorites from "./components/Favorites/Favorites";
 import Dashboard from "./components/Dashboard/Dashboard";
+import CreateProductUser from "./components/Form/CreateProductUser/CreateProductUser.jsx";
 import CreateProduct from "./components/Dashboard/CreateProduct/CreateProduct.jsx";
 import ProductsUpdate from "./components/Dashboard/ProductsUpdate/ProductsUpdate.jsx"
 import Modification from "./components/Modification/Modification";
+import Termsandconditions from "./components/TermsAndConditions/TermsAndConditions";
 import ProfileDashboard from "./components/ProfileDashboard/ProfileDashboard.jsx";
 import axios from "axios";
-axios.defaults.baseURL = "http://localhost:3001/";
+axios.defaults.baseURL = "http://localhost:7183/";
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
         <Route path="/favorites" element={<Favorites />} />
         <Route path="/termsandconditions" element={<Termsandconditions />} />
         <Route path="/profile" element={<ProfileDashboard />} />
+        <Route path="/publish-your-car" element={<CreateProductUser />} />
         <Route path="/admin/dashboard" element={<Dashboard />} />
         <Route path="/admin/dashboard/create" element={<CreateProduct />} />
         <Route path="/admin/dashboard/edit/:id" element={<ProductsUpdate />} />

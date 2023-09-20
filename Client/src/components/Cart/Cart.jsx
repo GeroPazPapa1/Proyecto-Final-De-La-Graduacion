@@ -3,18 +3,22 @@ import styles from "./Cart.module.css";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { deleteProduct, purchaseProducts, setCart } from "../../Redux/actions";
-import { NoCarsSVG } from "../../assets/svgs";
 import { CarRemovedFromCart, MercadoPagoFail, NeedToLogin } from "../NotiStack";
 import { initMercadoPago, Wallet } from "@mercadopago/sdk-react";
+import NOTCARS from "./Icons/NOTCARS.png";
+import DELETE from "./Icons/DELETE.png";
 import axios from "axios";
 import Swal from "sweetalert2";
 
 export default function Cart() {
+
   const cartList = useSelector((state) => state.cartList);
+  const purchasedProducts = useSelector((state) => state.purchasedProducts);
   const dispatch = useDispatch();
+
   const [preferenceId, setPreferenceId] = useState(null);
   const [showMercadoPago, setShowMercadoPago] = useState(false);
-  const purchasedProducts = useSelector((state) => state.purchasedProducts);
+  
   const removeFromCart = (productId) => {
     Swal.fire({
       title: "Are you sure?",
@@ -105,6 +109,10 @@ export default function Cart() {
     }
   };
 
+  const formatPrice = (price) => {
+    return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+  };
+
   useEffect(() => {
     // Carga el carrito desde localStorage
     const storedCart = localStorage.getItem("cart");
@@ -127,11 +135,21 @@ export default function Cart() {
     <>
       {cartList.length === 0 ? (
         <div className={styles.nocars}>
-          <h2 className={styles.cart_title}>No cars added at the cart</h2>
-          <NoCarsSVG />
-          <Link to="/home" className={styles.keeplooking}>
-            Keep looking
-          </Link>
+          <h2 className={styles.cart_title}>Your Cart</h2>
+          <div className={styles.notCars}>
+            <div>
+              <img src={NOTCARS} alt="Not Cars..." />
+            </div>
+            <div>
+              <h2>No cars yet!</h2>
+              <p>Add the cars you want to purchase</p>
+              <Link to="/home" className={styles.keeplooking}>
+                <button>
+                  Keep looking
+                </button>
+              </Link>
+            </div>
+          </div>
         </div>
       ) : (
         <div className={styles.cart}>
@@ -141,8 +159,8 @@ export default function Cart() {
           <div className={styles.products_detail}>
             <div className={styles.products}>
               <div className={styles.topics}>
-                <h3 className={styles.topic_product}>Product</h3>
-                <h3 className={styles.topic_price}>Price</h3>
+                <h3 className={styles.topic_product}>PRODUCT</h3>
+                <h3 className={styles.topic_price}>PRICE</h3>
               </div>
               {cartList.map((product) => (
                 <div className={styles.car_i} key={product.name}>
@@ -151,21 +169,7 @@ export default function Cart() {
                       className={styles.delete_btn}
                       onClick={() => removeFromCart(product.id)}
                     >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        className={styles.btnX}
-                        width="40"
-                        height="40"
-                        viewBox="0 0 24 24"
-                        strokeWidth="1.5"
-                        fill="none"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      >
-                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                        <path d="M18 6l-12 12" />
-                        <path d="M6 6l12 12" />
-                      </svg>
+                      <img src={DELETE} alt="Delete..." />
                     </div>
                   </div>
                   <Link
@@ -176,21 +180,22 @@ export default function Cart() {
                       <img
                         className={styles.car_img}
                         src={product.image[0]}
-                        alt="imagen"
+                        alt="Car..."
                       />
                     )}
                   </Link>
                   <div className={styles.name_and_brand}>
-                    <p>
-                      {product.name} {product.model}
-                      <br />
-                      {product.brand}{" "}
-                    </p>
+                    <div>
+                      <h3>{product.name} {product.model}</h3>
+                    </div>
+                    <div>
+                      <p>{product.brand}</p>
+                    </div>
                   </div>
                   <div className={styles.price}>
-                    <h4 className={styles.car_price}>
-                      ${Number(product.price)}
-                    </h4>
+                    <h3 className={styles.car_price}>
+                      $ {formatPrice(product.price)}
+                    </h3>
                   </div>
                 </div>
               ))}
@@ -198,14 +203,14 @@ export default function Cart() {
           </div>
           <div className={styles.detail}>
             <div className={styles.detail_info}>
-              <p className={styles.subtotal}>Subtotal: ${totalPrice()} USD</p>
-              {showMercadoPago ? (
+            <p className={styles.subtotal}>Subtotal: <span className={styles.subPrice}> {' '} $ {formatPrice(totalPrice())} USD</span></p>
+              {showMercadoPago ? (   
                 <div>
                   {preferenceId && <Wallet initialization={{ preferenceId }} />}
                 </div>
               ) : (
                 <button className={styles.btn_buy} onClick={handleBuy}>
-                  Finish Order
+                  FINISH ORDER
                 </button>
               )}
             </div>

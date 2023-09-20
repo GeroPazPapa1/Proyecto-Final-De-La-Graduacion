@@ -5,11 +5,12 @@ import Reviews from "./Reviews/Reviews";
 import CartHistory from "./CartHistory/CartHistory";
 import CreateProduct from "../Dashboard/CreateProduct/CreateProduct"
 import Modification from "../Modification/Modification";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { addMenuOption } from "../../Redux/actions";
 
 export default function ProfileDashboard() {
   const [selectedTopic, setSelectedTopic] = useState("Purchases");
-
+  const dispatch = useDispatch();
   const handleTopic = (topic) => {
     setSelectedTopic(topic);
   };
@@ -28,11 +29,9 @@ export default function ProfileDashboard() {
           <div className={styles.topics}>
             <button
               className={
-                selectedTopic === "Purchases"
-                  ? styles.selectedTopic
-                  : styles.topic
+                menuOption === "Purchases" ? styles.selectedTopic : styles.topic
               }
-              onClick={() => handleTopic("Purchases")}
+              onClick={() => dispatch(addMenuOption("Purchases"))}
             >
               <img
                 src="https://img.icons8.com/ios/50/paid--v1.png"
@@ -43,11 +42,9 @@ export default function ProfileDashboard() {
             </button>
             <button
               className={
-                selectedTopic === "Profile"
-                  ? styles.selectedTopic
-                  : styles.topic
+                menuOption === "Profile" ? styles.selectedTopic : styles.topic
               }
-              onClick={() => handleTopic("Profile")}
+              onClick={() => dispatch(addMenuOption("Profile"))}
             >
               <img
                 src="https://img.icons8.com/material-outlined/24/admin-settings-male.png"
@@ -77,7 +74,7 @@ export default function ProfileDashboard() {
                   ? styles.selectedTopic
                   : styles.topic
               }
-              onClick={() => handleTopic("Reviews")}
+              onClick={() => dispatch(addMenuOption("Reviews"))}
             >
               <img
                 src="https://img.icons8.com/external-xnimrodx-lineal-xnimrodx/64/external-rating-ecommerce-xnimrodx-lineal-xnimrodx-3.png"
@@ -90,14 +87,14 @@ export default function ProfileDashboard() {
         </div>
         <div className={styles.col2}>
           <div className={styles.col2a}>
-            {selectedTopic === "Purchases" && (
+            {menuOption === "Purchases" && (
               <div className={styles.profile}>
                 <div className={styles.carthistory}>
                   <CartHistory />
                 </div>
               </div>
             )}
-            {selectedTopic === "Profile" && (
+            {menuOption === "Profile" && (
               <div className={styles.myProfile}>
                 <Modification />
               </div>
@@ -107,7 +104,7 @@ export default function ProfileDashboard() {
                 <CreateProduct />
               </div>
             )}
-            {selectedTopic === "Reviews" && (
+            {menuOption === "Reviews" && (
               <div className={styles.reviews}>
                 <Reviews />
               </div>
