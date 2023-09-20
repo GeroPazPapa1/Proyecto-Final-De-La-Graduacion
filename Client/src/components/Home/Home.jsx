@@ -34,7 +34,6 @@ export default function Home() {
     localStorage.removeItem("transactionStatus");
     localStorage.removeItem("subPrice");
     localStorage.removeItem("purshasedCars");
-    localStorage.removeItem("cart");
   }, []);
 
   return (

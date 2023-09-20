@@ -120,8 +120,16 @@ export default function FormUserModification({ id, image }) {
           <h1 className={style.title_register}>Update</h1>
 
           {image
-          ? (<img src={image} alt="" className={style.iconImage} />)
-          : (<img src={user.image} alt="" className={style.iconImage} />)
+            ? (
+              <div className={style.div_img}>
+                <img src={image} alt="" className={style.iconImage} />
+              </div>
+            )
+            : (
+              <div className={style.div_img}>
+                <img src={user.image} alt="" className={style.iconImage} />
+              </div>
+            )
           }
 
           <UserImage />
@@ -137,57 +145,57 @@ export default function FormUserModification({ id, image }) {
               className={style.input}
               placeholder={user.name}
             />
-          {/* Show error message if exists*/}
-          {error.name && <p className={style.errors}>{error.name}</p>}
+            {/* Show error message if exists*/}
+            {error.name && <p className={style.errors}>{error.name}</p>}
           </label>
 
           <label htmlFor="lastName" className={style.label_lastName}>
             Last Name:{" "}
-          <br />
-          <input
-            type="text"
-            id="lastName"
-            name="lastName"
-            value={input.lastName}
-            onChange={handleChange}
-            className={style.input}
-            placeholder={user.lastName}
+            <br />
+            <input
+              type="text"
+              id="lastName"
+              name="lastName"
+              value={input.lastName}
+              onChange={handleChange}
+              className={style.input}
+              placeholder={user.lastName}
             />
-          {/* Show error message if exists*/}
-          {error.lastName && <p className={style.errors}>{error.lastName}</p>}
-            </label>
+            {/* Show error message if exists*/}
+            {error.lastName && <p className={style.errors}>{error.lastName}</p>}
+          </label>
 
           <label htmlFor="age" className={style.label_age}>
             Age:{" "}
-          <br />
-          <input
-            type="text"
-            id="age"
-            name="age"
-            value={input.age}
-            onChange={handleChange}
-            className={style.input}
-            placeholder={user.age}
+            <br />
+            <input
+              type="text"
+              id="age"
+              name="age"
+              value={input.age}
+              onChange={handleChange}
+              className={style.input}
+              placeholder={user.age}
             />
-          {/* Show error message if exists*/}
-          {error.age && <p className={style.errors}>{error.age}</p>}
-            </label>
+            {/* Show error message if exists*/}
+            {error.age && <p className={style.errors}>{error.age}</p>}
+          </label>
 
           <label htmlFor="tel" className={style.label_tel}>
             Phone:{" "}
-          <br />
-          <input
-            type="text"
-            id="tel"
-            name="tel"
-            value={input.tel}
-            onChange={handleChange}
-            className={style.input}
-            placeholder={user.tel}
+            <br />
+            <input
+              type="text"
+              id="tel"
+              name="tel"
+              value={input.tel}
+              onChange={handleChange}
+              className={style.input}
+              placeholder={user.tel}
             />
-          {/* Show error message if exists*/}
-          {error.tel && <p className={style.errors}>{error.tel}</p>}
-            </label>
+            {/* Show error message if exists*/}
+            {error.tel && <p className={style.errors}>{error.tel}</p>}
+          </label>
 
           <div className={style.largeinput}>
             <label className={style.label_country}>
@@ -211,16 +219,16 @@ export default function FormUserModification({ id, image }) {
           <div className={style.largeinput}>
             <label htmlFor="password" className={style.label_password}>
               Password:{" "}
-            <br />
-            <input
-              type={showPassword ? "text" : "password"}
-              id="password"
-              name="password"
-              value={input.password}
-              onChange={handleChange}
-              className={style.input_password2}
+              <br />
+              <input
+                type={showPassword ? "text" : "password"}
+                id="password"
+                name="password"
+                value={input.password}
+                onChange={handleChange}
+                className={style.input_password2}
               />
-              </label>
+            </label>
             <div className={style.btn_hideandshow}>
               <button
                 type="button"

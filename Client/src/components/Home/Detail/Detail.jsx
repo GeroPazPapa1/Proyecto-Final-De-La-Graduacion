@@ -21,11 +21,6 @@ export default function Detail() {
     const mainSliderRef = useRef(null);
     const secondSliderRef = useRef(null);
 
-    const handleRemoveFromCart = () => {
-        dispatch(deleteProduct(id));
-        CarRemovedFromCart()
-    }
-
     useEffect(() => {
         dispatch(getDetail(id));
         return () => {
