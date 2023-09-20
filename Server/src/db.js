@@ -3,13 +3,18 @@ const { DB_USER, DB_PASSWORD, DB_HOST, DB_NAME, DB_PORT } = process.env;
 const { Sequelize } = require("sequelize");
 const fs = require("fs");
 const path = require("path");
+// const User = require("./models/User");
+// const Admin = require("./models/admin");
+// const Brand = require("./models/Brand");
+// const Car = require("./models/Car");
 
+//conexión de sequelize
 const sequelize = new Sequelize(
   `postgresql://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_NAME}`,
-    { logging: false, native: false }
+  { logging: false, native: false }
 );
-
 const basename = path.basename(__filename);
+
 const modelDefiners = [];
 
 // Leemos todos los archivos de la carpeta Models, los requerimos y agregamos al arreglo modelDefiners
@@ -38,17 +43,26 @@ const { Brand, Buy, Car, Review, User, Sell } = sequelize.models;
 
 // Aca vendrian las relaciones
 // Product.hasMany(Reviews);
-Car.hasMany(Review, { foreignKey: 'carId' });
-Review.belongsTo(Car, { foreignKey: 'carId' });
-User.hasMany(Review, { foreignKey: 'userId' });
-Review.belongsTo(User, { foreignKey: 'userId' });
-Brand.hasMany(Car, { foreignKey: 'brandId' });
-Car.belongsTo(Brand, { foreignKey: 'brandId' });
+Car.belongsToMany(Review, { through: "carReviews" });
+Review.belongsTo(Car, { through: "carReviews" });
+
+User.belongsToMany(Review, { through: "userReviews" });
+Review.belongsTo(User, { through: "userReviews" });
+
+Brand.hasMany(Car, { foreignKey: "brandId" });
+Car.belongsTo(Brand, { foreignKey: "brandId" });
+
 Car.belongsToMany(Sell, { through: "carSells" });
+Sell.belongsToMany(Car, { through: "carSells" });
+
 Car.belongsToMany(Buy, { through: "carBuys" });
 Buy.belongsToMany(Car, { through: "carBuys" });
+
 Sell.belongsTo(Buy, { foreignKey: "buySellId" });
 Buy.belongsTo(Sell, { foreignKey: "buySellId" });
+
+User.hasMany(Buy, { foreignKey: "userId" });
+Buy.belongsTo(User, { foreignKey: "userId" });
 
 module.exports = {
   ...sequelize.models,

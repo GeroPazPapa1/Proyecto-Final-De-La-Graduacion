@@ -1,5 +1,4 @@
 const { Car, Brand } = require('../db');
-const data = require('../../api/db.json'); 
 
 const createCar = async (
     name,
@@ -13,28 +12,32 @@ const createCar = async (
     description,
   ) => {
 
-  //  console.log(data.Cars.map((element) => element.models.map((element)=> element)))
-// const allCarsDb = data.Cars.map((element) => element.models.map((element)=> element));
-// console.log(allCarsDb);
-// const allCarDb2 = [].concat.apply([],allCarsDb)
+const brandId = await Brand.findOne({
+  where: 
+    {
+      name: brand
+    }
+})
 
-// const newAllCar = await Car.bulkCreate(allCarDb2);
-// console.log(allCarDb2);
-// allCarDb2.map((element) => {
-//  Car.create(
-//     element.name,
-//         element.image,
-//         element.brand,
-//        element.model,
-//         element.state,
-//         element.price,
-//         element.location,
-//         element.color,
-//         element.description
-//  )
-// })
-
-const newCar = await Car.create({
+if(!brandId) {
+  const newBrand = Brand.create({name: brand});
+  const newCar = await Car.create({
+    name,
+    image,
+    brand,
+    model,
+    state,
+    price,
+    location,
+    color,
+    description,
+    brandId: newBrand.id
+});
+return newCar;
+}
+else
+{  
+  const newCar = await Car.create({
         name,
         image,
         brand,
@@ -44,17 +47,11 @@ const newCar = await Car.create({
         location,
         color,
         description,
+        brandId: brandId.id
     });
-  
-    // const BrandAll = await Brand.findAll({
-    //   where: {
-    //     name: brand,
-    //   },
-    // });
-    // await newCar.addBrand(BrandAll.map((brand) => brand.id));
-  
     return newCar;
-  };
+  }    
+};
 
   module.exports = {
     createCar,};

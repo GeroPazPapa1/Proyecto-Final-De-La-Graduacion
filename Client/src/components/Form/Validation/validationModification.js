@@ -41,6 +41,18 @@ const validation = (input) => {
     errors.password = "Password must contain a number";
   }
 
+  if (input.confirmPassword.length < 8 && input.confirmPassword) {
+    errors.confirmPassword = "Confirm Password must contain at least 8 characters";
+  } else if (!/[a-z]/.test(input.confirmPassword) && input.confirmPassword) {
+    errors.confirmPassword = "Confirm Password must contain a lowercase letter";
+  } else if (!/[A-Z]/.test(input.confirmPassword) && input.confirmPassword) {
+    errors.confirmPassword = "Confirm Password must contain an uppercase letter";
+  } else if (!/\d/.test(input.confirmPassword) && input.confirmPassword) {
+    errors.confirmPassword = "Confirm Password must contain a number";
+  }else if (input.password !== input.confirmPassword) {
+    errors.confirmPassword = "Passwords do not match";
+  }
+
   if (!/^(https?:\/\/)?\S+\.(jpg|jpeg|png|gif|webp)$/.test(input.image) && input.image) {
     errors.image = "The image must be of type jpg, jpeg, webp, png or gif";
   }
