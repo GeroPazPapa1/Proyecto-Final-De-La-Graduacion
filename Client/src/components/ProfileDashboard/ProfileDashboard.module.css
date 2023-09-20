@@ -1,0 +1,68 @@
+.profile {
+    display: grid;
+    grid-template-columns: 1fr 5fr;
+    background-color: var(--colorGrisClaro);
+}
+.carthistory{
+    grid-column: 2;
+    display: flex;
+}
+
+.col1 {
+    grid-column: 1;
+    background-color: var(--colorBlanco);
+    display: flex;
+    flex-direction: column;
+}
+
+.topics {
+    
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.topic,
+.selectedTopic {
+    border: none;
+    cursor: pointer;
+    font-size: 2rem;
+}
+.topic1{
+    margin-top: 2em;
+}
+.topic {
+    
+    background-color: transparent;
+    font-size: 1.5em;
+}
+
+.selectedTopic {
+    background-color: var(--colorGrisClaro);
+    font-size: 1.8em;
+   
+}
+
+.col2 {
+    grid-column: 2;
+    display: flex; /* Cambia display a flex */
+    flex-direction: column; /* Añade flex-direction: column */
+    justify-content: center; /* Centra verticalmente los elementos */
+    align-items: center; /* Centra horizontalmente los elementos */
+  }
+  
+  .col2a {
+    background-color: var(--colorGrisClaro);
+    width: 100%; /* Ocupa todo el ancho disponible */
+    height: 100%; /* Ocupa todo el alto disponible */
+    display: flex; /* Cambia display a flex */
+    flex-direction: column; /* Añade flex-direction: column */
+    justify-content: center; /* Centra verticalmente los elementos */
+    align-items: center; /* Centra horizontalmente los elementos */
+  }
+
+  .img{
+    width:1em;
+    margin-right: 0.5em;
+    
+  }
