@@ -1,0 +1,54 @@
+.mainContainer{
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1px white solid;
+    border-top: 1px white solid ;
+    background-color: white;
+    width: 90%;
+    margin:auto;
+    margin-bottom: 2em;
+    margin-top: 2em;
+}
+.cart {
+    margin-left: 1rem;
+    padding-bottom: 1rem;
+    margin-right: 1rem;
+    font-family: var(--fontInter);
+}
+.car_i {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    font-size: 1.3rem;
+    display: grid;
+    border-bottom: 1px solid;
+    padding: 1.2rem;
+}
+.car_img {
+    width: 200px;
+    aspect-ratio: 16/10;
+}
+.name_and_brand {
+    display: flex;
+    flex-direction: column;
+    margin-left: 2rem;
+    align-items: flex-start;
+    align-self: center;
+}
+.reviewInfo {
+    width: auto;
+    grid-column: 1/-1;
+}
+
+.star_container {
+    display: inline;
+    align-items: center;
+    margin: 5px;
+}
+  
+.star_label {
+    cursor: pointer;
+}
+  
+.star_label svg {
+    color: rgb(189, 162, 107);
+}

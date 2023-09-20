@@ -31,7 +31,6 @@
 }
 
 .register_form {
-  width: 520px;
   margin: 2rem 0;
   background-color: var(--colorBlanco);
   color: var(--colorGris);

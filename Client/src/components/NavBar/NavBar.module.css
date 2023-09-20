@@ -7,7 +7,8 @@
   flex-wrap: wrap;
   /* Permite que los elementos se envuelvan en pantallas pequeñas */
 }
-.spanWelcome{
+
+.spanWelcome {
   border: none;
   background-color: transparent;
   font-family: 'Inter', sans-serif;
@@ -17,14 +18,15 @@
   transition: border-bottom-color 0.3 ease;
 }
 
-.spanAdmin{
+.spanAdmin {
   z-index: 1;
   position: absolute;
   margin-right: 20px;
   bottom: -35%;
-  font-size: 12px;  
+  font-size: 12px;
   right: 50%;
 }
+
 .containerLP {
   display: flex;
   align-items: center;
@@ -65,14 +67,19 @@
   align-items: center;
   justify-content: center;
   font-family: var(--fontNunito);
-  font-size: 12px; /* Tamaño de la fuente del número */
-  color: #a39583; /* Color del texto (número) */
+  font-size: 12px;
+  /* Tamaño de la fuente del número */
+  color: #a39583;
+  /* Color del texto (número) */
   background-color: #ebe8e5;
   bottom: 0;
   right: 0;
-  border-radius: 50%; /* Para hacerlo circular */
-  width: 20px; /* Ancho del círculo */
-  height: 20px; /* Alto del círculo */
+  border-radius: 50%;
+  /* Para hacerlo circular */
+  width: 20px;
+  /* Ancho del círculo */
+  height: 20px;
+  /* Alto del círculo */
 }
 
 
@@ -109,9 +116,10 @@
 }
 
 .iconImage {
-  margin-left: 15px;
-  width: 30px;
-  height: 30px;
+  width: 35px;
+  height: 35px;
+  object-fit: cover;
+  object-position: center;
   border-radius: 50%;
 }
 
@@ -174,7 +182,7 @@
 .buttonDropdown {
   font-family: 'Inter', sans-serif;
   font-size: 16px;
-  margin-right: 20px  ;
+  margin-right: 20px;
   font-weight: lighter;
   background-color: transparent;
   border: none;

@@ -45,9 +45,9 @@ export default function DashBoardEmail() {
         "<option value=false>Not Banned</option>" +
         "</select>",
       showCancelButton: true,
-      reverseButtons: true,
       cancelButtonText: "Cancel",
       confirmButtonText: "Accept",
+      reverseButtons: true,
       preConfirm: () => {
         const selectedStatus = document.getElementById("select-status").value;
         const selectedBan = document.getElementById("select-ban").value;

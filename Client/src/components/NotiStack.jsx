@@ -84,7 +84,7 @@ export const RegisterFail = () => {
 
 export const FillInputsFixErrors = () => {
     enqueueSnackbar('Please fill all required fields and fix any validation errors', {
-        variant: 'error',
+        variant: 'warning',
         anchorOrigin: {
             vertical: 'bottom',
             horizontal: 'right',
@@ -136,7 +136,7 @@ export const logOut = () => {
     enqueueSnackbar('You logged out successfully', {
         variant: "info",
         anchorOrigin: {
-            vertical: 'top',
+            vertical: 'bottom',
             horizontal: 'right',
         }
     });
@@ -184,7 +184,7 @@ export const postReviewNoti = () => {
     enqueueSnackbar('Your review is successfully published', {
         variant: 'success',
         anchorOrigin: {
-            vertical: 'top',
+            vertical: 'bottom',
             horizontal: 'right',
         }
     })
@@ -194,7 +194,7 @@ export const deleteReviewNoti = () => {
     enqueueSnackbar('Your review is successfully deleted', {
         variant: 'error',
         anchorOrigin: {
-            vertical: 'top',
+            vertical: 'bottom',
             horizontal: 'right',
         }
     })
@@ -204,7 +204,7 @@ export const updateReviewNoti = () => {
     enqueueSnackbar('Your review is successfully updated', {
         variant: 'success',
         anchorOrigin: {
-            vertical: 'top',
+            vertical: 'bottom',
             horizontal: 'right',
         }
     })
@@ -214,7 +214,7 @@ export const errorReviewNoti = () => {
     enqueueSnackbar('You have already published a review', {
         variant: 'error',
         anchorOrigin: {
-            vertical: 'top',
+            vertical: 'bottom',
             horizontal: 'right',
         }
     })
@@ -234,7 +234,7 @@ export const verifyDeleteFav = () => {
     enqueueSnackbar('You removed the cart from Favorites', {
         variant: 'info',
         anchorOrigin: {
-            vertical: 'top',
+            vertical: 'bottom',
             horizontal: 'right',
         }
     })
@@ -261,11 +261,22 @@ export const typeAdmin = () => {
 }
 
 export const createProductSuccess = () => {
-    enqueueSnackbar('Your product has been successfully created!', {
+    enqueueSnackbar('Your product has been created successfully!', {
         variant: 'success',
         anchorOrigin: {
-            vertical: 'top',
+            vertical: 'bottom',
             horizontal: 'right',
         }
     });
 }
+
+export const removeImage = () => {
+    enqueueSnackbar('Your product has been removed successfully!', {
+        variant: 'success',
+        anchorOrigin: {
+            vertical: 'bottom',
+            horizontal: 'right',
+        }
+    });
+}
+

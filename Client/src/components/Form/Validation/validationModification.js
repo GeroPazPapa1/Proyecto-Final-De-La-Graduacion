@@ -22,11 +22,10 @@ const validation = (input) => {
   }
 
   if (isNaN(parseInt(input.tel)) && input.tel) {
-    errors.tel = "The number phone must be a valid number";
+    errors.tel = "The phone phone must be a valid number";
   } else if (!/^.{6,14}$/.test(input.tel) && input.tel) {
-    errors.tel = "The number must have between 6 and 14 digits.";
+    errors.tel = "The phone must have between 6 and 14 digits.";
   }
-
   if (!/^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/.test(input.email) && input.email) {
     errors.email = "Email is invalid";
   }
@@ -49,7 +48,7 @@ const validation = (input) => {
     errors.confirmPassword = "Confirm Password must contain an uppercase letter";
   } else if (!/\d/.test(input.confirmPassword) && input.confirmPassword) {
     errors.confirmPassword = "Confirm Password must contain a number";
-  }else if (input.password !== input.confirmPassword) {
+  } else if (input.password !== input.confirmPassword) {
     errors.confirmPassword = "Passwords do not match";
   }
 

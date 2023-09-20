@@ -14,7 +14,7 @@ const createCarDb = async () => {
     });
 
     if (!matchingBrand) {
-      matchingBrand = await Brand.create({name: newCar.brand});
+      matchingBrand = await Brand.create({ name: newCar.brand });
     }
 
     const carInstance = await Car.create({

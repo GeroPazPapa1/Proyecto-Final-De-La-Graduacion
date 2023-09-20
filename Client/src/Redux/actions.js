@@ -47,7 +47,6 @@ export const getAllCars = () => {
   return async (dispatch) => {
     try {
       const { data } = await axios(endpoint);
-      console.log(data);
       return dispatch({
         type: "GET_ALL_CARS",
         payload: data,
@@ -150,7 +149,6 @@ export const brandByQuery = () => {
   return async (dispatch) => {
     try {
       const { data } = await axios(endpoint);
-      console.log(data, "brands");
       return dispatch({
         type: "GET_ALL_BRAND",
         payload: data,
@@ -347,10 +345,31 @@ export const getReviews = (carId) => {
     type: "RESET_REVIEWS",
   };
 };
+export const getReviewsByUserId = (userId) => {
+  const endpoint = `/review/userid/${userId}`;
+  if (userId) {
+    return async (dispatch) => {
+      try {
+        const { data } = await axios.get(endpoint);
+        dispatch({
+          type: "REVIEWS_USER",
+          payload: data,
+        });
+      } catch (error) {
+        console.error(error);
+      }
+    };
+  }
+};
 
 export const resetReview = () => {
   return {
     type: "RESET_REVIEWS",
+  };
+};
+export const resetReviewByUser = () => {
+  return {
+    type: "RESET_REVIEWS_USER",
   };
 };
 
