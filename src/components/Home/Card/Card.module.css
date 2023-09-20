@@ -7,7 +7,7 @@
     justify-content: center; /* Alinear verticalmente al centro */
     align-items: center; /* Alinear horizontalmente al centro */
     transition: box-shadow 0.3s; /* Agregar una transición suave para la sombra */
-    border-radius: 10px; /* Añadido: esquinas redondas */
+    border-radius: 6px; /* Añadido: esquinas redondas */
 }
 
 .container:hover {

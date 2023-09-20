@@ -16,7 +16,7 @@ body {
   color: var(--colorNegro);
 }
 .darkMode {
-  background-color: rgb(48, 50, 73);
+  background-color: #172A46;
   color: var(--colorBlanco);
 }
 a {

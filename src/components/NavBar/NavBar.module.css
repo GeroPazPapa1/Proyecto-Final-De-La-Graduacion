@@ -4,11 +4,12 @@
   align-items: center;
   justify-content: space-between;
   margin: 2.5vw 9vw;
+  padding: 20px;
   flex-wrap: wrap;
   background-color: rgb(255, 255, 255);
   height: 100%;
   /* Permite que los elementos se envuelvan en pantallas pequeñas */
-  border-radius: 10px; /* Añadido: esquinas redondas */
+  border-radius: 6px; /* Añadido: esquinas redondas */
 }
 
 .containerLP {

@@ -11,7 +11,6 @@ export default function Home() {
 
   useEffect(() => {
     const transactionStatus = localStorage.getItem("transactionStatus");
-
     // Comprueba el estado de la compra y muestra la notificación adecuada
     if (transactionStatus === "success") {
       MercadoPagoSuccess();
@@ -21,7 +20,6 @@ export default function Home() {
       const purchasedProductsName = localStorage.getItem(
         "purchasedProductsName"
       );
-
       try {
         const response = axios.post("/buy/create", {
           userId: userId,
@@ -35,7 +33,6 @@ export default function Home() {
     } else if (transactionStatus === "fail") {
       MercadoPagoFail();
     }
-
     localStorage.removeItem("transactionStatus");
     localStorage.removeItem("subPrice");
     localStorage.removeItem("purshasedCars");
@@ -52,7 +49,7 @@ export default function Home() {
       <div className={styles.coverImage}></div>
       <nav>
         {/* Código para la barra de navegación */}
-        <label className={styles.switch}>
+        <label className={`${styles.switch} ${styles.switchRight}`}>
           <input
             type="checkbox"
             checked={darkMode}

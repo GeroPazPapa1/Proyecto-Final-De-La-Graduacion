@@ -6,13 +6,13 @@
 .container {
     display: flex;
     flex-wrap: wrap;
-    background-color:#bc9f66;
+    background-color:#66686a;
     justify-content: center;
     align-items: flex-start;
     padding-bottom: 25px;
     padding-top: 25px;
     margin: 0;
-    border-radius: 10px; /* Añadido: esquinas redondas */
+    border-radius: 6px; /* Añadido: esquinas redondas */
 }
 .container2 {
     align-items: center;
