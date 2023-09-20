@@ -16,7 +16,7 @@ import Register from "./components/LoginRegister/Register";
 import Favorites from "./components/Favorites/Favorites";
 import ProfileDashboard from "./components/ProfileDashboard/ProfileDashboard.jsx";
 import axios from "axios";
-axios.defaults.baseURL = "http://localhost:3001/";
+axios.defaults.baseURL = "http://localhost:7183/";
 
 function App() {
   return (
