@@ -8,7 +8,7 @@ import {
 } from '../../../Redux/actions';
 import Card from '../Card/Card';
 import LOADING from "./Icons/LOADING.svg";
-import NOTFOUND from "./Icons/NOTFOUND.svg";
+import NOTFOUND from "./Icons/NOTFOUND.png";
 
 export default function Cards() {
     const [currentPage, setCurrentPage] = useState(1); // Página actual

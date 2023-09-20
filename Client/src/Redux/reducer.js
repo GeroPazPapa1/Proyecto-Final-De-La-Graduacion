@@ -146,6 +146,26 @@ function rootReducer(state = initialState, action) {
         },
       };
 
+    case "DELETED_CAR":
+        return {
+          ...state,
+          allCars: action.payload,
+          filtereds: {
+            ...state.filtereds,
+            byQueryOrigin: action.payload,
+          },
+        };
+
+    case "EDITED_CAR":
+      return {
+        ...state,
+        allCars: action.payload,
+        filtereds: {
+          ...state.filtereds,
+          byQueryOrigin: action.payload, // Actualiza byQueryOrigin con el valor de action.payload
+        },
+      };
+
     case "GET_ALL_BRAND":
       return {
         ...state,

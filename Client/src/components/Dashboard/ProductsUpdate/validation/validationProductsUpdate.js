@@ -21,8 +21,8 @@ const validationProductsUpdate = (input) => {
 
   if (isNaN(parseInt(input.price)) && input.price) {
     errors.price = "The price must be a valid number";
-  } else if (!/^.{6,12}$/.test(input.price) && input.price) {
-    errors.price = "The number must have between 6 and 12 digits.";
+  } else if (!/^.{4,12}$/.test(input.price) && input.price) {
+    errors.price = "The number must have between 4 and 12 digits.";
   }
 
   if (!/^.{1,20}$/.test(input.color) && input.color) {

@@ -234,11 +234,13 @@ export const deleteUserWithID = (id) => {
 export const editPutUser = (id, type, ban) => {
   const endpoint = `/user/dashboard/users/${id}`;
   return async (dispatch) => {
+
+    console.log(id, "Soy el id");
+
     try {
-      const { status, data } = await axios.put(endpoint, {
-        status: type,
-        ban: ban,
-      });
+      const { status, data } = await axios.put(endpoint, objeto);
+
+      console.log(data, "soy el data");
       if (status === 200) {
         enqueueSnackbar("User edited successfully", { variant: "success" });
       }
@@ -361,6 +363,30 @@ export const deleteReview = (idReview) => {
     } catch (error) {
       console.error(error);
     }
+  }
+}
+
+export const editPutCar = (objeto, id) => {
+  const endpoint = `http://localhost:3001/car/edit/${id}`;
+  return async (dispatch) => {
+
+    console.log(id, "Soy el id");
+
+    try {
+      const { status, data } = await axios.put(endpoint, objeto);
+      
+      return dispatch({
+        type: "EDITED_CAR",
+        payload: data,
+      });
+    } catch (error) {
+      if (error.response) {
+        const { status } = error.response;
+        if (status === 403) {
+          enqueueSnackbar("Car not found", { variant: "error" });
+        }
+      }
+    }
   };
 };
 
@@ -382,3 +408,25 @@ export const addMenuOption = (option) => {
     payload: option,
   };
 };
+export const deleteCarWithID = (id) => {
+  const endpoint = `http://localhost:3001/car/dashboard/car/${id}`;
+  return async (dispatch) => {
+    try {
+      const { status, data } = await axios.delete(endpoint);
+      if (status === 200) {
+        enqueueSnackbar("Successfully deleted product", { variant: "success" });
+      }
+      return dispatch({
+        type: "DELETED_CAR",
+        payload: data,
+      });
+    } catch (error) {
+      if (error.response) {
+        const { status } = error.response;
+        if (status === 403) {
+          enqueueSnackbar("Can't remove this product", { variant: "error" });
+        }
+      }
+    }
+  };
+}

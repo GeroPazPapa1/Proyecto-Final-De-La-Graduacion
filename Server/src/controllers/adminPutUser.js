@@ -2,7 +2,9 @@ const { User } = require("../db");
 
 const adminInputUser = async (req, res) => {
   const { id } = req.params;
-  const { ban, status } = req.body;
+  const { ban, status, country, age, phone, name, lastName } = req.body;
+
+  console.log(ban, status, country, age, phone, name, lastName);
 
   try {
     const user = await User.findOne({
@@ -25,12 +27,33 @@ const adminInputUser = async (req, res) => {
       user.status = status;
     }
 
+    if (country !== undefined) {
+      user.country = country;
+    }
+
+    if (age !== undefined) {
+      user.age = age;
+    }
+
+    if (phone !== undefined) {
+      user.phone = phone;
+    }
+
+    if (name !== undefined) {
+      user.name = name;
+    }
+
+    if (lastName !== undefined) {
+      user.lastName = lastName;
+    }
+
+
     // Guarda los cambios en la base de datos
     await user.save();
 
-    const allUsers = await User.findAll();
+    // const allUsers = await User.findAll();
 
-    return res.status(200).json(allUsers);
+    return res.status(200).json(user);
   } catch (error) {
     console.error(error);
   }

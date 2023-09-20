@@ -37,12 +37,12 @@ const filteredUsers = async (
         },
         {
           lastName: {
-            [Op.iLike]: `%${name}`,
+            [Op.iLike]: `%${name}%`,
           },
         },
         {
           email: {
-            [Op.iLike]: `%${name}`,
+            [Op.iLike]: `%${name}%`,
           },
         },
       ];
