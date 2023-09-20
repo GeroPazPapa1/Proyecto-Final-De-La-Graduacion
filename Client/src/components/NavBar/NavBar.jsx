@@ -10,7 +10,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { logOutUserSuccess } from "../NotiStack";
 
 export default function NavBar() {
-
   const dispatch = useDispatch();
   const location = useLocation();
 
@@ -42,9 +41,11 @@ export default function NavBar() {
         const { data } = await axios.get(`/user/${loggedUser.response.id}`);
         setUser(data);
       } catch (error) {
-        console.log(`The request could not be completed because of the following error: ${error.message}`);
+        console.log(
+          `The request could not be completed because of the following error: ${error.message}`
+        );
       }
-    }
+    };
     userInfoFn();
   }, [location.pathname]);
 
@@ -75,7 +76,11 @@ export default function NavBar() {
               <div className={styles.dropdownContainer}>
                 <div className={styles.dropdown}>
                   <div className={styles.icon_name_user}>
-                    <img src={user?.image} alt="" className={styles.iconImage} />{" "}
+                    <img
+                      src={user?.image}
+                      alt=""
+                      className={styles.iconImage}
+                    />{" "}
                     <button className={styles.buttonDropdown}>
                       {user?.name} &#9660;{" "}
                       {/* Agregamos una flecha hacia abajo para indicar que es desplegable */}
@@ -83,9 +88,7 @@ export default function NavBar() {
                   </div>
                   <div className={styles.dropdownContent}>
                     {/* Aquí agregamos las opciones del menú */}
-                    <Link to="/publish-your-car">
-                      Publish car
-                    </Link>
+                    <Link to="/publish-your-car">Publish car</Link>
                     <Link
                       onClick={() => dispatch(addMenuOption("Purchases"))}
                       to="/profile"
@@ -151,9 +154,7 @@ export default function NavBar() {
                       </div>
                       <div className={styles.dropdownContent}>
                         {/* Aquí agregamos las opciones del menú */}
-                        <Link to="/publish-your-car">
-                          Publish car
-                        </Link>
+                        <Link to="/publish-your-car">Publish car</Link>
                         <Link
                           onClick={() => dispatch(addMenuOption("Purchases"))}
                           to="/profile"
@@ -239,9 +240,7 @@ export default function NavBar() {
                       </div>
                       <div className={styles.dropdownContent}>
                         {/* Aquí agregamos las opciones del menú */}
-                        <Link to="/publish-your-car">
-                          Publish car
-                        </Link>
+                        <Link to="/publish-your-car">Publish car</Link>
                         <Link
                           onClick={() => dispatch(addMenuOption("Purchases"))}
                           to="/profile"
@@ -327,9 +326,7 @@ export default function NavBar() {
                       </div>
                       <div className={styles.dropdownContent}>
                         {/* Aquí agregamos las opciones del menú */}
-                        <Link to="/publish-your-car">
-                          Publish car
-                        </Link>
+                        <Link to="/publish-your-car">Publish car</Link>
                         <Link
                           onClick={() => dispatch(addMenuOption("Purchases"))}
                           to="/profile"
@@ -403,9 +400,6 @@ export default function NavBar() {
                   <div className={styles.dropdownContainer}>
                     <div className={styles.dropdown}>
                       <div className={styles.icon_name_user}>
-                        {loggedUser.response?.type === "admin" && (
-                          <span className={styles.spanAdmin}>Admin</span>
-                        )}
                         <img
                           src={user.image}
                           alt=""
@@ -418,6 +412,7 @@ export default function NavBar() {
                       </div>
                       <div className={styles.dropdownContent}>
                         {/* Aquí agregamos las opciones del menú */}
+                        <Link to="/publish-your-car">Publish car</Link>
                         <Link
                           onClick={() => dispatch(addMenuOption("Purchases"))}
                           to="/profile"
@@ -437,9 +432,7 @@ export default function NavBar() {
                           Reviews
                         </Link>
                         {loggedUser.response?.type === "admin" && (
-                          <Link to={"/admin/dashboard"}>
-                            Dashboard
-                          </Link>
+                          <Link to={"/admin/dashboard"}>Dashboard</Link>
                         )}
                         <Link to={"/"} onClick={handleLogout}>
                           Log out
@@ -478,7 +471,7 @@ export default function NavBar() {
               <Link to={"/home"}>
                 <button className={styles.button}>Home</button>
               </Link>
-              <Link to={'/about'}>
+              <Link to={"/about"}>
                 <button className={styles.button}>Contacts</button>
               </Link>
               <Link to={"/favorites"}>
@@ -493,9 +486,6 @@ export default function NavBar() {
                   <div className={styles.dropdownContainer}>
                     <div className={styles.dropdown}>
                       <div className={styles.icon_name_user}>
-                        {loggedUser.response?.type === "admin" && (
-                          <span className={styles.spanAdmin}>Admin</span>
-                        )}
                         <img
                           src={user?.image}
                           alt=""
@@ -508,6 +498,7 @@ export default function NavBar() {
                       </div>
                       <div className={styles.dropdownContent}>
                         {/* Aquí agregamos las opciones del menú */}
+                        <Link to="/publish-your-car">Publish car</Link>
                         <Link
                           onClick={() => dispatch(addMenuOption("Purchases"))}
                           to="/profile"
@@ -566,7 +557,7 @@ export default function NavBar() {
               <Link to={"/home"}>
                 <button className={styles.button}>Home</button>
               </Link>
-              <Link to={'/about'}>
+              <Link to={"/about"}>
                 <button className={styles.button}>Contacts</button>
               </Link>
               <Link to={"/favorites"}>
@@ -593,6 +584,7 @@ export default function NavBar() {
                       </div>
                       <div className={styles.dropdownContent}>
                         {/* Aquí agregamos las opciones del menú */}
+                        <Link to="/publish-your-car">Publish car</Link>
                         <Link
                           onClick={() => dispatch(addMenuOption("Purchases"))}
                           to="/profile"
