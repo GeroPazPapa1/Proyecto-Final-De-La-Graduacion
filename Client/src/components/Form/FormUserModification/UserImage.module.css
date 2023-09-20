@@ -6,7 +6,6 @@
   margin-top: 10px;
   font-family: var(--fontNunito);
   font-weight: bold;
-  grid-column: 1/-1;
 }
 
 .buttonImage:hover {
@@ -15,11 +14,4 @@
 
 .buttonImage:hover {
   border-bottom-color: black;
-}
-
-.hiddenInput {
-  opacity: 0;
-  position: absolute;
-  overflow: hidden;
-  clip: rect(1px 1px 1px 1px); /* Ocultar el input de manera accesible */
 }

@@ -10,12 +10,15 @@
   --colorAzulCielo: #5555ff;
   --colorRojo: #e00000;
 }
-
 body {
   margin: 0;
-
+  background-color: var(--colorBlanco);
+  color: var(--colorNegro);
 }
-
-a{
+.darkMode {
+  background-color: #172A46;
+  color: var(--colorBlanco);
+}
+a {
   text-decoration: none;
 }

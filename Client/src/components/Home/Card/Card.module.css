@@ -7,6 +7,7 @@
     justify-content: center; /* Alinear verticalmente al centro */
     align-items: center; /* Alinear horizontalmente al centro */
     transition: box-shadow 0.3s; /* Agregar una transición suave para la sombra */
+    border-radius: 6px; /* Añadido: esquinas redondas */
 }
 
 .container:hover {
@@ -30,6 +31,7 @@
     font-size: 16px;
     margin-left: 19px;
     margin-top: 1px;
+    color: black;
 }
 
 .price {
@@ -37,6 +39,7 @@
     margin-top: 15px;
     font-family: 'Inter', sans-serif;
     font-size: 17px;
+    color: var(--colorNegro);
 }
 
 .state {

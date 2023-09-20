@@ -1,7 +1,7 @@
 .container {
   width: 100%;
   max-width: 1200px;
-  margin: 0 9vw;
+  margin: 0 auto;
   padding: 20px;
 }
 
@@ -14,19 +14,14 @@
 }
 
 .content {
-  margin: 0 10vw;
   background-color: #fff;
   padding: 20px;
   border-radius: 8px;
 }
 
 .title {
-  display: flex;
-  justify-content: center;
-  font-size: 35px;
-  margin-bottom: 30px;
-  font-family: "Nunito Sans", sans-serif;
-  color: #a39583;
+  font-size: 24px;
+  margin-bottom: 20px;
 }
 
 .buttonsContainer {
@@ -36,14 +31,13 @@
 }
 
 .button {
-  font-size: 13.5px;
+  font-size: 16px;
   padding: 10px 20px;
   margin-right: 10px;
-  margin-bottom: 30px;
   border: none;
+  border-radius: 4px;
   cursor: pointer;
   background-color: #f0f0f0;
-  font-family: "Nunito Sans", sans-serif;
 }
 
 .button:hover {
@@ -55,21 +49,17 @@
 }
 
 .paragraphsContainer {
-  font-family: "Inter", sans-serif;
-  font-size: 13px;
   margin-bottom: 20px;
 }
 
 .subtitle {
-  font-family: "Nunito Sans", sans-serif;
   font-size: 20px;
-  margin-bottom: 15px;
-  color: #b7ab9b;
+  margin-bottom: 10px;
 }
 
 .cardContainer {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   margin-bottom: 5px;
 }
 
@@ -77,27 +67,21 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+
 }
 
 .card img {
-  padding: 5px;
-  margin-top: 25px;
   width: 200px;
   height: auto;
   margin-bottom: 10px;
-  background-color: #a39583;
 }
 
 .card p {
-  font-family: "Inter", sans-serif;
-  font-size: 13px;
+  font-size: 14px;
   text-align: center;
 }
 
 .thanks {
-  margin-top: 35px;
-  font-size: 14px;
+  font-size: 16px;
   text-align: center;
-  font-family: "Nunito Sans", sans-serif;
-  color: #a39583;
 }

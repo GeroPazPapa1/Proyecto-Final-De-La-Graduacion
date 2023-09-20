@@ -14,8 +14,6 @@ import {
   PutEmailPassword,
   SignedSuccesfully,
   WrongEmailPassword,
-  typeAdmin,
-  typeUser,
 } from "../NotiStack";
 
 export default function Login() {
@@ -55,17 +53,12 @@ export default function Login() {
       );
       console.log("Respuesta del backend:", response.data);
 
-      const userName = response.data.name;
       const userId = response.data.id;
       const userType = response.data.type;
-      if (userType === 'user') {
-        typeUser(userName);
-      } else if (userType === 'admin') {
-        typeAdmin();
-      }
       dispatch(setUserId(userId));
       dispatch(setUserType(userType));
       const { access } = response.data;
+      SignedSuccesfully();
       setAccess(true);
       localStorage.setItem("userId", response.data.id);
       localStorage.setItem("userType", response.data.type);
@@ -128,14 +121,9 @@ export default function Login() {
           email: input.email,
           password: input.password,
         });
-        const userName = response.data.name;
+        SignedSuccesfully();
         const userId = response.data.id;
         const userType = response.data.type;
-        if (userType === 'user') {
-          typeUser(userName);
-        } else if (userType === 'admin') {
-          typeAdmin();
-        }
         dispatch(setUserId(userId));
         dispatch(setUserType(userType));
         const { access } = response.data;

@@ -4,12 +4,11 @@ import Posts from "./Posts/Posts";
 import Reviews from "./Reviews/Reviews";
 import CartHistory from "./CartHistory/CartHistory";
 import Modification from "../Modification/Modification";
-import { useSelector, useDispatch } from "react-redux";
-import { addMenuOption } from "../../Redux/actions";
+import { useSelector } from "react-redux";
 
 export default function ProfileDashboard() {
   const [selectedTopic, setSelectedTopic] = useState("Purchases");
-  const dispatch = useDispatch();
+
   const handleTopic = (topic) => {
     setSelectedTopic(topic);
   };
@@ -28,9 +27,11 @@ export default function ProfileDashboard() {
           <div className={styles.topics}>
             <button
               className={
-                menuOption === "Purchases" ? styles.selectedTopic : styles.topic
+                selectedTopic === "Purchases"
+                  ? styles.selectedTopic
+                  : styles.topic
               }
-              onClick={() => dispatch(addMenuOption("Purchases"))}
+              onClick={() => handleTopic("Purchases")}
             >
               <img
                 src="https://img.icons8.com/ios/50/paid--v1.png"
@@ -41,9 +42,11 @@ export default function ProfileDashboard() {
             </button>
             <button
               className={
-                menuOption === "Profile" ? styles.selectedTopic : styles.topic
+                selectedTopic === "Profile"
+                  ? styles.selectedTopic
+                  : styles.topic
               }
-              onClick={() => dispatch(addMenuOption("Profile"))}
+              onClick={() => handleTopic("Profile")}
             >
               <img
                 src="https://img.icons8.com/material-outlined/24/admin-settings-male.png"
@@ -54,9 +57,11 @@ export default function ProfileDashboard() {
             </button>
             <button
               className={
-                menuOption === "Reviews" ? styles.selectedTopic : styles.topic
+                selectedTopic === "Reviews"
+                  ? styles.selectedTopic
+                  : styles.topic
               }
-              onClick={() => dispatch(addMenuOption("Reviews"))}
+              onClick={() => handleTopic("Reviews")}
             >
               <img
                 src="https://img.icons8.com/external-xnimrodx-lineal-xnimrodx/64/external-rating-ecommerce-xnimrodx-lineal-xnimrodx-3.png"
@@ -69,24 +74,24 @@ export default function ProfileDashboard() {
         </div>
         <div className={styles.col2}>
           <div className={styles.col2a}>
-            {menuOption === "Purchases" && (
+            {selectedTopic === "Purchases" && (
               <div className={styles.profile}>
                 <div className={styles.carthistory}>
                   <CartHistory />
                 </div>
               </div>
             )}
-            {menuOption === "Profile" && (
+            {selectedTopic === "Profile" && (
               <div className={styles.myProfile}>
                 <Modification />
               </div>
             )}
-            {menuOption === "Posts" && (
+            {selectedTopic === "Posts" && (
               <div className={styles.posts}>
                 <Posts />
               </div>
             )}
-            {menuOption === "Reviews" && (
+            {selectedTopic === "Reviews" && (
               <div className={styles.reviews}>
                 <Reviews />
               </div>

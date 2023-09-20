@@ -1,31 +1,3 @@
-.buttonBackContainer{
-  margin-top: 1.2em;
-  justify-self: left;
-  text-decoration: none;
-  height: auto;
-  font-size: 1.2em;
-  margin-left:1em;
-  
-}
-.buttonBackLink{
-  display: flex;
-  align-items: center;
-  border: none;
-  height: 1.5em;
-  background-color: transparent;
-  font-family: "Inter", sans-serif;
-  font-size: 17px;
-  margin: 0 13px;
-  cursor: pointer;
-  border-bottom: 2px solid transparent;
-  transition: border-bottom-color 0.3s ease;
-  width: 6em;
-}
-.buttonBackLink:hover{border-bottom-color: black;}
-.buttonBackH5{
-  color: black;
-}
-
 .container {
   display: flex;
   flex-wrap: wrap;
@@ -34,6 +6,7 @@
   /* Centra horizontalmente los elementos */
   margin: 15px;
   gap: 20px;
+  background-color: rgba(0, 0, 0, 0.23);
 }
 
 .coverImage {
@@ -68,32 +41,10 @@
 .title {
   font-size: 32px;
   font-weight: bold;
-  margin-bottom: 35px;
+  margin-bottom: 20px;
   animation: fade-in 0.5s ease-in-out;
   text-align: center;
-  font-family: "Nunito Sans", sans-serif;
   /* Centrar horizontalmente */
-}
-
-.containerNF {
-  margin: 9vw 0;
-}
-
-.containerNFP {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.containerNFP p {
-  font-family: "Nunito Sans", sans-serif;
-  font-size: 23px;
-  color: #a39583;
-  margin: 0;
-}
-
-.containerNFP span {
-  font-family: 'Inter', sans-serif;
 }
 
 @keyframes fade-in {
