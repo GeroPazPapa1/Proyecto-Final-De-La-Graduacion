@@ -10,6 +10,7 @@ const initialState = {
   pageFilteredDb: [],
   cartHistory: [],
   menuOption: "",
+  darkMode: false,
 
   queryParams: {
     name: "",
@@ -148,14 +149,14 @@ function rootReducer(state = initialState, action) {
       };
 
     case "DELETED_CAR":
-        return {
-          ...state,
-          allCars: action.payload,
-          filtereds: {
-            ...state.filtereds,
-            byQueryOrigin: action.payload,
-          },
-        };
+      return {
+        ...state,
+        allCars: action.payload,
+        filtereds: {
+          ...state.filtereds,
+          byQueryOrigin: action.payload,
+        },
+      };
 
     case "EDITED_CAR":
       return {
@@ -338,6 +339,8 @@ function rootReducer(state = initialState, action) {
       };
     case "ADD_MENU_OPTION":
       return { ...state, menuOption: action.payload };
+    case "CHANGE_DARK_MODE":
+      return { ...state, darkMode: !state.darkMode };
     default:
       return state;
   }

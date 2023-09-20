@@ -4,7 +4,10 @@
   align-items: center;
   justify-content: space-between;
   margin: 2.5vw 9vw;
+  padding: 20px;
   flex-wrap: wrap;
+  background-color: rgb(255, 255, 255);
+  height: 100%;
   /* Permite que los elementos se envuelvan en pantallas pequeñas */
 }
 
@@ -49,13 +52,7 @@
   /* Espacio entre el logo y otros elementos en pantallas grandes */
 }
 
-.cartIconContainer {
-  position: relative;
-  display: inline-block;
-}
-
 .icons {
-  margin-left: 10px;
   width: 30px;
   height: auto;
   cursor: pointer;
@@ -92,6 +89,7 @@
   cursor: pointer;
   border-bottom: 2px solid transparent;
   transition: border-bottom-color 0.3s ease;
+
 }
 
 .button:hover {
@@ -108,7 +106,7 @@
 .name {
   border: none;
   background-color: transparent;
-  font-family: "Inter", sans-serif;
+  font-family: 'Inter', sans-serif;
   font-size: 17px;
   margin: 0 13px;
   border-bottom: 2px solid transparent;
@@ -187,6 +185,7 @@
   background-color: transparent;
   border: none;
   cursor: pointer;
+  font-size: 16px;
 }
 
 .dropdownContent {
@@ -212,4 +211,84 @@
 
 .dropdown:hover .dropdownContent {
   display: block;
+}
+
+/* Estilos para el modo oscuro */
+.container.darkMode {
+  background-color: #333;
+  color: #fff;
+}
+
+.container.darkMode .button {
+  color: #fff;
+}
+
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked+.slider {
+  background-color: #2196F3;
+}
+
+input:focus+.slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked+.slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+  content: "Dark";
+  color: #fff;
+  font-size: 12px;
+  line-height: 26px;
+  text-align: center;
+}
+
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+  content: "Light";
+  color: #333;
+  font-size: 12px;
+  line-height: 26px;
+  text-align: center;
 }

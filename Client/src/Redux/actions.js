@@ -232,7 +232,6 @@ export const deleteUserWithID = (id) => {
 export const editPutUser = (id, type, ban) => {
   const endpoint = `/user/dashboard/users/${id}`;
   return async (dispatch) => {
-
     console.log(id, "Soy el id");
 
     try {
@@ -382,18 +381,17 @@ export const deleteReview = (idReview) => {
     } catch (error) {
       console.error(error);
     }
-  }
-}
+  };
+};
 
 export const editPutCar = (objeto, id) => {
   const endpoint = `/car/edit/${id}`;
   return async (dispatch) => {
-
     console.log(id, "Soy el id");
 
     try {
       const { status, data } = await axios.put(endpoint, objeto);
-      
+
       return dispatch({
         type: "EDITED_CAR",
         payload: data,
@@ -448,4 +446,7 @@ export const deleteCarWithID = (id) => {
       }
     }
   };
-}
+};
+export const changeDarkMode = () => {
+  return { type: "CHANGE_DARK_MODE" };
+};
