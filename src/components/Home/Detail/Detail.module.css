@@ -1,0 +1,148 @@
+.detail {
+    font-family: var(--fontNunito);
+    display: grid;
+    background-color: var(--colorGrisClaro);
+}
+
+.detail_card {
+    margin: 3rem 19vw;
+    display: grid;
+    grid-template-columns: 92px 1fr 1fr;
+    gap: 0.7rem;
+    padding: 2rem;
+    background-color: var(--colorBlanco);
+}
+
+.carrousel_img1,
+.carrousel_img {
+    max-width: 30.45rem;
+}
+
+.selected_imgs {
+    display: flex;
+    flex-direction: column;
+}
+
+.custom_carrousel {
+    max-width: 30.45rem;
+    aspect-ratio: 16/10;
+}
+
+.carrousel_img1 {
+    cursor: grab;
+}
+
+.carrousel_img1:active {
+    cursor: grabbing;
+}
+
+.carrousel_img2 {
+    max-width: 90px;
+    aspect-ratio: 16/10;
+    border: 2px solid transparent;
+    cursor: pointer;
+}
+
+.carrousel_img2:hover {
+    border-color: var(--colorGris);
+}
+
+.selected_image {
+    max-width: 90px;
+    aspect-ratio: 16/10;
+    border: 2px solid #7e6852;
+    cursor: pointer;
+}
+
+.detail_info {
+    grid-column: 3;
+}
+
+.h1_detail {
+    font-size: 1.2rem;
+    font-family: var(--fontInter);
+}
+
+.detail_name {
+    margin-top: -0.5rem;
+    font-size: 3rem;
+}
+
+.detail_brand {
+    font-size: 2rem;
+}
+
+.detail_model {
+    font-size: 2.5rem;
+}
+
+.detail_state {
+    font-size: 1.6rem;
+    color: var(--colorGris);
+}
+
+.detail_price {
+    font-size: 1.7rem;
+}
+
+.description_car {
+    grid-row: 2;
+    grid-column: 1/-1;
+}
+
+.btn_removecart,
+.btn_gocart,
+.btn_addcart {
+    width: 150px;
+    border: 1px solid var(--colorNegro);
+    color: var(--colorNegro);
+    background-color: var(--colorBlanco);
+    text-transform: uppercase;
+    padding: 0.5rem;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: ease-in-out 0.1s;
+}
+
+.div_removegocart {
+    display: flex;
+    gap: 1rem;
+}
+
+.btn_removecart {
+    width: 250px;
+}
+
+.linktolocation {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+    color: var(--colorNegro);
+}
+
+.linktolocation:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 1650px) {
+
+    .locationcolor,
+    .linktolocation {
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        text-align: left;
+    }
+
+    .detail_card {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .selected_imgs {
+        display: flex;
+        flex-direction: row;
+    }
+}
