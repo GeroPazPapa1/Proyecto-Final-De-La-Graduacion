@@ -127,13 +127,9 @@ export default function NavBar() {
             <div className={styles.containerL}>
               {loggedUser && (
                 <>
-                  <span className={styles.spanWelcome}>Welcome</span>
                   <div className={styles.dropdownContainer}>
                     <div className={styles.dropdown}>
                       <div className={styles.icon_name_user}>
-                        {loggedUser.response?.type === "admin" && (
-                          <span className={styles.spanAdmin}>Admin</span>
-                        )}
                         <img
                           src={user.image}
                           alt=""
@@ -213,9 +209,6 @@ export default function NavBar() {
                   <div className={styles.dropdownContainer}>
                     <div className={styles.dropdown}>
                       <div className={styles.icon_name_user}>
-                        {loggedUser.response?.type === "admin" && (
-                          <span className={styles.spanAdmin}>Admin</span>
-                        )}
                         <img
                           src={user.image}
                           alt=""
@@ -292,9 +285,6 @@ export default function NavBar() {
                   <div className={styles.dropdownContainer}>
                     <div className={styles.dropdown}>
                       <div className={styles.icon_name_user}>
-                        {loggedUser.response?.type === "admin" && (
-                          <span className={styles.spanAdmin}>Admin</span>
-                        )}
                         <img
                           src={user.image}
                           alt=""
@@ -371,9 +361,6 @@ export default function NavBar() {
                   <div className={styles.dropdownContainer}>
                     <div className={styles.dropdown}>
                       <div className={styles.icon_name_user}>
-                        {loggedUser.response?.type === "admin" && (
-                          <span className={styles.spanAdmin}>Admin</span>
-                        )}
                         <img
                           src={user.image}
                           alt=""
