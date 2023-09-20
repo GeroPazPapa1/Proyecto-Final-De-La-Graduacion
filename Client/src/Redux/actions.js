@@ -47,7 +47,6 @@ export const getAllCars = () => {
   return async (dispatch) => {
     try {
       const { data } = await axios(endpoint);
-      console.log(data);
       return dispatch({
         type: "GET_ALL_CARS",
         payload: data,
@@ -150,7 +149,6 @@ export const brandByQuery = () => {
   return async (dispatch) => {
     try {
       const { data } = await axios(endpoint);
-      console.log(data, "brands");
       return dispatch({
         type: "GET_ALL_BRAND",
         payload: data,

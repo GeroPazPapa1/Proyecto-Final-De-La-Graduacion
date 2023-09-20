@@ -11,10 +11,13 @@
 }
 .cart {
     margin-left: 1rem;
+    padding-bottom: 1rem;
     margin-right: 1rem;
     font-family: var(--fontInter);
 }
 .car_i {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
     font-size: 1.3rem;
     display: grid;
     border-bottom: 1px solid;
@@ -32,8 +35,8 @@
     align-self: center;
 }
 .reviewInfo {
-    display: flex;
-    flex-direction: column;
+    width: auto;
+    grid-column: 1/-1;
 }
 
 .star_container {

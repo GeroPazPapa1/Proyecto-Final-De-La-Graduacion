@@ -27,9 +27,6 @@ const Review = () => {
   const idUser = loggedUser?.response?.id
   const idCar = detail.id
 
-  console.log(data, 'data');
-  console.log(newData, 'newData');
-
   const validate = () => {
     let errors = {}
 
@@ -56,7 +53,7 @@ const Review = () => {
       setError(errors)
     }
   };
-
+  console.log(error);
   const getPurchasesHandler = async (idUser) => {
     try {
       const endpoint = "/buy/getByuser/";

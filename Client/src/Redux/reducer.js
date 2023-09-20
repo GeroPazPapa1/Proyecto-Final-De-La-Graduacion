@@ -219,7 +219,6 @@ function rootReducer(state = initialState, action) {
       };
 
     case "CARDS_LOADED":
-      console.log(action.payload);
       return {
         ...state,
         carsLoaded: action.payload,

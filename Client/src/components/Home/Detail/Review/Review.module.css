@@ -57,7 +57,7 @@
 }
 
 .star_label svg:hover {
-  color: #636060;
+  color: var(--colorGris);
 }
 
 
@@ -118,7 +118,6 @@
   border: 1px solid var(--colorNegro);
   background-color: var(--colorBlanco);
   margin: 5px;
-  padding: 5rem;
   font-size: 0.9rem;
   cursor: pointer;
   transition: background-color ease-in-out 0.1s;
@@ -128,7 +127,6 @@
 .btn_disabled {
   width: auto;
   border: 1px solid var(--colorNegro);
-  background-color: var(--colorAzulCielo);
   margin: 5px;
   padding: 0.5rem;
   font-size: 0.9rem;
@@ -142,6 +140,7 @@
   background-color: var(--colorBlanco);
   float: right;
   position: relative;
+  text-transform: uppercase;
 }
 
 

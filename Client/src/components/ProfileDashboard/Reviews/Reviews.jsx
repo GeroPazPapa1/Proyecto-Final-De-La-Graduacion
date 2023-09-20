@@ -12,8 +12,6 @@ export default function Reviews() {
     const loggedUser = loggedUserJson ? JSON.parse(loggedUserJson) : null;
     const idUser = loggedUser?.response?.id
 
-    console.log(reviewsByUserId);
-
     useEffect(() => {
         dispatch(getReviewsByUserId(idUser))
     }, [idUser])
@@ -23,7 +21,7 @@ export default function Reviews() {
             <div className={styles.cart}>
                 {reviewsByUserId && [...reviewsByUserId].reverse().map((review, index) => (
                 <div key={index} className={styles.car_i}>
-                    <Link className={styles.link_imgcar} to={`/detail/${review.id}`}> 
+                    <Link className={styles.link_imgcar} to={`/detail/${review.Car.id}`}> 
                     <img src={review.Car.image[0]} alt="imgCar" className={styles.car_img}/><br />
                     </Link>
                     <div className={styles.name_and_brand}>
