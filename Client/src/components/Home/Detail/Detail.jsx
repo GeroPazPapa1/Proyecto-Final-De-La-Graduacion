@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import { getDetail, resetDetail, addToCart, deleteProduct } from '../../../Redux/actions';
 import styles from './Detail.module.css';
 import { useSelector, useDispatch } from 'react-redux';
-import { LocationSvg, ButtonBack } from '../../../assets/svgs'
+import { ButtonBack } from '../../../assets/svgs'
 import { CarRemovedFromCart, CarAddedToCart } from '../../NotiStack';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';

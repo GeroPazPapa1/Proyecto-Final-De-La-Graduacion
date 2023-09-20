@@ -143,7 +143,7 @@ export default function FormUserModification({ id, image }) {
           {image ? (
             <img src={image} alt="" className={style.iconImage} />
           ) : (
-            <img src={user.image} alt="" className={style.iconImage} />
+            <img src={user?.image} alt="" className={style.iconImage} />
           )}
 
             <UserImage />
@@ -158,7 +158,7 @@ export default function FormUserModification({ id, image }) {
               value={input.name}
               onChange={handleChange}
               className={style.input}
-              placeholder={user.name}
+              placeholder={user?.name}
             />
             {/* Show error message if exists*/}
             {error.name && <p className={style.errors}>{error.name}</p>}
@@ -173,7 +173,7 @@ export default function FormUserModification({ id, image }) {
               value={input.lastName}
               onChange={handleChange}
               className={style.input}
-              placeholder={user.lastName}
+              placeholder={user?.lastName}
             />
             {/* Show error message if exists*/}
             {error.lastName && <p className={style.errors}>{error.lastName}</p>}
@@ -188,7 +188,7 @@ export default function FormUserModification({ id, image }) {
               value={input.age}
               onChange={handleChange}
               className={style.input}
-              placeholder={user.age}
+              placeholder={user?.age}
             />
             {/* Show error message if exists*/}
             {error.age && <p className={style.errors}>{error.age}</p>}
@@ -203,7 +203,7 @@ export default function FormUserModification({ id, image }) {
               value={input.tel}
               onChange={handleChange}
               className={style.input}
-              placeholder={user.tel}
+              placeholder={user?.tel}
             />
             {/* Show error message if exists*/}
             {error.tel && <p className={style.errors}>{error.tel}</p>}
@@ -218,7 +218,7 @@ export default function FormUserModification({ id, image }) {
                 name="country"
                 onChange={(e) => handleChange(e)}
               >
-                <option hidden>{user.country}</option>
+                <option hidden>{user?.country}</option>
                 {countries.map((country, index) => (
                   <option key={index} value={country}>
                     {country}

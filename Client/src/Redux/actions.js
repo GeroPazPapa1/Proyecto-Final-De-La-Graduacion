@@ -234,11 +234,12 @@ export const deleteUserWithID = (id) => {
 export const editPutUser = (id, type, ban) => {
   const endpoint = `/user/dashboard/users/${id}`;
   return async (dispatch) => {
+    console.log(id, "Soy el id");
+
     try {
-      const { status, data } = await axios.put(endpoint, {
-        status: type,
-        ban: ban,
-      });
+      const { status, data } = await axios.put(endpoint, objeto);
+
+      console.log(data, "soy el data");
       if (status === 200) {
         enqueueSnackbar("User edited successfully", { variant: "success" });
       }
@@ -364,6 +365,29 @@ export const deleteReview = (idReview) => {
   };
 };
 
+export const editPutCar = (objeto, id) => {
+  const endpoint = `/car/edit/${id}`;
+  return async (dispatch) => {
+    console.log(id, "Soy el id");
+
+    try {
+      const { status, data } = await axios.put(endpoint, objeto);
+
+      return dispatch({
+        type: "EDITED_CAR",
+        payload: data,
+      });
+    } catch (error) {
+      if (error.response) {
+        const { status } = error.response;
+        if (status === 403) {
+          enqueueSnackbar("Car not found", { variant: "error" });
+        }
+      }
+    }
+  };
+};
+
 export const updateReview = (newData) => {
   const endpoint = "/review/";
   return async (dispatch) => {
@@ -381,4 +405,29 @@ export const addMenuOption = (option) => {
     type: "ADD_MENU_OPTION",
     payload: option,
   };
+};
+export const deleteCarWithID = (id) => {
+  const endpoint = `/car/dashboard/car/${id}`;
+  return async (dispatch) => {
+    try {
+      const { status, data } = await axios.delete(endpoint);
+      if (status === 200) {
+        enqueueSnackbar("Successfully deleted product", { variant: "success" });
+      }
+      return dispatch({
+        type: "DELETED_CAR",
+        payload: data,
+      });
+    } catch (error) {
+      if (error.response) {
+        const { status } = error.response;
+        if (status === 403) {
+          enqueueSnackbar("Can't remove this product", { variant: "error" });
+        }
+      }
+    }
+  };
+};
+export const changeDarkMode = () => {
+  return { type: "CHANGE_DARK_MODE" };
 };

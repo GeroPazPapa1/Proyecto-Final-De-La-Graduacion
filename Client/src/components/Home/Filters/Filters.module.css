@@ -3,17 +3,19 @@
     padding-right: 70px;
     flex-direction: column;
     align-items: flex-start;
+    border-radius: 6px;
 }
 
 .column {
     display: flex;
     flex-direction: column;
+    border-radius: 6px;
 }
 
 .buttonCF {
     font-family: 'Nunito Sans', sans-serif;
     border: 1px solid #bbb3ab;
-    background-color: #ddd4d4;
+    background-color: #bbb3ab;
     color: white;
     padding: 8px 20px;
     margin-top: 0px;
@@ -21,6 +23,7 @@
     vertical-align: middle;
     cursor: pointer;
     transition: background-color 0.3s, color 0.3s, border 0.3s;
+    border-radius: 6px;
 }
 
 .buttonCF:hover {
@@ -33,12 +36,14 @@
     font-family: 'Nunito Sans', sans-serif;
     font-size: 17px;
     margin-bottom: 15px;
+    border-radius: 6px;
 }
 
 .column label {
     font-family: 'Inter', sans-serif;
     font-size: 13px;
     margin: 0 0 7px 0;
+    border-radius: 6px;
 }
 
 .column input[type="number"] {
@@ -47,12 +52,14 @@
     margin-top: 10px;
     border: 1.5px solid black;
     padding-left: 10px;
+    border-radius: 6px;
 }
 
 .column input[type="number"]::-webkit-inner-spin-button,
 .column input[tyoe="number"]::-webkit-outer-spin-button {
     -webkit-appearance: none;
     margin: 0;
+    border-radius: 6px;
 }
 
 .column input[type="checkbox"] {
@@ -63,20 +70,31 @@
     height: 15px;
     vertical-align: middle;
     margin-right: 12px;
+    border-radius: 6px;
 }
 
 .column input[type="checkbox"]:checked {
     border: 2px solid black;
+    border-radius: 6px;
 }
 
 .button {
-    font-family: 'Inter', sans-serif;
-    border: 1px solid black;
-    background-color: transparent;
+    font-family: 'Nunito Sans', sans-serif;
+    border: 1px solid #bbb3ab;
+    background-color: #bbb3ab;
+    color: white;
     padding: 8px 0;
     margin-top: 10px;
     vertical-align: middle;
     cursor: pointer;
+    border-radius: 6px;
+    transition: background-color 0.3s, color 0.3s, border 0.3s;
+}
+
+.button:hover {
+    background-color: transparent;
+    color: #bbb3ab;
+    border: 1px solid #bbb3ab;
 }
 
 .buttonToggle {
@@ -85,9 +103,11 @@
     font-family: 'Nunito Sans', sans-serif;
     color: #bbb3ab;
     margin-top: 7px;
+    border-radius: 6px;
 }
 
 .buttonToggle img {
     width: 10px;
     height: auto;
+    border-radius: 6px;
 }

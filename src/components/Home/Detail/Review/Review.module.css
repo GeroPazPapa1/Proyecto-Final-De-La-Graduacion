@@ -1,0 +1,136 @@
+.form {
+  font-family: var(--fontInter);
+  font-size: 20px;
+  flex-wrap: wrap;
+}
+
+.Review_Seccion {
+  font-family: var(--fontInter);
+  padding-bottom: 5px;
+  margin: auto;
+}
+
+.Review_Title {
+  margin-bottom: 100px;
+  padding: 15px;
+}
+
+.radio_star {
+  display: inline;
+  align-items: center;
+  margin: 5px;
+}
+
+.star_label {
+  cursor: pointer;
+}
+
+.star_label svg {
+  color: rgb(189, 162, 107);
+}
+
+.star_label svg:hover {
+  color: #636060;
+}
+
+.image {
+  margin-right: 8px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  line-height: 36px;
+  text-align: center;
+  background-color: #e0e0e080;
+}
+
+.input,
+.textarea {
+  resize: none;
+  display: block;
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--colorGris);
+}
+
+.textarea:focus {
+  outline: none;
+  border-color: var(--colorGris);
+}
+
+.title {
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.review {
+  font-size: 16px;
+  color: var(--colorGris);
+}
+
+hr {
+  color: var(--colorGris);
+}
+
+.btn_submit,
+.btn_update_review,
+.btn_delete {
+  width: auto;
+  border: 1px solid var(--colorNegro);
+  background-color: var(--colorBlanco);
+  margin: 5px;
+  padding: 0.5rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: ease-in-out 0.1s;
+  text-transform: uppercase;
+}
+
+.btn_edit {
+  border: 1px solid var(--colorNegro);
+  background-color: var(--colorBlanco);
+  float: right;
+  position: relative;
+}
+
+.btn_submit:hover {
+  background-color: var(--colorGrisClaro);
+}
+
+.btn_update_review:hover {
+  background-color: var(--colorGrisClaro);
+}
+
+.btn_edit:hover {
+  background-color: var(--colorGrisClaro);
+}
+
+.btn_delete:hover {
+  background-color: var(--colorGrisClaro);
+}
+
+.alert {
+  background-color: var(--colorGrisClaro);
+  border: 1px solid var(--colorGris);
+  font-size: 18px;
+  text-align: center;
+}
+
+.btn_no,
+.btn_yes {
+  width: auto;
+  background-color: var(--colorBlanco);
+  border: 1px solid var(--colorGris);
+  margin: 5px;
+  padding: 0.5rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
