@@ -36,7 +36,7 @@ div .goback {
 }
 
 .register_form {
-  width: 520px;
+  max-width: 470px;
   margin: 2rem 0;
   background-color: var(--colorBlanco);
   color: var(--colorGris);
@@ -186,10 +186,6 @@ div .goback {
 .svg_google {
   filter: brightness(0.9);
   mix-blend-mode: multiply;
-}
-
-.p_google {
-  padding-left: 24%;
 }
 
 .btn_hideandshow {

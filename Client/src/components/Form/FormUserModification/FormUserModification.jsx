@@ -80,9 +80,7 @@ export default function FormUserModification({ id, image }) {
       modificationUserSuccess();
       navigate("/home");
     } catch (error) {
-      alert(
-        `The request could not be completed because of the following error: ${error.message}`
-      );
+      console.error(error.message)
     }
   };
 
@@ -125,9 +123,7 @@ export default function FormUserModification({ id, image }) {
         const { data } = await axios.get(`/user/${id}`);
         setUser(data);
       } catch (error) {
-        alert(
-          `The request could not be completed because of the following error: ${error.message}`
-        );
+        console.error(error.message)
       }
     };
     userInfoFn();
@@ -201,6 +197,7 @@ export default function FormUserModification({ id, image }) {
               id="tel"
               name="tel"
               value={input.tel}
+              maxLength={14}
               onChange={handleChange}
               className={style.input}
               placeholder={user?.tel}

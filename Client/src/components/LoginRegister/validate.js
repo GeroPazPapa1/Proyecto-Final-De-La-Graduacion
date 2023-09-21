@@ -18,6 +18,8 @@ export default function validate(input) {
     errors.password = "Password must have at least one number";
   } else if (!/[a-zA-Z]/.test(input.password)) {
     errors.password = "Password must have at least one letter";
+  } else if (!/[A-Z]/.test(input.password)) {
+    errors.password = "Password must have at least one uppercase letter";
   } else {
     errors.password = "";
   }

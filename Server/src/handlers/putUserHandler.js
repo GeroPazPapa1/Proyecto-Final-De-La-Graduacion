@@ -18,7 +18,7 @@ const putUserHandler = async (req, res) => {
     await user.save();
     return res.status(200).json("user updated successfully");
   } catch (error) {
-    return res.status(500).send(error.message);
+    console.log(error)
   }
 };
 

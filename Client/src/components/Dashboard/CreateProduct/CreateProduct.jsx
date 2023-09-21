@@ -142,7 +142,7 @@ export default function CreateProduct() {
   //----------------------------------------------------------Cloudinary---------------------------------------------------------------------------------------
 
   const [errors, setErrors] = useState(null);
-  const cloudinaryUploadUrl =  "https://api.cloudinary.com/v1_1/Vehibuy/upload";
+  const cloudinaryUploadUrl = "https://api.cloudinary.com/v1_1/Vehibuy/upload";
 
   const handleImageUpload = async (selectedFile) => {
     setErrors(null);
@@ -167,69 +167,69 @@ export default function CreateProduct() {
 
     const formDataArray = [];
 
-    for (let i = 1; i <= 5; i++)
-    {
-        const inputElement = document.getElementById(`imageInput${i}`);
-        if (inputElement.files[0]) {
-          const file = await handleImageUpload(inputElement.files[0]);
-          if (file) {
-            const formData = new FormData();
-            formData.append("file", file);
-            formData.append("upload_preset", "jsnxe58v");
-            formData.append("folder", `${input.name}${input.brand}_car`);
-            formDataArray.push(formData);
-          }
+    for (let i = 1; i <= 5; i++) {
+      const inputElement = document.getElementById(`imageInput${i}`);
+      if (inputElement.files[0]) {
+        const file = await handleImageUpload(inputElement.files[0]);
+        if (file) {
+          const formData = new FormData();
+          formData.append("file", file);
+          formData.append("upload_preset", "jsnxe58v");
+          formData.append("folder", `${input.name}${input.brand}_car`);
+          formDataArray.push(formData);
         }
+      }
     }
 
     try {
-          const uploadPromises = formDataArray.map((formData) =>
-            axios.post(cloudinaryUploadUrl, formData)
-          );
+      const uploadPromises = formDataArray.map((formData) =>
+        axios.post(cloudinaryUploadUrl, formData)
+      );
 
-          const responses = await Promise.all(uploadPromises);
+      const responses = await Promise.all(uploadPromises);
 
-          const imageUrls = responses.map((response) => response.data.secure_url);
+      const imageUrls = responses.map((response) => response.data.secure_url);
 
-          setInput({
-            ...input,
-            image: imageUrls,
-          });
+      setInput({
+        ...input,
+        image: imageUrls,
+      });
 
-          setErrors('Images uploaded successfully');
-        } catch (error) {
-          setErrors("Error uploading images to Cloudinary");
-        }
+      setErrors('Images uploaded successfully');
+    } catch (error) {
+      setErrors("Error uploading images to Cloudinary");
+    }
   }
 
   //----------------------------------------------------------Cloudinary---------------------------------------------------------------------------------------
 
-  
+
 
 
   return (
     <div className={style.login}>
-    <Link to={"/admin/dashboard"}>
-      <ButtonBack />
-    </Link>
+      <Link to={"/admin/dashboard"}>
+        <ButtonBack />
+      </Link>
       <div className={style.register_form}>
         <form onSubmit={handleSubmit} className={style.form_in}>
-        {location.pathname === "/admin/dashboard/create" && (<h1 className={style.title_register}>Create</h1>)}
-        {location.pathname === "/profile" && (<h1 className={style.title_register}>Add Product</h1>)}
+          {location.pathname === "/admin/dashboard/create" && (<h1 className={style.title_register}>Create</h1>)}
+          {location.pathname === "/profile" && (<h1 className={style.title_register}>Add Product</h1>)}
 
-        <label htmlFor="name" className={style.label_name}>
+          <label htmlFor="name" className={style.label_name}>
             Name: <br />
             <input
               type="text"
               id="name"
               name="name"
+              maxLength={20}
               value={input.name}
               onChange={handleChange}
               className={style.input}
             />
-          {/* Show error message if exists*/}
-          {error.name && <p className={style.errors}>{error.name}</p>}
-        </label>
+            {/* Show error message if exists*/}
+            {error.name && <p className={style.errors}>{error.name}</p>}
+          </label>
 
           <label htmlFor="brand" className={style.label_lastName}>
             Brand: <br />
@@ -237,44 +237,45 @@ export default function CreateProduct() {
               type="text"
               id="brand"
               name="brand"
+              maxLength={20}
               value={input.brand}
               onChange={handleChange}
               className={style.input}
-              />
+            />
             {/* Show error message if exists*/}
             {error.brand && <p className={style.errors}>{error.brand}</p>}
           </label>
 
-            <label htmlFor="model" className={style.label_name}>
-              Model: <br />
+          <label htmlFor="model" className={style.label_name}>
+            Model: <br />
             <input
               type="text"
               id="model"
               name="model"
+              maxLength={4}
               value={input.model}
               onChange={handleChange}
               className={style.input}
             />
-          {/* Show error message if exists*/}
-          {error.model && <p className={style.errors}>{error.model}</p>}
+            {/* Show error message if exists*/}
+            {error.model && <p className={style.errors}>{error.model}</p>}
           </label>
 
-
-            <label className={style.label_lastName}>
-              State: <br />
-              <select
-                className={style.input_country}
-                id="state"
-                name="state"
-                onChange={handleChange}
-              >
-                <option hidden></option>
-                <option value="New">New</option>
-                <option value="Used">Used</option>
-              </select>
+          <label className={style.label_lastName}>
+            State: <br />
+            <select
+              className={style.input_country}
+              id="state"
+              name="state"
+              onChange={handleChange}
+            >
+              <option hidden></option>
+              <option value="New">New</option>
+              <option value="Used">Used</option>
+            </select>
             {/* Show error message if exists*/}
             {error.state && <p className={style.errors}>{error.state}</p>}
-            </label>
+          </label>
 
 
           <label htmlFor="price" className={style.label_name}>
@@ -287,27 +288,27 @@ export default function CreateProduct() {
               onChange={handleChange}
               className={style.input}
             />
-          {/* Show error message if exists*/}
-          {error.price && <p className={style.errors}>{error.price}</p>}
+            {/* Show error message if exists*/}
+            {error.price && <p className={style.errors}>{error.price}</p>}
           </label>
 
 
-            <label className={style.label_country}>
-              Location: <br />
-              <select
-                className={style.input_country}
-                id="location"
-                name="location"
-                onChange={(e) => handleChange(e)}
-              >
-                <option hidden></option>
-                {countries.map((country, index) => (
-                  <option key={index} value={country}>
-                    {country}
-                  </option>
-                ))}
-              </select>
-            </label>
+          <label className={style.label_country}>
+            Location: <br />
+            <select
+              className={style.input_country}
+              id="location"
+              name="location"
+              onChange={(e) => handleChange(e)}
+            >
+              <option hidden></option>
+              {countries.map((country, index) => (
+                <option key={index} value={country}>
+                  {country}
+                </option>
+              ))}
+            </select>
+          </label>
 
 
           <label htmlFor="color" className={style.label_name}>
@@ -316,12 +317,13 @@ export default function CreateProduct() {
               type="text"
               id="color"
               name="color"
+              maxLength={20}
               value={input.color}
               onChange={handleChange}
               className={style.input}
             />
-          {/* Show error message if exists*/}
-          {error.color && <p className={style.errors}>{error.color}</p>}
+            {/* Show error message if exists*/}
+            {error.color && <p className={style.errors}>{error.color}</p>}
           </label>
 
           <label htmlFor="description" className={style.label_lastName}>
@@ -330,10 +332,12 @@ export default function CreateProduct() {
               type="text"
               id="description"
               name="description"
+              minLength={10}
+              maxLength={300}
               value={input.description}
               onChange={handleChange}
               className={style.input}
-              />
+            />
             {/* Show error message if exists*/}
             {error.description && <p className={style.errors}>{error.description}</p>}
           </label>
@@ -398,23 +402,23 @@ export default function CreateProduct() {
             Select image 5 <span id="fileName5"></span>
           </label>
 
-            <button className={style.btn_image} onClick={handleButton}>Save images</button>
-            {errors && <span>{errors}</span>}
-            <div className={style.divButtons}>
-              <button
-                type="button"
-               className={style.btn_cancel}
-               onClick={handleCancelClick}
-               >
-               Cancel
-              </button>
-              <button
-               type="submit"
-               className={style.btn_register}
-               disabled={hasErrors()}
-              >
-               Create
-             </button>
+          <button className={style.btn_image} onClick={handleButton}>Save images</button>
+          {errors && <span>{errors}</span>}
+          <div className={style.divButtons}>
+            <button
+              type="button"
+              className={style.btn_cancel}
+              onClick={handleCancelClick}
+            >
+              Cancel
+            </button>
+            <button
+              type="submit"
+              className={style.btn_register}
+              disabled={hasErrors()}
+            >
+              Create
+            </button>
           </div>
         </form>
       </div>

@@ -22,7 +22,7 @@ const validation = (input) => {
   }
 
   if (isNaN(parseInt(input.tel)) && input.tel) {
-    errors.tel = "The phone phone must be a valid number";
+    errors.tel = "The phone must be a valid number";
   } else if (!/^.{6,14}$/.test(input.tel) && input.tel) {
     errors.tel = "The phone must have between 6 and 14 digits.";
   }

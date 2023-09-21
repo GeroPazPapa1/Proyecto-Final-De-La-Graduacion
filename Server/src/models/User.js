@@ -39,7 +39,7 @@ module.exports = (sequelize) => {
       defaultValue:
         "https://res.cloudinary.com/vehibuy/image/upload/q_auto/v1694066777/user_imgProfileStandar/istockphoto-903053114-612x612_qslxrv.webp",
     },
-    tel: { type: DataTypes.INTEGER, allowNull: true },
+    tel: { type: DataTypes.STRING, allowNull: true },
     ban: {
       type: DataTypes.BOOLEAN,
       defaultValue: false,
