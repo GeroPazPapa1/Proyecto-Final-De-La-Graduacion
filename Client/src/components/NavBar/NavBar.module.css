@@ -30,6 +30,10 @@
   right: 50%;
 }
 
+.cartIconContainer {
+  margin-left: 20px;
+}
+
 .containerLP {
   display: flex;
   align-items: center;

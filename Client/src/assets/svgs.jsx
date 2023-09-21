@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 export const Google = () => {
   return (
@@ -240,23 +241,32 @@ export const NoCarsSVG = () => {
 
 export const ButtonBack = () => {
   return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      class="icon icon-tabler icon-tabler-arrow-bar-to-left"
-      width="30"
-      height="30"
-      viewBox="0 0 24 24"
-      strokeWidth="1.5"
-      stroke="#000000"
-      fill="none"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-      <path d="M10 12l10 0" />
-      <path d="M10 12l4 4" />
-      <path d="M10 12l4 -4" />
-      <path d="M4 4l0 16" />
-    </svg>
+    <div style={{ margin: '0 10vw', display: 'flex', alignItems: 'center' }}>
+      <div style={{ margin: '0 9px 0 0' }}>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="icon icon-tabler icon-tabler-arrow-bar-to-left"
+          width="30"
+          height="30"
+          viewBox="0 0 24 24"
+          strokeWidth="1.5"
+          stroke="#000000"
+          fill="none"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+          <path d="M10 12l10 0" />
+          <path d="M10 12l4 4" />
+          <path d="M10 12l4 -4" />
+          <path d="M4 4l0 16" />
+        </svg>
+      </div>
+      <div>
+        <p style={{ fontFamily: 'Nunito Sans', color: '#a39583', fontSize: '15px' }}>
+          Go Back
+        </p>
+      </div>
+    </div >
   );
 };

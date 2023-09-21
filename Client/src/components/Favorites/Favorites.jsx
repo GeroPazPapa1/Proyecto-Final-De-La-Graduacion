@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
 import { ButtonBack } from "../../assets/svgs";
 import Card from "../Home/Card/Card";
 import style from "./Favorites.module.css";
@@ -26,10 +25,7 @@ export default function Favorites() {
     <div>
       <div className={style.coverImage}></div>
       <div className={style.buttonBackContainer}>
-        <Link to={"/home"} className={style.buttonBackLink}>
-          <ButtonBack className={style.buttonBack} />
-          <h5 className={style.buttonBackH5}>Go Back</h5>
-        </Link>
+          <ButtonBack />
       </div>
       <h2 className={`${style.favorites_title} ${style.title}`}>
         Your Favorites

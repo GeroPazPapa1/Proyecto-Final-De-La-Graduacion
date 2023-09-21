@@ -1,9 +1,10 @@
 const validationProductsUpdate = (input) => {
   const errors = {};
 
-  // if (!/^.{1,20}$/.test(input.name) && input.name) {
-  //   errors.name = "The name must contain a maximum of 20 characters";
-  // } else if (!/^[A-Za-z]+$/.test(input.name) && input.name) {
+  if (!/^.{1,20}$/.test(input.name) && input.name) {
+    errors.name = "The name must contain a maximum of 20 characters";
+  }
+  // else if (!/^[A-Za-z]+$/.test(input.name) && input.name) {
   //   errors.name = "The name must contain only letters";
   // }
 
@@ -21,10 +22,10 @@ const validationProductsUpdate = (input) => {
 
   if (isNaN(parseInt(input.price)) && input.price) {
     errors.price = "The price must be a valid number";
-  } 
+  }
 
 
-  
+
   // else if (!/^.{4,12}$/.test(input.price) && input.price) {
   //   errors.price = "The number must have between 6 and 12 digits.";
   // }
@@ -35,9 +36,10 @@ const validationProductsUpdate = (input) => {
     errors.color = "The color must contain only letters";
   }
 
-  // if (!/^.{1,400}$/.test(input.description) && input.description) {
-  //   errors.description = "The description must contain a maximum of 400 characters";
-  // } else if (!/^[A-Za-z]+$/.test(input.description) && input.description) {
+  if (!/^.{1,400}$/.test(input.description) && input.description) {
+    errors.description = "The description must contain a maximum of 400 characters";
+  }
+  // else if (!/^[A-Za-z]+$/.test(input.description) && input.description) {
   //   errors.description = "The description must contain only letters";
   // }
 

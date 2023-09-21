@@ -260,6 +260,16 @@ export const typeAdmin = () => {
     })
 }
 
+export const alertFilterValues = () => {
+    enqueueSnackbar('Please enter supported values', {
+        variant: 'error',
+        anchorOrigin: {
+            vertical: 'top',
+            horizontal: 'right',
+        }
+    })
+}
+
 export const createProductSuccess = () => {
     enqueueSnackbar('Your product has been created successfully!', {
         variant: 'success',

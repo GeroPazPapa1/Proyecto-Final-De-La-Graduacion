@@ -83,6 +83,7 @@ export default function CreateProduct() {
         `/car/create/`,
         updatedInput
       );
+      console.log(data);
       createProductSuccess();
       navigate("/admin/dashboard");
     } catch (error) {
@@ -181,213 +182,224 @@ export default function CreateProduct() {
   console.log(input, "Informacion del JSON");
 
   return (
-    <div className={style.login}>
+    <>
+
       <div className={style.goback}>
-        <Link to={"/admin/dashboard"} className={style.btn_back}>
-          <ButtonBack /> Go Back
+        <Link to='/admin/dashboard'>
+          <ButtonBack />
         </Link>
       </div>
-      <div className={style.register_form}>
-        <form onSubmit={handleSubmit} className={style.form_in}>
-          <h1 className={style.title_register}>Create</h1>
+      <div className={style.login}>
+        <div className={style.register_form}>
+          <form onSubmit={handleSubmit} className={style.form_in}>
+            <h1 className={style.title_register}>Create</h1>
 
-          <label htmlFor="name" className={style.label_name}>
-            Name: <br />
+            <label htmlFor="name" className={style.label_name}>
+              Name: <br />
+              <input
+                type="text"
+                id="name"
+                name="name"
+                value={input.name}
+                onChange={handleChange}
+                className={style.input}
+                maxLength={20}
+              />
+              {/* Show error message if exists*/}
+              {error.name && <p className={style.errors}>{error.name}</p>}
+            </label>
+
+            <label htmlFor="brand" className={style.label_lastName}>
+              Brand: <br />
+              <input
+                type="text"
+                id="brand"
+                name="brand"
+                value={input.brand}
+                onChange={handleChange}
+                className={style.input}
+                maxLength={20}
+              />
+              {/* Show error message if exists*/}
+              {error.brand && <p className={style.errors}>{error.brand}</p>}
+            </label>
+
+            <label htmlFor="model" className={style.label_name}>
+              Model: <br />
+              <input
+                type="text"
+                id="model"
+                name="model"
+                pattern="\d+"
+                value={input.model}
+                onChange={handleChange}
+                className={style.input}
+                maxLength={4}
+              />
+              {/* Show error message if exists*/}
+              {error.model && <p className={style.errors}>{error.model}</p>}
+            </label>
+
+
+            <label className={style.label_lastName}>
+              State: <br />
+              <select
+                className={style.input_country}
+                id="state"
+                name="state"
+                onChange={handleChange}
+              >
+                <option hidden></option>
+                <option value="New">New</option>
+                <option value="Used">Used</option>
+              </select>
+              {/* Show error message if exists*/}
+              {error.state && <p className={style.errors}>{error.state}</p>}
+            </label>
+
+
+            <label htmlFor="price" className={style.label_name}>
+              Price: <br />
+              <input
+                type="text"
+                id="price"
+                name="price"
+                value={input.price}
+                onChange={handleChange}
+                className={style.input}
+                maxLength={10}
+              />
+              {/* Show error message if exists*/}
+              {error.price && <p className={style.errors}>{error.price}</p>}
+            </label>
+
+
+            <label className={style.label_country}>
+              Location: <br />
+              <select
+                className={style.input_country}
+                id="location"
+                name="location"
+                onChange={(e) => handleChange(e)}
+              >
+                <option hidden></option>
+                {countries.map((country, index) => (
+                  <option key={index} value={country}>
+                    {country}
+                  </option>
+                ))}
+              </select>
+            </label>
+
+
+            <label htmlFor="color" className={style.label_name}>
+              Color: <br />
+              <input
+                type="text"
+                id="color"
+                name="color"
+                value={input.color}
+                onChange={handleChange}
+                className={style.input}
+                maxLength={20}
+              />
+              {/* Show error message if exists*/}
+              {error.color && <p className={style.errors}>{error.color}</p>}
+            </label>
+
+            <label htmlFor="description" className={style.label_lastName}>
+              Description: <br />
+              <input
+                type="text"
+                id="description"
+                name="description"
+                value={input.description}
+                onChange={handleChange}
+                className={style.input}
+                minLength={10}
+                maxLength={300}
+              />
+              {/* Show error message if exists*/}
+              {error.description && <p className={style.errors}>{error.description}</p>}
+            </label>
+
             <input
-              type="text"
-              id="name"
-              name="name"
-              value={input.name}
-              onChange={handleChange}
-              className={style.input}
+              className={style.input_image}
+              type="file"
+              accept="image/*"
+              id="imageInput1"
+              style={{ display: "none" }}
+              onChange={(e) => handleFileChange(e, 1)}
             />
-            {/* Show error message if exists*/}
-            {error.name && <p className={style.errors}>{error.name}</p>}
-          </label>
+            <label htmlFor="imageInput1" className={style.btn_image}>
+              Select image 1
+              <span id="fileName1"></span>
+            </label>
 
-          <label htmlFor="brand" className={style.label_lastName}>
-            Brand: <br />
             <input
-              type="text"
-              id="brand"
-              name="brand"
-              value={input.brand}
-              onChange={handleChange}
-              className={style.input}
+              className={style.input_image}
+              type="file"
+              accept="image/*"
+              id="imageInput2"
+              style={{ display: "none" }}
+              onChange={(e) => handleFileChange(e, 2)}
             />
-            {/* Show error message if exists*/}
-            {error.brand && <p className={style.errors}>{error.brand}</p>}
-          </label>
+            <label htmlFor="imageInput2" className={style.btn_image}>
+              Select image 2
+              <span id="fileName2"></span>
+            </label>
 
-          <label htmlFor="model" className={style.label_name}>
-            Model: <br />
             <input
-              type="text"
-              id="model"
-              name="model"
-              value={input.model}
-              onChange={handleChange}
-              className={style.input}
+              className={style.input_image}
+              type="file"
+              accept="image/*"
+              id="imageInput3"
+              style={{ display: "none" }}
+              onChange={(e) => handleFileChange(e, 3)}
             />
-            {/* Show error message if exists*/}
-            {error.model && <p className={style.errors}>{error.model}</p>}
-          </label>
+            <label htmlFor="imageInput3" className={style.btn_image}>
+              Select image 3
+              <span id="fileName3"></span>
+            </label>
 
+            <input
+              className={style.input_image}
+              type="file"
+              accept="image/*"
+              id="imageInput4"
+              style={{ display: "none" }}
+              onChange={(e) => handleFileChange(e, 4)}
+            />
+            <label htmlFor="imageInput4" className={style.btn_image}>
+              Select image 4
+              <span id="fileName4"></span>
+            </label>
 
-          <label className={style.label_lastName}>
-            State: <br />
-            <select
-              className={style.input_country}
-              id="state"
-              name="state"
-              onChange={handleChange}
+            <input
+              className={style.input_image}
+              type="file"
+              accept="image/*"
+              id="imageInput5"
+              style={{ display: "none" }}
+              onChange={(e) => handleFileChange(e, 5)}
+            />
+            <label htmlFor="imageInput5" className={style.btn_image}>
+              Select image 5
+              <span id="fileName5"></span>
+            </label>
+
+            <button className={style.btn_image} onClick={handleButton}>Upload</button>
+            {errors && <span>{errors}</span>}
+            <button
+              type="submit"
+              className={style.btn_register}
+              disabled={hasErrors()}
             >
-              <option hidden></option>
-              <option value="New">New</option>
-              <option value="Used">Used</option>
-            </select>
-            {/* Show error message if exists*/}
-            {error.state && <p className={style.errors}>{error.state}</p>}
-          </label>
-
-
-          <label htmlFor="price" className={style.label_name}>
-            Price: <br />
-            <input
-              type="text"
-              id="price"
-              name="price"
-              value={input.price}
-              onChange={handleChange}
-              className={style.input}
-            />
-            {/* Show error message if exists*/}
-            {error.price && <p className={style.errors}>{error.price}</p>}
-          </label>
-
-
-          <label className={style.label_country}>
-            Location: <br />
-            <select
-              className={style.input_country}
-              id="location"
-              name="location"
-              onChange={(e) => handleChange(e)}
-            >
-              <option hidden></option>
-              {countries.map((country, index) => (
-                <option key={index} value={country}>
-                  {country}
-                </option>
-              ))}
-            </select>
-          </label>
-
-
-          <label htmlFor="color" className={style.label_name}>
-            Color: <br />
-            <input
-              type="text"
-              id="color"
-              name="color"
-              value={input.color}
-              onChange={handleChange}
-              className={style.input}
-            />
-            {/* Show error message if exists*/}
-            {error.color && <p className={style.errors}>{error.color}</p>}
-          </label>
-
-          <label htmlFor="description" className={style.label_lastName}>
-            Description: <br />
-            <input
-              type="text"
-              id="description"
-              name="description"
-              value={input.description}
-              onChange={handleChange}
-              className={style.input}
-            />
-            {/* Show error message if exists*/}
-            {error.description && <p className={style.errors}>{error.description}</p>}
-          </label>
-
-          <input
-            className={style.input_image}
-            type="file"
-            accept="image/*"
-            id="imageInput1"
-            style={{ display: "none" }}
-            onChange={(e) => handleFileChange(e, 1)}
-          />
-          <label htmlFor="imageInput1" className={style.btn_image}>
-            Select image 1
-            <span id="fileName1"></span>
-          </label>
-
-          <input
-            className={style.input_image}
-            type="file"
-            accept="image/*"
-            id="imageInput2"
-            style={{ display: "none" }}
-            onChange={(e) => handleFileChange(e, 2)}
-          />
-          <label htmlFor="imageInput2" className={style.btn_image}>
-            Select image 2
-            <span id="fileName2"></span>
-          </label>
-
-          <input
-            className={style.input_image}
-            type="file"
-            accept="image/*"
-            id="imageInput3"
-            style={{ display: "none" }}
-            onChange={(e) => handleFileChange(e, 3)}
-          />
-          <label htmlFor="imageInput3" className={style.btn_image}>
-            Select image 3
-            <span id="fileName3"></span>
-          </label>
-
-          <input
-            className={style.input_image}
-            type="file"
-            accept="image/*"
-            id="imageInput4"
-            style={{ display: "none" }}
-            onChange={(e) => handleFileChange(e, 4)}
-          />
-          <label htmlFor="imageInput4" className={style.btn_image}>
-            Select image 4
-            <span id="fileName4"></span>
-          </label>
-
-          <input
-            className={style.input_image}
-            type="file"
-            accept="image/*"
-            id="imageInput5"
-            style={{ display: "none" }}
-            onChange={(e) => handleFileChange(e, 5)}
-          />
-          <label htmlFor="imageInput5" className={style.btn_image}>
-            Select image 5
-            <span id="fileName5"></span>
-          </label>
-
-          <button className={style.btn_image} onClick={handleButton}>Upload</button>
-          {errors && <span>{errors}</span>}
-          <button
-            type="submit"
-            className={style.btn_register}
-            disabled={hasErrors()}
-          >
-            Create
-          </button>
-        </form>
+              Create
+            </button>
+          </form>
+        </div>
       </div>
-    </div>
+    </>
   )
 };

@@ -1,14 +1,10 @@
-.goback {
+div .goback {
   display: flex;
-  margin-top: 1rem;
+  flex-direction: row;
+  justify-content: flex-start;
+  padding-top: 1rem;
+  background-color: var(--colorCrema);
 }
-
-.btn_back {
-  display: flex;
-  align-items: center;
-  color: var(--colorNegro);
-}
-
 
 .largeinput {
   grid-column: 1/-1;
@@ -240,6 +236,7 @@
 }
 
 .btn_image {
+  overflow: hidden;
   cursor: pointer;
   padding: 0.5rem;
   border: none;
