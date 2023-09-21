@@ -71,7 +71,7 @@ const updateReview = async (req, res) => {
     }
   }
 
-  const getReviewByUserId = async (req, res) => {
+const getReviewByUserId = async (req, res) => {
     const {id} = req.params
     try {
         const review = await Review.findAll({
@@ -90,11 +90,24 @@ const updateReview = async (req, res) => {
         res.status(400).json({error: error.message})
     }
 };
+
+const getAllReview = async (req, res) => {
+    try {
+        const reviews = await Review.findAll({
+            attributes: ['id', 'rating', 'carId']
+        })
+        res.status(200).json(reviews)
+    } catch (error) {
+        res.status(500).json(error.message)
+    }
+}
+
   
 module.exports = {
     postReview,
     getReviewById,
     deleteReview,
     updateReview,
-    getReviewByUserId
+    getReviewByUserId,
+    getAllReview,
 };

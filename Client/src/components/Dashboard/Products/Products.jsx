@@ -11,6 +11,7 @@ import FiltersCar from "../Filters/FiltersCar";
 import SearchBarCar from "../SearchBar/SearchBarCar";
 import { Link } from "react-router-dom"
 import { enqueueSnackbar } from "notistack";
+import axios from 'axios'
 
 export default function DashBoardProducts() {
 
@@ -18,6 +19,7 @@ export default function DashBoardProducts() {
     const carsLoadeds = useSelector((state) => state.carsLoaded);
     const dispatch = useDispatch();
     const [productSelection, setProductSelection] = useState([]);
+    const [rating, setRating] = useState([]);
     const [selectAll, setSelectAll] = useState(false);
     const selectedProducts = Object.keys(productSelection).filter((key) => productSelection[key]);
     const selectedProductsObjects = selectedProducts.map((emailId) => {
@@ -25,6 +27,25 @@ export default function DashBoardProducts() {
     });
     const aux = selectedProductsObjects.length;
 
+    const getReviewRating = async () => {
+        try {
+            const endpoint = "/review/";
+            const { data } = await axios.get(endpoint);
+            setRating(data);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+
+    useEffect(() => {
+        try {
+            getReviewRating();
+        } catch (error) {
+            console.log(error);
+        }
+    }, []);
+  
     useEffect(() => {
         if (!carsLoadeds) {
             const fetchCars = async () => {
@@ -36,7 +57,6 @@ export default function DashBoardProducts() {
         }
     }, [carsLoadeds, dispatch])
 
-    console.log(pageFilteredDb);
 
     const handleCheckboxActionEdit = async () => {
         Swal.fire({
@@ -110,7 +130,7 @@ const handleSelectAllChange = () => {
 
     return (
         <div>
-                <SearchBarCar/>
+                {/* <SearchBarCar/> */}
                 <div className={styles.filtersEdit}>
                     <FiltersCar/>
                     <button className={aux<2 ? styles.deleteDisabled : styles.delete} onClick={handleCheckboxActionDelete} disabled={aux<2}>
@@ -139,24 +159,37 @@ const handleSelectAllChange = () => {
                 <div className={styles.emailItem}>Price</div>
                 <div className={styles.emailItem}>Location</div>
                 <div className={styles.emailItem}>State</div>
+                <div className={styles.emailItem}>Rating</div>
                 <div className={styles.emailItem}>Actions</div>
             </div>
             <div>
-                {pageFilteredDb?.map((email) => (
-                    <Product
-                        key={email.id}
-                        id={email.id}
-                        name={email.name}
-                        brand={email.brand}
-                        color={email.color}
-                        model={email.model}
-                        price={email.price}
-                        location={email.location}
-                        state={email.state} 
-                        isChecked={productSelection[email.id] || false}
-                        onCheckboxChange={handleCheckboxChange}
-                        />
-                ))
+                {
+                    pageFilteredDb?.map((email) => {
+                        const ratings = rating.filter((review) => review.carId === email.id);
+                        
+                        let promRating = 'Unrated'; 
+
+                        for ( let i = 0; i < ratings.length; i++) {
+                            const sumRatings = ratings.reduce((acc, review) => acc + review.rating, 0);
+                            promRating = Math.round(sumRatings / ratings.length);
+                        }
+                        return (
+                            <Product
+                                key={email.id}
+                                id={email.id}
+                                name={email.name}
+                                brand={email.brand}
+                                color={email.color}
+                                model={email.model}
+                                price={email.price}
+                                location={email.location}
+                                state={email.state}
+                                rating={promRating}
+                                isChecked={productSelection[email.id] || false}
+                                onCheckboxChange={handleCheckboxChange}
+                            />
+                        )
+                    } )
                 }
             </div>
         </div>
