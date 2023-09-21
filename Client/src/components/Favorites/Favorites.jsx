@@ -4,9 +4,10 @@ import { ButtonBack } from "../../assets/svgs";
 import Card from "../Home/Card/Card";
 import style from "./Favorites.module.css";
 import NOTFOUND from "./Icons/NOTFOUND.png";
+import { Link } from "react-router-dom";
 
 export default function Favorites() {
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const favorites = useSelector((state) => state.favorites);
 
   useEffect(() => {
@@ -25,7 +26,9 @@ export default function Favorites() {
     <div>
       <div className={style.coverImage}></div>
       <div className={style.buttonBackContainer}>
+        <Link to={"/home"}>
           <ButtonBack />
+        </Link>
       </div>
       <h2 className={`${style.favorites_title} ${style.title}`}>
         Your Favorites
@@ -60,4 +63,3 @@ export default function Favorites() {
     </div>
   );
 }
-
