@@ -8,12 +8,12 @@ import EDIT from "../Email/Icons/EDIT.svg";
 import PLUS from "../Email/Icons/PLUS.svg";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { AiOutlineStar, AiFillStar } from 'react-icons/ai'
 
 export default function Email(props) {
-    const { id, name, brand, color, model, price, location, state, onCheckboxChange, isChecked } = props;
-
+    const { id, name, brand, color, model, price, location, state, rating, onCheckboxChange, isChecked } = props;
     const dispatch = useDispatch();
-    
+
     const handleDeletedCar = async (id) => {
             Swal.fire({
             title: "¿Are you sure?",
@@ -44,6 +44,15 @@ export default function Email(props) {
             <div className={styles.emailItem}>{price}</div>
             <div className={styles.emailItem}>{location}</div>
             <div className={styles.emailItem}>{state}</div>
+            {typeof rating === 'number' ? (
+            <div className={styles.emailItem}>
+                {Array.from({ length: 5 }, (_, i) => (
+                <label className={styles.star_label} key={i}>
+                    {i + 1 <= rating ? <AiFillStar /> : <AiOutlineStar />}
+                </label>
+                ))}
+            </div>) : (
+            <div className={styles.emailItem}>{rating}</div> )}
             <div className={styles.emailItem}>
                 <>
                     <button className={styles.delete} onClick={() => handleDeletedCar(id)}>
