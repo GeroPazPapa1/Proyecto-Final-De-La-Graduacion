@@ -55,22 +55,7 @@ export default function ProfileDashboard() {
             </button>
             <button
               className={
-                selectedTopic === "Add Product"
-                  ? styles.selectedTopic
-                  : styles.topic
-              }
-              onClick={() => handleTopic("Add Product")}
-            >
-              <img
-                src="https://img.icons8.com/ios/50/paid--v1.png"
-                alt="Cart icon"
-                className={styles.img}
-              />
-              Add Product
-            </button>
-            <button
-              className={
-                selectedTopic === "Reviews"
+                menuOption === "Reviews"
                   ? styles.selectedTopic
                   : styles.topic
               }
@@ -112,14 +97,14 @@ export default function ProfileDashboard() {
                 <Modification />
               </div>
             )}
-            {selectedTopic === "Add Product" && (
-              <div className={styles.posts}>
-                <CreateProduct />
-              </div>
-            )}
             {menuOption === "Reviews" && (
               <div className={styles.reviews}>
                 <Reviews />
+              </div>
+            )}
+            {menuOption === "Posts" && (
+              <div className={styles.reviews}>
+                <Posts />
               </div>
             )}
           </div>

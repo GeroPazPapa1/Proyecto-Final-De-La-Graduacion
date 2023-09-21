@@ -48,6 +48,7 @@ export default function DashBoardProducts() {
                 '<option value="New">New</option>' +
                 '</select>',
             confirmButtonText: "Accept",
+            reverseButtons: true,
             showCancelButton: true,
             cancelButtonText: "Cancel",
             preConfirm: () => {

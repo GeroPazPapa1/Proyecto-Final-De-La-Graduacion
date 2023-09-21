@@ -81,11 +81,6 @@ export default function Card(props) {
             ))}
           </div>
         </div>
-        <div className={styles.detail}>
-          <div className={styles.detail_info}>
-            <p className={styles.subtotal}>Total: ${totalPrice()} USD</p>
-          </div>
-        </div>
       </div>
     </div>
   );

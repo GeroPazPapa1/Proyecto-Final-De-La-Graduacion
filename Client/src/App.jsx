@@ -15,6 +15,7 @@ import Dashboard from "./components/Dashboard/Dashboard";
 import CreateProductUser from "./components/Form/CreateProductUser/CreateProductUser.jsx";
 import CreateProduct from "./components/Dashboard/CreateProduct/CreateProduct.jsx";
 import ProductsUpdate from "./components/Dashboard/ProductsUpdate/ProductsUpdate.jsx"
+import ProductsUpdateUser from "./components/Form/CreateProductUser/ProductsUpdateUser.jsx"
 import Modification from "./components/Modification/Modification";
 import Termsandconditions from "./components/TermsAndConditions/TermsAndConditions";
 import ProfileDashboard from "./components/ProfileDashboard/ProfileDashboard.jsx";
@@ -40,6 +41,7 @@ function App() {
         <Route path="/admin/dashboard" element={<Dashboard />} />
         <Route path="/admin/dashboard/create" element={<CreateProduct />} />
         <Route path="/admin/dashboard/edit/:id" element={<ProductsUpdate />} />
+        <Route path="/user/edit/:id" element={<ProductsUpdateUser />} />
         <Route path="/profileSettings" element={<Modification />} />
         <Route path="/about" element={<AboutUs />} />
       </Routes>

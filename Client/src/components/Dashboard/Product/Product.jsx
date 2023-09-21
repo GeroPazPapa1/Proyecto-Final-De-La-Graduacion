@@ -20,6 +20,7 @@ export default function Email(props) {
             text: `You are about to delete ${name} from the database`,
             icon: "warning",
             showCancelButton: true,
+            reverseButtons: true,
             cancelButtonText: "Cancel",
             confirmButtonText: "Accept",
         }).then((result) => {
@@ -37,7 +38,8 @@ export default function Email(props) {
             checked={isChecked}
             onChange={() => onCheckboxChange(id)}>
             </input>
-            <div className={styles.emailItem}>{name}</div>
+            <Link
+            to={`/detail/${id}`}><div className={styles.emailItem}>{name}</div></Link>
             <div className={styles.emailItem}>{brand}</div>
             <div className={styles.emailItem}>{color}</div>
             <div className={styles.emailItem}>{model}</div>

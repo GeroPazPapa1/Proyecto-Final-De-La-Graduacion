@@ -195,7 +195,6 @@ export const getDashboard = (loggedUser) => {
   return async (dispatch) => {
     try {
       const { data } = await axios(endpoint, config);
-      console.log(data);
       return dispatch({
         type: "GET_ALL_USERS",
         payload: data,
@@ -315,7 +314,7 @@ export const orderFilters = (order) => {
 };
 
 export const editPutCar = (objeto, id) => {
-  const endpoint = `http://localhost:3001/car/edit/${id}`;
+  const endpoint = `http://localhost:7183/car/edit/${id}`;
   return async (dispatch) => {
 
     console.log(id, "Soy el id");
@@ -352,7 +351,7 @@ export const postReview = (data) => {
 };
 
 export const deleteCarWithID = (id) => {
-  const endpoint = `http://localhost:3001/car/dashboard/car/${id}`;
+  const endpoint = `http://localhost:7183/car/dashboard/car/${id}`;
   return async (dispatch) => {
     try {
       const { status, data } = await axios.delete(endpoint);

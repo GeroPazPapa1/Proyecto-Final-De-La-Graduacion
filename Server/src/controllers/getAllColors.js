@@ -2,7 +2,7 @@ const axios = require("axios");
 
 const getAllColor = async (req, res) => {
   try {
-    const { data } = await axios.get("http://localhost:7432/car");
+    const { data } = await axios.get("http://localhost:7183/car");
 
     const carColor = data.map((car) => car.color);
 

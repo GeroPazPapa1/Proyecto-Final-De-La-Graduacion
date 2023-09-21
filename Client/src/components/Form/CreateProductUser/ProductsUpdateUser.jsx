@@ -3,18 +3,32 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { ButtonBack } from "../../../assets/svgs";
-import { createProductSuccess } from "../../NotiStack";
-import validationProductsCreate from "./validation/validationProductsCreate";
-import style from "./CreateProduct.module.css"
-import { addDashboardOption } from "../../../Redux/actions";
+import { modificationUserSuccess } from "../../NotiStack";
+import validationProductsUpdate from "./validation/validationProductsUpdate";
+import style from "./ProductsUpdateUser.module.css"
+import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { resetDetail, getDetail, addMenuOption, addDashboardOption } from "../../../Redux/actions";
 import Swal from "sweetalert2";
 
+export default function ProductsUpdateUser() {
 
-export default function CreateProduct() {
+  const {id} = useParams();
+  const dispatch = useDispatch();
+  const detail = useSelector((state) => state.detail);
+  const location = useLocation();
+  useEffect(() => {
+    dispatch(getDetail(id));
+    return () => {
+        dispatch(resetDetail());
+    };
+}, [id, dispatch]);
+  
+  console.log(id, "edit");
 
   const navigate = useNavigate();
-  const [countries, setCountries] = useState([]);
-  const location = useLocation();
+
+  const [countries, setCountries] = useState([])
 
   const [imageValue, setImageValue] = useState({
     image1: false,
@@ -23,6 +37,7 @@ export default function CreateProduct() {
     image4: false,
     image5: false,
   });
+
   const [input, setInput] = useState({
     name: "",
     image: [],
@@ -30,6 +45,7 @@ export default function CreateProduct() {
     model: "",
     state: "",
     price: "",
+    location: "",
     color: "",
     description: "",
   });
@@ -40,39 +56,11 @@ export default function CreateProduct() {
     model: "",
     state: "",
     price: "",
+    location: "",
     color: "",
     description: "",
   });
 
-  const loggedUserJson = localStorage.getItem("authToken");
-  const loggedUser = loggedUserJson ? JSON.parse(loggedUserJson) : null;
-  const userId = loggedUser.response.id;
-
-  function handleFileChange(e, inputId) {
-    const fileNameSpan = document.getElementById(`fileName${inputId}`);
-    if (e.target.files.length > 0) {
-      fileNameSpan.textContent = e.target.files[0].name;
-    } else {
-      fileNameSpan.textContent = "";
-    }
-  }
-  const handleCancelClick = () => {
-    Swal.fire({
-      title: "Are you sure?",
-      text: "Your car will not be published!",
-      icon: "warning",
-      showCancelButton: true,
-      reverseButtons: true,
-      cancelButtonText: "No, stay here",
-      confirmButtonText: "Yes, cancel publish!",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        navigate('/admin/dashboard');
-        processCancelSuccess();
-        dispatch(addDashboardOption("PRODUCTS"))
-      }
-    });
-  };
 
   const handleChange = (event) => {
     setInput({
@@ -81,7 +69,7 @@ export default function CreateProduct() {
     });
     // The form is validated and the local error status is updated with the corresponding validation error messages.
     setError(
-      validationProductsCreate({
+      validationProductsUpdate({
         ...input,
         [event.target.name]: event.target.value,
       })
@@ -104,20 +92,18 @@ export default function CreateProduct() {
     event.preventDefault();
     try {
       // Create a copy of the current input object to send to the server
-      let updatedInput = { ...input, userId };
-
-      console.log(updatedInput);
-
-      const { data } = await axios.post(
-        `/car/create/`,
+      let updatedInput = { ...input };
+      if(updatedInput.image.length === 0) {
+        delete updatedInput.image;
+      }
+      console.log(updatedInput, "Soy la informacion de car");
+      const { data } = await axios.put(
+        `/car/edit/${id}`,
         updatedInput
       );
-
-      localStorage.setItem(`${data.id}`, JSON.stringify(data.id));
-      const idProduct = localStorage.getItem(`${data.id}`);
-      createProductSuccess();
-      navigate("/admin/dashboard");
-      dispatch(addDashboardOption("PRODUCTS"))
+      modificationUserSuccess();
+      navigate("/profile");
+      dispatch(addMenuOption("Posts"))
     } catch (error) {
       console.log(error);
     }
@@ -139,83 +125,101 @@ export default function CreateProduct() {
     fetchCountries();
   }, []);
 
-  //----------------------------------------------------------Cloudinary---------------------------------------------------------------------------------------
+   //----------------------------------------------------------Cloudinary---------------------------------------------------------------------------------------
 
-  const [errors, setErrors] = useState(null);
-  const cloudinaryUploadUrl =  "https://api.cloudinary.com/v1_1/Vehibuy/upload";
-
-  const handleImageUpload = async (selectedFile) => {
-    setErrors(null);
-
-
-    if (!selectedFile) {
-      setErrors("Please, select an image.");
-      return;
-    }
-
-    if (!selectedFile.type.startsWith("image/")) {
-      setErrors("The selected file is not a valid image.");
-      return;
-    }
-
-
-    return selectedFile;
+   const [errors, setErrors] = useState(null);
+   const cloudinaryUploadUrl =  "https://api.cloudinary.com/v1_1/Vehibuy/upload";
+ 
+   const handleImageUpload = async (selectedFile) => {
+     setErrors(null);
+ 
+ 
+     if (!selectedFile) {
+       setErrors("Please, select an image.");
+       return;
+     }
+ 
+     if (!selectedFile.type.startsWith("image/")) {
+       setErrors("The selected file is not a valid image.");
+       return;
+     }
+ 
+ 
+     return selectedFile;
+   };
+ 
+   const handleButton = async (event) => {
+     event.preventDefault();
+ 
+     const formDataArray = [];
+ 
+     for (let i = 1; i <= 5; i++) 
+     {
+         const inputElement = document.getElementById(`imageInput${i}`);
+         if (inputElement.files[0]) {
+           const file = await handleImageUpload(inputElement.files[0]);
+           if (file) {
+             const formData = new FormData();
+             formData.append("file", file);
+             formData.append("upload_preset", "jsnxe58v");
+             formData.append("folder", `${input.name}${input.brand}_car`);
+             formDataArray.push(formData);
+           }
+         }
+     }
+ 
+     try {
+           const uploadPromises = formDataArray.map((formData) =>
+             axios.post(cloudinaryUploadUrl, formData)
+           );
+       
+           const responses = await Promise.all(uploadPromises);
+       
+           const imageUrls = responses.map((response) => response.data.secure_url);
+ 
+           setInput({
+             ...input,
+             image: imageUrls,
+           });
+ 
+           setErrors('Images uploaded successfully');
+         } catch (error) {
+           setErrors("Error uploading images to Cloudinary");
+         }
+   } 
+ 
+   const handleCancelClick = () => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "Your car will not be published!",
+      icon: "warning",
+      showCancelButton: true,
+      reverseButtons: true,
+      cancelButtonText: "No, stay here",
+      confirmButtonText: "Yes, cancel publish!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        navigate('/profile');
+        processCancelSuccess();
+        dispatch(addMenuOption("Posts"))
+      }
+    });
   };
 
-  const handleButton = async (event) => {
-    event.preventDefault();
-
-    const formDataArray = [];
-
-    for (let i = 1; i <= 5; i++)
-    {
-        const inputElement = document.getElementById(`imageInput${i}`);
-        if (inputElement.files[0]) {
-          const file = await handleImageUpload(inputElement.files[0]);
-          if (file) {
-            const formData = new FormData();
-            formData.append("file", file);
-            formData.append("upload_preset", "jsnxe58v");
-            formData.append("folder", `${input.name}${input.brand}_car`);
-            formDataArray.push(formData);
-          }
-        }
-    }
-
-    try {
-          const uploadPromises = formDataArray.map((formData) =>
-            axios.post(cloudinaryUploadUrl, formData)
-          );
-
-          const responses = await Promise.all(uploadPromises);
-
-          const imageUrls = responses.map((response) => response.data.secure_url);
-
-          setInput({
-            ...input,
-            image: imageUrls,
-          });
-
-          setErrors('Images uploaded successfully');
-        } catch (error) {
-          setErrors("Error uploading images to Cloudinary");
-        }
-  }
-
-  //----------------------------------------------------------Cloudinary---------------------------------------------------------------------------------------
-
-  
+   //----------------------------------------------------------Cloudinary---------------------------------------------------------------------------------------
+ 
 
 
   return (
     <div className={style.login}>
-    <Link to={"/admin/dashboard"}>
+    <Link 
+    to={"/profile"}
+    onClick={() => dispatch(addMenuOption("Posts"))}>
       <ButtonBack />
     </Link>
       <div className={style.register_form}>
         <form onSubmit={handleSubmit} className={style.form_in}>
-        {location.pathname === "/admin/dashboard/create" && (<h1 className={style.title_register}>Create</h1>)}
-        {location.pathname === "/profile" && (<h1 className={style.title_register}>Add Product</h1>)}
+        <h1 className={style.title_register}>Update</h1>
 
         <label htmlFor="name" className={style.label_name}>
             Name: <br />
@@ -226,6 +230,7 @@ export default function CreateProduct() {
               value={input.name}
               onChange={handleChange}
               className={style.input}
+              placeholder={detail.name}
             />
           {/* Show error message if exists*/}
           {error.name && <p className={style.errors}>{error.name}</p>}
@@ -240,6 +245,7 @@ export default function CreateProduct() {
               value={input.brand}
               onChange={handleChange}
               className={style.input}
+              placeholder={detail.brand}
               />
             {/* Show error message if exists*/}
             {error.brand && <p className={style.errors}>{error.brand}</p>}
@@ -254,13 +260,13 @@ export default function CreateProduct() {
               value={input.model}
               onChange={handleChange}
               className={style.input}
+              placeholder={detail.model}
             />
           {/* Show error message if exists*/}
           {error.model && <p className={style.errors}>{error.model}</p>}
           </label>
 
-
-            <label className={style.label_lastName}>
+          <label className={style.label_lastName}>
               State: <br />
               <select
                 className={style.input_country}
@@ -268,14 +274,13 @@ export default function CreateProduct() {
                 name="state"
                 onChange={handleChange}
               >
-                <option hidden></option>
+                <option value={detail.state}>{detail.state}</option>
                 <option value="New">New</option>
                 <option value="Used">Used</option>
               </select>
             {/* Show error message if exists*/}
             {error.state && <p className={style.errors}>{error.state}</p>}
             </label>
-
 
           <label htmlFor="price" className={style.label_name}>
             Price: <br />
@@ -286,13 +291,13 @@ export default function CreateProduct() {
               value={input.price}
               onChange={handleChange}
               className={style.input}
+              placeholder={detail.price}
             />
           {/* Show error message if exists*/}
           {error.price && <p className={style.errors}>{error.price}</p>}
           </label>
 
-
-            <label className={style.label_country}>
+          <label className={style.label_country}>
               Location: <br />
               <select
                 className={style.input_country}
@@ -300,7 +305,7 @@ export default function CreateProduct() {
                 name="location"
                 onChange={(e) => handleChange(e)}
               >
-                <option hidden></option>
+                <option value={detail.location}>{detail.location}</option>
                 {countries.map((country, index) => (
                   <option key={index} value={country}>
                     {country}
@@ -308,7 +313,6 @@ export default function CreateProduct() {
                 ))}
               </select>
             </label>
-
 
           <label htmlFor="color" className={style.label_name}>
             Color: <br />
@@ -319,6 +323,7 @@ export default function CreateProduct() {
               value={input.color}
               onChange={handleChange}
               className={style.input}
+              placeholder={detail.color}
             />
           {/* Show error message if exists*/}
           {error.color && <p className={style.errors}>{error.color}</p>}
@@ -333,6 +338,7 @@ export default function CreateProduct() {
               value={input.description}
               onChange={handleChange}
               className={style.input}
+              placeholder={detail.description}
               />
             {/* Show error message if exists*/}
             {error.description && <p className={style.errors}>{error.description}</p>}
@@ -349,7 +355,7 @@ export default function CreateProduct() {
           <label htmlFor="imageInput1" className={style.btn_image}>
             Select image 1 <span id="fileName1"></span>
           </label>
-
+            
           <input
             className={style.input_image}
             type="file"
@@ -361,7 +367,7 @@ export default function CreateProduct() {
           <label htmlFor="imageInput2" className={style.btn_image}>
             Select image 2 <span id="fileName2"></span>
           </label>
-
+            
           <input
             className={style.input_image}
             type="file"
@@ -373,7 +379,7 @@ export default function CreateProduct() {
           <label htmlFor="imageInput3" className={style.btn_image}>
             Select image 3 <span id="fileName3"></span>
           </label>
-
+            
           <input
             className={style.input_image}
             type="file"
@@ -398,23 +404,24 @@ export default function CreateProduct() {
             Select image 5 <span id="fileName5"></span>
           </label>
 
-            <button className={style.btn_image} onClick={handleButton}>Save images</button>
+            <button className={style.btn_image} onClick={handleButton}>Save Images</button>
             {errors && <span>{errors}</span>}
+
             <div className={style.divButtons}>
-              <button
-                type="button"
-               className={style.btn_cancel}
-               onClick={handleCancelClick}
-               >
-               Cancel
-              </button>
-              <button
-               type="submit"
-               className={style.btn_register}
-               disabled={hasErrors()}
-              >
-               Create
-             </button>
+            <button
+              type="button"
+              className={style.btn_cancel}
+              onClick={handleCancelClick}
+            >
+              Cancel
+            </button>
+            <button
+              type="submit"
+              className={style.btn_register}
+              disabled={hasErrors()}
+            >
+              Update
+            </button> 
           </div>
         </form>
       </div>

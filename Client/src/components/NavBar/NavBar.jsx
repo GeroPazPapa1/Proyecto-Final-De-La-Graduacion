@@ -5,7 +5,7 @@ import styles from "./NavBar.module.css";
 import { Link, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { addMenuOption } from "../../Redux/actions";
+import { addMenuOption, addDashboardOption } from "../../Redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { logOutUserSuccess } from "../NotiStack";
 import { changeDarkMode } from "../../Redux/actions.js";
@@ -134,7 +134,12 @@ export default function NavBar() {
                       My Posts
                     </Link>
                     {loggedUser.response?.type === "admin" && (
-                      <Link to={"/admin/dashboard"}>Dashboard</Link>
+                      <Link 
+                      to={"/admin/dashboard"}
+                      onClick={() => dispatch(addDashboardOption("USERS"))}
+                      >
+                        Dashboard
+                        </Link>
                     )}
                     <Link to={"/"} onClick={handleLogout}>
                       Log out
@@ -206,7 +211,12 @@ export default function NavBar() {
                           My Posts
                         </Link>
                         {loggedUser.response?.type === "admin" && (
-                          <Link to={"/admin/dashboard"}>Dashboard</Link>
+                          <Link 
+                          to={"/admin/dashboard"}
+                          onClick={() => dispatch(addDashboardOption("USERS"))}
+                          >
+                            Dashboard
+                            </Link>
                         )}
                         <Link to={"/"} onClick={handleLogout}>
                           Log out
@@ -298,7 +308,12 @@ export default function NavBar() {
                           My Posts
                         </Link>
                         {loggedUser.response?.type === "admin" && (
-                          <Link to={"/admin/dashboard"}>Dashboard</Link>
+                          <Link 
+                          to={"/admin/dashboard"}
+                          onClick={() => dispatch(addDashboardOption("USERS"))}
+                          >
+                            Dashboard
+                            </Link>
                         )}
                         <Link to={"/"} onClick={handleLogout}>
                           Log out
@@ -390,7 +405,12 @@ export default function NavBar() {
                           My Posts
                         </Link>
                         {loggedUser.response?.type === "admin" && (
-                          <Link to={"/admin/dashboard"}>Dashboard</Link>
+                          <Link 
+                          to={"/admin/dashboard"}
+                          onClick={() => dispatch(addDashboardOption("USERS"))}
+                          >
+                            Dashboard
+                            </Link>
                         )}
                         <Link to={"/"} onClick={handleLogout}>
                           Log out
@@ -482,7 +502,12 @@ export default function NavBar() {
                           My Posts
                         </Link>
                         {loggedUser.response?.type === "admin" && (
-                          <Link to={"/admin/dashboard"}>Dashboard</Link>
+                          <Link 
+                          to={"/admin/dashboard"}
+                          onClick={() => dispatch(addDashboardOption("USERS"))}
+                          >
+                            Dashboard
+                            </Link>
                         )}
                         <Link to={"/"} onClick={handleLogout}>
                           Log out
@@ -574,7 +599,12 @@ export default function NavBar() {
                           My Posts
                         </Link>
                         {loggedUser.response?.type === "admin" && (
-                          <Link to={"/admin/dashboard"}>Dashboard</Link>
+                          <Link 
+                          to={"/admin/dashboard"}
+                          onClick={() => dispatch(addDashboardOption("USERS"))}
+                          >
+                            Dashboard
+                            </Link>
                         )}
                         <Link to={"/"} onClick={handleLogout}>
                           Log out
@@ -666,7 +696,12 @@ export default function NavBar() {
                           My Posts
                         </Link>
                         {loggedUser.response?.type === "admin" && (
-                          <Link to={"/admin/dashboard"}>Dashboard</Link>
+                          <Link 
+                          to={"/admin/dashboard"}
+                          onClick={() => dispatch(addDashboardOption("USERS"))}
+                          >
+                            Dashboard
+                            </Link>
                         )}
                         <Link to={"/"} onClick={handleLogout}>
                           Log out
