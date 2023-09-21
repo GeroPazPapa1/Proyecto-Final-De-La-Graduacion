@@ -37,6 +37,7 @@ export default function Home() {
     } else if (transactionStatus === "fail") {
       MercadoPagoFail();
     }
+
     localStorage.removeItem("transactionStatus");
     localStorage.removeItem("subPrice");
     localStorage.removeItem("purshasedCars");
@@ -45,7 +46,6 @@ export default function Home() {
   return (
     <div className={`${styles.container} ${darkMode ? styles.darkMode : ""}`}>
       <div className={styles.coverImage}></div>
-
       <Search />
       <div className={styles.container2}>
         <Filters />
