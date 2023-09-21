@@ -130,7 +130,7 @@ const handleSelectAllChange = () => {
 
     return (
         <div>
-                {/* <SearchBarCar/> */}
+                <SearchBarCar/>
                 <div className={styles.filtersEdit}>
                     <FiltersCar/>
                     <button className={aux<2 ? styles.deleteDisabled : styles.delete} onClick={handleCheckboxActionDelete} disabled={aux<2}>

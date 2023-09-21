@@ -38,8 +38,12 @@ export default function Email(props) {
             checked={isChecked}
             onChange={() => onCheckboxChange(id)}>
             </input>
+            <div className={styles.emailItem}>
             <Link
-            to={`/detail/${id}`}><div className={styles.emailItem}>{name}</div></Link>
+            className={styles.none}
+            to={`/detail/${id}`}>{name}
+            </Link>
+            </div>
             <div className={styles.emailItem}>{brand}</div>
             <div className={styles.emailItem}>{color}</div>
             <div className={styles.emailItem}>{model}</div>

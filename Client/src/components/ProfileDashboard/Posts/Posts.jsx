@@ -80,11 +80,11 @@ export default function Posts() {
                           className={styles.delete_btn}
                         >
                             <button className={styles.del} onClick={() => handleDeletedCar(product.id)}>
-                            <img className={styles.img} src={TRASH} alt="Icon..." title="Delete user" />
+                            <img className={styles.img} src={TRASH} alt="Icon..." title="Delete Post" />
                             </button>
                             <Link to={`/user/edit/${product.id}`} >
                             <button className={styles.edit}>
-                            <img className={styles.img} src={EDIT} alt="Icon..." title="Edit user" />
+                            <img className={styles.img} src={EDIT} alt="Icon..." title="Edit Post" />
                             </button>
                             </Link>
                           {/* <img src={DELETE} alt="Delete..." /> */}
