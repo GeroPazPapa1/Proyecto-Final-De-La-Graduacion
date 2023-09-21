@@ -20,10 +20,9 @@ export default function Footer() {
               <p>VehiBuy</p>
             </div>
             <span>
-              Elevating Driving Luxury. Discover a curated
-              selection of exquisite luxury cars that redefine elegance and
-              performance. Explore the epitome of automotive refinement with
-              Elegance Motors.
+              Elevating Driving Luxury. Discover a curated selection of
+              exquisite luxury cars that redefine elegance and performance.
+              Explore the epitome of automotive refinement with Elegance Motors.
             </span>
           </div>
         </div>
@@ -31,7 +30,7 @@ export default function Footer() {
           <p>Our Service</p>
           <ul>
             <Link to={"/termsAndConditions"}>
-              <li>Terms&Conditions</li>
+              <li>Terms & Conditions</li>
             </Link>
             <Link to={"/about"}>
               <li>About Us</li>
@@ -42,13 +41,19 @@ export default function Footer() {
           <p>Company</p>
           <ul>
             <Link to={"https://wa.link/bu5p4z"}>
-              <li><b>Tel: </b>+54 3498 436701</li>
+              <li>
+                <b>Tel: </b>+54 3498 436701
+              </li>
             </Link>
             <a href="mailto:vehibuy@vehibuy.com">
-              <li><b>Email: </b>vehibuy@vehibuy.com</li>
+              <li>
+                <b>Email: </b>vehibuy@vehibuy.com
+              </li>
             </a>
             <Link to={"https://wa.link/bu5p4z"}>
-              <li><b>WhatsApp: </b>+54 3498 437601</li>
+              <li>
+                <b>WhatsApp: </b>+54 3498 437601
+              </li>
             </Link>
             <a href="https://www.youtube.com/watch?v=mmzn77xOCe0">
               <li>Youtube</li>
@@ -56,9 +61,7 @@ export default function Footer() {
           </ul>
         </div>
         <div className={styles.containerList}>
-          <p>
-            Q&A
-          </p>
+          <p>Q&A</p>
           <ul>
             <Link to={"/termsAndConditions"}>
               <li>How to buy</li>
@@ -77,6 +80,6 @@ export default function Footer() {
           <p>Copyrigth ® 2023 | vehiBuy</p>
         </div>
       </div>
-    </div >
+    </div>
   );
 }

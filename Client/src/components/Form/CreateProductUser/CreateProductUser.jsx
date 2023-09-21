@@ -3,13 +3,16 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { ButtonBack } from "../../../assets/svgs";
-import { createProductSuccess , uploadImageFail, uploadImageSuccess} from "../../NotiStack";
+import {
+  createProductSuccess,
+  uploadImageFail,
+  uploadImageSuccess,
+} from "../../NotiStack";
 import validationCreateProductUser from "./validation/validationCreateProductUser";
-import style from "./CreateProductUser.module.css"
+import style from "./CreateProductUser.module.css";
 import Swal from "sweetalert2";
 
 export default function CreateProductUser() {
-
   const navigate = useNavigate();
   const [countries, setCountries] = useState([]);
 
@@ -71,7 +74,7 @@ export default function CreateProductUser() {
       confirmButtonText: "Yes, cancel publish!",
     }).then((result) => {
       if (result.isConfirmed) {
-        navigate('/home');
+        navigate("/home");
         processCancelSuccess();
       }
     });
@@ -97,10 +100,7 @@ export default function CreateProductUser() {
 
       console.log(updatedInput);
 
-      const { data } = await axios.post(
-        `/car/create/`,
-        updatedInput
-      );
+      const { data } = await axios.post(`/car/create/`, updatedInput);
       localStorage.setItem(`${data.id}`, JSON.stringify(data.id));
       const idProduct = localStorage.getItem(`${data.id}`);
       createProductSuccess();
@@ -111,7 +111,7 @@ export default function CreateProductUser() {
       );
     }
   };
-  console.log(input)
+  console.log(input);
 
   //api countries
   useEffect(() => {
@@ -133,10 +133,8 @@ export default function CreateProductUser() {
   const [errors, setErrors] = useState(null);
   const cloudinaryUploadUrl = "https://api.cloudinary.com/v1_1/Vehibuy/upload";
 
-
   const handleImageUpload = async (selectedFile) => {
     setErrors(null);
-
 
     if (!selectedFile) {
       setErrors("Please, select an image.");
@@ -183,24 +181,24 @@ export default function CreateProductUser() {
         ...input,
         image: imageUrls,
       });
-      uploadImageSuccess()
-      setErrors('Images uploaded successfully');
+      uploadImageSuccess();
+      setErrors("Images uploaded successfully");
     } catch (error) {
-      uploadImageFail()
+      uploadImageFail();
       setErrors(`Error uploading images to Cloudinary ${error.message}`);
     }
-  }
+  };
 
   const handleInputChange = () => {
     console.log("algo cambio");
-  }
+  };
 
   //----------------------------------------------------------Cloudinary---------------------------------------------------------------------------------------
 
   return (
     <div className={style.login}>
       <div className={style.buttonBackContainer}>
-        <Link to={"/home"} className={style.buttonBackLink}>
+        <Link to={"/home"}>
           <ButtonBack className={style.buttonBack} />
         </Link>
       </div>
@@ -250,7 +248,6 @@ export default function CreateProductUser() {
             {error.model && <p className={style.errors}>{error.model}</p>}
           </label>
 
-
           <label className={style.label_lastName}>
             State: <br />
             <select
@@ -266,7 +263,6 @@ export default function CreateProductUser() {
             {/* Show error message if exists*/}
             {error.state && <p className={style.errors}>{error.state}</p>}
           </label>
-
 
           <label htmlFor="price" className={style.label_name}>
             Price: <br />
@@ -324,7 +320,9 @@ export default function CreateProductUser() {
               className={style.input}
             />
             {/* Show error message if exists*/}
-            {error.description && <p className={style.errors}>{error.description}</p>}
+            {error.description && (
+              <p className={style.errors}>{error.description}</p>
+            )}
           </label>
 
           <input
@@ -386,7 +384,9 @@ export default function CreateProductUser() {
             Select image 5 <span id="fileName5"></span>
           </label>
 
-          <button className={style.btn_image} onClick={handleButton}>Save Images</button>
+          <button className={style.btn_image} onClick={handleButton}>
+            Save Images
+          </button>
           {errors && <span>{errors}</span>}
 
           <div className={style.divButtons}>
@@ -408,5 +408,5 @@ export default function CreateProductUser() {
         </form>
       </div>
     </div>
-  )
-};
+  );
+}

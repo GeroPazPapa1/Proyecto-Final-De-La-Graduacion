@@ -189,7 +189,9 @@ export default function Login() {
   return (
     <div className={styles.login}>
       <div className={styles.buttonBackContainer}>
-        <ButtonBack />
+        <Link to={"/home"}>
+          <ButtonBack />
+        </Link>
       </div>
       <div className={styles.login_form}>
         <form className={styles.form_in} onSubmit={(e) => handleSubmitLogin(e)}>
