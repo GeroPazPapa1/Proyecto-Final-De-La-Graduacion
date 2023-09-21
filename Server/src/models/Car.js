@@ -22,8 +22,8 @@ module.exports = (sequelize) => {
       allowNull: false,
     },
     model: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
+      type: DataTypes.INTEGER,
+      allowNull: false,
     },
     state: {
       type: DataTypes.ENUM("New", "Used"),

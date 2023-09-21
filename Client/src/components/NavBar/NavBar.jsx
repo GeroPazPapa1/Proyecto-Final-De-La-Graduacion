@@ -8,8 +8,17 @@ import axios from "axios";
 import { addMenuOption } from "../../Redux/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { logOutUserSuccess } from "../NotiStack";
+import { changeDarkMode } from "../../Redux/actions.js";
 
 export default function NavBar() {
+  //______________DarkMode__________________________________
+  const handleModeChange = () => {
+    dispatch(changeDarkMode());
+    document.body.classList.toggle("darkMode");
+    console.log(darkMode);
+  };
+  const darkMode = useSelector((state) => state.darkMode);
+  //________________________________________________________
   const dispatch = useDispatch();
   const location = useLocation();
 
@@ -62,6 +71,17 @@ export default function NavBar() {
       </div>
       {location.pathname === "/" && (
         <div className={styles.containerL}>
+          <div>
+            {/* Código para la barra de navegación */}
+            <label className={`${styles.switch} ${styles.switchRight}`}>
+              <input
+                type="checkbox"
+                checked={darkMode}
+                onChange={handleModeChange}
+              />
+              <span className={`${styles.slider} ${styles.round}`}></span>
+            </label>
+          </div>
           {!loggedUser ? (
             <>
               <Link to={"/login"}>
@@ -93,7 +113,7 @@ export default function NavBar() {
                       onClick={() => dispatch(addMenuOption("Purchases"))}
                       to="/profile"
                     >
-                      Purchases
+                      My Purchases
                     </Link>
                     <Link
                       to="/profile"
@@ -105,7 +125,13 @@ export default function NavBar() {
                       to="/profile"
                       onClick={() => dispatch(addMenuOption("Reviews"))}
                     >
-                      Reviews
+                      My Reviews
+                    </Link>
+                    <Link
+                      to="/profile"
+                      onClick={() => dispatch(addMenuOption("Posts"))}
+                    >
+                      My Posts
                     </Link>
                     {loggedUser.response?.type === "admin" && (
                       <Link to={"/admin/dashboard"}>Dashboard</Link>
@@ -175,9 +201,9 @@ export default function NavBar() {
                         </Link>
                         <Link
                           to="/profile"
-                          onClick={() => dispatch(addMenuOption("Add Product"))}
+                          onClick={() => dispatch(addMenuOption("Posts"))}
                         >
-                          Add Product
+                          My Posts
                         </Link>
                         {loggedUser.response?.type === "admin" && (
                           <Link to={"/admin/dashboard"}>Dashboard</Link>
@@ -265,6 +291,12 @@ export default function NavBar() {
                         >
                           Reviews
                         </Link>
+                        <Link
+                          to="/profile"
+                          onClick={() => dispatch(addMenuOption("Posts"))}
+                        >
+                          My Posts
+                        </Link>
                         {loggedUser.response?.type === "admin" && (
                           <Link to={"/admin/dashboard"}>Dashboard</Link>
                         )}
@@ -350,6 +382,12 @@ export default function NavBar() {
                           onClick={() => dispatch(addMenuOption("Reviews"))}
                         >
                           Reviews
+                        </Link>
+                        <Link
+                          to="/profile"
+                          onClick={() => dispatch(addMenuOption("Posts"))}
+                        >
+                          My Posts
                         </Link>
                         {loggedUser.response?.type === "admin" && (
                           <Link to={"/admin/dashboard"}>Dashboard</Link>
@@ -437,6 +475,12 @@ export default function NavBar() {
                         >
                           Reviews
                         </Link>
+                        <Link
+                          to="/profile"
+                          onClick={() => dispatch(addMenuOption("Posts"))}
+                        >
+                          My Posts
+                        </Link>
                         {loggedUser.response?.type === "admin" && (
                           <Link to={"/admin/dashboard"}>Dashboard</Link>
                         )}
@@ -523,6 +567,12 @@ export default function NavBar() {
                         >
                           Reviews
                         </Link>
+                        <Link
+                          to="/profile"
+                          onClick={() => dispatch(addMenuOption("Posts"))}
+                        >
+                          My Posts
+                        </Link>
                         {loggedUser.response?.type === "admin" && (
                           <Link to={"/admin/dashboard"}>Dashboard</Link>
                         )}
@@ -608,6 +658,12 @@ export default function NavBar() {
                           onClick={() => dispatch(addMenuOption("Reviews"))}
                         >
                           Reviews
+                        </Link>
+                        <Link
+                          to="/profile"
+                          onClick={() => dispatch(addMenuOption("Posts"))}
+                        >
+                          My Posts
                         </Link>
                         {loggedUser.response?.type === "admin" && (
                           <Link to={"/admin/dashboard"}>Dashboard</Link>

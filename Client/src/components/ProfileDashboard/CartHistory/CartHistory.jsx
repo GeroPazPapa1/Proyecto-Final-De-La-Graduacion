@@ -81,9 +81,9 @@ export default function CartHistory() {
   return (
     <>
       {purchases.length === 0 ? (
-        <div className={styles.nocars}>
-          <h2 className={styles.cart_title}>Purchases</h2>
-          <div className={styles.notCars}>
+        <div className={styles.nopurchases}>
+          <h2 className={styles.purchase_title}>Purchases</h2>
+          <div className={styles.notPurchases}>
             <div>
               <img src={NOTCARS} alt="Not Cars..." />
             </div>

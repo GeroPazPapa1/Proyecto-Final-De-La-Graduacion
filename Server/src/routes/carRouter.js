@@ -11,11 +11,13 @@ const {
 const { putCarHandler } = require("../handlers/putCarHandler")
 
 const carRouter = Router();
+const { handlerCarUserId } = require('../handlers/handlerCarUserId')
 const { getAllBrand } = require("../controllers/getAllBrand");
 const { getAllColor } = require("../controllers/getAllColors");
 const { getAllLocation } = require("../controllers/getAllLocation");
 
 carRouter.get("/", getAllCarHandler);
+carRouter.get('/user/:id', handlerCarUserId)
 carRouter.get("/detail/:id", getDetailCarHandler);
 carRouter.get("/search", getFiltersHandler);
 carRouter.get("/brand", getAllBrand);

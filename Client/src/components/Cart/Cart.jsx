@@ -32,12 +32,17 @@ export default function Cart() {
       if (result.isConfirmed) {
         dispatch(deleteProduct(productId));
         CarRemovedFromCart();
+        updateCartStateAndLocalStorage(cartList.filter((item) => item.id !== productId));
       }
     });
   };
-  console.log(cartList);
   // initMercadoPago('TEST-620ddc2a-2dd8-487a-a99e-61892333c8d0');
   initMercadoPago("TEST-ff5e06a0-15c1-4054-b8bf-9ad68b31499b");
+
+  const updateCartStateAndLocalStorage = (updatedCart) => {
+    dispatch(setCart(updatedCart)); // Actualiza el estado en Redux
+    localStorage.setItem("cart", JSON.stringify(updatedCart)); // Guarda en localStorage
+  };
 
   const createPreference = async () => {
     try {
@@ -116,7 +121,6 @@ export default function Cart() {
   useEffect(() => {
     // Carga el carrito desde localStorage
     const storedCart = localStorage.getItem("cart");
-    console.log(storedCart);
     if (storedCart) {
       const parsedCart = JSON.parse(storedCart);
       dispatch(setCart(parsedCart));
@@ -130,7 +134,7 @@ export default function Cart() {
       MercadoPagoFail();
     }
     localStorage.removeItem("transactionStatus");
-  }, [cartList, dispatch]);
+  }, [dispatch]);
   return (
     <>
       {cartList.length === 0 ? (

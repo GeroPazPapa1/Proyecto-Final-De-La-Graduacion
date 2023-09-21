@@ -1,23 +1,31 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
 import { ButtonBack } from "../../assets/svgs";
 import Card from "../Home/Card/Card";
 import style from "./Favorites.module.css";
 import NOTFOUND from "./Icons/NOTFOUND.png";
 
 export default function Favorites() {
-
+  const dispatch = useDispatch()
   const favorites = useSelector((state) => state.favorites);
+
+  useEffect(() => {
+    localStorage.setItem("favorites", JSON.stringify(favorites));
+  }, [favorites]);
+
+  useEffect(() => {
+    const savedFavorites = localStorage.getItem("favorites");
+    if (savedFavorites) {
+      // Parse the JSON data and update the Redux store or state with it
+      dispatch({ type: "SET_FAVORITES", payload: JSON.parse(savedFavorites) });
+    }
+  }, []);
 
   return (
     <div>
       <div className={style.coverImage}></div>
       <div className={style.buttonBackContainer}>
-        <Link to={"/home"} className={style.buttonBackLink}>
-          <ButtonBack className={style.buttonBack} />
-          <h5 className={style.buttonBackH5}>Go Back</h5>
-        </Link>
+          <ButtonBack />
       </div>
       <h2 className={`${style.favorites_title} ${style.title}`}>
         Your Favorites

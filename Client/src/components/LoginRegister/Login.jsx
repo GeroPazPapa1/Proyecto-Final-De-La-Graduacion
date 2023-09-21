@@ -58,9 +58,9 @@ export default function Login() {
       const userName = response.data.name;
       const userId = response.data.id;
       const userType = response.data.type;
-      if (userType === 'user') {
+      if (userType === "user") {
         typeUser(userName);
-      } else if (userType === 'admin') {
+      } else if (userType === "admin") {
         typeAdmin();
       }
       dispatch(setUserId(userId));
@@ -131,9 +131,9 @@ export default function Login() {
         const userName = response.data.name;
         const userId = response.data.id;
         const userType = response.data.type;
-        if (userType === 'user') {
+        if (userType === "user") {
           typeUser(userName);
-        } else if (userType === 'admin') {
+        } else if (userType === "admin") {
           typeAdmin();
         }
         dispatch(setUserId(userId));
@@ -189,10 +189,7 @@ export default function Login() {
   return (
     <div className={styles.login}>
       <div className={styles.buttonBackContainer}>
-        <Link to={"/home"} className={styles.buttonBackLink}>
-          <ButtonBack className={styles.buttonBack} />
-          <h5 className={styles.buttonBackH5}>Go Back</h5>
-        </Link>
+        <ButtonBack />
       </div>
       <div className={styles.login_form}>
         <form className={styles.form_in} onSubmit={(e) => handleSubmitLogin(e)}>

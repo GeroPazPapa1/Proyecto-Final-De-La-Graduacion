@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import { getDetail, resetDetail, addToCart, deleteProduct } from '../../../Redux/actions';
 import styles from './Detail.module.css';
 import { useSelector, useDispatch } from 'react-redux';
-import { LocationSvg, ButtonBack } from '../../../assets/svgs'
+import { ButtonBack } from '../../../assets/svgs'
 import { CarRemovedFromCart, CarAddedToCart } from '../../NotiStack';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
@@ -25,12 +25,12 @@ export default function Detail() {
 
     const [isFav, setIsFav] = useState(false);
     const [selectedImage, setSelectedImage] = useState(null);
-    const [firstImageBordered, setFirstImageBordered] = useState(false)
 
     const mainSliderRef = useRef(null);
     const secondSliderRef = useRef(null);
 
     useEffect(() => {
+        console.log(detail)
         myFavorites.forEach((fav) => {
             if (fav.id === id) {
                 setIsFav(true);
@@ -73,11 +73,6 @@ export default function Detail() {
     const toggleFav = () => {
         setIsFav(!isFav);
     };
-
-    const handleRemoveFromCart = () => {
-        dispatch(deleteProduct(id));
-        CarRemovedFromCart()
-    }
 
     useEffect(() => {
         dispatch(getDetail(id));
@@ -123,7 +118,6 @@ export default function Detail() {
             setSelectedImage(index);
         },
     };
-    const idCar = detail.id
     return (
         <div className={styles.detail}>
             <Link to={"/home"}><ButtonBack /></Link>
