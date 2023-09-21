@@ -224,7 +224,9 @@ export default function NavBar() {
                         {loggedUser.response?.type === "admin" && (
                           <Link
                             to={"/admin/dashboard"}
-                            onClick={() => dispatch(addDashboardOption("USERS"))}
+                            onClick={() =>
+                              dispatch(addDashboardOption("USERS"))
+                            }
                           >
                             Dashboard
                           </Link>
@@ -321,7 +323,9 @@ export default function NavBar() {
                         {loggedUser.response?.type === "admin" && (
                           <Link
                             to={"/admin/dashboard"}
-                            onClick={() => dispatch(addDashboardOption("USERS"))}
+                            onClick={() =>
+                              dispatch(addDashboardOption("USERS"))
+                            }
                           >
                             Dashboard
                           </Link>
@@ -418,7 +422,9 @@ export default function NavBar() {
                         {loggedUser.response?.type === "admin" && (
                           <Link
                             to={"/admin/dashboard"}
-                            onClick={() => dispatch(addDashboardOption("USERS"))}
+                            onClick={() =>
+                              dispatch(addDashboardOption("USERS"))
+                            }
                           >
                             Dashboard
                           </Link>
@@ -515,7 +521,9 @@ export default function NavBar() {
                         {loggedUser.response?.type === "admin" && (
                           <Link
                             to={"/admin/dashboard"}
-                            onClick={() => dispatch(addDashboardOption("USERS"))}
+                            onClick={() =>
+                              dispatch(addDashboardOption("USERS"))
+                            }
                           >
                             Dashboard
                           </Link>
@@ -612,7 +620,9 @@ export default function NavBar() {
                         {loggedUser.response?.type === "admin" && (
                           <Link
                             to={"/admin/dashboard"}
-                            onClick={() => dispatch(addDashboardOption("USERS"))}
+                            onClick={() =>
+                              dispatch(addDashboardOption("USERS"))
+                            }
                           >
                             Dashboard
                           </Link>
@@ -709,7 +719,9 @@ export default function NavBar() {
                         {loggedUser.response?.type === "admin" && (
                           <Link
                             to={"/admin/dashboard"}
-                            onClick={() => dispatch(addDashboardOption("USERS"))}
+                            onClick={() =>
+                              dispatch(addDashboardOption("USERS"))
+                            }
                           >
                             Dashboard
                           </Link>
