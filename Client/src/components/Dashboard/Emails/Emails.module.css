@@ -26,10 +26,29 @@
   cursor: pointer;
   margin-right: 3px;
   margin-bottom: 5px;
+  margin-right: 7.8vw;
 }
-
+.editDisabled{
+background-color: rgb(150, 150, 150);
+  border: none;
+  border-radius: 20%;
+  padding: 5px;
+  cursor: pointer;
+  margin-right: 3px;
+  margin-bottom: 5px;
+  margin-right: 7.8vw;
+}
 .delete {
   background-color: rgb(210, 45, 45);
+  border: none;
+  border-radius: 20%;
+  padding: 5px;
+  cursor: pointer;
+  margin-right: 3px;
+  margin-bottom: 5px;
+}
+.deleteDisabled {
+  background-color: rgb(150, 150, 150);
   border: none;
   border-radius: 20%;
   padding: 5px;
@@ -65,3 +84,9 @@
 .textNF span {
   font-family: 'Inter', sans-serif;
 }
+
+.filtersEdit{
+    display: flex;
+    align-items: center;
+    justify-content: right;
+  }

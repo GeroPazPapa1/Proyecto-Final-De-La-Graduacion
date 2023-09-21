@@ -30,9 +30,10 @@ export default function Email(props) {
             title: "¿Are you sure?",
             text: `You are about to delete ${name} from the database`,
             icon: "warning",
+            showCancelButton: true,
+            reverseButtons: true,
             cancelButtonText: "Cancel",
             confirmButtonText: "Accept",
-            showCancelButton: true,
         }).then((result) => {
             if (result.isConfirmed) {
                 dispatch(deleteUserWithID(id));
@@ -63,8 +64,9 @@ export default function Email(props) {
             icon: icon,
             html:
                 htmlContent,
+                showCancelButton: true,
+                reverseButtons: true,
             cancelButtonText: "Cancel",
-            showCancelButton: true,
             confirmButtonText: "Accept",
             customClass: {
                 actions: styles.customSwal2Actions, // Aplica la clase de estilo CSS Modules
@@ -78,7 +80,7 @@ export default function Email(props) {
                 const selectedStatus = document.getElementById('select-status').value;
                 const selectedBan = document.getElementById('select-ban').value;
                 return {
-                    type: selectedStatus,
+                    status: selectedStatus,
                     ban: selectedBan,
                     name: selectedName,
                     lastName: selectedLastname,
@@ -91,8 +93,9 @@ export default function Email(props) {
             if (result.isConfirmed) {
                 // const { type, ban, name, lastName, age, country, phone } = result.value;
                 let objeto = {}
-                if (result.value.type){
-                    objeto.status = result.value.type
+                console.log(result, "Soy el result");
+                if (result.value.status){
+                    objeto.status = result.value.status
                 }
                 if (result.value.ban){
                     objeto.ban = result.value.ban
@@ -113,7 +116,7 @@ export default function Email(props) {
                     objeto.phone = result.value.phone
                 }
 
-                console.log(objeto);
+                console.log(objeto, "soy el objeto");
                 // Aquí puedes utilizar los valores seleccionados (type y ban) como desees
                 await dispatch(editPutUser(objeto, id));
                 await dispatch(getDashboard());
@@ -122,7 +125,6 @@ export default function Email(props) {
         });
     };
     useEffect(() => {
-        console.log("soy effect en email");
         if (!EmailsLoaded) {
             const handleChangeEmails = async () => {
                 await dispatch(getDashboard());

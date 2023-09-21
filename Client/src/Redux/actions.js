@@ -233,12 +233,13 @@ export const deleteUserWithID = (id) => {
 
 
 export const editPutUser = (objeto, id) => {
-  const endpoint = `http://localhost:3001/user/dashboard/users/${id}`;
+  const endpoint = `http://localhost:7183/user/dashboard/users/${id}`;
   return async (dispatch) => {
 
     console.log(id, "Soy el id");
 
     try {
+      console.log(objeto, "Objeto en action");
       const { status, data } = await axios.put(endpoint, objeto);
 
       console.log(data, "soy el data");

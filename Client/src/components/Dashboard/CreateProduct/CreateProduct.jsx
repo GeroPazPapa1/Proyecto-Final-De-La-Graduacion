@@ -6,7 +6,7 @@ import { ButtonBack } from "../../../assets/svgs";
 import { createProductSuccess } from "../../NotiStack";
 import validationProductsCreate from "./validation/validationProductsCreate";
 import style from "./CreateProduct.module.css"
-
+import Swal from "sweetalert2";
 
 export default function CreateProduct() {
 
@@ -126,6 +126,23 @@ export default function CreateProduct() {
     fetchCountries();
   }, []);
 
+  const handleCancelClick = () => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "Your car will not be published!",
+      icon: "warning",
+      showCancelButton: true,
+      reverseButtons: true,
+      cancelButtonText: "No, stay here",
+      confirmButtonText: "Yes, cancel publish!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        navigate('/admin/dashboard');
+        processCancelSuccess();
+      }
+    });
+  };
+
   //----------------------------------------------------------Cloudinary---------------------------------------------------------------------------------------
 
   const [errors, setErrors] = useState(null);
@@ -229,9 +246,13 @@ export default function CreateProduct() {
 
   return (
     <div className={style.login}>
-    <Link to={"/admin/dashboard"}>
+      {location.pathname === "/profile" && (<Link to={"/home"}>
       <ButtonBack />
-    </Link>
+    </Link>)}
+    {location.pathname === "/admin/dashboard/create" &&
+    (<Link to={"/admin/dashboard"}>
+      <ButtonBack />
+    </Link>)}
       <div className={style.register_form}>
         <form onSubmit={handleSubmit} className={style.form_in}>
         {location.pathname === "/admin/dashboard/create" && (<h1 className={style.title_register}>Create</h1>)}
@@ -425,20 +446,22 @@ export default function CreateProduct() {
 
             <button className={style.btn_image} onClick={handleButton}>Upload</button>
             {errors && <span>{errors}</span>}
-          <button
-            type="submit"
-            className={style.btn_cancel}
-            disabled={hasErrors()}
-          >
-            cancel
-          </button>
-          <button
-            type="submit"
-            className={style.btn_register}
-            disabled={hasErrors()}
-          >
-            Create
-          </button>
+          <div className={style.divButtons}>
+            <button
+              type="button"
+              className={style.btn_cancel}
+              onClick={handleCancelClick}
+            >
+              Cancel
+            </button>
+            <button
+              type="submit"
+              className={style.btn_register}
+              disabled={hasErrors()}
+            >
+              Create
+            </button> 
+          </div>
         </form>
       </div>
     </div>

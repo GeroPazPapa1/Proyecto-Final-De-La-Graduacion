@@ -9,6 +9,7 @@ import style from "./ProductsUpdate.module.css"
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { resetDetail, getDetail } from "../../../Redux/actions";
+import Swal from "sweetalert2";
 
 export default function ProductsUpdate() {
 
@@ -92,6 +93,9 @@ export default function ProductsUpdate() {
     try {
       // Create a copy of the current input object to send to the server
       let updatedInput = { ...input };
+      if(updatedInput.image.length === 0) {
+        delete updatedInput.image;
+      }
       console.log(updatedInput, "Soy la informacion de car");
       const { data } = await axios.put(
         `/car/edit/${id}`,
@@ -219,8 +223,25 @@ export default function ProductsUpdate() {
          } catch (error) {
            setErrors("Error uploading images to Cloudinary");
          }
-   }
+   } 
  
+   const handleCancelClick = () => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "Your car will not be published!",
+      icon: "warning",
+      showCancelButton: true,
+      reverseButtons: true,
+      cancelButtonText: "No, stay here",
+      confirmButtonText: "Yes, cancel publish!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        navigate('/admin/dashboard');
+        processCancelSuccess();
+      }
+    });
+  };
+
    //----------------------------------------------------------Cloudinary---------------------------------------------------------------------------------------
  
 
@@ -356,56 +377,91 @@ export default function ProductsUpdate() {
             {/* Show error message if exists*/}
             {error.description && <p className={style.errors}>{error.description}</p>}
           </label>
-          <input className={style.input_image} type="file" accept="image/*" id="imageInput1" onChange={() => handleChangeImage("1")}/>
-            <label htmlFor="imageInput1" className={style.btn_image}>
-            Select file 1
-            </label>
-            {
-              imageValue.image1 ? <span>The image loaded successfully</span> : null
-            }
-            
-            <input className={style.input_image} type="file" accept="image/*" id="imageInput2" onChange={() => handleChangeImage("2")}/>
-            <label htmlFor="imageInput2" className={style.btn_image}>
-            Select file 2
-            </label>
-            {
-              imageValue.image2 ? <span>The image loaded successfully</span> : null
-            }
-            
-            <input className={style.input_image} type="file" accept="image/*" id="imageInput3" onChange={() => handleChangeImage("3")}/>
-            <label htmlFor="imageInput3" className={style.btn_image}>
-            Select file 3
-            </label>
-            {
-              imageValue.image3 ? <span>The image loaded successfully</span> : null
-            }
-            
-            <input className={style.input_image} type="file" accept="image/*" id="imageInput4" onChange={() => handleChangeImage("4")}/>
-            <label htmlFor="imageInput4" className={style.btn_image}>
-            Select file 4
-            </label>
-            {
-              imageValue.image4 ? <span>The image loaded successfully</span> : null
-            }
 
-            <input className={style.input_image} type="file" accept="image/*" id="imageInput5" onChange={() => handleChangeImage("5")}/>
-            <label htmlFor="imageInput5" className={style.btn_image}>
-            Select file 5
-            </label>
-            {
-              imageValue.image5 ? <span>The image loaded successfully</span> : null
-            }
+          <input
+            className={style.input_image}
+            type="file"
+            accept="image/*"
+            id="imageInput1"
+            style={{ display: "none" }}
+            onChange={(e) => handleFileChange(e, 1)}
+          />
+          <label htmlFor="imageInput1" className={style.btn_image}>
+            Select image 1
+            <span id="fileName1"></span>
+          </label>
+            
+          <input
+            className={style.input_image}
+            type="file"
+            accept="image/*"
+            id="imageInput2"
+            style={{ display: "none" }}
+            onChange={(e) => handleFileChange(e, 2)}
+          />
+          <label htmlFor="imageInput2" className={style.btn_image}>
+            Select image 2
+            <span id="fileName2"></span>
+          </label>
+            
+          <input
+            className={style.input_image}
+            type="file"
+            accept="image/*"
+            id="imageInput3"
+            style={{ display: "none" }}
+            onChange={(e) => handleFileChange(e, 3)}
+          />
+          <label htmlFor="imageInput3" className={style.btn_image}>
+            Select image 3
+            <span id="fileName3"></span>
+          </label>
+            
+          <input
+            className={style.input_image}
+            type="file"
+            accept="image/*"
+            id="imageInput4"
+            style={{ display: "none" }}
+            onChange={(e) => handleFileChange(e, 4)}
+          />
+          <label htmlFor="imageInput4" className={style.btn_image}>
+            Select image 4
+            <span id="fileName4"></span>
+          </label>
 
-            <button className={style.btn_image1} onClick={handleButton}>Upload</button>
+          <input
+            className={style.input_image}
+            type="file"
+            accept="image/*"
+            id="imageInput5"
+            style={{ display: "none" }}
+            onChange={(e) => handleFileChange(e, 5)}
+          />
+          <label htmlFor="imageInput5" className={style.btn_image}>
+            Select image 5
+            <span id="fileName5"></span>
+          </label>
+
+            <button className={style.btn_image} onClick={handleButton}>Upload</button>
             {errors && <span>{errors}</span>}
 
-          <button
-            type="submit"
-            className={style.btn_register}
-            disabled={hasErrors()}
-          >
-            Save
-          </button>
+            <div className={style.divButtons}>
+            <button
+              type="button"
+              className={style.btn_cancel}
+              onClick={handleCancelClick}
+            >
+              Cancel
+            </button>
+            <button
+              type="submit"
+              className={style.btn_register}
+              disabled={hasErrors()}
+            >
+              Create
+            </button> 
+          </div>
 
         </form>
       </div>

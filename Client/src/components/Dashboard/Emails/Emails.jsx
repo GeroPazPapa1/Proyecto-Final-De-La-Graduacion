@@ -98,7 +98,6 @@ export default function DashBoardEmail() {
       };
 
     useEffect(() => {
-        console.log("SOY USEEFECCT DEL PRINCIPAL");
         if (!EmailsLoaded) {
             const handleChangeEmails = async () => {
                 await dispatch(getDashboard());
