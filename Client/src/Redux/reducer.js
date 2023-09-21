@@ -10,6 +10,7 @@ const initialState = {
   pageFilteredDb: [],
   cartHistory: [],
   menuOption: "",
+  dashboardOption: "",
   darkMode: false,
 
   queryParams: {
@@ -339,6 +340,8 @@ function rootReducer(state = initialState, action) {
       };
     case "ADD_MENU_OPTION":
       return { ...state, menuOption: action.payload };
+    case "ADD_DASHBOARD_OPTION":
+      return { ...state, dashboardOption: action.payload };
     case "CHANGE_DARK_MODE":
       return { ...state, darkMode: !state.darkMode };
     default:

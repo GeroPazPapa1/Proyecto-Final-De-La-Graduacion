@@ -67,6 +67,28 @@
     justify-content: center;
   }
 
+  .DashboardUser {
+    margin: 0 2vw;
+    overflow-y: auto;
+    max-height: 600px;
+  }
+  
+  .stateUp {
+    display: flex; /* Cambiamos a inline-block para que el fondo se ajuste al contenido */
+    justify-content: center;
+    justify-content: flex-end; /* Alinea el contenido hacia la derecha */
+    background-color: white;
+    padding: 0; /* Eliminamos el padding en el contenedor */
+  }
+  
+  .stateUp h2 {
+    font-family: 'Nunito Sans', sans-serif;
+    color: #EBE8E5;
+    line-height: 49px;
+    font-size: 70px;
+    margin: 0; /* Eliminamos el margin para quitar el espacio alrededor del texto */
+  }
+  
 .containerLeft h2 {
   font-family: "Nunito Sans", sans-serif;
   font-size: 25px;

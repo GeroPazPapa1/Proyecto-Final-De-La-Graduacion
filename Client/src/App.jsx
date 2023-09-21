@@ -2,7 +2,6 @@ import React from "react";
 import AboutUs from "./components/AboutUs/AboutUs.jsx";
 import { Routes, Route } from "react-router-dom";
 import Cart from "./components/Cart/Cart.jsx";
-import Dashboard from "./components/Dashboard/Dashboard";
 import Detail from "./components/Home/Detail/Detail";
 import Footer from "./components/Home/Footer/Footer";
 import ForgotPassword from "./components/LoginRegister/ForgotPassword";
@@ -12,9 +11,11 @@ import Login from "./components/LoginRegister/Login";
 import Register from "./components/LoginRegister/Register";
 import NavBar from "./components/NavBar/NavBar";
 import Favorites from "./components/Favorites/Favorites";
+import Dashboard from "./components/Dashboard/Dashboard";
 import CreateProductUser from "./components/Form/CreateProductUser/CreateProductUser.jsx";
 import CreateProduct from "./components/Dashboard/CreateProduct/CreateProduct.jsx";
 import ProductsUpdate from "./components/Dashboard/ProductsUpdate/ProductsUpdate.jsx"
+import ProductsUpdateUser from "./components/Form/CreateProductUser/ProductsUpdateUser.jsx"
 import Modification from "./components/Modification/Modification";
 import Termsandconditions from "./components/TermsAndConditions/TermsAndConditions";
 import ProfileDashboard from "./components/ProfileDashboard/ProfileDashboard.jsx";
@@ -40,6 +41,7 @@ function App() {
         <Route path="/admin/dashboard" element={<Dashboard />} />
         <Route path="/admin/dashboard/create" element={<CreateProduct />} />
         <Route path="/admin/dashboard/edit/:id" element={<ProductsUpdate />} />
+        <Route path="/user/edit/:id" element={<ProductsUpdateUser />} />
         <Route path="/profileSettings" element={<Modification />} />
         <Route path="/about" element={<AboutUs />} />
       </Routes>

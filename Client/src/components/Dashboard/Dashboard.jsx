@@ -9,9 +9,10 @@ import SearchBarDashboard from "./SearchBar/SearchBar";
 import { logOut } from "../NotiStack";
 import Filters from "./Filters/Filters";
 import DashBoardProducts from "./Products/Products"
+import { addDashboardOption } from "../../Redux/actions";
 
 export default function Dashboard() {
-    const [selectedTab, setSelectedTab] = useState("USERS");
+    const [selectedTab, setSelectedTab] = useState("");
 
     const location = useLocation();
     const dispatch = useDispatch();
@@ -24,6 +25,14 @@ export default function Dashboard() {
     const handleTabChange = (tab) => {
         setSelectedTab(tab);
     }
+    let dashboardOption = useSelector((state) => state.dashboardOption);
+      useEffect(() => {
+        // if (!dashboardOption) {
+        //     dashboardOption = "USERS";
+        //     handleTabChange(dashboardOption);
+        // }
+            handleTabChange(dashboardOption);
+      }, []);
 
     const handleLogout = () => {
         localStorage.clear();
@@ -76,13 +85,13 @@ export default function Dashboard() {
                                 </div>
                                 <div>
                                     <>
-                                        <button onClick={() => handleTabChange("USERS")}>USERS</button>
-                                        <button onClick={() => handleTabChange("SALES")}>SALES</button>
-                                        <button onClick={() => handleTabChange("PRODUCTS")}>PRODUCTS</button>
+                                        <button onClick={() => dispatch(addDashboardOption("USERS"))}>USERS</button>
+                                        {/* <button onClick={() => handleTabChange("SALES")}>SALES</button> */}
+                                        <button onClick={() => dispatch(addDashboardOption("PRODUCTS"))}>PRODUCTS</button>
                                         <Link to={"/home"}>
                                             <button>HOME</button>
                                         </Link>
-                                        <Link to={"/"}>
+                                        <Link to={"/login"}>
                                             <button onClick={handleLogout}>LOGOUT</button>
                                         </Link>
                                     </>
@@ -90,19 +99,19 @@ export default function Dashboard() {
                             </div>
                             <div className={styles.containerRight}>
                                 <div className={styles.stateUp}>
-                                    <h2>{selectedTab}</h2>
+                                    <h2>{dashboardOption}</h2>
                                 </div>
                                 <div className={styles.hello}>
                                     <h2>DashBoard</h2>
                                 </div>
-                                <div>{selectedTab === "USERS" && (
+                                <div>{dashboardOption === "USERS" && (
                                     <div className={styles.DashboardUser}>
                                         <DashBoardEmail/>
                                     </div>
                                 )
                                     }
                                 </div>
-                                <div>{selectedTab === "PRODUCTS" && (
+                                <div>{dashboardOption === "PRODUCTS" && (
                                     <div className={styles.DashboardUser}>
                                         <DashBoardProducts/>
                                     </div>

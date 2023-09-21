@@ -28,14 +28,14 @@
 
 .Review_Seccion {
   font-family: var(--fontInter);
-  padding-bottom: 5px;
+  padding-bottom: 3rem;
   margin: auto;
   width: 100%; 
 }
 
 .Review_Title {
   margin-bottom: 20px;
-  padding: 5px;
+  padding-bottom: 5px;
   font-size: 24px; 
   font-weight: bold;
   border-bottom: 1px solid;
@@ -115,31 +115,41 @@
 .btn_update_review,
 .btn_delete {
   width: auto;
-  border: 1px solid var(--colorNegro);
-  background-color: var(--colorBlanco);
-  margin: 5px;
-  font-size: 0.9rem;
+  font-family: "Inter", sans-serif;
+  padding: 10px;
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+  background-color: transparent;
+  border: 1px solid #bbb3ab;
   cursor: pointer;
-  transition: background-color ease-in-out 0.1s;
+  transition: background-color 0.3s, color 0.3s, border 0.3s;
   text-transform: uppercase;
 }
 
 .btn_disabled {
   width: auto;
-  border: 1px solid var(--colorNegro);
-  margin: 5px;
-  padding: 0.5rem;
-  font-size: 0.9rem;
+  font-family: "Inter", sans-serif;
+  padding: 10px;
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+  background-color: transparent;
+  border: 1px solid #bbb3ab;
   cursor: pointer;
-  transition: background-color ease-in-out 0.1s;
+  transition: background-color 0.3s, color 0.3s, border 0.3s;
   text-transform: uppercase;
 }
 
 .btn_edit {
-  border: 1px solid var(--colorNegro);
-  background-color: var(--colorBlanco);
   float: right;
   position: relative;
+  width: auto;
+  font-family: "Inter", sans-serif;
+  padding: 10px;
+  margin-top: 0.5rem;
+  background-color: transparent;
+  border: 1px solid #bbb3ab;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s, border 0.3s;
   text-transform: uppercase;
 }
 
@@ -162,10 +172,10 @@
 .btn_no,
 .btn_yes {
   width: auto;
-  background-color: var(--colorBlanco);
-  border: 1px solid var(--colorGris);
   margin: 5px;
   padding: 0.5rem;
-  font-size: 0.9rem;
+  font-family: "Inter", sans-serif;
+  background-color: var(--colorBlanco);
   cursor: pointer;
+  text-transform: uppercase;
 }

@@ -85,3 +85,11 @@
     margin-bottom: 5px;
   }
   
+  .star_label svg {
+    color: rgb(189, 162, 107);
+    font-size: 15px;
+  }
+  .none{
+    text-decoration: none;
+    color: var(--colorNegro);
+  }

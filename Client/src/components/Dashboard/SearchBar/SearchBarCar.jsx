@@ -15,7 +15,6 @@ export default function SearchBarDashboard() {
                         queryParams.name = name;
                         await dispatch(searchByQuery(queryParams));
                         dispatch(applyFilters("queryCars"));
-                        setFilter('Defect')
                     }, 1000);
                     return () => clearTimeout(delaySearch);
                 } else if (name === '') {
@@ -23,7 +22,6 @@ export default function SearchBarDashboard() {
                         queryParams.name = name;
                         await dispatch(getAllCars());
                         dispatch(applyFilters("originCars"));
-                        setFilter('Defect');
                     };
                     delayNotSearch();
                 }

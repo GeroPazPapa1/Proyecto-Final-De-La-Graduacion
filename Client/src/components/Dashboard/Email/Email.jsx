@@ -1,7 +1,8 @@
 import React from "react";
+import { useEffect } from "react";
 import styles from "./Email.module.css";
 import Swal from "sweetalert2";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { applyFilterDb, deleteUserWithID, editPutUser, getDashboard } from "../../../Redux/actions";
 import TRASH from "./Icons/TRASH.svg";
 import EDIT from "./Icons/EDIT.svg";
@@ -11,7 +12,7 @@ export default function Email(props) {
     const { id, name, lastName, email, country, age, status, verify, ban, image, phone, onCheckboxChange, isChecked } = props;
 
     const dispatch = useDispatch();
-
+    const EmailsLoaded = useSelector((state) => state.EmailsLoaded);
     const verifyText = verify ? "Yes" : "Not";
     const banText = ban ? "Banned" : "Not";
     const veryClass = verify ? styles.emailItemVerifyYes : styles.emailItemVerifyNot;
@@ -23,16 +24,16 @@ export default function Email(props) {
         icon = null;
         imageTag = `<img src="${image}" alt="User Image" width="100" style="border-radius: 50%;">`;
     }
-    console.log(image);
 
     const handleDeletedEmail = async (id) => {
             Swal.fire({
             title: "¿Are you sure?",
             text: `You are about to delete ${name} from the database`,
             icon: "warning",
+            showCancelButton: true,
+            reverseButtons: true,
             cancelButtonText: "Cancel",
             confirmButtonText: "Accept",
-            showCancelButton: true,
         }).then((result) => {
             if (result.isConfirmed) {
                 dispatch(deleteUserWithID(id));
@@ -62,10 +63,10 @@ export default function Email(props) {
             title: "Edit User",
             icon: icon,
             html:
-                imageTag +
                 htmlContent,
+                showCancelButton: true,
+                reverseButtons: true,
             cancelButtonText: "Cancel",
-            showCancelButton: true,
             confirmButtonText: "Accept",
             customClass: {
                 actions: styles.customSwal2Actions, // Aplica la clase de estilo CSS Modules
@@ -79,7 +80,7 @@ export default function Email(props) {
                 const selectedStatus = document.getElementById('select-status').value;
                 const selectedBan = document.getElementById('select-ban').value;
                 return {
-                    type: selectedStatus,
+                    status: selectedStatus,
                     ban: selectedBan,
                     name: selectedName,
                     lastName: selectedLastname,
@@ -92,8 +93,9 @@ export default function Email(props) {
             if (result.isConfirmed) {
                 // const { type, ban, name, lastName, age, country, phone } = result.value;
                 let objeto = {}
-                if (result.value.type){
-                    objeto.status = result.value.type
+                console.log(result, "Soy el result");
+                if (result.value.status){
+                    objeto.status = result.value.status
                 }
                 if (result.value.ban){
                     objeto.ban = result.value.ban
@@ -114,7 +116,7 @@ export default function Email(props) {
                     objeto.phone = result.value.phone
                 }
 
-                console.log(objeto);
+                console.log(objeto, "soy el objeto");
                 // Aquí puedes utilizar los valores seleccionados (type y ban) como desees
                 await dispatch(editPutUser(objeto, id));
                 await dispatch(getDashboard());
@@ -122,6 +124,15 @@ export default function Email(props) {
             }
         });
     };
+    useEffect(() => {
+        if (!EmailsLoaded) {
+            const handleChangeEmails = async () => {
+                await dispatch(getDashboard());
+                await dispatch(applyFilterDb("originEmails"));
+            };
+            handleChangeEmails();
+        }
+    }, [EmailsLoaded, dispatch])
 
     return (
         <div className={styles.emailContainer}>

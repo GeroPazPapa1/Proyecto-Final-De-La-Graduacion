@@ -56,4 +56,13 @@
   margin-right: 3px;
 }
 
+.customSwal2Actions {
+  text-align: right; /* Alinea los botones a la izquierda */
+}
+
+/* Opcional: Ajusta el margen del botón "Accept" para separarlo del botón "Cancel" */
+.customSwal2Actions .swal2-confirm {
+  margin-right: 10px; /* Ajusta el margen derecho según tu preferencia */
+}
+/* Estilos adicionales según tus preferencias */
 /* Estilos adicionales según tus preferencias */

@@ -202,7 +202,6 @@ export default function CreateProductUser() {
       <div className={style.buttonBackContainer}>
         <Link to={"/home"} className={style.buttonBackLink}>
           <ButtonBack className={style.buttonBack} />
-          <h5 className={style.buttonBackH5}>Go Back</h5>
         </Link>
       </div>
       <div className={style.register_form}>
@@ -337,13 +336,8 @@ export default function CreateProductUser() {
             onChange={(e) => handleFileChange(e, 1)}
           />
           <label htmlFor="imageInput1" className={style.btn_image}>
-            Select image 1
-            <span id="fileName1"></span>
+            Select image 1 <span id="fileName1"></span>
           </label>
-          <button type="button" onClick={() => handleRemoveFile(1)}>
-            X
-          </button>
-
           <input
             className={style.input_image}
             type="file"
@@ -353,8 +347,7 @@ export default function CreateProductUser() {
             onChange={(e) => handleFileChange(e, 2)}
           />
           <label htmlFor="imageInput2" className={style.btn_image}>
-            Select image 2
-            <span id="fileName2"></span>
+            Select image 2 <span id="fileName2"></span>
           </label>
 
           <input
@@ -366,10 +359,8 @@ export default function CreateProductUser() {
             onChange={(e) => handleFileChange(e, 3)}
           />
           <label htmlFor="imageInput3" className={style.btn_image}>
-            Select image 3
-            <span id="fileName3"></span>
+            Select image 3 <span id="fileName3"></span>
           </label>
-
 
           <input
             className={style.input_image}
@@ -380,8 +371,7 @@ export default function CreateProductUser() {
             onChange={(e) => handleFileChange(e, 4)}
           />
           <label htmlFor="imageInput4" className={style.btn_image}>
-            Select image 4
-            <span id="fileName4"></span>
+            Select image 4 <span id="fileName4"></span>
           </label>
 
           <input
@@ -393,11 +383,10 @@ export default function CreateProductUser() {
             onChange={(e) => handleFileChange(e, 5)}
           />
           <label htmlFor="imageInput5" className={style.btn_image}>
-            Select image 5
-            <span id="fileName5"></span>
+            Select image 5 <span id="fileName5"></span>
           </label>
 
-          <button className={style.btn_image} onClick={handleButton}>Upload</button>
+          <button className={style.btn_image} onClick={handleButton}>Save Images</button>
           {errors && <span>{errors}</span>}
 
           <div className={style.divButtons}>

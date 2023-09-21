@@ -3,6 +3,7 @@ import styles from "./ProfileDashboard.module.css";
 import Posts from "./Posts/Posts";
 import Reviews from "./Reviews/Reviews";
 import CartHistory from "./CartHistory/CartHistory";
+import CreateProduct from "../Dashboard/CreateProduct/CreateProduct"
 import Modification from "../Modification/Modification";
 import { useSelector, useDispatch } from "react-redux";
 import { addMenuOption } from "../../Redux/actions";
@@ -54,7 +55,9 @@ export default function ProfileDashboard() {
             </button>
             <button
               className={
-                menuOption === "Reviews" ? styles.selectedTopic : styles.topic
+                menuOption === "Reviews"
+                  ? styles.selectedTopic
+                  : styles.topic
               }
               onClick={() => dispatch(addMenuOption("Reviews"))}
             >
@@ -94,14 +97,14 @@ export default function ProfileDashboard() {
                 <Modification />
               </div>
             )}
-            {menuOption === "Posts" && (
-              <div className={styles.posts}>
-                <Posts />
-              </div>
-            )}
             {menuOption === "Reviews" && (
               <div className={styles.reviews}>
                 <Reviews />
+              </div>
+            )}
+            {menuOption === "Posts" && (
+              <div className={styles.reviews}>
+                <Posts />
               </div>
             )}
           </div>

@@ -253,7 +253,7 @@ const Review = () => {
         </form>}
       </div> <br />
       <div className={styles.Review_Seccion}>
-        <span className={styles.Review_Title}>Review:</span><br />
+          <span className={styles.Review_Title}>Review: </span><br />
         <div>
           {reviews && [...reviews].reverse().map((review, index) => (
             <div key={index}>

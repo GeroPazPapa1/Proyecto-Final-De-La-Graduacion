@@ -195,7 +195,6 @@ export const getDashboard = (loggedUser) => {
   return async (dispatch) => {
     try {
       const { data } = await axios(endpoint, config);
-      console.log(data);
       return dispatch({
         type: "GET_ALL_USERS",
         payload: data,
@@ -229,12 +228,14 @@ export const deleteUserWithID = (id) => {
   };
 };
 
-export const editPutUser = (id, type, ban) => {
-  const endpoint = `/user/dashboard/users/${id}`;
+
+export const editPutUser = (objeto, id) => {
+  const endpoint = `http://localhost:7183/user/dashboard/users/${id}`;
   return async (dispatch) => {
     console.log(id, "Soy el id");
 
     try {
+      console.log(objeto, "Objeto en action");
       const { status, data } = await axios.put(endpoint, objeto);
 
       console.log(data, "soy el data");
@@ -311,6 +312,30 @@ export const orderFilters = (order) => {
     payload: order,
   };
 };
+
+export const editPutCar = (objeto, id) => {
+  const endpoint = `http://localhost:7183/car/edit/${id}`;
+  return async (dispatch) => {
+
+    console.log(id, "Soy el id");
+
+    try {
+      const { status, data } = await axios.put(endpoint, objeto);
+      
+      return dispatch({
+        type: "EDITED_CAR",
+        payload: data,
+      });
+    } catch (error) {
+      if (error.response) {
+        const { status } = error.response;
+        if (status === 403) {
+          enqueueSnackbar("Car not found", { variant: "error" });
+        }
+      }
+    }
+  }
+}
 //------------------------------------------------------------------------
 
 export const postReview = (data) => {
@@ -325,6 +350,28 @@ export const postReview = (data) => {
   };
 };
 
+export const deleteCarWithID = (id) => {
+  const endpoint = `http://localhost:7183/car/dashboard/car/${id}`;
+  return async (dispatch) => {
+    try {
+      const { status, data } = await axios.delete(endpoint);
+      if (status === 200) {
+        enqueueSnackbar("Successfully deleted product", { variant: "success" });
+      }
+      return dispatch({
+        type: "DELETED_CAR",
+        payload: data,
+      });
+    } catch (error) {
+      if (error.response) {
+        const { status } = error.response;
+        if (status === 403) {
+          enqueueSnackbar("Can't remove this product", { variant: "error" });
+        }
+      }
+    }
+  };
+};
 export const getReviews = (carId) => {
   const endpoint = `/review/${carId}`;
   if (carId) {
@@ -384,29 +431,6 @@ export const deleteReview = (idReview) => {
   };
 };
 
-export const editPutCar = (objeto, id) => {
-  const endpoint = `/car/edit/${id}`;
-  return async (dispatch) => {
-    console.log(id, "Soy el id");
-
-    try {
-      const { status, data } = await axios.put(endpoint, objeto);
-
-      return dispatch({
-        type: "EDITED_CAR",
-        payload: data,
-      });
-    } catch (error) {
-      if (error.response) {
-        const { status } = error.response;
-        if (status === 403) {
-          enqueueSnackbar("Car not found", { variant: "error" });
-        }
-      }
-    }
-  };
-};
-
 export const updateReview = (newData) => {
   const endpoint = "/review/";
   return async (dispatch) => {
@@ -425,26 +449,11 @@ export const addMenuOption = (option) => {
     payload: option,
   };
 };
-export const deleteCarWithID = (id) => {
-  const endpoint = `/car/dashboard/car/${id}`;
-  return async (dispatch) => {
-    try {
-      const { status, data } = await axios.delete(endpoint);
-      if (status === 200) {
-        enqueueSnackbar("Successfully deleted product", { variant: "success" });
-      }
-      return dispatch({
-        type: "DELETED_CAR",
-        payload: data,
-      });
-    } catch (error) {
-      if (error.response) {
-        const { status } = error.response;
-        if (status === 403) {
-          enqueueSnackbar("Can't remove this product", { variant: "error" });
-        }
-      }
-    }
+
+export const addDashboardOption = (option) => {
+  return {
+    type: "ADD_DASHBOARD_OPTION",
+    payload: option,
   };
 };
 export const changeDarkMode = () => {
