@@ -58,7 +58,7 @@ function LandingPage() {
             </div>
             <div className={style.review}>
               <div className={style.reviewHeader}>
-                <h3 className={style.customerName}>Patricio Lopez</h3>
+                <h3 className={style.customerName}>Juan Villalba</h3>
                 <div className={style.starRating}>
                   <span className={style.star}>&#9733;</span>
                   <span className={style.star}>&#9733;</span>

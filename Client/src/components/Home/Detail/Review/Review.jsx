@@ -280,8 +280,8 @@ const Review = () => {
                       </div>
                     );
                   })}
-                  <input className={styles.input} type="text" name="title" value={newData.title} onChange={(event) => handleUpdateChange(event, review.id)} placeholder={review.title} />
-                  <input className={styles.input} type="text" name="review" value={newData.review} onChange={(event) => handleUpdateChange(event, review.id)} placeholder={review.review} />
+                  <input className={styles.input} maxLenght={20} type="text" name="title" value={newData.title} onChange={(event) => handleUpdateChange(event, review.id)} placeholder={review.title} />
+                  <input className={styles.input} maxLenght={300} type="text" name="review" value={newData.review} onChange={(event) => handleUpdateChange(event, review.id)} placeholder={review.review} />
                   <button type="submit" className={styles.btn_update_review}>Update Review</button>
                 </form>
               ) : (
