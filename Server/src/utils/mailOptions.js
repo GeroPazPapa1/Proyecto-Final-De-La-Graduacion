@@ -7,27 +7,27 @@ let mailOptions = (to, subject, html) => {
     attachments: [
       {
         filename: "facebook.png",
-        path: "./facebook.png",
+        path: process.cwd() + "/src/utils/icons/facebook.png",
         cid: "fb",
       },
       {
         filename: "LOGO.png",
-        path: "./LOGO.png",
+        path: process.cwd() + "/src/utils/icons/LOGO.png",
         cid: "logo",
       },
       {
         filename: "linkedin.png",
-        path: "./linkedin.png",
+        path: process.cwd() + "/src/utils/icons/linkedin.png",
         cid: "ld",
       },
       {
         filename: "gmail.png",
-        path: "./gmail.png",
+        path: process.cwd() + "/src/utils/icons/gmail.png",
         cid: "gmail",
       },
       {
         filename: "wapp.png",
-        path: "./wapp.png",
+        path: process.cwd() + "/src/utils/icons/wapp.png",
         cid: "wapp",
       },
     ],

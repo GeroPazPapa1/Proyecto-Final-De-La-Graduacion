@@ -1,19 +1,46 @@
-.form {
+
+.detail_review {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; 
+  align-items: center;
+  margin-left: 80px;
+  margin-right: 80px;
+}
+
+.name {
+  color: var(--colorNegro);
+}
+
+.formReview {
   font-family: var(--fontInter);
   font-size: 20px;
-  flex-wrap: wrap;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%; 
 }
+
+.form {
+  width: 100%; 
+}
+
 
 .Review_Seccion {
   font-family: var(--fontInter);
-  padding-bottom: 5px;
+  padding-bottom: 3rem;
   margin: auto;
+  width: 100%; 
 }
 
 .Review_Title {
-  margin-bottom: 100px;
-  padding: 15px;
+  margin-bottom: 20px;
+  padding-bottom: 5px;
+  font-size: 24px; 
+  font-weight: bold;
+  border-bottom: 1px solid;
 }
+
 
 .radio_star {
   display: inline;
@@ -30,8 +57,9 @@
 }
 
 .star_label svg:hover {
-  color: #636060;
+  color: var(--colorGris);
 }
+
 
 .image {
   margin-right: 8px;
@@ -40,14 +68,14 @@
   border-radius: 50%;
   line-height: 36px;
   text-align: center;
-  background-color: #e0e0e080;
 }
+
 
 .input,
 .textarea {
   resize: none;
   display: block;
-  width: 100%;
+  width: 100%; 
   padding: 10px;
   margin-bottom: 15px;
   border: 1px solid #ccc;
@@ -56,19 +84,17 @@
   line-height: 1.5;
 }
 
-.input:focus {
-  outline: none;
-  border-color: var(--colorGris);
-}
-
+.input:focus,
 .textarea:focus {
   outline: none;
   border-color: var(--colorGris);
 }
 
+
 .title {
   font-weight: bold;
   font-size: 20px;
+  color: var(--colorNegro);
 }
 
 .review {
@@ -76,46 +102,65 @@
   color: var(--colorGris);
 }
 
-hr {
+
+.review_render {
   color: var(--colorGris);
+  border-bottom: 1px solid var(--colorGris);
+  margin: 10px;
+  padding: 10px;
 }
+
 
 .btn_submit,
 .btn_update_review,
 .btn_delete {
   width: auto;
-  border: 1px solid var(--colorNegro);
-  background-color: var(--colorBlanco);
-  margin: 5px;
-  padding: 0.5rem;
-  font-size: 0.9rem;
+  font-family: "Inter", sans-serif;
+  padding: 10px;
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+  background-color: transparent;
+  border: 1px solid #bbb3ab;
   cursor: pointer;
-  transition: ease-in-out 0.1s;
+  transition: background-color 0.3s, color 0.3s, border 0.3s;
+  text-transform: uppercase;
+}
+
+.btn_disabled {
+  width: auto;
+  font-family: "Inter", sans-serif;
+  padding: 10px;
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+  background-color: transparent;
+  border: 1px solid #bbb3ab;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s, border 0.3s;
   text-transform: uppercase;
 }
 
 .btn_edit {
-  border: 1px solid var(--colorNegro);
-  background-color: var(--colorBlanco);
   float: right;
   position: relative;
+  width: auto;
+  font-family: "Inter", sans-serif;
+  padding: 10px;
+  margin-top: 0.5rem;
+  background-color: transparent;
+  border: 1px solid #bbb3ab;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s, border 0.3s;
+  text-transform: uppercase;
 }
 
-.btn_submit:hover {
-  background-color: var(--colorGrisClaro);
-}
 
-.btn_update_review:hover {
-  background-color: var(--colorGrisClaro);
-}
-
-.btn_edit:hover {
-  background-color: var(--colorGrisClaro);
-}
-
+.btn_submit:hover,
+.btn_update_review:hover,
+.btn_edit:hover,
 .btn_delete:hover {
   background-color: var(--colorGrisClaro);
 }
+
 
 .alert {
   background-color: var(--colorGrisClaro);
@@ -127,10 +172,10 @@ hr {
 .btn_no,
 .btn_yes {
   width: auto;
-  background-color: var(--colorBlanco);
-  border: 1px solid var(--colorGris);
   margin: 5px;
   padding: 0.5rem;
-  font-size: 0.9rem;
+  font-family: "Inter", sans-serif;
+  background-color: var(--colorBlanco);
   cursor: pointer;
+  text-transform: uppercase;
 }

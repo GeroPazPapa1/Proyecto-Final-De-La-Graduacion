@@ -46,7 +46,7 @@ const postUserController = async (dataUserBody) => {
     });
 
     const subject = "Account Verification on Vehibuy.com";
-    let link = `http://localhost:7183/user/verify/${token}`;
+    let link = `https://vehibuy-rho.vercel.app/user/verify/${token}`;
     const html = verifyHTML(link);
     transporter.sendMail(mailOptions(email, subject, html), (error, info) => {
       if (error) {

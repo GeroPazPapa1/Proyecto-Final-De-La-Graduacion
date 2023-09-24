@@ -1,5 +1,5 @@
 .container {
-  margin: 0 9vw;
+  margin: 0 10vw;
 }
 
 .titleCont {
@@ -68,12 +68,12 @@
 }
 
 .contPhotons {
-    display: flex;
-    flex-wrap: wrap; /* Permite que las cartas se envuelvan en filas cuando no haya suficiente espacio */
-    justify-content: center;
-    align-items: flex-start; /* Alinea las cartas en la parte superior del contenedor */
-    margin: 20px;
-  }
+  display: flex;
+  flex-wrap: wrap;
+  /* Permite que las cartas se envuelvan en filas cuando no haya suficiente espacio */
+  justify-content: center;
+  align-items: flex-start;
+}
 
 .cards {
   background-color: #ffffff;
@@ -83,7 +83,7 @@
   transition: transform 0.2s ease-in-out;
   height: 400px;
   width: 250px;
-  margin: 20px;
+  margin: 30px;
   border-radius: 10px;
 }
 
@@ -94,7 +94,8 @@
 .img {
   width: 250px;
   height: 250px;
-  object-fit: cover; /* Esto asegura que todas las imágenes se ajusten correctamente dentro del contenedor sin estirarse ni deformarse */
+  object-fit: cover;
+  /* Esto asegura que todas las imágenes se ajusten correctamente dentro del contenedor sin estirarse ni deformarse */
   border-radius: 10px 10px 0 0;
   margin-bottom: 10px;
 }
@@ -141,7 +142,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  }
+}
 
 .countryI {
   width: 20px

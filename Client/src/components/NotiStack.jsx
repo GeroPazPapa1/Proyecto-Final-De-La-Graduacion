@@ -84,7 +84,7 @@ export const RegisterFail = () => {
 
 export const FillInputsFixErrors = () => {
     enqueueSnackbar('Please fill all required fields and fix any validation errors', {
-        variant: 'error',
+        variant: 'warning',
         anchorOrigin: {
             vertical: 'bottom',
             horizontal: 'right',
@@ -132,9 +132,17 @@ export const Banned = () => {
         }
     });
 }
-
+export const logOut = () => {
+    enqueueSnackbar('You logged out successfully', {
+        variant: "info",
+        anchorOrigin: {
+            vertical: 'bottom',
+            horizontal: 'right',
+        }
+    });
+}
 export const modificationUserSuccess = () => {
-    enqueueSnackbar('Your account has been successfully modified!', {
+    enqueueSnackbar('Your product has been successfully modified!', {
         variant: 'success',
         anchorOrigin: {
             vertical: 'bottom',
@@ -174,40 +182,111 @@ export const uploadImageFail = () => {
 
 export const postReviewNoti = () => {
     enqueueSnackbar('Your review is successfully published', {
-            variant: 'success',
-            anchorOrigin: {
-                vertical: 'top',
-                horizontal: 'right',
-            }
-        })
-    }
-    
-    export const deleteReviewNoti = () => {
+        variant: 'success',
+        anchorOrigin: {
+            vertical: 'bottom',
+            horizontal: 'right',
+        }
+    })
+}
+
+export const deleteReviewNoti = () => {
     enqueueSnackbar('Your review is successfully deleted', {
-            variant: 'error',
-            anchorOrigin: {
-                vertical: 'top',
-                horizontal: 'right',
-            }
-        })
-    }
-    
-    export const updateReviewNoti = () => {
+        variant: 'error',
+        anchorOrigin: {
+            vertical: 'bottom',
+            horizontal: 'right',
+        }
+    })
+}
+
+export const updateReviewNoti = () => {
     enqueueSnackbar('Your review is successfully updated', {
-            variant: 'success',
-            anchorOrigin: {
-                vertical: 'top',
-                horizontal: 'right',
-            }
-        })
-    }
-    
-    export const errorReviewNoti = () => {
+        variant: 'success',
+        anchorOrigin: {
+            vertical: 'bottom',
+            horizontal: 'right',
+        }
+    })
+}
+
+export const errorReviewNoti = () => {
     enqueueSnackbar('You have already published a review', {
-            variant: 'error',
-            anchorOrigin: {
-                vertical: 'top',
-                horizontal: 'right',
-            }
-        })
-    }
+        variant: 'error',
+        anchorOrigin: {
+            vertical: 'bottom',
+            horizontal: 'right',
+        }
+    })
+}
+
+export const logOutUserSuccess = () => {
+    enqueueSnackbar('session has been successfully log out!', {
+        variant: 'success',
+        anchorOrigin: {
+            vertical: 'bottom',
+            horizontal: 'right',
+        }
+    });
+}
+
+export const verifyDeleteFav = () => {
+    enqueueSnackbar('You removed the cart from Favorites', {
+        variant: 'info',
+        anchorOrigin: {
+            vertical: 'bottom',
+            horizontal: 'right',
+        }
+    })
+}
+
+export const typeUser = (userName) => {
+    enqueueSnackbar(`Welcome ${userName}!`, {
+        variant: 'success',
+        anchorOrigin: {
+            vertical: 'bottom',
+            horizontal: 'right',
+        }
+    })
+}
+
+export const typeAdmin = () => {
+    enqueueSnackbar(`Welcome Admin!`, {
+        variant: 'warning',
+        anchorOrigin: {
+            vertical: 'bottom',
+            horizontal: 'right',
+        }
+    })
+}
+
+export const alertFilterValues = () => {
+    enqueueSnackbar('Please enter supported values', {
+        variant: 'error',
+        anchorOrigin: {
+            vertical: 'top',
+            horizontal: 'right',
+        }
+    })
+}
+
+export const createProductSuccess = () => {
+    enqueueSnackbar('Your product has been created successfully!', {
+        variant: 'success',
+        anchorOrigin: {
+            vertical: 'bottom',
+            horizontal: 'right',
+        }
+    });
+}
+
+export const removeImage = () => {
+    enqueueSnackbar('Your product has been removed successfully!', {
+        variant: 'success',
+        anchorOrigin: {
+            vertical: 'bottom',
+            horizontal: 'right',
+        }
+    });
+}
+

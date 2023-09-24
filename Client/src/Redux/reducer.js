@@ -10,6 +10,8 @@ const initialState = {
   pageFilteredDb: [],
   cartHistory: [],
   menuOption: "",
+  dashboardOption: "",
+  darkMode: false,
 
   queryParams: {
     name: "",
@@ -45,6 +47,7 @@ const initialState = {
   locationLoaded: false,
   usersLoaded: false,
   reviews: [],
+  reviewsByUserId: []
 };
 
 function rootReducer(state = initialState, action) {
@@ -146,6 +149,26 @@ function rootReducer(state = initialState, action) {
         },
       };
 
+    case "DELETED_CAR":
+      return {
+        ...state,
+        allCars: action.payload,
+        filtereds: {
+          ...state.filtereds,
+          byQueryOrigin: action.payload,
+        },
+      };
+
+    case "EDITED_CAR":
+      return {
+        ...state,
+        allCars: action.payload,
+        filtereds: {
+          ...state.filtereds,
+          byQueryOrigin: action.payload, // Actualiza byQueryOrigin con el valor de action.payload
+        },
+      };
+
     case "GET_ALL_BRAND":
       return {
         ...state,
@@ -218,7 +241,6 @@ function rootReducer(state = initialState, action) {
       };
 
     case "CARDS_LOADED":
-      console.log(action.payload);
       return {
         ...state,
         carsLoaded: action.payload,
@@ -306,8 +328,22 @@ function rootReducer(state = initialState, action) {
         ...state,
         reviews: [], // Restablecer las reviews a un objeto vacío
       };
+    case "REVIEWS_USER":
+      return {
+        ...state,
+        reviewsByUserId: action.payload,
+      };
+    case "RESET_REVIEWS_USER":
+      return {
+        ...state,
+        reviewsByUserId: [], // Restablecer las reviews a un objeto vacío
+      };
     case "ADD_MENU_OPTION":
       return { ...state, menuOption: action.payload };
+    case "ADD_DASHBOARD_OPTION":
+      return { ...state, dashboardOption: action.payload };
+    case "CHANGE_DARK_MODE":
+      return { ...state, darkMode: !state.darkMode };
     default:
       return state;
   }

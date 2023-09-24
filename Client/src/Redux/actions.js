@@ -47,7 +47,6 @@ export const getAllCars = () => {
   return async (dispatch) => {
     try {
       const { data } = await axios(endpoint);
-      console.log(data);
       return dispatch({
         type: "GET_ALL_CARS",
         payload: data,
@@ -150,7 +149,6 @@ export const brandByQuery = () => {
   return async (dispatch) => {
     try {
       const { data } = await axios(endpoint);
-      console.log(data, "brands");
       return dispatch({
         type: "GET_ALL_BRAND",
         payload: data,
@@ -197,7 +195,6 @@ export const getDashboard = (loggedUser) => {
   return async (dispatch) => {
     try {
       const { data } = await axios(endpoint, config);
-      console.log(data);
       return dispatch({
         type: "GET_ALL_USERS",
         payload: data,
@@ -231,14 +228,17 @@ export const deleteUserWithID = (id) => {
   };
 };
 
-export const editPutUser = (id, type, ban) => {
-  const endpoint = `/user/dashboard/users/${id}`;
+
+export const editPutUser = (objeto, id) => {
+  const endpoint = `http://localhost:7183/user/dashboard/users/${id}`;
   return async (dispatch) => {
+    console.log(id, "Soy el id");
+
     try {
-      const { status, data } = await axios.put(endpoint, {
-        status: type,
-        ban: ban,
-      });
+      console.log(objeto, "Objeto en action");
+      const { status, data } = await axios.put(endpoint, objeto);
+
+      console.log(data, "soy el data");
       if (status === 200) {
         enqueueSnackbar("User edited successfully", { variant: "success" });
       }
@@ -312,6 +312,30 @@ export const orderFilters = (order) => {
     payload: order,
   };
 };
+
+export const editPutCar = (objeto, id) => {
+  const endpoint = `http://localhost:7183/car/edit/${id}`;
+  return async (dispatch) => {
+
+    console.log(id, "Soy el id");
+
+    try {
+      const { status, data } = await axios.put(endpoint, objeto);
+      
+      return dispatch({
+        type: "EDITED_CAR",
+        payload: data,
+      });
+    } catch (error) {
+      if (error.response) {
+        const { status } = error.response;
+        if (status === 403) {
+          enqueueSnackbar("Car not found", { variant: "error" });
+        }
+      }
+    }
+  }
+}
 //------------------------------------------------------------------------
 
 export const postReview = (data) => {
@@ -326,6 +350,28 @@ export const postReview = (data) => {
   };
 };
 
+export const deleteCarWithID = (id) => {
+  const endpoint = `http://localhost:7183/car/dashboard/car/${id}`;
+  return async (dispatch) => {
+    try {
+      const { status, data } = await axios.delete(endpoint);
+      if (status === 200) {
+        enqueueSnackbar("Successfully deleted product", { variant: "success" });
+      }
+      return dispatch({
+        type: "DELETED_CAR",
+        payload: data,
+      });
+    } catch (error) {
+      if (error.response) {
+        const { status } = error.response;
+        if (status === 403) {
+          enqueueSnackbar("Can't remove this product", { variant: "error" });
+        }
+      }
+    }
+  };
+};
 export const getReviews = (carId) => {
   const endpoint = `/review/${carId}`;
   if (carId) {
@@ -345,10 +391,31 @@ export const getReviews = (carId) => {
     type: "RESET_REVIEWS",
   };
 };
+export const getReviewsByUserId = (userId) => {
+  const endpoint = `/review/userid/${userId}`;
+  if (userId) {
+    return async (dispatch) => {
+      try {
+        const { data } = await axios.get(endpoint);
+        dispatch({
+          type: "REVIEWS_USER",
+          payload: data,
+        });
+      } catch (error) {
+        console.error(error);
+      }
+    };
+  }
+};
 
 export const resetReview = () => {
   return {
     type: "RESET_REVIEWS",
+  };
+};
+export const resetReviewByUser = () => {
+  return {
+    type: "RESET_REVIEWS_USER",
   };
 };
 
@@ -381,4 +448,14 @@ export const addMenuOption = (option) => {
     type: "ADD_MENU_OPTION",
     payload: option,
   };
+};
+
+export const addDashboardOption = (option) => {
+  return {
+    type: "ADD_DASHBOARD_OPTION",
+    payload: option,
+  };
+};
+export const changeDarkMode = () => {
+  return { type: "CHANGE_DARK_MODE" };
 };

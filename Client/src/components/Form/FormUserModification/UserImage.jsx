@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import axios from "axios";
 import { uploadImageFail, uploadImageSuccess } from "../../NotiStack";
 
-
 const cloudinaryUploadUrl = "https://api.cloudinary.com/v1_1/Vehibuy/upload";
 
 const UserImage = () => {
@@ -58,11 +57,15 @@ const UserImage = () => {
 
   return (
     <div>
+      <label htmlFor="imageInput" className={style.buttonImage}>
+        Select File
+      </label>
       <input
         type="file"
         accept="image/*"
         id="imageInput"
-        className={style.buttonImage}
+        className={style.hiddenInput}
+        title="No files selected" // Texto en inglés
       />
       <button onClick={handleButton} className={style.buttonImage}>
         Upload

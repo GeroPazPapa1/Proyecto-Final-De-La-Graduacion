@@ -1,12 +1,18 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Cards from "./Cards/Cards.jsx";
 import Filters from "./Filters/Filters.jsx";
 import Search from "./Search/Search.jsx";
 import styles from "./Home.module.css";
 import { MercadoPagoFail, MercadoPagoSuccess } from "../NotiStack.jsx";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { changeDarkMode } from "../../Redux/actions.js";
+import { useSelector } from "react-redux";
 
 export default function Home() {
+  const dispatch = useDispatch();
+  const darkMode = useSelector((state) => state.darkMode);
+
   useEffect(() => {
     const transactionStatus = localStorage.getItem("transactionStatus");
     // Comprueba el estado de la compra y muestra la notificación adecuada
@@ -31,18 +37,15 @@ export default function Home() {
     } else if (transactionStatus === "fail") {
       MercadoPagoFail();
     }
+
     localStorage.removeItem("transactionStatus");
     localStorage.removeItem("subPrice");
     localStorage.removeItem("purshasedCars");
-    localStorage.removeItem("cart");
   }, []);
 
   return (
-    <div className={styles.container}>
+    <div className={`${styles.container} ${darkMode ? styles.darkMode : ""}`}>
       <div className={styles.coverImage}></div>
-      <nav>
-        {/* Código para la barra de navegación */}
-      </nav>
       <Search />
       <div className={styles.container2}>
         <Filters />

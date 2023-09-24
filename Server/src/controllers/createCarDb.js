@@ -1,7 +1,7 @@
 const { Car, Brand } = require('../db');
 const data = require('../../api/db.json');
 
-const createCarDb = async () => {
+const createCarDb = async (userId) => {
   const allCarsDb = data.Cars.flatMap((element) => element.models.map((element)=> element));
 
   for (let i = 0; i < allCarsDb.length; i++) {
@@ -14,12 +14,10 @@ const createCarDb = async () => {
     });
 
     if (!matchingBrand) {
-      matchingBrand = await Brand.findOrCreate({
-        where: {
-          name: newCar.brand,
-        }
-      });
+      matchingBrand = await Brand.create({ name: newCar.brand });
     }
+
+    console.log(userId)
 
     const carInstance = await Car.create({
         name: newCar.name,
@@ -32,6 +30,7 @@ const createCarDb = async () => {
         color: newCar.color,
         description: newCar.description,
         brandId: matchingBrand.id,
+        userId: userId,
     });
   }
 }

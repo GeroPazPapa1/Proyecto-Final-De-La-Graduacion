@@ -4,6 +4,7 @@ const { carNameController } = require("../controllers/getCarByName");
 const { getCarById } = require("../controllers/getCarById");
 const { createCarDb } = require("../controllers/createCarDb");
 const { deleteCarController } = require("../controllers/deleteCar");
+const { adminDeleteCarController } = require("../controllers/adminDeleteCar");
 const { filteredCars } = require("../controllers/filters/filters");
 //-----------------------------getAllCar---------------------------------------------------------------
 //
@@ -95,6 +96,7 @@ const postCarHandler = async (req, res) => {
       location,
       color,
       description,
+      userId,
     } = req.body;
     if (
       !name ||
@@ -104,7 +106,8 @@ const postCarHandler = async (req, res) => {
       !state ||
       !price ||
       !location ||
-      !color
+      !color ||
+      !userId
     ) {
       return res.status(404).json({ error: "Missing data to post" });
     }
@@ -118,7 +121,8 @@ const postCarHandler = async (req, res) => {
       price,
       location,
       color,
-      description
+      description,
+      userId
     );
     res.status(200).json(createdCar);
   } catch (error) {
@@ -130,10 +134,24 @@ const postCarHandler = async (req, res) => {
 //
 const createCarDbHandler = async (req, res) => {
   try {
-    const createdCar = await createCarDb();
+    const { userId } = req.body
+    const createdCar = await createCarDb(userId);
     res.status(200).json(createdCar);
   } catch (error) {
     res.status(500).send(error.message);
+  }
+};
+
+//-----------------------------adminDeleteCarHandler---------------------------------------------------------------
+//
+const adminDeleteCarHandler = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const adminDeletedCar = await adminDeleteCarController(id);
+    res.status(200).json(adminDeletedCar);
+  } catch (error) {
+    res.status(500).json(error.message);
   }
 };
 
@@ -145,4 +163,5 @@ module.exports = {
   createCarDbHandler,
   getFiltersHandler,
   deleteCarHandler,
+  adminDeleteCarHandler,
 };
